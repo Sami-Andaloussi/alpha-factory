@@ -1,0 +1,41 @@
+# --- System / tooling noise ---
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- Secrets: a structural barrier, not a guideline ---
+# The whole folder is ignored: a broker or API key dropped here tomorrow
+# is protected by default, without anyone having to think about it.
+secrets/*
+**/secrets/*
+!secrets/README.md
+!**/secrets/README.md
+*.key
+*.pem
+.env
+.env.*
+
+# --- Market data: never in git (volume + licensing) ---
+# Data is downloaded locally; only the scripts and manifests that fetch it are versioned.
+data/raw/
+data/interim/
+**/data/raw/
+**/data/interim/
+*.parquet
+*.h5
+*.hdf5
+*.db
+*.sqlite
+
+# --- Run outputs: derived, therefore rebuildable from code + seed ---
+runs/
+output/
+output_*/
+*.pstats
