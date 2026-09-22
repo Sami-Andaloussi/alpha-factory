@@ -60,24 +60,24 @@ Thirteen reads reach a page built in a later phase. Each is bridged until its ow
 Inside a phase, a page may also read one placed after it, as S1.8 reads the three pages it seals:
 every page of a phase is finished before its gate. The [interfaces](interfaces.md) list every flow.
 
-## How the order was set
+## Why this order
 
-- **The order is the pilot orchestration's**, from the former corpus: a frame, then the data spine,
-  features and the strategies, validation, decision and execution on paper, then live capital with
-  its lifecycle, each phase ending on a gate; inside a phase, the pilot's sequence is kept. It is
-  used here as an order for the whole factory, not as a smaller first version of it.
-- **Four pages the pilot does not place follow their dependencies**: the data lifecycle (S7.7) after
-  the [feature registry](glossary.md#feature-registry), in phase 2; architectural fitness (S7.3) and
-  the budgets of reliability and risk (S7.4) in phase 4, before
+- **Each phase gives the next what it needs**: a frame, then the data spine, features and the
+  strategies, validation, decision and execution on paper, then live capital with its lifecycle,
+  each phase ending on a gate. Inside a phase, the list gives a workable order, not a binding one.
+  The phases build the whole factory, not a smaller first version of it.
+- **Four lifecycle pages are placed by what they depend on**: the data lifecycle (S7.7) after the
+  [feature registry](glossary.md#feature-registry), in phase 2; architectural fitness (S7.3) and the
+  budgets of reliability and risk (S7.4) in phase 4, before
   [change management](glossary.md#change-management) (S7.5) and before any capital; the loop of
   missions (S7.10) last, since it gathers from every page of section 7.
-- **Three pages move earlier than in the pilot, so that no capital runs without them**:
-  [drift](glossary.md#drift) detection (S6.4), operational security (S6.6) and stabilisation with
-  its operating modes (S6.5) are built in phase 4, where section 5 and monitoring already read them,
-  each after the pages it reads.
-- **Lifecycle starts in phase 0 and ends in phase 5**: the pilot opens with a first version of the
-  rituals, the journal of decisions and the handling of incidents, and completes them once capital
-  is live.
+- **[Drift](glossary.md#drift), security and the operating modes come before any capital**: drift
+  detection (S6.4), operational security (S6.6) and stabilisation with its operating modes (S6.5)
+  are built in phase 4, where section 5 and monitoring already read them, each after the pages it
+  reads.
+- **Lifecycle starts in phase 0 and ends in phase 5**: phase 0 builds a first version of the
+  rituals, the journal of decisions and the handling of incidents, and phase 5 completes them once
+  capital is live.
 - **From phase 3, one strategy leads the build**: the first the lab hands over is carried through
   validation, paper trading and its first capital tier; the others follow on the finished chain.
 - **Effort is counted in steps**, by the tags every page carries: a

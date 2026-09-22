@@ -9,8 +9,8 @@ Sub-section pages cite an entry by its anchor; a method with no checked referenc
 
 ## Books
 
-Eight books were summarised when the factory was first designed. The table gives each in a line,
-with the sections whose pages cite it; below it, what the blueprint takes from each.
+Eight books underpin the blueprint. The table gives each in a line, with the sections whose pages
+cite it; below it, what the blueprint takes from each.
 
 | Reference | In one line | Cited in |
 |---|---|---|
@@ -36,7 +36,7 @@ with the sections whose pages cite it; below it, what the blueprint takes from e
   of record, derived data rebuilt by replaying it, schemas that evolve without breaking their
   readers, idempotent processing, one code path for batch work (research, backtests) and
   streaming (live), and the limits of clocks and ordering across machines. A second edition, with
-  C. Riccomini, appeared in 2026; the summaries used here predate it.
+  C. Riccomini, appeared in 2026; the blueprint cites the first.
 - **Grinold & Kahn (1999).** The language of active management: the information ratio as the
   measure of active performance, the fundamental law linking it to skill (the information
   coefficient) and breadth, the refinement of raw signals into alphas (volatility × IC × score),

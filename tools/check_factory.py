@@ -1,19 +1,24 @@
 #!/usr/bin/env python3
-"""Check the factory blueprint: page layout, navigation, links, flows and Notion leftovers.
+"""Check the factory blueprint: page layout, navigation, links, flows and spelling.
 
-Usage:  python3 tools/check_factory.py [--final] [-q]
+Usage:  python3 tools/check_factory.py [-q]
 
-Scope: every Markdown page under factory/ except factory/FRAMING.md. Three kinds of page:
-sub-section pages (factory/sections/s*/s*.md), section pages (factory/sections/s*/README.md)
-and top-level pages (all others). Each rule is stated below.
+  -q        print errors in full, and warnings as one count per kind.
 
-First use (warning only): after the TL;DR, the first use of a glossary term on any
-page must be a link to its glossary entry, except on the three pages that define or list the terms
-rather than use them: the glossary, the references and the index of sub-sections. Code, link texts, headings,
-step summaries and bold labels (**Goal.**, **Service levels:**) are not uses. Terms and links
-are read across the line breaks of a paragraph, so a term cut by a wrapped line is still found.
-A word that is a glossary term but means something else on the page is reworded, so one word
-keeps one meaning.
+Scope: every Markdown page under factory/ (a FRAMING.md there, if any, is not a blueprint page and
+is skipped). Three kinds of page: sub-section pages (factory/sections/s*/s*.md), section pages
+(factory/sections/s*/README.md) and top-level pages (all others). The main rules are stated below.
+
+Pages and links (error): all 64 sub-section pages exist, every row of the index links to its page,
+and every link leads to a page, and an anchor, that exist.
+
+First use (warning only): after the TL;DR, the first use of a glossary term on any page must be a
+link to its glossary entry, except on the three pages that define or list the terms rather than
+use them: the glossary, the references and the index of sub-sections. Code, link texts, headings,
+step summaries and bold labels (**Goal.**, **Service levels:**) are not uses. Terms and links are
+read across the line breaks of a paragraph, so a term cut by a wrapped line is still found. A word
+that is a glossary term but means something else on the page is reworded, so one word keeps one
+meaning.
 
 Interfaces notes (error): on a sub-section page, whatever follows the Interfaces table (what each
 flow carries, the constraints, the service levels) sits in one <details> block with a <summary>,
@@ -33,21 +38,19 @@ all steps.
 Cited in (error): each row of the books table in factory/references.md names, in its "Cited in"
 column, exactly the sections whose pages (section or sub-section) cite that book by its anchor.
 
-Prints one line per problem, naming the file and the line, then a summary. Exits with code 1
-if there is any error; warnings alone keep it green. Standard library only.
-
-  --final   all 64 sub-section pages must exist, every index row must link to its page, and
-            every missing link target is an error.
-  -q        print errors in full, and warnings as one count per kind.
+List markers (warning): one space after '-' or '1.', never two.
 
 Spelling (warning): British spelling (-ise, -yse, -ll-) everywhere, except in the bibliographic cell
 of a row of factory/references.md, which quotes each title as published.
 
-What is read where: Notion leftovers are searched on every line, fenced code included, since a
-leftover is never legitimate anywhere. Everything else (navigation, headings, TL;DR, tables,
-links, French detection) reads prose only: lines outside fenced code blocks, with inline code
-spans (single or double backticks) removed. Indented code blocks are not used in the blueprint
-and are read as prose.
+What is read where: every page check reads the lines outside fenced code blocks; indented code
+blocks are not used in the blueprint and are read as prose. Links, first use, list markers and
+spelling also drop inline code spans (single or double backticks); headings, the TL;DR and table
+cells read inline code as its text. The overview and the interfaces page are compared as raw text,
+Mermaid code included.
+
+Prints one line per problem, naming the file and the line, then a summary. Exits with code 1 if
+there is any error; warnings alone keep it green. Standard library only.
 """
 from __future__ import annotations
 
@@ -107,22 +110,10 @@ EXPLICIT_ANCHOR = re.compile(r"\b(?:id|name)=\"([^\"]+)\"")
 SUMMARY = re.compile(r"<summary>(.*?)</summary>")
 EXTERNAL = re.compile(r"^(?:[a-zA-Z][a-zA-Z0-9+.-]*:|//)")
 
-CHECKBOX = re.compile(r"^\s*(?:[-*+]|\d+\.)\s+\[[ xX]\]")
 DOUBLE_SPACED_ITEM = re.compile(r"^\s*(?:[-*+]|\d+\.) {2,}\S")
-TE_TAG = re.compile(r"\((?:TE|TNE)(?:\s*/\s*(?:TE|TNE))?\)")
-STATUS_TAG = re.compile(r"\$\s*-\s*(?:full|partiel|survol)\s*\$", re.IGNORECASE)
-NOTION_ID = re.compile(r"(?<![0-9a-fA-F])[0-9a-fA-F]{32}(?![0-9a-fA-F])")
 GLOSSARY_ENTRY = re.compile(r'<a id="([^"]+)"></a>\*\*(.+?)\*\*')
 BOLD_LABEL = re.compile(r"\*\*[^*]+?[.:]\*\*")  # **Goal.**, **Service levels:** and the like
 
-FRENCH_WORDS = {
-    "le", "les", "des", "du", "une", "et", "pour", "avec", "dans", "qui", "que", "cette",
-    "sont", "aux", "leur", "leurs", "selon", "donc", "ainsi", "être", "très", "mais", "nous",
-    "vous", "ils", "elles", "doit", "peut", "chaque", "lorsque", "afin", "dont", "également",
-    "sur", "pas", "où", "ces", "sans", "entre", "puis", "vers", "chez", "après", "avant",
-}
-FRENCH_LETTERS = set("àâçéèêëîïôûùüÿœ")
-WORD = re.compile(r"[A-Za-zÀ-ÿœŒ]+")
 # British spelling (-ise, -yse, -ll-); file names keep their original spelling, so link targets are not read.
 AMERICAN = re.compile(r"\b[A-Za-z]{4,}?iz(?:e|es|ed|ing|ation|ations|er|ers)\b"
                       r"|\b(?:[Aa]nal|[Pp]araly|[Cc]ataly)yz(?:e|es|ed|ing|er|ers)\b"
@@ -452,8 +443,8 @@ def check_interfaces(page: Path, lines: list[str], report: Report) -> list[Flow]
 
 
 def check_flows(flows: dict[str, tuple[Path, list[Flow]]], report: Report) -> None:
-    """Between two written sub-section pages, every flow must be declared at both ends: an out row
-    naming a page needs an in row of the same artifact on that page, naming the sender, and back."""
+    """Between two sub-section pages, every flow must be declared at both ends: an out row naming a
+    page needs an in row of the same artifact on that page, naming the sender, and back."""
     def declares(sub_id: str, direction: str, key: str, other: str) -> bool:
         return any(d == direction and k == key and other in values for _, d, k, _, values in flows[sub_id][1])
 
@@ -605,44 +596,24 @@ def check_steps(page: Path, lines: list[str], report: Report) -> None:
                     f"{opened} <details> blocks for {len(summaries)} <summary> lines")
 
 
-def check_links(page: Path, lines: list[str], index_pages: set[Path], final: bool, report: Report) -> None:
+def check_links(page: Path, lines: list[str], report: Report) -> None:
     for number, line in prose_lines(lines):
         for _, target in links_in(line):
             if EXTERNAL.match(target):
                 continue
             destination, anchor = resolve(page, target)
             if not destination.exists():
-                if destination in index_pages and not final:
-                    report.warn(page, number, "sub-section page not written yet",
-                                f"link to {rel(destination)}, listed in the index, not written yet")
-                else:
-                    report.error(page, number, f"broken link '{target}'")
+                report.error(page, number, f"broken link '{target}'")
                 continue
             if anchor and destination.is_file() and destination.suffix == ".md":
                 if anchor not in anchors_of(destination):
                     report.error(page, number, f"link '{target}': no anchor '#{anchor}' in {rel(destination)}")
 
 
-def check_leftovers(page: Path, lines: list[str], report: Report) -> None:
-    for number, line in enumerate(lines, 1):
-        if CHECKBOX.match(line):
-            report.error(page, number, "Notion checkbox")
-        if TE_TAG.search(line):
-            report.error(page, number, "(TE)/(TNE) is the source's task tag: use 'Design task' / 'Execution task'; "
-                                       "for tracking error, write the words in full")
-        if STATUS_TAG.search(line):
-            report.error(page, number, "Notion status tag ($-full$, $-partiel$, $-survol$)")
-        if NOTION_ID.search(line):
-            report.error(page, number, "32-hex Notion ID")
+def check_prose(page: Path, lines: list[str], report: Report) -> None:
     for number, line in prose_lines(lines):
         if DOUBLE_SPACED_ITEM.match(line):
             report.warn(page, number, "double space after a list marker", "one space after '-' or '1.'")
-        text = INLINE_CODE.sub("", re.sub(r"\]\([^)]*\)", "]", line)).lower()
-        words = {w for w in WORD.findall(text)}
-        french = words & FRENCH_WORDS
-        accents = sum(1 for char in text if char in FRENCH_LETTERS)
-        if len(french) >= 3 or (french and accents >= 2):
-            report.warn(page, number, "line looks French", "line looks French")
         if page == REFERENCES and line.startswith("|") and EXPLICIT_ANCHOR.search(line):
             line = "|" + "|".join(table_cells(line)[1:])  # a title is quoted as published, in its own spelling
         american = [w for w in AMERICAN.findall(INLINE_CODE.sub("", re.sub(r"\]\([^)]*\)", "]", line)))
@@ -781,14 +752,11 @@ def pages_to_check() -> list[Path]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Check the factory blueprint pages.")
-    parser.add_argument("--final", action="store_true",
-                        help="all 64 sub-section pages must exist and every missing target is an error")
     parser.add_argument("-q", "--quiet", action="store_true", help="count warnings per kind instead of listing them")
     args = parser.parse_args()
 
     report = Report()
     index = read_index(report)
-    index_pages = set(index.values())
     seen_ids: dict[str, Path] = {}
     flows: dict[str, tuple[Path, list[Flow]]] = {}
     terms = glossary_terms()
@@ -802,8 +770,8 @@ def main() -> int:
         elif kind == "section" and page.parent.name not in SECTION_FOLDERS:
             report.error(page, 0, f"unknown section folder '{page.parent.name}'")
         check_frame(page, lines, kind, index, sub_id, report)
-        check_links(page, lines, index_pages, args.final, report)
-        check_leftovers(page, lines, report)
+        check_links(page, lines, report)
+        check_prose(page, lines, report)
         if page not in FIRST_USE_EXEMPT:
             check_first_use(page, lines, terms, report)
     check_flows(flows, report)
@@ -812,10 +780,9 @@ def main() -> int:
     check_overview(report)
     check_cited_in(report)
 
-    if args.final:
-        for sub_id in ALL_IDS:
-            if sub_id in index and not index[sub_id].exists():
-                report.error(index[sub_id], 0, f"{sub_id}: page missing (listed in the index)")
+    for sub_id in ALL_IDS:
+        if sub_id in index and not index[sub_id].exists():
+            report.error(index[sub_id], 0, f"{sub_id}: page missing (listed in the index)")
 
     report.print(args.quiet)
     return 1 if report.errors else 0
