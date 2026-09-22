@@ -4,14 +4,16 @@
 
 ## TL;DR
 
-One English term per concept, used the same way on every page of the blueprint.
+One term per concept, used the same way on every page of the blueprint.
 Each definition is written for a reader outside quantitative finance; pages link here at a term's first use.
 
 ## How to read it
 
 Terms are sorted alphabetically. An acronym has a short entry that points to the full term.
 Links inside a definition lead to other entries. Anchors are stable: a page links to
-`glossary.md#<term>`, for example [point-in-time](#point-in-time).
+`glossary.md#<term>`, for example [point-in-time](#point-in-time). When an entry names the pages
+that make or read an object, it names the main ones; the [interfaces](interfaces.md) page lists
+every flow.
 
 ## A
 
@@ -378,7 +380,7 @@ Links inside a definition lead to other entries. Anchors are stable: a page link
 - <a id="timebase"></a>**Timebase** — The single clock and ordering rule the whole factory uses to timestamp and sequence events, so that the same inputs always replay in the same order.
 - <a id="total-return"></a>**Total return** — The return of an instrument with its dividends and other distributions reinvested.
 - <a id="traceability"></a>**Traceability** — Every result can be followed back to the data, code, parameters and decisions that produced it.
-- <a id="tracking-error"></a>**Tracking error** — The volatility of the difference between a portfolio's return and its benchmark's. Always written in full on these pages: the source plans use TE for their task tag.
+- <a id="tracking-error"></a>**Tracking error** — The volatility of the difference between a portfolio's return and its benchmark's.
 - <a id="trade-signing"></a>**Trade signing** — Classifying each trade as buyer- or seller-initiated by aligning it with the quote in force; a trade that cannot be classified is marked unknown, not guessed.
 - <a id="trading-calendar"></a>**Trading calendar** — The days and hours a market is open, with its holidays and early closes, for each market and time zone.
 - <a id="trading-halt"></a>**Trading halt** — A suspension of trading in an instrument or a market, decided by the exchange.

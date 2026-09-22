@@ -5,8 +5,6 @@ The contract between `alpha-lab/` and `factory/`: what a complete
 its output format; the factory uses it as its admission criteria, in
 [S3.1](../factory/sections/s3-strategy-lab/s3.1-admission.md).
 
-**Status: first draft**, written with the factory blueprint. The design of the lab may amend it.
-
 ## What a dossier is
 
 One complete folder per strategy, readable without its author: a reader who comes to it cold
@@ -35,3 +33,8 @@ implementation on factory data, its optimisation, combination, inference, varian
 work, and the plan section 4 will run; every trial it runs joins the trial registry.
 [S3.9](../factory/sections/s3-strategy-lab/s3.9-traceability-rationale.md) keeps the living
 dossier from there on.
+
+A dossier goes back to the lab only when S3.1 refuses it or
+[S3.2](../factory/sections/s3-strategy-lab/s3.2-architecture-invariances.md) cannot reproduce it.
+What section 3's [variants](../factory/glossary.md#variant) teach does not flow back on its own:
+the lab draws the lessons for its theories itself.

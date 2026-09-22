@@ -4,7 +4,7 @@
 
 ## TL;DR
 
-Twelve rules the whole blueprint follows, distilled from the twenty foundation pages of the former corpus.
+Twelve rules the whole blueprint follows.
 Each gives the rule in one sentence, why it matters, and where it shows in the sub-sections.
 A rule changes only as principles 3 and 4 allow: by an open, written revision, never by a private exception.
 
@@ -49,9 +49,6 @@ date: an instrument, a listing, an issuer and an alias each have one meaning
 [falsifiable thesis](glossary.md#falsifiable-thesis), a hypothesis and not a result
 ([S3.1](sections/s3-strategy-lab/s3.1-admission.md)).
 
-**From.** Foundations 1 (the factory's grammar), 7 (a common ontology of objects) and 19 (the same
-words, the same effects).
-
 ## 2. A bounded, lasting intent
 
 **Rule.** The factory states what it produces and what it refuses to produce, and aims at returns
@@ -76,8 +73,6 @@ its purpose and what success looks like, and names the triggers that make it run
 can be replayed ([S1.3](sections/s1-data-foundation/s1.3-timebase-replay.md),
 [S7.2](sections/s7-lifecycle/s7.2-decision-record.md)).
 
-**From.** Foundations 2 (the contract of intent and scope) and 12 (a long-term posture).
-
 ## 3. Why before how
 
 **Rule.** Principles (why), policies (what is required or forbidden), processes (the logical
@@ -101,8 +96,6 @@ left silent, since every alert points to its runbook
 ([S7.3](sections/s7-lifecycle/s7.3-architectural-fitness.md)). The blueprint reads in the same
 order: section page, sub-section page, then the detail folded under each summary (the notes under
 the Interfaces table, and the steps).
-
-**From.** Foundations 3 (levels of abstraction) and 17 (the integrity grid: no private exception).
 
 ## 4. The producer is never the judge
 
@@ -131,8 +124,6 @@ are capped, and each is reviewed afterwards (S5.4, S7.4). Each role gets the lea
 decision, research, execution and risk, each declare any conflict of interest before signing
 (S4.10).
 
-**From.** Foundations 4 (decision rights and the two pairs of eyes) and 17 (the integrity grid).
-
 ## 5. Small, measurable, reversible
 
 **Rule.** Every change is small enough for its effect to be attributed, measured against a stated
@@ -155,8 +146,6 @@ doubt, the factory [fails closed](glossary.md#fail-closed)
 (S5.1), and [regime](glossary.md#regime) adaptation stays neutral when its context is missing
 ([S5.5](sections/s5-decision-execution/s5.5-regime-adaptation.md)).
 
-**From.** Foundation 5 (reversibility and safe experimentation).
-
 ## 6. Simple by default, removable by design
 
 **Rule.** Start simple and add complexity only on proof that it pays for itself; accepted complexity
@@ -175,9 +164,6 @@ redundant features and keeps representatives
 deprecated) and a policy of deprecation, with an overlap period and an end-of-life date (S2.10).
 Strategies are withdrawn cleanly, down to their [sunset](glossary.md#sunset)
 ([S7.6](sections/s7-lifecycle/s7.6-champion-challenger.md)).
-
-**From.** Foundations 10 (parsimony and clarity) and 20 (the simplification charter and the right to
-retire).
 
 ## 7. Reasons written when decided
 
@@ -200,9 +186,6 @@ carries its [design rationale](glossary.md#design-rationale) in its living
 a correction is a new event that points to the original (S1.3). Every job and experiment pins the
 batches it reads, and a job without [pinning](glossary.md#pinning) is rejected
 ([S1.8](sections/s1-data-foundation/s1.8-data-governance.md)).
-
-**From.** Foundations 6 (intellectual traceability and the log of reasons) and 14 (document
-governance and the versions of ideas).
 
 ## 8. A ladder of proof, on comparable terms
 
@@ -229,8 +212,6 @@ context, against Simpson's paradox
 of every measure, as the factory's [single source of truth](glossary.md#single-source-of-truth)
 (S6.1).
 
-**From.** Foundations 8 (the scale of proof) and 9 (comparability hygiene).
-
 ## 9. Named states, governed transitions
 
 **Rule.** The factory, and each of its parts, is always in a named mode with its own permissions
@@ -249,8 +230,6 @@ paper through canary and [capital tiers](glossary.md#capital-tier) to
 [champion](glossary.md#champion-challenger), [quarantine](glossary.md#quarantine) and sunset (S7.6).
 And every sub-section passes its own gates: entry, exit (pass, retry or fail) and requalification.
 
-**From.** Foundation 11 (states and transitions).
-
 ## 10. Loose coupling through contracts
 
 **Rule.** Parts meet only through written, versioned contracts (what each expects, offers and
@@ -267,8 +246,6 @@ are served under a [feature-serving contract](glossary.md#feature-serving-contra
 [schema contracts](glossary.md#schema-contract) of data are kept by S7.7 and change by "expand and
 contract" (S7.5). In monitoring, each flow stays declared from its producer to its reader, and the
 platform only carries it ([S6.8](sections/s6-monitoring/s6.8-monitoring-as-code.md)).
-
-**From.** Foundation 15 (couplings and interface contracts).
 
 ## 11. A steady cadence, little work in progress
 
@@ -290,9 +267,6 @@ or fortnight, with no decision outside that cadence except on an incident
 ([S7.8](sections/s7-lifecycle/s7.8-capital-cost-steering.md)). Each strategy's cadence of adjustment
 follows its half-life (S5.1).
 
-**From.** Foundations 13 (cognitive flow and limits of work in progress) and 18 (rhythms and
-rituals).
-
 ## 12. Learn without blame
 
 **Rule.** Every incident or significant deviation is rebuilt from the facts as they were, into a
@@ -308,5 +282,3 @@ lesson that never reaches a rule, a test or a guide is a failure of the loop.
 non-regression, and follows them to their close
 ([S7.9](sections/s7-lifecycle/s7.9-incident-response.md)). Monitoring's signals become missions that
 are decided, recorded, and fed back into its thresholds (S7.10).
-
-**From.** Foundation 16 (a learning culture and blameless postmortems).
