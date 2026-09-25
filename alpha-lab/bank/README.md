@@ -103,7 +103,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [SC-020](SC-020-presidential-election-cycle.md) | Presidential election cycle (political cycle) | macroeconomic, risk premium, behavioural | stocks, equity indices | years | not-testable |
 | [SC-021](SC-021-same-calendar-month-seasonality.md) | Same-calendar-month seasonality (cross-section of stock returns) | flows, risk premium, information | stocks | months | not-testable |
 | [SC-022](SC-022-information-cycle-return-seasonality.md) | Information-cycle explanation of return seasonality | information | stocks, sectors | months | not-testable |
-| [SC-023](SC-023-return-seasonalities.md) | Return seasonalities | risk premium, behavioural, flows | stocks, equity indices, crypto | days, months | untouched |
+| [SC-023](SC-023-return-seasonalities.md) | Return seasonalities | risk premium, behavioural, flows | stocks, equity indices, crypto | days, months | tested-inconclusive |
 | [SC-024](SC-024-overnight-return-premium.md) | Overnight return premium | microstructure, limits to arbitrage | stocks, equity indices | intraday, days | untouched |
 | [SC-025](SC-025-seasonal-affective-disorder-effect.md) | Seasonal affective disorder (SAD) effect | behavioural, risk premium | stocks, equity indices | months | untouched |
 | [SC-026](SC-026-daylight-saving-time-anomaly.md) | Daylight saving time anomaly | behavioural | stocks, equity indices | days | untouched |

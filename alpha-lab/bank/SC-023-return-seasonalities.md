@@ -6,7 +6,7 @@ mechanism: [risk premium, behavioural, flows]
 asset_classes: [stocks, equity indices, crypto]
 horizon: [days, months]
 data: [daily prices, monthly returns]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
