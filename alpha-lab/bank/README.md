@@ -36,7 +36,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [TM-036](TM-036-extrapolative-expectations.md) | Extrapolative expectations (X-CAPM, return extrapolation) | behavioural, limits to arbitrage | equity indices, stocks | months, years | untouched |
 | [TM-037](TM-037-investor-sentiment-momentum.md) | Investor sentiment and momentum | behavioural, limits to arbitrage, flows | stocks, crypto, commodities | days, weeks, months | untouched |
 | [TM-038](TM-038-adaptive-markets-hypothesis.md) | Adaptive markets hypothesis | behavioural, limits to arbitrage, macroeconomic | equity indices, bonds, currencies, commodities | months, years | untouched |
-| [TM-039](TM-039-return-dispersion-momentum.md) | Cross-asset return dispersion and momentum | macroeconomic | equity indices, bonds, commodities, currencies, sectors | months | untouched |
+| [TM-039](TM-039-return-dispersion-momentum.md) | Cross-asset return dispersion and momentum | macroeconomic | equity indices, bonds, commodities, currencies, sectors | months | tested-inconclusive |
 | [TM-040](TM-040-value-momentum-combination.md) | Value and momentum combination (trending value) | behavioural | stocks, equity indices, bonds, currencies, commodities | months, years | untouched |
 | [TM-041](TM-041-size-momentum-interaction.md) | Size-momentum interaction (stronger momentum in small capitalisations) | information, limits to arbitrage | stocks, equity indices, commodities | weeks, months | untouched |
 | [TM-043](TM-043-positive-return-autocorrelation.md) | Positive return autocorrelation (variance ratio) | behavioural, information, microstructure | equity indices, stocks | weeks, months | untouched |

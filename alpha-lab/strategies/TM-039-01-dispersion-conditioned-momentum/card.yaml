@@ -1,0 +1,71 @@
+id: TM-039-01-dispersion-conditioned-momentum
+theory: TM-039
+parent: null
+mechanism: >
+  Cross-sectional momentum is long the winners and short the losers of a set of assets, so it can
+  earn only what the assets' returns differ by: when they move together it has nothing to sort, and
+  when asymmetric shocks, crises confined to one class or sector rotations pull them apart, the
+  month's winners and losers are far apart, which a sort that picked them earns. Momentum's profit
+  in a month rises with the dispersion of the assets' returns in that month.
+prediction:
+  sign: positive
+  size: an alpha at or above CA-001-01's rule's over the same sessions and costs, with no upper bound; the only lagged relation the lab could read, on US stocks, has the other sign, and no source gives a size the lab can transfer
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY, SPY, QQQ, IWM, EFA, EEM, GLD, SLV, DBC]
+horizon: months
+signal: >
+  CA-001-01's rule held only while the returns of the funds it ranks were more dispersed than their
+  own average. Within each of three groups (the eleven sector funds; SPY, QQQ, IWM, EFA and EEM;
+  GLD, SLV and DBC), a fund is ranked on a session, as CA-001-01 ranks it on a target, when it
+  trades on that session and traded at the start of the window read up to the session before it,
+  which ends skip sessions before that session before and starts lookback sessions before it, and it
+  has a return over that window. The dispersion of a set of funds on a session is the standard
+  deviation, with n - 1 in the denominator, of the funds' returns over the last skip sessions up to
+  the session before it, from the close skip + 1 sessions before the session to the close of the
+  session before, taken over the funds ranked on that session; it has a reading on every session on
+  which the set holds two ranked funds or more. On the first session of each month, under scope
+  "group", each group's reading on that session is set against the average of its readings on the
+  sessions from its first reading through the session before; under scope "all", the reading of all
+  the ranked funds of the universe is set against the average of its own, and gives one state for
+  the three groups. A group in the state, its reading above that average, holds CA-001-01's weights:
+  of the N funds trading, its n ranked funds hold n/N of the portfolio, split equally among its top
+  third by the window return, rounded, one at least, ties to the order of the universe. A group out
+  of the state, its reading at or below the average, or with fewer than two ranked funds, or with no
+  reading before that session, holds its n ranked funds at 1/N each. A fund trading but not yet
+  ranked is held at 1/N. The targets start on the first month in which a fund is ranked; from then
+  the portfolio is always fully invested.
+parameters:
+  lookback: sessions from the start of the ranking window to the session before the target
+  skip: sessions before the session before the target left out of the ranking window, over which the dispersion is read
+  scope: '"group" reads each group''s own dispersion; "all" the dispersion of all ranked funds, one state for every group'
+variants:
+  - {lookback: 252, skip: 21, scope: group}
+  - {lookback: 252, skip: 21, scope: all}
+neighbours:
+  lookback: {25: [189, 315], 50: [126, 378]}
+  skip: {25: [16, 26], 50: [10, 32]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the base, at the lab's stated costs, by its alpha over the nineteen funds held in equal
+  parts less that of CA-001-01's base (lookback 252, skip 21), both over the base's in-sample
+  sessions from its first holding, each hedged with its own whole-sample beta, as python -m
+  lab.compare computes it (CA-001-01 earned 0.20% a year from 2006-02-01; the same code on the same
+  snapshot should give it again, and the verdict checks it). The claim is refuted in this form if
+  the difference is below -1% a year and more than one standard error of the monthly differences, as
+  lab.compare measures it, below zero: switching CA-001-01's tilt off after its groups' returns were
+  less dispersed than usual would then have lost alpha, through the tilt's own months, through the
+  market exposure the switch adds or through the costs of switching, which the reported measures
+  below tell apart; this says nothing against the relation over the same period, which the lab does
+  not test. A difference below -1% within one standard error, or between -1% and 0, is not proven,
+  not refuted; a difference above zero is reported with its standard error and is not taken as
+  proof. The battery's gates judge the base's own edge over the benchmark: passing them would show
+  that edge, not where CA-001-01's lies. The variant is compared with CA-001-01's base in the same
+  way and reported, not graded. Reported too, not graded, and stated here before the run: the base's
+  and CA-001-01's alphas over the months in which the base's weights differ from CA-001-01's in any
+  group and over the other months, each rule given its own beta in each set; each group's tilt,
+  CA-001-01's weights less its equal parts, measured raw, in the months after that group's reading
+  was above its average and in the others; and CA-001-01's hedged edge in the months in and out of
+  the variant's state, with a beta for each state, the months in the state being those in which the
+  variant and CA-001-01 hold the same weights.
