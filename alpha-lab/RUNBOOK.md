@@ -36,7 +36,11 @@ its own, beside the snapshot, whose files never change.
 2. **The folder**: `strategies/<theory-id>-<nn>-<slug>/`, `<nn>` counting the strategies drawn
    from the theory, from `01`. The folder's name is the card's id, and an id is used once.
 3. **Reasoning**, `reasoning.md`: why this theory now; how its mechanism becomes a signal; each
-   choice with its reason; the options rejected, and why.
+   choice with its reason; the options rejected, and why. What the lab has already published about
+   the card's period is disclosed there; a figure derived from published averages over other spans
+   — monthly averages weighted by the days a window takes of each month — is an estimate, not the
+   sample's figure, and is written as one: twice the pattern inside the months moved such a figure
+   by more than half a standard error (SC-010-01, SC-025-01).
 4. **Hypothesis card**, `card.yaml`, from `templates/card.yaml`: the mechanism, the prediction
    (sign and rough size), the universe, the horizon, the signal, the parameters, three variants at
    most with the base first, and what would refute it.
