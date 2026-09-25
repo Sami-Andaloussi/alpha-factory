@@ -187,6 +187,17 @@ def test_a_cross_check_on_closes_saved_by_hand_lands_in_the_manifest(snapshot, t
         data.cross_check_folder(folder, root=snapshot)
 
 
+def test_an_asset_the_cross_check_did_not_confirm_waits_for_its_days_to_be_examined():
+    manifest = {"cross_check": {"status": "run", "checked": "2026-09-25",
+                                "tickers": {"AAA": {"confirmed": True}, "BBB": {"confirmed": False}}}}
+    assert data.unexamined(manifest) == ["BBB"]
+    manifest["cross_check_review"] = {"checked": "2026-09-24", "tickers": {"BBB": "dividend days"}}
+    assert data.unexamined(manifest) == ["BBB"]                # a review of an earlier cross-check
+    manifest["cross_check_review"]["checked"] = "2026-09-25"
+    assert data.unexamined(manifest) == []
+    assert data.unexamined({"cross_check": {"status": "not run"}}) == []
+
+
 def test_files_saved_from_stooq_name_their_asset():
     assert [data.stooq_ticker(s) for s in ("spy", "spy_us_d", "spy.us", "btcusd_d", "XLF")] == \
         ["SPY", "SPY", "SPY", "BTC-USD", "XLF"]

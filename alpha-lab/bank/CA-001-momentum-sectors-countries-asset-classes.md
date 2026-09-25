@@ -6,7 +6,7 @@ mechanism: [behavioural, information, flows]
 asset_classes: [stocks, sectors, equity indices, commodities]
 horizon: [months]
 data: [daily prices, sector index levels, country index levels, factor returns]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
