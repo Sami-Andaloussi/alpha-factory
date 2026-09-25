@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 254 untouched · 1 in-progress · 0 tested-conclusive · 7 tested-inconclusive · 1 not-testable.
+**263 theories**: 253 untouched · 1 in-progress · 0 tested-conclusive · 8 tested-inconclusive · 1 not-testable.
 
-**8 strategies**: 0 passing gates 1 to 7, 3 stopped at gate 2, 5 stopped at gate 3; 1 under paper trading.
+**9 strategies**: 0 passing gates 1 to 7, 4 stopped at gate 2, 5 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -253,7 +253,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-015](bank/TM-015-slow-moving-capital-delegated-management.md) Slow-moving capital and delegated management (benchmark hugging, career risk) | trend and momentum | untouched |  |
 | [TM-016](bank/TM-016-disposition-effect.md) Disposition effect (capital gains overhang) | trend and momentum | untouched |  |
 | [TM-017](bank/TM-017-time-series-momentum.md) Time-series momentum (trend following, absolute momentum) | trend and momentum | in-progress | [TM-017-01-time-series-momentum](strategies/TM-017-01-time-series-momentum/) · stops at gate 3 · gate 8 since 2026-09-25, a test of the chain: 0 of 0 signals identical, +0.00% ([log](https://github.com/Sami-Andaloussi/alpha-factory/blob/paper/paper/README.md)) · [report](strategies/TM-017-01-time-series-momentum/report.ipynb) · [verdict](strategies/TM-017-01-time-series-momentum/verdict.md) |
-| [TM-018](bank/TM-018-market-divergence-crisis-alpha.md) Market divergence and crisis alpha | trend and momentum | untouched |  |
+| [TM-018](bank/TM-018-market-divergence-crisis-alpha.md) Market divergence and crisis alpha | trend and momentum | tested-inconclusive | [TM-018-01-divergence-conditioned-trend](strategies/TM-018-01-divergence-conditioned-trend/) · stops at gate 2 · [report](strategies/TM-018-01-divergence-conditioned-trend/report.ipynb) · [verdict](strategies/TM-018-01-divergence-conditioned-trend/verdict.md) |
 | [TM-019](bank/TM-019-earnings-momentum.md) Earnings momentum | trend and momentum | untouched |  |
 | [TM-023](bank/TM-023-momentum-seasonality.md) Seasonality of momentum (tax-loss selling and window dressing) | trend and momentum | untouched |  |
 | [TM-024](bank/TM-024-momentum-crashes.md) Momentum crashes (state-dependent momentum risk) | trend and momentum | tested-inconclusive | [TM-024-01-crash-managed-momentum](strategies/TM-024-01-crash-managed-momentum/) · stops at gate 2 · [report](strategies/TM-024-01-crash-managed-momentum/report.ipynb) · [verdict](strategies/TM-024-01-crash-managed-momentum/verdict.md) |

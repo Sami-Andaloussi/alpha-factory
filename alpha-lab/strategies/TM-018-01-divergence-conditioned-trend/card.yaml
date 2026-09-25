@@ -1,0 +1,59 @@
+id: TM-018-01-divergence-conditioned-trend
+theory: TM-018
+parent: null
+mechanism: >
+  Trend following earns when markets diverge — when prices move persistently and cleanly, above
+  all in crises, as deleveraging, intervention and herding push assets apart — and earns nothing, or
+  loses, when they oscillate. Favourable and unfavourable environments alternate about every half
+  year, so the card takes the divergence of the months just past as a guide to the month ahead.
+prediction:
+  sign: positive
+  size: an alpha at least TM-017-01's rule earns over the same sessions (the base), since the rule gives up only the months after low divergence, which the card assumes are like the low-divergence months in which the source finds trend following earning nothing or losing; for the crisis variant, a difference near zero or slightly negative, since the source finds trend following earning little outside crises
+universe: [SPY, EFA, EEM, IEF, TLT, GLD, DBC]
+horizon: months
+signal: >
+  On the first session of each month, the state is read on closes up to the session before. Under
+  condition "divergence", each fund's signal to noise ratio is the absolute change of its close over
+  its last mdi_window daily changes up to the session before, divided by the sum of the absolute
+  values of those changes; the market divergence index is its average over the funds that have
+  mdi_window daily changes, read from prices whether the funds trade or not; the state is divergent
+  when the index is above the average of its daily values from its first reading through the session
+  before. Under condition "crisis", SPY's month closes are its closes on the last session of each
+  month; the state is a crisis when SPY fell over the month just ended and the unbroken run of
+  falling months ending with it lost 5% or more in all; it ends with the first month SPY rises. In
+  the state, each fund that trades and whose return over the past lookback sessions, read up to the
+  session before, beats the Treasury bill over the same sessions is held in a seventh of the
+  portfolio, the rest in cash: TM-017-01's rule; a fund without lookback + 1 closes is out of trend.
+  Out of the state, the funds that trade are held in equal parts. The targets start on the first
+  month in which the state can be read and a fund has lookback + 1 closes up to the session before.
+parameters:
+  condition: '"divergence" reads the market divergence index; "crisis" reads a run of falling months of SPY'
+  mdi_window: daily changes over which each fund's signal to noise ratio is measured
+  lookback: sessions of the past return that decides whether a fund is in trend
+variants:
+  - {condition: divergence, mdi_window: 100, lookback: 252}
+  - {condition: crisis, mdi_window: 100, lookback: 252}
+neighbours:
+  mdi_window: {25: [75, 125], 50: [50, 150]}
+  lookback: {25: [189, 315], 50: [126, 378]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the base, at the lab's stated costs, by its alpha over the seven funds held in equal
+  parts less that of TM-017-01's rule (lookback 252) recomputed over the base's in-sample sessions
+  from its first holding, at the same costs (TM-017-01 earned 1.55% a year over its own sessions from
+  2006-02-01, under the battery's version 1; version 2 changes gate 6 only, so the recomputed figure
+  should match, and the verdict checks it). The theory is refuted in this form if the difference is
+  below -1% a year and more than one standard error of the monthly differences, as the verdict
+  measures it, below zero: TM-017-01's edge would then lie in the months after the index was below
+  its average, which the lagged reading says give none; it says nothing against the relation the
+  source measures over the same period. Any other difference is not shown, not refuted. The theory is
+  supported only if the base passes gates 1 to 7 and its difference from TM-017-01 lies above 1% a
+  year; a pass with a smaller difference shows the rule's edge, not where it lies. The variant judges
+  the crisis claim alone, against the same band, with its own measured standard error: a difference
+  below -1% a year and more than one standard error below zero refutes, in this form, the claim that
+  crises carry more than half of the edge, since it would leave them less than about a third of
+  TM-017-01's alpha. A difference between about half of that alpha below zero and zero, which the
+  claim allows, cannot be told from one it does not.

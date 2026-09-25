@@ -6,7 +6,7 @@ mechanism: [macroeconomic, flows, risk premium, behavioural]
 asset_classes: [equity indices, bonds, currencies, commodities]
 horizon: [months, years]
 data: [daily prices, futures curves]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
