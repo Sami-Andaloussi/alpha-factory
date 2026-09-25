@@ -1,0 +1,60 @@
+id: TM-001-01-momentum-between-asset-classes
+theory: TM-001
+parent: null
+mechanism: >
+  Investors underreact to news, news reaches the market slowly and capital chases what has done
+  well, so that the assets that led over the past year keep leading over the next months; the
+  continuation is found within each asset class and across them, where it guides a global tactical
+  allocation between unlike asset classes.
+prediction:
+  sign: positive (the top two's return above the seven's equal weight)
+  size: a judgment -- the top two's return above the seven's equal weight about 0 to +2% a year before costs, at or below CA-001-01's predicted 2% for the within-class form, the library giving the between-class ranking a sign and no size; the rule's costs about 0.24 to 0.4% a year, about -0.4 to +1.8% after them, the benchmark's own costs narrowing the difference a little; an appraisal ratio of about 0 to 0.25; the base expected to fail gate 4 and gate 5, whose blend must pass gate 4, likely gate 3, gate 2 near its threshold, and likely gate 6 on one asset's share of the profit or on the top 1 neighbour
+universe: [SPY, EFA, EEM, IEF, TLT, GLD, DBC]
+horizon: months
+signal: >
+  On the first session of each month, each asset is ranked by its return over a window read up to
+  the session before the target: it ends skip sessions before that session before, and starts
+  lookback sessions before it. An asset is ranked when it trades on the target's session and
+  traded on the window's first session, with a return over the window; ties go to the asset listed
+  first in the universe. The `top` assets ranked highest by that return, or all those ranked when
+  fewer, are held in equal parts, the whole portfolio invested; an asset trading but not ranked is
+  not held. The targets are set on every first session of a month from the first on which an asset
+  is ranked, whether or not they change.
+parameters:
+  lookback: sessions from the start of the ranking window to the session before the target
+  skip: sessions before the session before the target left out of the ranking window
+  top: how many of the ranked assets are held
+variants:
+  - {lookback: 252, skip: 21, top: 2}
+  - {lookback: 252, skip: 0, top: 2}
+neighbours:
+  lookback: {25: [189, 315], 50: [126, 378]}
+  skip: {25: [16, 26], 50: [10, 32]}
+  top: {25: [1, 3], 50: [1, 3]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, on the market's closes, over the in-sample months from the first target,
+  2006-02-01, the last ending at the close of 2022-12-30: each month from the close of its first
+  session to the close of the next month's first session, the return of the top two assets by the
+  base's signal, in equal parts, less the equal-weighted return of those of the seven funds that
+  trade on the month's first session; the mean of those monthly gaps, its standard error from
+  their standard deviation over the months, and its t statistic, computed apart from the battery.
+  The theory is refuted in this form if that t statistic is -0.35 or below: the past year's
+  leaders among the asset classes no better than the classes held in equal parts. Above it, short
+  of passing gates 1 to 7, it is not proven, not refuted; a base that passes gates 1 to 7 while
+  the clause refutes leaves the theory refuted in this form. Of TM-001's refutation criteria the
+  first is graded on the long side; the fifth is reported; the second, third and fourth read
+  single stocks and are not read. Reported, not graded: the same gap for the variant; the top two
+  less the bottom two by the base's signal; the gap of the same rule ranked by the window's return
+  divided by the standard deviation of its daily returns; how often each asset is held, how often
+  both places go to one class, and the months with IEF and TLT both held; the gap in January and
+  in the other months, in the months whose target follows a fall of the seven's equal weight over
+  the 252 sessions to the session before the target and in the others, from July to December 2008,
+  and from March to December 2009; over 2006-2013, 2014-2022, without the months whose target
+  falls in 2008, and without those in 2020; the same gap over the holdout, 2023 to 2025; against
+  TM-017-01 on the same months, the share of months holding the same assets and the correlation of
+  the two rules' monthly returns less the seven's; the base's alpha before and after costs, and
+  the neighbours' and the one-day-late rule's alphas and appraisal ratios.

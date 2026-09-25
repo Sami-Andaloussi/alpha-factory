@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 222 untouched · 1 in-progress · 0 tested-conclusive · 30 tested-inconclusive · 10 not-testable.
+**263 theories**: 221 untouched · 1 in-progress · 0 tested-conclusive · 31 tested-inconclusive · 10 not-testable.
 
-**32 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 21 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
+**33 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 22 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -240,7 +240,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [SC-026](bank/SC-026-daylight-saving-time-anomaly.md) Daylight saving time anomaly | seasonality and calendar effects | tested-inconclusive | [SC-026-01-sessions-after-the-clock-change](strategies/SC-026-01-sessions-after-the-clock-change/) · stops at gate 2 · [report](strategies/SC-026-01-sessions-after-the-clock-change/report.ipynb) · [verdict](strategies/SC-026-01-sessions-after-the-clock-change/verdict.md) |
 | [SC-027](bank/SC-027-lunar-cycle-effect.md) Lunar cycle effect | seasonality and calendar effects | tested-inconclusive | [SC-027-01-new-moon-fortnight](strategies/SC-027-01-new-moon-fortnight/) · stops at gate 2 · [report](strategies/SC-027-01-new-moon-fortnight/report.ipynb) · [verdict](strategies/SC-027-01-new-moon-fortnight/verdict.md) |
 | [SC-028](bank/SC-028-sunshine-effect.md) Sunshine effect | seasonality and calendar effects | not-testable | [SC-028-01-sunshine](strategies/SC-028-01-sunshine/) · not testable: [reasoning](strategies/SC-028-01-sunshine/reasoning.md) |
-| [TM-001](bank/TM-001-cross-sectional-price-momentum.md) Cross-sectional price momentum (relative strength) | trend and momentum | untouched |  |
+| [TM-001](bank/TM-001-cross-sectional-price-momentum.md) Cross-sectional price momentum (relative strength) | trend and momentum | tested-inconclusive | [TM-001-01-momentum-between-asset-classes](strategies/TM-001-01-momentum-between-asset-classes/) · stops at gate 2 · [report](strategies/TM-001-01-momentum-between-asset-classes/report.ipynb) · [verdict](strategies/TM-001-01-momentum-between-asset-classes/verdict.md) |
 | [TM-002](bank/TM-002-52-week-high-momentum.md) 52-week high momentum (anchoring on the annual high) | trend and momentum | tested-inconclusive | [TM-002-01-sector-52-week-high](strategies/TM-002-01-sector-52-week-high/) · stops at gate 3 · [report](strategies/TM-002-01-sector-52-week-high/report.ipynb) · [verdict](strategies/TM-002-01-sector-52-week-high/verdict.md) |
 | [TM-003](bank/TM-003-industry-momentum.md) Industry momentum (information spillovers) | trend and momentum | tested-inconclusive | [TM-003-01-sector-momentum](strategies/TM-003-01-sector-momentum/) · stops at gate 3 · [report](strategies/TM-003-01-sector-momentum/report.ipynb) · [verdict](strategies/TM-003-01-sector-momentum/verdict.md) |
 | [TM-005](bank/TM-005-conservatism-and-representativeness.md) Conservatism and representativeness (investor sentiment model) | trend and momentum | untouched |  |

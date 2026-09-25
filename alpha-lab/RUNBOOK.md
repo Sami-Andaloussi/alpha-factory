@@ -40,7 +40,12 @@ its own, beside the snapshot, whose files never change.
    the card's period is disclosed there; a figure derived from published averages over other spans
    — monthly averages weighted by the days a window takes of each month — is an estimate, not the
    sample's figure, and is written as one: twice the pattern inside the months moved such a figure
-   by more than half a standard error (SC-010-01, SC-025-01).
+   by more than half a standard error (SC-010-01, SC-025-01). Nothing is computed on the in-sample
+   returns before the card is locked, not even their volatilities for the test's power: a power
+   estimate is built from published figures — a verdict's tracking error or standard error — or
+   from counts of the signal that read no return; where that rule was broken, the reasoning says
+   so and the verdict records it (TM-001-01, whose in-sample estimate fell short of the tracking
+   error a verdict had already published).
 4. **Hypothesis card**, `card.yaml`, from `templates/card.yaml`: the mechanism, the prediction
    (sign and rough size), the universe, the horizon, the signal, the parameters, three variants at
    most with the base first, and what would refute it.
