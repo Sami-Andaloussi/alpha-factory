@@ -88,7 +88,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [SC-002](SC-002-january-effect.md) | January effect (turn-of-the-year effect) | flows, limits to arbitrage, microstructure | stocks, equity indices | days, weeks | untouched |
 | [SC-006](SC-006-december-effect.md) | December effect (deferral of capital gains) | flows | stocks | days, weeks | untouched |
 | [SC-007](SC-007-santa-claus-rally.md) | Santa Claus rally | behavioural, flows, microstructure | stocks, equity indices | days | untouched |
-| [SC-008](SC-008-turn-of-the-month-effect.md) | Turn-of-the-month effect | flows, information, limits to arbitrage | stocks, equity indices, crypto | days | in-progress |
+| [SC-008](SC-008-turn-of-the-month-effect.md) | Turn-of-the-month effect | flows, information, limits to arbitrage | stocks, equity indices, crypto | days | tested-inconclusive |
 | [SC-009](SC-009-payday-hypothesis-dash-for-cash.md) | Payday hypothesis (Dash for Cash) | flows, limits to arbitrage | stocks, bonds | days | untouched |
 | [SC-010](SC-010-semi-month-effect.md) | Semi-month effect (first half of the month) | flows, information | stocks, equity indices | days, weeks | untouched |
 | [SC-011](SC-011-macroeconomic-announcement-clustering.md) | Macroeconomic announcement clustering hypothesis | information, risk premium | stocks, equity indices | days | not-testable |
