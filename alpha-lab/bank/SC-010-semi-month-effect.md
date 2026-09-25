@@ -6,7 +6,7 @@ mechanism: [flows, information]
 asset_classes: [stocks, equity indices]
 horizon: [days, weeks]
 data: [daily prices, macroeconomic releases, payment dates]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

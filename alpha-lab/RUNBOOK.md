@@ -86,10 +86,13 @@ its own, beside the snapshot, whose files never change.
    registry bears this id or this card; like the run, it refuses while the registry is not whole
    (step 7), and while the folder holds anything but the card and its reasoning: the build plan and
    the code are written after the card is locked, not before. Then **commit the card alone**
-   (`card: <id>`), before any code: from that commit, the card never changes. The lock proves the
-   order of the commits; the order of the work is for whoever runs the lab to keep, and a departure
-   from it is written in the verdict. A changed hypothesis is a new card, `<nn>` plus one, which
-   names this one as its `parent`; its trials add to the registry's count.
+   (`card: <id>`), before any code: from that commit, the card never changes. The hook
+   `tools/hooks/pre-commit`, installed as `.git/hooks/pre-commit`, runs the check on every card a
+   commit stages and stops the commit it refuses (SC-010-01, whose lock went through with a card
+   that did not parse, the check's refusal piped away). The lock proves the order of the commits;
+   the order of the work is for whoever runs the lab to keep, and a departure from it is written in
+   the verdict. A changed hypothesis is a new card, `<nn>` plus one, which names this one as its
+   `parent`; its trials add to the registry's count.
 5. **Build plan**, `build-plan.md`: what code, in what order, and why.
 6. **Strategy code**, `strategy.py`: a function `positions(market, **parameters)` that returns a
    target weight for each session and asset, commented against the build plan.
@@ -151,8 +154,8 @@ its own, beside the snapshot, whose files never change.
    - If the run stops after its record (the battery raised, the run was interrupted, the lab
      changed), the card has run: its lines are written void, with the returns the battery computed
      when the lab changed, the board is regenerated, and a new card is needed. If the registry could
-     not be written, the clone kept the lines: `python -m lab.registry restore` puts them back once it
-     can be; the notebook and the board are drawn all the same.
+     not be written, the clone kept the lines: `python -m lab.registry restore` puts them back once
+     it can be; the notebook and the board are drawn all the same.
    - If the runs that every gate judges break (the benchmarks, a choosing card's walk-forward),
      every gate fails with the error: the card has run, the trials its variants computed count in
      gate 4, the report says the runs broke, and a new card is needed.
