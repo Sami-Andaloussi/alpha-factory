@@ -174,7 +174,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [CA-021](CA-021-value-sectors-countries-asset-classes.md) | Value across sectors, countries and asset classes | behavioural, limits to arbitrage | stocks, sectors, equity indices | weeks, months, years | untouched |
 | [CA-022](CA-022-value-spread-deep-value.md) | Value spread and deep value | risk premium, limits to arbitrage, behavioural | stocks, sectors, equity indices, crypto | months, years | untouched |
 | [CA-023](CA-023-fundamental-indexation.md) | Fundamental indexation | structural, flows | stocks, equity indices | months, years | untouched |
-| [CA-024](CA-024-value-momentum-everywhere.md) | Value and momentum everywhere | behavioural, risk premium, limits to arbitrage | stocks, equity indices, bonds, currencies, commodities | months, years | untouched |
+| [CA-024](CA-024-value-momentum-everywhere.md) | Value and momentum everywhere | behavioural, risk premium, limits to arbitrage | stocks, equity indices, bonds, currencies, commodities | months, years | tested-inconclusive |
 | [CA-025](CA-025-carry-across-asset-classes.md) | Carry across asset classes | risk premium, limits to arbitrage, structural | currencies, equity indices, bonds, credit, commodities, volatility, stocks, crypto | months | untouched |
 | [CA-028](CA-028-commodity-equity-oil-shock-rotation.md) | Commodity-to-equity transmission and oil shock sector rotation | macroeconomic, information | commodities, sectors, equity indices, stocks, crypto | weeks, months | untouched |
 | [CA-029](CA-029-illiquidity-premium.md) | Illiquidity premium | risk premium, microstructure, limits to arbitrage | stocks | months, years | untouched |

@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 247 untouched · 1 in-progress · 0 tested-conclusive · 13 tested-inconclusive · 2 not-testable.
+**263 theories**: 246 untouched · 1 in-progress · 0 tested-conclusive · 14 tested-inconclusive · 2 not-testable.
 
-**14 strategies**: 0 passing gates 1 to 7, 8 stopped at gate 2, 6 stopped at gate 3; 1 under paper trading.
+**15 strategies**: 0 passing gates 1 to 7, 9 stopped at gate 2, 6 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -56,7 +56,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [CA-021](bank/CA-021-value-sectors-countries-asset-classes.md) Value across sectors, countries and asset classes | cross-asset relative value | untouched |  |
 | [CA-022](bank/CA-022-value-spread-deep-value.md) Value spread and deep value | cross-asset relative value | untouched |  |
 | [CA-023](bank/CA-023-fundamental-indexation.md) Fundamental indexation | cross-asset relative value | untouched |  |
-| [CA-024](bank/CA-024-value-momentum-everywhere.md) Value and momentum everywhere | cross-asset relative value | untouched |  |
+| [CA-024](bank/CA-024-value-momentum-everywhere.md) Value and momentum everywhere | cross-asset relative value | tested-inconclusive | [CA-024-01-value-within-groups](strategies/CA-024-01-value-within-groups/) · stops at gate 2 · [report](strategies/CA-024-01-value-within-groups/report.ipynb) · [verdict](strategies/CA-024-01-value-within-groups/verdict.md) |
 | [CA-025](bank/CA-025-carry-across-asset-classes.md) Carry across asset classes | cross-asset relative value | untouched |  |
 | [CA-028](bank/CA-028-commodity-equity-oil-shock-rotation.md) Commodity-to-equity transmission and oil shock sector rotation | cross-asset relative value | untouched |  |
 | [CA-029](bank/CA-029-illiquidity-premium.md) Illiquidity premium | cross-asset relative value | untouched |  |

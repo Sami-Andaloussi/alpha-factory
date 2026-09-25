@@ -110,12 +110,16 @@ def stationary_bootstrap(n: int, length: int, mean_block: float, draws: int, rng
     return paths
 
 
-def placebo_offsets(n: int, draws: int, minimum: int, rng) -> np.ndarray:
-    """Random circular shifts of at least `minimum` sessions each way, for the exposure-matched
-    placebo: the strategy's own positions, moved in time."""
-    if n <= 2 * minimum:
-        raise ValueError("the sample is too short for shifts of at least a year each way")
-    return rng.integers(minimum, n - minimum + 1, size=draws)
+def placebo_offsets(n: int, draws: int, minimum: int, rng, forward: int | None = None) -> np.ndarray:
+    """Random circular shifts of at least `minimum` sessions back, for the exposure-matched
+    placebo: the strategy's own positions, moved in time. A shift s holds, on the first s days, the
+    weights of n - s days later: `forward`, `minimum` unless given, is the least of that distance,
+    so that a placebo never holds weights whose signal read the day it is paid on."""
+    forward = minimum if forward is None else forward
+    if n < minimum + forward + 1:
+        raise ValueError("the sample is too short for shifts of at least a year each way, beyond the "
+                         "signal's memory")
+    return rng.integers(minimum, n - forward + 1, size=draws)
 
 
 def decision_clusters(positions: pd.DataFrame, gap: int = 5) -> int:

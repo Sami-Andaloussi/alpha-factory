@@ -52,14 +52,15 @@ def beta(excess: pd.Series, benchmark_excess: pd.Series) -> float:
 def difference(market: Market, strategy, parameters: dict, reference, reference_parameters: dict,
                end, start=None, crypto=costs.CRYPTO) -> dict:
     """The rule's alpha less the reference's, on `market`, already restricted to the universe and
-    window both rules share, over the sessions from `start` — the rule's own first holding when it
-    is not given — to `end`. Refused when the reference first holds after `start`."""
+    window both rules share, over the sessions from `start` — the first session the rule holds an
+    asset into when it is not given — to `end`. Refused when the reference first holds into a later
+    session than `start`."""
     positions = battery.targets(strategy, market, parameters)
     reference_positions = battery.targets(reference, market, reference_parameters)
-    start = battery.first_holding(positions) if start is None else pd.Timestamp(start)
+    start = battery.first_held(positions) if start is None else pd.Timestamp(start)
     if start is None:
         raise ValueError("the rule never holds an asset")
-    reference_start = battery.first_holding(reference_positions)
+    reference_start = battery.first_held(reference_positions)
     if reference_start is None or reference_start > start:
         raise ValueError(f"the reference first holds on {reference_start:%Y-%m-%d}, after the rule's "
                          f"{start:%Y-%m-%d}: its days in cash would count as a hedge"
@@ -141,7 +142,7 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     market = battery.restrict(data.load(end=battery.IN_SAMPLE[1]), card.universe).window(*card.in_sample)
     strategy, reference_strategy = (report.strategy_of(folder / "strategy.py") for folder in folders)
-    start = battery.first_holding(battery.targets(strategy, market, dict(card.variants[0])))
+    start = battery.first_held(battery.targets(strategy, market, dict(card.variants[0])))
     try:
         result = difference(market, strategy, dict(card.variants[args.variant]), reference_strategy,
                             dict(reference.variants[args.reference_variant]), card.in_sample[1], start)

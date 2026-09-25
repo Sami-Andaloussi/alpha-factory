@@ -1,0 +1,48 @@
+id: CA-024-01-value-within-groups
+theory: CA-024
+parent: null
+mechanism: >
+  Investors overreact and extrapolate, and arbitrage capital is slow and constrained, so that
+  within a group of comparable assets the members whose prices fell most over several years are
+  cheap and those that rose most are dear, and prices revert: the cheap members of each group
+  outperform the dear ones over the following years, in each group, with a common structure across
+  the groups and a return opposed to momentum's.
+prediction:
+  sign: positive
+  size: an alpha of about 0.7 to 1.5% a year over the same funds held in equal parts, an appraisal ratio of about 0.12 to 0.25; built group by group from the study's long-short value premia (about 5.8% a year in commodities, 3.5% in stock selection), four fifths of that for the price-only measure on equities, 40 to 50% of it long only, at CA-001-01's tracking error of about 6% a year on the same groups; from half to all of the long record, which the 2010s in several asset classes point below
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY, SPY, QQQ, IWM, EFA, EEM, GLD, SLV, DBC]
+horizon: months
+signal: >
+  On the first session of each month, within each of three groups -- the eleven sector funds; the
+  five equity markets SPY, QQQ, IWM, EFA and EEM; the commodities GLD, SLV and DBC -- the members
+  are ranked by their return from lookback sessions before the session before the target to skip
+  sessions before that session before. The bottom third of each group's ranked members, rounded, one
+  at least, is held: the cheapest by their price then against their price now. Of the N assets
+  trading, a group of n ranked members holds n/N of the portfolio, split equally among its cheapest;
+  an asset trading without lookback sessions of prices is not ranked and is held at 1/N, its
+  benchmark weight. The targets start on the first month in which an asset is ranked; from then the
+  portfolio is always fully invested.
+parameters:
+  lookback: sessions from the start of the value window to the session before the target
+  skip: sessions before the session before the target left out of the value window
+variants:
+  - {lookback: 1260, skip: 0}
+  - {lookback: 756, skip: 0}
+  - {lookback: 1260, skip: 252}
+neighbours:
+  lookback: {25: [945, 1575], 50: [630, 1890]}
+choose: false
+memory: 1260
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the base by its alpha over the same funds held in equal parts, as gate 2 measures it,
+  and by the share of its placebos, shifted in time, that it beats at the lab's costs. The theory is
+  refuted in this form if the alpha is zero or less and the base beats half of its placebos or
+  fewer: the cheapest members of the groups would then have earned no more than the groups from 2010
+  to 2022, as the bank's first refutation reads for these asset classes. Any other result short of
+  passing gates 1 to 7 is not proven, not refuted. Reported, not graded: the variants, the
+  three-year window and the year skipped; the value tilt's alpha in each group, with a beta for
+  each; the correlation of the tilt's hedged monthly returns between the groups, and with
+  CA-001-01's momentum tilt over the same months; the alpha by year, and in 2020.

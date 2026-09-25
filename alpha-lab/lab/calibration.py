@@ -173,7 +173,7 @@ def in_sample(market: Market, strategy, parameters) -> tuple[battery.Leg, slice]
     positions = battery.targets(strategy, inside, parameters)
     result = battery.at_cost(inside, positions, battery.costs.CRYPTO)
     leg = battery.Leg(positions, result, result, *battery.benchmarks(inside, positions, battery.costs.CRYPTO))
-    return leg, slice(battery.first_holding(positions), pd.Timestamp(battery.IN_SAMPLE[1]))
+    return leg, slice(battery.first_held(positions), pd.Timestamp(battery.IN_SAMPLE[1]))
 
 
 def appraisal(market: Market, strategy, parameters) -> float:

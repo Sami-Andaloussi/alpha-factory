@@ -6,7 +6,7 @@ mechanism: [behavioural, risk premium, limits to arbitrage]
 asset_classes: [stocks, equity indices, bonds, currencies, commodities]
 horizon: [months, years]
 data: [daily prices, valuation ratios, bond yields, exchange rates, commodity prices]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

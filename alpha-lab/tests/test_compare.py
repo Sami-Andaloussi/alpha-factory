@@ -45,11 +45,11 @@ def judged():
 
 def test_the_figures_are_the_battery_s_own(judged):
     inside, rule, verdict = judged
-    start = battery.first_holding(battery.targets(rule, inside, CARD.variants[0]))
+    start = battery.first_held(battery.targets(rule, inside, CARD.variants[0]))
     for k, parameters in enumerate(CARD.variants):
         result = compare.difference(inside, rule, dict(parameters), equal_parts, {}, CARD.in_sample[1], start,
                                     crypto=frozenset())
-        assert result["from"] == start                                    # the base's first holding, for every variant
+        assert result["from"] == start                                    # the base's first session held, for every variant
         assert np.isclose(result["appraisal ratio"], verdict.trials[k].sharpe, rtol=0, atol=1e-12)
         if k == 0:
             assert np.isclose(result["alpha"], verdict.gates[1].figures["alpha"], rtol=0, atol=1e-12)
@@ -59,7 +59,7 @@ def test_a_later_variant_is_counted_from_the_base_s_first_holding(judged):
     inside, rule, verdict = judged
     own = compare.difference(inside, rule, dict(CARD.variants[1]), equal_parts, {}, CARD.in_sample[1],
                              crypto=frozenset())
-    assert own["from"] > battery.first_holding(battery.targets(rule, inside, CARD.variants[0]))
+    assert own["from"] > battery.first_held(battery.targets(rule, inside, CARD.variants[0]))
     assert not np.isclose(own["appraisal ratio"], verdict.trials[1].sharpe, rtol=0, atol=1e-6)
 
 

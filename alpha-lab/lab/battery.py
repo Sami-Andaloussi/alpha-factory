@@ -14,7 +14,21 @@ The thresholds below were set before any card. `THRESHOLDS` is the battery's ver
 every verdict: changing a threshold, or how a gate computes its figures, is a versioned decision that
 applies only to later cards. Version 2 (2026-09-25): gate 6 leaves a cluster out by making its assets
 untradable, their prices still read, where version 1 removed them from the market; a rule that trades
-one market on another's signal keeps its signal when the market it reads is left out.
+one market on another's signal keeps its signal when the market it reads is left out. Version 3
+(2026-09-25): a card declares its signal's memory, the sessions it reads back from the session before
+a target, a year unless it says more; gate 1 checks it, the targets unchanged when the prices older
+than the memory are scrambled, and gate 3 draws no placebo shift that would hold, past the circular
+wrap, weights whose signal read the day they are paid on: shifts back of a year at least, and
+forward, past the wrap, of the memory and two sessions at least — two sessions more than version 2
+for a signal of a year. Version 4 (2026-09-25): every return the gates judge is counted from the
+first session the strategy holds an asset into, the session after its first target, whose orders
+fill at that target's close; version 3 counted the target's own session, on which a strategy that
+starts late holds nothing while its benchmark, invested from the first session, earns the day. That
+session, and the entry's cost paid on it, count in no return: at the data's first session both the
+strategy and the benchmark lose their entry, and for a late start neither entry is counted. The
+targets are still judged from the first target: gate 1's checks and count, and gate 6's neighbours
+that set the base's targets; gate 3's placebos, which price each day but their window's first, run
+from it too, and are version 3's.
 """
 from __future__ import annotations
 
@@ -28,7 +42,7 @@ from lab import costs, engine, stats
 from lab.data import Market
 from lab.universe import cluster_of
 
-THRESHOLDS = 2
+THRESHOLDS = 4
 IN_SAMPLE = ("2005-01-01", "2022-12-31")
 HOLDOUT = ("2023-01-01", "2025-12-31")
 BLOCKS = (("2005-01-01", "2007-12-31"), ("2008-01-01", "2009-12-31"), ("2010-01-01", "2014-12-31"),
@@ -75,8 +89,11 @@ class Card:
     in_sample: tuple[str, str] = IN_SAMPLE
     holdout: tuple[str, str] = HOLDOUT
     choose: bool = False
+    memory: int = MIN_SHIFT   # sessions the signal reads back from the session before a target
 
     def __post_init__(self):
+        if isinstance(self.memory, bool) or not isinstance(self.memory, int) or self.memory < 1:
+            raise ValueError("a card's memory is a whole number of sessions, one at least")
         if not 1 <= len(self.variants) <= 3:
             raise ValueError("a card has one to three variants, the base first")
         if any(set(v) != set(self.variants[0]) for v in self.variants[1:]):
@@ -91,8 +108,9 @@ class Card:
         start, end = (pd.Timestamp(d) for d in self.in_sample)
         if not pd.Timestamp(IN_SAMPLE[0]) <= start < end == pd.Timestamp(IN_SAMPLE[1]):
             raise ValueError(f"the in-sample period ends on {IN_SAMPLE[1]}, and starts on {IN_SAMPLE[0]} or later")
+        after = start + pd.Timedelta(days=1)          # the first target's session counts in no return
         blocks = sum(1 for first, last in BLOCKS
-                     if len(pd.bdate_range(max(start, pd.Timestamp(first)), last)) >= MIN_BLOCK_SESSIONS)
+                     if len(pd.bdate_range(max(after, pd.Timestamp(first)), last)) >= MIN_BLOCK_SESSIONS)
         if blocks < MIN_POSITIVE_BLOCKS:
             raise ValueError(f"an in-sample period from {start:%Y-%m-%d} leaves {blocks} blocks of {MIN_BLOCK_SESSIONS} "
                              f"sessions or more, and gate 5 needs {MIN_POSITIVE_BLOCKS}: start earlier")
@@ -219,12 +237,13 @@ def run(card: Card, strategy, market: Market, history=(), seed: int = 0,
         gates += [Gate(n, GATES[n], None, "not computed: the strategy cannot run") for n in range(2, 8)]
         return Verdict(card.id, gates, [], evidence)
 
-    start = first_holding(variants[0])
-    if start is None:
+    start, held = first_holding(variants[0]), first_held(variants[0])
+    if held is None:
         gates.append(Gate(1, GATES[1], False, "the base variant never holds an asset"))
         gates += [Gate(n, GATES[n], None, "not computed: nothing is held") for n in range(2, 8)]
         return Verdict(card.id, gates, [], evidence)
-    period = slice(start, pd.Timestamp(card.in_sample[1]))
+    period = slice(held, pd.Timestamp(card.in_sample[1]))      # the returns, from the first session held into
+    decided = slice(start, pd.Timestamp(card.in_sample[1]))    # the targets, from the first
     trials: list[Trial] = []
     try:
         legs = [Leg(p, r, d, *benchmarks(inside, p, crypto)) for p, r, d in zip(variants, results, doubled)]
@@ -238,13 +257,15 @@ def run(card: Card, strategy, market: Market, history=(), seed: int = 0,
     except Exception as error:  # the runs every gate judges: without them, no gate can be computed
         reason = f"cannot be computed: {type(error).__name__}: {error}"
         return Verdict(card.id, [Gate(n, GATES[n], False, reason) for n in GATES], trials, evidence)
-    gates.append(guarded(1, hygiene, strategy, card, universe, inside, legs, main, period, crypto, streams[1], evidence))
+    gates.append(guarded(1, hygiene, strategy, card, universe, inside, legs, main, decided, crypto, streams[1], evidence))
     gates.append(guarded(2, economic, main, inside.rf, period, evidence))
-    gates.append(guarded(3, lambda: significance(main.result, inside, period, streams[3], evidence)[0]))
+    gates.append(guarded(3, lambda: significance(main.result, inside, period, streams[3], evidence,
+                                                 card.memory, decided)[0]))
     gates.append(guarded(4, lambda: multiple_testing(edge(main, inside.rf, period), trials, history, evidence)))
-    gates.append(guarded(5, stability, legs, main, wfe, inside, period, trials, history, crypto, streams[5], evidence))
+    gates.append(guarded(5, stability, legs, main, wfe, inside, period, trials, history, crypto, streams[5], evidence,
+                         card.memory, decided))
     gates.append(guarded(6, robustness, card, strategy, inside, legs[0], main, period, history, crypto, cluster,
-                         evidence))
+                         evidence, decided))
     gates.append(guarded(7, holdout, card, strategy, universe, legs, main, period, crypto, streams[7], evidence))
     return Verdict(card.id, gates, trials, evidence)
 
@@ -265,15 +286,20 @@ def hygiene(strategy, card, universe, market, legs, main, period, crypto, rng, e
     in gates 4 and 5; the evidence is counted on the positions the other gates judge."""
     timing = [timing_breaks(strategy, parameters, market, leg.positions, period, rng, CHECKED_DATES)
               for parameters, leg in zip(card.variants, legs)]
+    memory = [memory_breaks(strategy, parameters, market, leg.positions, period, rng, CHECKED_DATES, card.memory)
+              for parameters, leg in zip(card.variants, legs)]
     problems = data_problems(universe, slice(*map(pd.Timestamp, card.in_sample)))
     figures = {"dates checked": sum(t.checked for t in timing),
                "look-ahead breaks": sum(len(t.look_ahead) for t in timing),
                "same-day breaks": sum(len(t.same_day) for t in timing),
+               "memory": card.memory, "memory dates checked": sum(m[0] for m in memory),
+               "memory breaks": sum(len(m[1]) for m in memory),
                "data problems": problems,
                "clustered decisions": stats.decision_clusters(main.positions.loc[period]),
                "years in-sample": len(market.prices.loc[period]) / PERIODS,
                "years needed": years_needed(market.prices.columns, crypto)}
-    evidence["timing breaks"] = {k: {"look-ahead": t.look_ahead, "same-day": t.same_day} for k, t in enumerate(timing)}
+    evidence["timing breaks"] = {k: {"look-ahead": t.look_ahead, "same-day": t.same_day, "memory": m[1]}
+                                 for k, (t, m) in enumerate(zip(timing, memory))}
     evidence["target days"] = main.positions.loc[period].dropna(how="all").index
     return decide_hygiene(figures)
 
@@ -294,21 +320,29 @@ def economic(leg: Leg, rf, period, evidence=None) -> Gate:
     return decide_economic(figures)
 
 
-def significance(result: engine.Result, market: Market, period, rng, evidence=None) -> tuple[Gate, np.ndarray]:
+def significance(result: engine.Result, market: Market, period, rng, evidence=None,
+                 memory: int = MIN_SHIFT, decided=None) -> tuple[Gate, np.ndarray]:
     """Gate 3 protects against luck, and against being paid only for being invested; it decides
-    whether the edge is more than noise and more than exposure."""
+    whether the edge is more than noise and more than exposure. A placebo shifted back by s holds,
+    on the period's first s days, the weights of days later by n - s: that distance is kept beyond
+    the signal's memory and two sessions, so that no placebo holds weights whose signal read the
+    day they are paid on. The placebos run over `decided`, from the first target, since they price
+    each day but the first: their returns, like the PSR's, start on the first session held into.
+    Without `decided`, `period` must start on the first target."""
     x = excess(result, market.rf, period)
-    sessions = len(market.prices.loc[period])
+    decided = period if decided is None else decided
+    sessions = len(market.prices.loc[decided])
+    forward = max(MIN_SHIFT, memory + 2)
     figures = {"PSR": stats.adjusted_psr(x), "placebo sessions": sessions, "placebos": 0, "placebos beaten": None}
     placebos = np.array([])
-    if sessions > 2 * MIN_SHIFT + 1:
-        offsets = stats.placebo_offsets(sessions, PLACEBOS, MIN_SHIFT, rng)
-        own, placebos = placebo_sharpes(result, market, period, offsets)
+    if sessions > MIN_SHIFT + forward + 1:
+        offsets = stats.placebo_offsets(sessions, PLACEBOS, MIN_SHIFT, rng, forward)
+        own, placebos = placebo_sharpes(result, market, decided, offsets)
         figures["placebos"], figures["placebos beaten"] = len(placebos), float(np.mean(placebos < own))
         if evidence is not None:
             evidence["placebos"], evidence["placebo own Sharpe"] = placebos, own
-            evidence["placebo window"] = (market.prices.loc[period].index[0], market.prices.loc[period].index[-1])
-            evidence["placebo late assets"] = late_assets(result.weights, market.tradable, period)
+            evidence["placebo window"] = (market.prices.loc[decided].index[0], market.prices.loc[decided].index[-1])
+            evidence["placebo late assets"] = late_assets(result.weights, market.tradable, decided)
     return decide_significance(figures), placebos
 
 
@@ -333,13 +367,15 @@ def multiple_testing(x: pd.Series, card_trials, history, evidence=None) -> Gate:
     return decide_multiple_testing(figures)
 
 
-def stability(legs, main, wfe, market, period, card_trials, history, crypto, rng, evidence) -> Gate:
+def stability(legs, main, wfe, market, period, card_trials, history, crypto, rng, evidence,
+              memory: int = MIN_SHIFT, decided=None) -> Gate:
     """Gate 5 protects against an edge that lives in one variant or one episode; it decides whether
     the edge is a property of the idea rather than of one draw."""
     rf = market.rf
     blend = blended(legs, market, crypto)
     blend_edge = edge(blend, rf, period)
-    checks = [economic(blend, rf, period), significance(blend.result, market, period, rng)[0],
+    checks = [economic(blend, rf, period), significance(blend.result, market, period, rng, memory=memory,
+                                                         decided=decided)[0],
               multiple_testing(blend_edge, card_trials, history)]
     x, b = excess(main.result, rf, period), excess(main.bench, rf, period)
     blocks = block_alphas(x, b)
@@ -357,13 +393,16 @@ def stability(legs, main, wfe, market, period, card_trials, history, crypto, rng
     return decide_stability(figures)
 
 
-def robustness(card, strategy, market, base_leg, main, period, history, crypto, cluster, evidence) -> Gate:
+def robustness(card, strategy, market, base_leg, main, period, history, crypto, cluster, evidence,
+               decided=None) -> Gate:
     """Gate 6 protects against a peak, one asset, timing too tight and a clone; it decides whether
     the edge survives what live trading will change. Neighbours, clusters left out and the market
     without bitcoin move the base variant, and are compared with it; the delay, the P&L shares and
     the clones judge the positions the other gates judge. A cluster left out is not held, but its
-    prices are still read (`unheld`); bitcoin left out is removed from the market."""
+    prices are still read (`unheld`); bitcoin left out is removed from the market. `decided` is the
+    span whose targets a neighbour must change, from the base's first target; `period` the returns'."""
     rf, base = market.rf, card.variants[0]
+    decided = period if decided is None else decided
     base_sharpe, sharpe = (stats.sharpe(excess(leg.result, rf, period)) for leg in (base_leg, main))
     figures: dict = {}
 
@@ -379,7 +418,7 @@ def robustness(card, strategy, market, base_leg, main, period, history, crypto, 
         figures["neighbour median ratio"] = float(np.median(ratios))
         figures["lowest ±25% ratio"] = min(near) if near else None
         figures["neighbours that hold the base"] = [f"{p}={v}" for (p, _, v), m in zip(named, moved)
-                                                    if same_rows(m.loc[period], base_leg.positions.loc[period])]
+                                                    if same_rows(m.loc[decided], base_leg.positions.loc[decided])]
         evidence["neighbours"] = {f"{p}={v}": q for (p, _, v), q in zip(named, ratios)}
 
     # one cluster out at a time
@@ -476,6 +515,10 @@ def decide_hygiene(f: dict) -> Gate:
                         f"{f['dates checked']} dates)")
     if f["same-day breaks"]:
         failures.append(f"positions read the bar they trade on ({f['same-day breaks']} of {f['dates checked']} dates)")
+    if f.get("memory breaks"):
+        failures.append(f"positions change when the prices older than the card's memory of {f['memory']} sessions "
+                        f"are scrambled ({f['memory breaks']} of {f['memory dates checked']} dates): the card declares "
+                        f"the memory its signal reads")
     if f["data problems"]:
         failures.append("the data: " + "; ".join(f["data problems"]))
     if not f["clustered decisions"] >= MIN_DECISIONS:
@@ -511,7 +554,8 @@ def decide_significance(f: dict) -> Gate:
     if not f["PSR"] >= MIN_PSR:
         failures.append(f"PSR {f['PSR']:.3f} below {MIN_PSR}")
     if f["placebos beaten"] is None:
-        failures.append(f"{f['placebo sessions']} sessions: too short for placebos shifted a year each way")
+        failures.append(f"{f['placebo sessions']} sessions: too short for placebos shifted a year each way, "
+                        f"beyond the signal's memory")
     elif not f["placebos beaten"] >= MIN_BEATEN:
         failures.append(f"beats {f['placebos beaten']:.1%} of its shifted placebos, fewer than {MIN_BEATEN:.0%}")
     if failures:
@@ -663,8 +707,18 @@ def benchmarks(market: Market, positions: pd.DataFrame, crypto) -> tuple[engine.
 
 
 def first_holding(positions: pd.DataFrame):
+    """The session of the strategy's first target to hold an asset: its targets are judged from it."""
     held = positions.fillna(0.0).gt(0).any(axis=1)
     return held.idxmax() if held.any() else None
+
+
+def first_held(positions: pd.DataFrame):
+    """The first session the strategy holds an asset into, the session after its first holding,
+    whose orders fill at the close: its returns are judged from it. On the first holding's own
+    session it holds nothing, and a benchmark invested before would earn the day against it."""
+    start = first_holding(positions)
+    later = positions.index[positions.index > start] if start is not None else []
+    return later[0] if len(later) else None
 
 
 def excess(result: engine.Result, rf: pd.Series, period) -> pd.Series:
@@ -747,6 +801,33 @@ def timing_breaks(strategy, parameters, market: Market, positions, period, rng, 
         if not same_rows(targets(strategy, scrambled(seen, lagged, rng), parameters).loc[[day]], cut):
             same_day.append(day)
     return Timing(len(chosen), look_ahead, same_day)
+
+
+def memory_breaks(strategy, parameters, market: Market, positions, period, rng, dates, memory: int) -> tuple[int, list]:
+    """Dates where a target changes when the prices older than the signal's memory are scrambled:
+    every price before the one `memory` sessions before the session before the target moved at
+    random, the dates, the assets that trade and the bill rate kept, the future cut off. `dates` are
+    drawn among the sessions where the strategy sets a target with older prices to scramble. Returns
+    the number of dates checked and those that broke."""
+    index = market.prices.index
+    rows = positions.loc[period]
+    setting = rows.index[rows.notna().any(axis=1).to_numpy()]
+    usable = setting[index.get_indexer(setting) >= memory + 2]
+    if not len(usable):
+        return 0, []
+    chosen = sorted(pd.Timestamp(d) for d in rng.choice(usable, size=min(dates, len(usable)), replace=False))
+    breaks = []
+    for day in chosen:
+        seen = market.asof(day)
+        cut = index.get_loc(day) - memory - 1                       # the oldest price the signal may read
+        prices, signal = seen.prices.copy(), seen.signal_prices.copy()
+        width = prices.shape[1]
+        prices.iloc[:cut] = prices.iloc[:cut].to_numpy() * rng.uniform(0.5, 1.5, (cut, width))
+        signal.iloc[:cut] = signal.iloc[:cut].to_numpy() * rng.uniform(0.5, 1.5, (cut, width))
+        moved = Market(prices, seen.tradable, seen.rf, signal)
+        if not same_rows(targets(strategy, moved, parameters).loc[[day]], positions.loc[[day]]):
+            breaks.append(day)
+    return len(chosen), breaks
 
 
 def scrambled(market: Market, lagged, rng) -> Market:
