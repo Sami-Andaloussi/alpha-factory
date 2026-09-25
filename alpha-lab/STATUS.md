@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 227 untouched · 1 in-progress · 0 tested-conclusive · 27 tested-inconclusive · 8 not-testable.
+**263 theories**: 226 untouched · 1 in-progress · 0 tested-conclusive · 27 tested-inconclusive · 9 not-testable.
 
 **29 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 18 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -235,7 +235,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [SC-021](bank/SC-021-same-calendar-month-seasonality.md) Same-calendar-month seasonality (cross-section of stock returns) | seasonality and calendar effects | not-testable | [SC-021-01-same-calendar-month](strategies/SC-021-01-same-calendar-month/) · not testable: [reasoning](strategies/SC-021-01-same-calendar-month/reasoning.md) |
 | [SC-022](bank/SC-022-information-cycle-return-seasonality.md) Information-cycle explanation of return seasonality | seasonality and calendar effects | not-testable | [SC-022-01-information-cycle](strategies/SC-022-01-information-cycle/) · not testable: [reasoning](strategies/SC-022-01-information-cycle/reasoning.md) |
 | [SC-023](bank/SC-023-return-seasonalities.md) Return seasonalities | seasonality and calendar effects | tested-inconclusive | [SC-023-01-same-month-across-assets](strategies/SC-023-01-same-month-across-assets/) · stops at gate 2 · [report](strategies/SC-023-01-same-month-across-assets/report.ipynb) · [verdict](strategies/SC-023-01-same-month-across-assets/verdict.md) |
-| [SC-024](bank/SC-024-overnight-return-premium.md) Overnight return premium | seasonality and calendar effects | untouched |  |
+| [SC-024](bank/SC-024-overnight-return-premium.md) Overnight return premium | seasonality and calendar effects | not-testable | [SC-024-01-overnight-premium](strategies/SC-024-01-overnight-premium/) · not testable: [reasoning](strategies/SC-024-01-overnight-premium/reasoning.md) |
 | [SC-025](bank/SC-025-seasonal-affective-disorder-effect.md) Seasonal affective disorder (SAD) effect | seasonality and calendar effects | untouched |  |
 | [SC-026](bank/SC-026-daylight-saving-time-anomaly.md) Daylight saving time anomaly | seasonality and calendar effects | untouched |  |
 | [SC-027](bank/SC-027-lunar-cycle-effect.md) Lunar cycle effect | seasonality and calendar effects | untouched |  |

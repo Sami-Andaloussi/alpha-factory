@@ -6,7 +6,7 @@ mechanism: [microstructure, limits to arbitrage]
 asset_classes: [stocks, equity indices]
 horizon: [intraday, days]
 data: [opening prices, closing prices, opening order imbalances]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
