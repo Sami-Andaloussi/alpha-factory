@@ -1,0 +1,64 @@
+id: SC-010-02-first-half-of-the-month
+theory: SC-010
+parent: SC-010-01-first-half-of-the-month
+mechanism: >
+  Cash received at the start of the month, individuals investing their income, the monthly buying
+  programmes of large investors and pension contributions are deployed over several sessions after
+  the turn of the month, not only on its few sessions: the first half of the trading month, from the
+  previous month's last session through the ninth, earns more than the rest of the month, and the
+  second week, the turn's sessions removed, still more than the second half.
+prediction:
+  sign: positive (the theory's direction for the second week's gap; the judged size centred about -0.01; the rule's alpha near nil)
+  size: a judgment, from the sources -- the three US funds' second week, +5 to +9, about -0.06 to +0.04% a day against the second half, +10 to -2, the recent sources near its lower end; the rule's alpha over the five funds held always about -2.5 to +3.5% a year before costs of about 1.2% a year across that range, -1 to +2% at its centre, an appraisal ratio of about -0.35 to +0.2 after costs; the rule expected to fail gate 2 at the range's centre, reaching its threshold at the top
+universe: [SPY, QQQ, IWM, EFA, EEM]
+horizon: days
+signal: >
+  The five funds held in equal parts over the sessions of the first half of each trading month, and
+  nothing, the bill's rate on cash, over the other sessions. Sessions are placed on the New York
+  Stock Exchange's calendar of scheduled sessions, derived from its holiday rules alone and read
+  from no price: weekdays less New Year's Day (on 2 January when 1 January is a Sunday, not observed
+  when it is a Saturday), Martin Luther King Jr. Day, Washington's Birthday, Good Friday, Memorial
+  Day, Juneteenth from 2022, Independence Day, Labor Day, Thanksgiving and Christmas, with
+  Juneteenth, Independence Day and Christmas moved to the Friday before when they fall on a Saturday
+  and to the Monday after when on a Sunday. The last scheduled session of a month is -1, the one
+  before it -2, and so on back; the first scheduled session of a month is +1, the one after it +2,
+  and so on. A scheduled session is in the window when it is among the last -start sessions of its
+  month or among the first end sessions of its month. On each session of the market, from the first,
+  the target is the five funds in equal parts, among those that trade, if the next scheduled session
+  is in the window, and nothing otherwise; a target is set only on the sessions on which it changes,
+  and on the first. A scheduled session on which the exchange does not open is counted as the
+  calendar counts it and is absent from the market.
+parameters:
+  start: the window's first session, counted back from the month's last scheduled session, -1
+  end: the window's last session, counted from the next month's first scheduled session, +1
+variants:
+  - {start: -1, end: 9}
+neighbours:
+  start: {25: [-2], 50: [-2]}
+  end: {25: [7, 11], 50: [4, 14]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs: over the in-sample sessions from the base's first held, the three US funds'
+  (SPY, QQQ, IWM) average daily return less the bill's rate, each from the market's previous close;
+  the mean over the sessions whose return spans a scheduled session from +5 to +9 of its month, less
+  the mean over the sessions whose return spans a scheduled session from +10 of a month to -2 of
+  that month, a return spanning a scheduled session outside its group left out, the same rule for
+  every gap reported, with the standard error of that difference, the square root of the sum of each
+  group's variance over its count, and its t statistic, computed apart from the battery. The theory
+  is refuted in this form if that t statistic is -0.35 or below. Above it, short of passing gates 1
+  to 7, it is not proven, not refuted; a base that passes gates 1 to 7 while the clause refutes
+  leaves the theory refuted in this form. Of SC-010's refutation criteria the second is graded, the
+  first reported, the third and fourth beyond the lab's data. Reported, not graded, each gap with
+  the standard error from the two groups' variances, for the three US funds' average unless stated:
+  the same gap for each fund, for the five funds' average and for IWM less SPY; the second week
+  against +10 to -11; the first half, -1 to +9, against the second half, for the US funds' and the
+  five funds' averages, Ariel's halves, each trading month from -1 to the next month's -2 split
+  evenly with the odd middle session to the last half, and Lakonishok and Smidt's calendar halves,
+  the first to the fifteenth day of the month or to the next session when the fifteenth is not one,
+  against the rest; the turn, -1 to +4, and each session from +5 to +9, against the second half; the
+  second week against the second half without its sessions from -5 to -2; the gap over 2005-2011 and
+  2012-2022, and without 2008; the rule's alpha before and after costs, and the neighbours' and the
+  one-day-late rule's alphas and appraisal ratios.
