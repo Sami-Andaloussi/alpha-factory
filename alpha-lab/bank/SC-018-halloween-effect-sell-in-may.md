@@ -6,7 +6,7 @@ mechanism: [behavioural, risk premium, macroeconomic]
 asset_classes: [stocks, equity indices, crypto]
 horizon: [months]
 data: [daily prices, dividends, short-term interest rates, index futures prices]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
