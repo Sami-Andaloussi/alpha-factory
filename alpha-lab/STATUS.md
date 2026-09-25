@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 252 untouched · 1 in-progress · 0 tested-conclusive · 9 tested-inconclusive · 1 not-testable.
+**263 theories**: 251 untouched · 1 in-progress · 0 tested-conclusive · 10 tested-inconclusive · 1 not-testable.
 
-**10 strategies**: 0 passing gates 1 to 7, 5 stopped at gate 2, 5 stopped at gate 3; 1 under paper trading.
+**11 strategies**: 0 passing gates 1 to 7, 6 stopped at gate 2, 5 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -266,7 +266,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-036](bank/TM-036-extrapolative-expectations.md) Extrapolative expectations (X-CAPM, return extrapolation) | trend and momentum | untouched |  |
 | [TM-037](bank/TM-037-investor-sentiment-momentum.md) Investor sentiment and momentum | trend and momentum | untouched |  |
 | [TM-038](bank/TM-038-adaptive-markets-hypothesis.md) Adaptive markets hypothesis | trend and momentum | untouched |  |
-| [TM-039](bank/TM-039-return-dispersion-momentum.md) Cross-asset return dispersion and momentum | trend and momentum | untouched |  |
+| [TM-039](bank/TM-039-return-dispersion-momentum.md) Cross-asset return dispersion and momentum | trend and momentum | tested-inconclusive | [TM-039-01-dispersion-conditioned-momentum](strategies/TM-039-01-dispersion-conditioned-momentum/) · stops at gate 2 · [report](strategies/TM-039-01-dispersion-conditioned-momentum/report.ipynb) · [verdict](strategies/TM-039-01-dispersion-conditioned-momentum/verdict.md) |
 | [TM-040](bank/TM-040-value-momentum-combination.md) Value and momentum combination (trending value) | trend and momentum | untouched |  |
 | [TM-041](bank/TM-041-size-momentum-interaction.md) Size-momentum interaction (stronger momentum in small capitalisations) | trend and momentum | untouched |  |
 | [TM-043](bank/TM-043-positive-return-autocorrelation.md) Positive return autocorrelation (variance ratio) | trend and momentum | untouched |  |

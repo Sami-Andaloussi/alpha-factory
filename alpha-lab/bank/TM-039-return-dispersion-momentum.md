@@ -6,7 +6,7 @@ mechanism: [macroeconomic]
 asset_classes: [equity indices, bonds, commodities, currencies, sectors]
 horizon: [months]
 data: [daily prices]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
@@ -39,4 +39,7 @@ that do not raise dispersion.
 
 ## References
 
-- Greyserman, A. & Kaminski, K. (2014). Trend Following with Managed Futures: The Search for Crisis Alpha, ch. 4, section "Return Dispersion". Wiley.
+- Greyserman, A. & Kaminski, K. (2014). Trend Following with Managed Futures: The Search for Crisis Alpha, ch. 4, section "Return Dispersion". Wiley. (The book holds no such section in chapter 4; its chapter 11, "Return Dispersion", measures dispersion between trend following programmes: see TM-039-01's reasoning.)
+- Stivers, C. & Sun, L. (2010). Cross-Sectional Return Dispersion and Time Variation in Value and Momentum Premiums. Journal of Financial and Quantitative Analysis, 45(4), 987-1014 (abstract read: recent dispersion negatively related to the subsequent momentum premium).
+- Hurst, G. & Docherty, P. (2018). Return dispersion and conditional momentum returns: International evidence. Pacific-Basin Finance Journal, 50, 263-278 (abstract read).
+- Eriksen, J. N. (2019). Cross-sectional return dispersion and currency momentum. Journal of Empirical Finance, 53, 91-108 (abstract read).
