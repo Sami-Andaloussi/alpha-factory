@@ -6,7 +6,7 @@ mechanism: [behavioural]
 asset_classes: [stocks, equity indices]
 horizon: [days, weeks]
 data: [daily prices, lunar phase dates, trading volumes]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
