@@ -1,0 +1,58 @@
+id: SC-025-01-equinox-to-solstice
+theory: SC-025
+parent: null
+mechanism: >
+  Where the length of the day varies strongly over the year, enough investors become more
+  risk-averse as the days shorten in autumn to raise the premia they require and weigh on prices:
+  in the northern hemisphere's markets, equities earn less from the September equinox to the
+  December solstice than over the rest of the year.
+prediction:
+  sign: positive (the rule's alpha; the window's gap to the other sessions negative)
+  size: a judgment, no source in the library giving a figure -- the four northern equity funds' average excess return over the window about 0 to 0.5% a month below the rest of the year, 0 to -0.024% a day; the rule out of them over the window an alpha of about 0 to +1.1% a year before costs of about 0.1% a year over the four held always, raised mechanically by a regression beta below the three quarters of the sessions held, and an appraisal ratio after costs of about -0.01 to +0.11; the lab's published monthly figures put the in-sample gap at about +0.022% a day, past the refutation's line; the clause expected to refute, the base to fail gate 2 or 3 and gate 4, and likely gate 6 on QQQ's share of the profit
+universe: [SPY, QQQ, IWM, EFA]
+horizon: months
+signal: >
+  Sessions are placed on the New York Stock Exchange's calendar of scheduled sessions, derived from
+  its holiday rules alone and read from no price: weekdays less New Year's Day (on 2 January when 1
+  January is a Sunday, not observed when it is a Saturday), Martin Luther King Jr. Day, Washington's
+  Birthday, Good Friday, Memorial Day, Juneteenth from 2022, Independence Day, Labor Day,
+  Thanksgiving and Christmas, with Juneteenth, Independence Day and Christmas moved to the Friday
+  before when they fall on a Saturday and to the Monday after when on a Sunday. A date is in the
+  window when it falls on 22 September, the September equinox's date to within a day, of its own
+  year or of the year before, or on one of the `days` - 1 days after it. On each session of the
+  market, from the first, the target is the four funds in equal parts, among those that trade, if
+  the next scheduled session's date is not in the window, and nothing otherwise, so that the
+  portfolio holds the funds over the sessions outside the window and the bill's rate over the
+  sessions in it; a target is set only on the first session and on the sessions on which it
+  changes.
+parameters:
+  days: the window's length in calendar days from 22 September
+variants:
+  - {days: 90}
+neighbours:
+  days: {25: [68, 112], 50: [45, 135]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, over the in-sample sessions from 4 January 2005, each session's return taken
+  from the market's previous close: the four funds' average daily return less the bill's rate over
+  the sessions whose date is in the base's window, less the same over the other sessions; the
+  standard error of that difference from the two groups' daily variances, and its t statistic,
+  computed apart from the battery. The theory is refuted in this form if that t statistic is +0.35
+  or above: the autumn no weaker than the rest of the year. Below it, short of passing gates 1 to 7,
+  it is not proven, not refuted; a base that passes gates 1 to 7 while the clause refutes leaves the
+  theory refuted in this form. The in-sample result is largely known before the run: the lab's
+  published monthly figures for the five equity funds, weighted over the window, put the gap at
+  about +0.022% a day, a t statistic of about +0.43 to +0.50, so the clause is read as largely
+  known, likely a refutation, not as fresh evidence. Of SC-025's refutation criteria the first is
+  graded, in the northern markets the lab holds, and with it the fifth's survival outside the first
+  samples; the hemispheres are out of reach; the latitude is reported; the calendar's other forces
+  are not graded. Reported, not graded: the gap by fund, for the four funds' average and for EEM;
+  the half year from 22 September to 20 March against the rest of the year, and the winter alone,
+  21 December to 20 March, against the spring and summer, 21 March to 21 September; EFA less the
+  US funds' average, in the window against outside; the gap by month of the window; over 2005-2011,
+  2012-2022 and without 2008; the same gap over the holdout, 2023 to 2025; the base's alpha before
+  and after costs, at the regression beta and at a beta equal to the share of sessions held, and
+  the neighbours' and the one-day-late rule's alphas and appraisal ratios.

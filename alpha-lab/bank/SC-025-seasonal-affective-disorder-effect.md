@@ -6,7 +6,7 @@ mechanism: [behavioural, risk premium]
 asset_classes: [stocks, equity indices]
 horizon: [months]
 data: [daily prices, daylight hours by market location, international index returns]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
