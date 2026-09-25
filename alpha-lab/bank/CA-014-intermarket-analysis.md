@@ -6,7 +6,7 @@ mechanism: [macroeconomic, information]
 asset_classes: [bonds, equity indices, commodities, currencies, sectors]
 horizon: [weeks, months]
 data: [bond yields, equity index levels, commodity prices, exchange rates]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
