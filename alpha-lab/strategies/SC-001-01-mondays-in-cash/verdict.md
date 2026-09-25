@@ -103,6 +103,10 @@ variances:
   trade in New York had no source of their own, and the card said so only by leaving them at zero.
   No code catches a prediction borrowed from a different market; the logic audit is where it is
   asked.
+- **The order of the work.** The strategy's code was drafted outside the folder while the logic
+  audit read the card, before the card was locked; it read no return, the card's rule did not change
+  after the audit, and the code was committed after the lock, as the run requires. The departure is
+  written here, as the runbook asks.
 
 SC-001 is `tested-inconclusive`: on the lab's equity funds from 2005 to 2022, the small caps'
 weekend effect held at about the size the sources last measured, within noise; the week's first

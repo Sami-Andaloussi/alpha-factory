@@ -1,0 +1,72 @@
+id: SC-006-01-sector-winners-before-the-year-end
+theory: SC-006
+parent: null
+mechanism: >
+  Holders of the year's winners postpone selling them until January, since a gain realised a few
+  days later is taxed almost a year later: at the year's end the winners face less selling pressure
+  and rise, whatever the market does, and their postponed sales fall in early January.
+prediction:
+  sign: positive
+  size: a judgment, from the source -- the sector funds nearest their year's high, less the other sector funds and adjusted for their beta, over the five sessions from the close of the seventh-last session of December to the close of the second-last, about 0 to +0.25% a year, positive in somewhat more than half the years; the rule's alpha about 0 to 0.18% a year before costs of about 0.14% a year, an appraisal ratio of about 0 to 0.2 before costs; gates 2 to 4 likely failed at that size
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY]
+horizon: days
+signal: >
+  Sessions are placed on the New York Stock Exchange's calendar of scheduled sessions, derived from
+  its holiday rules alone and read from no price: weekdays less New Year's Day (on 2 January when 1
+  January is a Sunday, not observed when it is a Saturday), Martin Luther King Jr. Day, Washington's
+  Birthday, Good Friday, Memorial Day, Juneteenth from 2022, Independence Day, Labor Day,
+  Thanksgiving and Christmas, with Juneteenth, Independence Day and Christmas moved to the Friday
+  before when they fall on a Saturday and to the Monday after when on a Sunday. Scheduled sessions
+  of December are counted back from its last, -1 the last. Each year, on the ranking session, the
+  market's last session on or before December's twelfth-last scheduled session, each fund that
+  traded on the market's first session of the year has a drop, its close less its highest close
+  since that first session, over that highest close; the winners are the winners-count funds with
+  the smallest drop, ties at the cut all included. The year's window holds the scheduled sessions
+  after December's entry session up to and including its exit session. On each session of the
+  market, from the first, if the next scheduled session is in a window, the target is that year's
+  winners in equal parts, among those that trade; otherwise it is the funds that trade in equal
+  parts. A target is set on the sessions on which the state changes, on the market's first session
+  of each month outside the windows, which sets the funds back to equal parts, and on the first. A
+  scheduled session on which the exchange does not open is counted as the calendar counts it and is
+  absent from the market.
+parameters:
+  winners: how many funds with the smallest drop from their year's high are held in the window
+  entry: the session of December, counted back from its last, whose close starts the window
+  exit: the session of December, counted back from its last, whose close ends the window
+variants:
+  - {winners: 3, entry: -7, exit: -2}
+neighbours:
+  winners: {25: [2, 4], 50: [2, 4]}
+  entry: {25: [-5, -9], 50: [-4, -10]}
+  exit: {25: [-1, -3], 50: [-1, -3]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs: for each of the eighteen Decembers from 2005 to 2022, the winners' average
+  return, the three funds with the smallest drop as the rule ranks them, ties at the cut all
+  included, less the average return of the other funds ranked, less b times the average return of
+  all the funds ranked, each from the close of the seventh-last scheduled session of December to the
+  close of the second-last, b being the least-squares slope, with an intercept, of the daily
+  difference between the winners' average return and the others' on the daily average of all the
+  funds ranked, over that year's sessions from the market's first to the ranking session; the mean
+  over the years, its standard error, the standard deviation over the years (with n - 1) over the
+  square root of eighteen, and its t statistic, computed apart from the battery. The theory is
+  refuted in this form if that t statistic is -0.35 or below. Above it, short of passing gates 1 to
+  7, it is not proven, not refuted; a base that passes gates 1 to 7 while the clause refutes leaves
+  the theory refuted in this form. Of SC-006's refutation criteria the first is graded, the fourth
+  reported, the second and third reported in part and otherwise beyond the lab's data. Reported, not
+  graded, each return compounded over its sessions: the graded difference year by year, with the
+  years positive, and b year by year; the same difference without the beta adjustment; the graded
+  difference in the years when the bill's rate on the ranking session was 1% a year or more against
+  the others, and in the years whose winners had risen from the year's first session to the ranking
+  session against the others; the winners' return less the other funds' from the close of December's
+  last scheduled session to the close of January's fifth scheduled session, over the Decembers 2005
+  to 2021, and the December difference less it, the 2022 December's January apart after the run; the
+  losers', the three funds with the largest drop, ties at the cut all included, less the other
+  funds' over the window and over January's first five scheduled sessions; the ranked funds' average
+  return over the window less the bill's; the winners' return less the other funds' from the close
+  of the ranking session to the close of December's last scheduled session; the winners' and the
+  other funds' average drops, year by year; the rule's alpha before and after costs, and the
+  neighbours' and the one-day-late rule's alphas and appraisal ratios.
