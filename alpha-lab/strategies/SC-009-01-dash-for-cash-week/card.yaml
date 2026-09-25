@@ -1,0 +1,66 @@
+id: SC-009-01-dash-for-cash-week
+theory: SC-009
+parent: null
+mechanism: >
+  Salaries, pensions, dividends, coupons and contributions are paid at the turn of the month;
+  institutions need cash for them settled by the month's last session and sell to raise it in the
+  days before, then investors put the cash received back into equities at the turn: equity prices
+  are pressed in the week before the month's last week and recover at the turn, the payment cycle
+  moving prices before the pressure is absorbed.
+prediction:
+  sign: positive (the rule's alpha; the window's gap to the mid-month sessions negative)
+  size: a judgment, from the sources -- the three US funds' sessions from -10 to -6 about -0.02 to -0.07% a day below the mid-month sessions, the five funds' about the same; at the funds' published premium, the rule's alpha over the five funds held always about 2.4 to 4.2% a year before costs of about 1.2% a year, mostly the hedge's charge of only its sessions' share of a premium earned at the turn, an appraisal ratio of about 0.13 to 0.32 after costs, a Sharpe ratio of about 0.41 to 0.50; gate 2 expected to pass from a five-funds gap near -0.02% a day, gate 3 or gate 4 to fail
+universe: [SPY, QQQ, IWM, EFA, EEM]
+horizon: days
+signal: >
+  The five funds held in equal parts on every session but those of a window before each month's end,
+  and nothing, the bill's rate on cash, over the window's sessions. Sessions are placed on the New
+  York Stock Exchange's calendar of scheduled sessions, derived from its holiday rules alone and
+  read from no price: weekdays less New Year's Day (on 2 January when 1 January is a Sunday, not
+  observed when it is a Saturday), Martin Luther King Jr. Day, Washington's Birthday, Good Friday,
+  Memorial Day, Juneteenth from 2022, Independence Day, Labor Day, Thanksgiving and Christmas, with
+  Juneteenth, Independence Day and Christmas moved to the Friday before when they fall on a Saturday
+  and to the Monday after when on a Sunday. The last scheduled session of a month is -1, the one
+  before it -2, and so on back; the first scheduled session of a month is +1, the one after it +2,
+  and so on. A scheduled session is in the window when it lies from -(end + length - 1) to -end of
+  its month. On each session of the market, from the first, the target is nothing if the next
+  scheduled session is in the window, and the five funds in equal parts, among those that trade,
+  otherwise; a target is set only on the sessions on which it changes, and on the first. A scheduled
+  session on which the exchange does not open is counted as the calendar counts it and is absent
+  from the market.
+parameters:
+  end: the window's last session, counted back from the month's last scheduled session, 1 the last
+  length: the window's number of scheduled sessions
+variants:
+  - {end: 6, length: 5}
+neighbours:
+  end: {25: [4, 8], 50: [3, 9]}
+  length: {25: [4, 6], 50: [2, 8]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs: over the in-sample sessions from the base's first held, the three US funds'
+  (SPY, QQQ, IWM) average daily return less the bill's rate, each from the market's previous close;
+  the mean over the sessions whose return spans a scheduled session from -10 to -6 of its month,
+  less the mean over the sessions whose return spans a scheduled session outside -10 to +5, from the
+  month's sixth scheduled session to its eleventh-last, with the standard error of that difference,
+  the square root of the sum of each group's variance over its count, and its t statistic, computed
+  apart from the battery. The theory is refuted in this form if that t statistic is +0.35 or above:
+  the window stronger than the middle of the month by 0.35 standard errors or more. Below it, short
+  of passing gates 1 to 7, it is not proven, not refuted; a base that passes gates 1 to 7 while the
+  clause refutes leaves the theory refuted in this form. Of SC-009's refutation criteria the second
+  is graded, its absorption reported only, the fourth reported through a proxy, the first and third
+  beyond the lab's data. Reported, not graded, each gap against the mid-month sessions with the
+  standard error from the two groups' variances, for the three US funds' average unless stated: the
+  same gap for each fund, for the five funds' average and for IWM less SPY; the gap of each session
+  from -10 to +3 for the US funds' and the five funds' averages, the summed gaps from -10 to +3 with
+  their standard error, the square root of the sum of each session's variance over its count plus 13
+  squared times the mid-month variance over its count, and the gap of the turn from -1 to +3; the
+  gaps of -8 to -4 and of -9 to -5; the window's gap for SHY, IEF and TLT, and the change of the
+  bill's yield, ^IRX's close on the session less its close on the session before, in basis points,
+  on each session from -10 to +3; the window's gap in the months that end a quarter against their
+  mid-month sessions and in the other months against theirs; the gap over 2005-2011 and 2012-2022,
+  and without 2008; the rule's alpha before and after costs, and the neighbours' and the
+  one-day-late rule's alphas and appraisal ratios.

@@ -6,7 +6,7 @@ mechanism: [flows, limits to arbitrage]
 asset_classes: [stocks, bonds]
 horizon: [days]
 data: [daily prices, bond yields, money market rates, payment dates]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
