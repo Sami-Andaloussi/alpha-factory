@@ -6,7 +6,7 @@ mechanism: [behavioural]
 asset_classes: [stocks, equity indices]
 horizon: [days]
 data: [daily prices, local weather data]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism

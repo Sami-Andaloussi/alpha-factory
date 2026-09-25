@@ -108,7 +108,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [SC-025](SC-025-seasonal-affective-disorder-effect.md) | Seasonal affective disorder (SAD) effect | behavioural, risk premium | stocks, equity indices | months | tested-inconclusive |
 | [SC-026](SC-026-daylight-saving-time-anomaly.md) | Daylight saving time anomaly | behavioural | stocks, equity indices | days | tested-inconclusive |
 | [SC-027](SC-027-lunar-cycle-effect.md) | Lunar cycle effect | behavioural | stocks, equity indices | days, weeks | tested-inconclusive |
-| [SC-028](SC-028-sunshine-effect.md) | Sunshine effect | behavioural | stocks, equity indices | days | untouched |
+| [SC-028](SC-028-sunshine-effect.md) | Sunshine effect | behavioural | stocks, equity indices | days | not-testable |
 
 ## Lead-lag and information diffusion (LL, 40)
 
