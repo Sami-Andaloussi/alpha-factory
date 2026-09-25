@@ -1,0 +1,60 @@
+id: LL-023-01-continuous-momentum-within-groups
+theory: LL-023
+parent: null
+mechanism: >
+  Investors attend to large, discrete news and underweight information that arrives in many small,
+  unspectacular increments: a price that rose through a steady run of small gains has absorbed its
+  news more slowly than one that rose through a few jumps, and keeps rising longer. Among past
+  winners of about the same return, those whose gains came continuously continue more than those
+  whose gains came in jumps.
+prediction:
+  sign: positive
+  size: the more continuous half of each group's pool earning an alpha about 1% a year above the more discrete half of the same pool, between about 0.5 and 1.25%; the sources' halves of their winners differ by 2 to 4% a year on stocks, and by about 1 to 2.5% a year in pools as wide as these, halved here by assumption for baskets of stocks and for the years after publication
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY, SPY, QQQ, IWM, EFA, EEM, GLD, SLV, DBC]
+horizon: months
+signal: >
+  CA-001-01's rule with its choice of leaders changed. On the first session of each month, within
+  each of three groups (the eleven sector funds; SPY, QQQ, IWM, EFA and EEM; GLD, SLV and DBC), the
+  funds are ranked by their return over a window read up to the session before the target: it ends
+  skip sessions before that session before and starts lookback sessions before it; a fund is ranked
+  when it trades on the target's session and traded at the window's start, as in CA-001-01. A group
+  of n ranked funds holds k of them, k the top third of n, rounded, one at least, as CA-001-01
+  does, drawn from its pool: its 2k highest-ranked funds, or all n if fewer, ties in the return to
+  the order of the universe, as CA-001-01 ranks. Each pool fund has a path score: the count of the
+  window's daily returns that are positive less the count that are negative, divided by the
+  window's lookback minus skip daily returns, read from the same prices as the ranking; for a fund
+  whose window return is positive, it is minus the source's information discreteness. Under half
+  "continuous", the k pool funds with the highest scores are held; under half "discrete", the k
+  with the lowest, the rest of the pool when it holds 2k. Ties in the score go to the higher window
+  return, then to the order of the universe. Of the N funds trading, a group of n ranked funds
+  holds n/N of the portfolio, split equally among its k funds; a fund trading but not yet ranked is
+  held at 1/N, its benchmark weight. The targets start on the first month in which a fund is
+  ranked; from then the portfolio is always fully invested.
+parameters:
+  lookback: sessions from the start of the ranking window to the session before the target
+  skip: sessions before the session before the target left out of the ranking window and the score
+  half: '"continuous" holds the pool''s k highest scores; "discrete" its k lowest'
+variants:
+  - {lookback: 252, skip: 21, half: continuous}
+  - {lookback: 252, skip: 21, half: discrete}
+neighbours:
+  lookback: {25: [189, 315], 50: [126, 378]}
+  skip: {25: [16, 26], 50: [10, 32]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged at the lab's stated costs by the base's alpha less the variant's, both over the base's
+  in-sample sessions from its first holding, each hedged of the nineteen funds held in equal parts
+  with its own whole-sample beta, as python -m lab.compare computes it with the card named twice,
+  --variant 0 --reference-variant 1. The claim that the more continuous of a group's leading funds
+  continue more than the more discrete is refuted in this form if the difference is below -1% a
+  year and more than one standard error of the monthly differences, as lab.compare measures it,
+  below zero. A difference below -1% within one standard error, or between -1% and 0, is not
+  proven, not refuted; a difference above zero is reported with its standard error against the
+  prediction and is not taken as proof. The battery's gates judge the base's own edge over the
+  benchmark: passing them would show that edge, not the path's contribution. Reported, not graded:
+  the base's alpha less that of CA-001-01's base, by lab.compare, over the same sessions (CA-001-01
+  earned 0.20% a year from 2006-02-01 under the battery's version 1; version 2 changed gate 6 only,
+  so the recomputed figure should match, and the verdict checks it).

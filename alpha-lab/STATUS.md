@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 253 untouched · 1 in-progress · 0 tested-conclusive · 8 tested-inconclusive · 1 not-testable.
+**263 theories**: 252 untouched · 1 in-progress · 0 tested-conclusive · 9 tested-inconclusive · 1 not-testable.
 
-**9 strategies**: 0 passing gates 1 to 7, 4 stopped at gate 2, 5 stopped at gate 3; 1 under paper trading.
+**10 strategies**: 0 passing gates 1 to 7, 5 stopped at gate 2, 5 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -163,7 +163,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [LL-019](bank/LL-019-common-institutional-ownership-shareholder-coordination.md) Common institutional ownership and shareholder coordination | lead-lag and information diffusion | untouched |  |
 | [LL-020](bank/LL-020-information-cascades-observational-learning.md) Information cascades and rational observational learning | lead-lag and information diffusion | untouched |  |
 | [LL-021](bank/LL-021-complicated-firms-pseudo-conglomerate-diffusion.md) Complicated firms and pseudo-conglomerate information diffusion | lead-lag and information diffusion | untouched |  |
-| [LL-023](bank/LL-023-frog-in-the-pan.md) Frog-in-the-pan | lead-lag and information diffusion | untouched |  |
+| [LL-023](bank/LL-023-frog-in-the-pan.md) Frog-in-the-pan | lead-lag and information diffusion | tested-inconclusive | [LL-023-01-continuous-momentum-within-groups](strategies/LL-023-01-continuous-momentum-within-groups/) · stops at gate 2 · [report](strategies/LL-023-01-continuous-momentum-within-groups/report.ipynb) · [verdict](strategies/LL-023-01-continuous-momentum-within-groups/verdict.md) |
 | [LL-024](bank/LL-024-media-limited-information-diffusion.md) Media-limited information diffusion | lead-lag and information diffusion | untouched |  |
 | [LL-025](bank/LL-025-information-discreteness-lead-lag-puzzle.md) Information discreteness and the lead-lag returns puzzle | lead-lag and information diffusion | untouched |  |
 | [LL-026](bank/LL-026-etf-arbitrage-creation-redemption-tether.md) ETF arbitrage and the creation-redemption tether | lead-lag and information diffusion | untouched |  |

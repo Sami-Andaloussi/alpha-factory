@@ -23,6 +23,7 @@ its own, beside the snapshot, whose files never change.
 | `python -m lab.calibration` | Calibrates the battery again (about twenty minutes on nine workers); needed whenever the battery changes. |
 | `python -m lab.status` | Regenerates the board, `STATUS.md`; every run does it too, and the tests refuse a board out of date. |
 | `python -m lab.bank` | Checks every theory file of `bank/` and regenerates the bank's index, `bank/README.md`; the tests refuse an index out of date. |
+| `python -m lab.compare strategies/<card> strategies/<reference>` | The card's alpha less the reference rule's, over the card's in-sample sessions from its base's first holding, at the lab's stated costs, with the standard error of the monthly differences — the measure of a card judged against a rule it refines. Refused until both cards have run as they stand, so it cannot size a band before a run. |
 
 ## One theory, step by step
 
@@ -163,7 +164,9 @@ its own, beside the snapshot, whose files never change.
      commit.
 8. **Verdict**, `verdict.md`: gate by gate, what the notebook shows; the verdict, which is the
    first gate failed or "passes gates 1 to 7"; what was learned about the theory, the market and
-   the lab. A bug found after the run is written down; fixing it takes a new card.
+   the lab. A bug found after the run is written down; fixing it takes a new card. A card judged
+   against a rule it refines takes its difference from `python -m lab.compare`, not from a script
+   of its own: the measure is then the same for every such card.
 9. **The theory's status**, once no other strategy will be drawn from it: `tested-conclusive` if
    one of its strategies passed gates 1 to 7, `tested-inconclusive` if they all failed, or
    `not-testable`, with the reason in `reasoning.md`.
