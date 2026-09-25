@@ -6,7 +6,7 @@ mechanism: [information, behavioural, flows, limits to arbitrage]
 asset_classes: [stocks, sectors, equity indices, commodities]
 horizon: [months]
 data: [daily prices, industry classifications, market capitalisation]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

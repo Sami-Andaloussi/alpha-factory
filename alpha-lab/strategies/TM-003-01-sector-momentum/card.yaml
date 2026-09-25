@@ -1,0 +1,48 @@
+id: TM-003-01-sector-momentum
+theory: TM-003
+parent: null
+mechanism: >
+  Shocks to demand, costs, regulation and technology hit whole industries, and investors take them
+  in slowly and by theme, through the diffusion of news among firms that share them, sector
+  benchmarks and the slow rotations of managers: the industries that led over the past months keep
+  leading over the next ones.
+prediction:
+  sign: positive
+  size: an alpha of about 1.5 to 2% a year over the sector funds that trade held in equal parts, an appraisal ratio of about 0.3; half the long side of the source's six-month strategy among twenty US industries, which carried most of its profit
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY]
+horizon: months
+signal: >
+  On the first session of each month, the sector funds that trade on that session and have a close
+  lookback sessions before the session before it are ranked by their return from that close to the
+  close of the session before; ties, which exact returns make unlikely, go to the fund first in
+  alphabetical order. The three highest, or all the ranked funds if fewer than three, form that
+  month's tranche, held in equal parts. The portfolio holds, in equal shares, the tranches of the
+  last hold months, the current one included, and before hold tranches exist those formed so far;
+  within a tranche, a fund that does not trade on that session is dropped and the others share its
+  part. The targets start on the first month in which a fund is ranked; from then the portfolio is
+  always fully invested, its holdings drifting with prices between monthly targets and set back to
+  the tranches' weights on each first session.
+parameters:
+  lookback: sessions of past return on which the funds are ranked, up to the session before
+  hold: months for which each month's tranche is held
+variants:
+  - {lookback: 126, hold: 6}
+  - {lookback: 252, hold: 6}
+neighbours:
+  lookback: {25: [94, 158], 50: [63, 189]}
+  hold: {25: [5, 7], 50: [3, 9]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the base, at the lab's stated costs, by its appraisal ratio over the sector funds that
+  trade held in equal parts (gate 4's figure), measured to about ±0.24 over these 17 years. The
+  theory is refuted in this form if that ratio is -0.1 or less and the base beats half of its
+  placebos shifted in time or fewer: 1.6 standard errors below the prediction, with no sign of skill
+  in the placebos. A ratio of 0.3 or less rules out, on its own, an edge of the source's size, near
+  0.8. Any other result short of passing gates 1 to 7 is not proven, not refuted: among them a ratio
+  above -0.1, fewer than 90% of placebos beaten, one fund carrying above 30% of the profit, no alpha
+  without the best year, or a failure at gates 2, 4, 5 or 7. The variant is read by its appraisal
+  ratio alone, against the same prediction, since the battery ranks only the base and the blend
+  among placebos.
