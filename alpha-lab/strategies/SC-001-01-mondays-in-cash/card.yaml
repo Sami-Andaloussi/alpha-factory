@@ -1,0 +1,66 @@
+id: SC-001-01-mondays-in-cash
+theory: SC-001
+parent: null
+mechanism: >
+  Speculative short sellers close their positions before the market closes for a weekend and reopen
+  them after it, individual investors sell more after a weekend while institutions trade less, and
+  news is released after Friday's close: the first session of a week, which carries the weekend,
+  earns less than the other sessions, the last session more. Short sellers moved to options where
+  options are cheap, so the effect left the large caps and lasted longest in the small caps.
+prediction:
+  sign: positive
+  size: before costs, IWM's weekend effect, its week's last session less its next first, about +0.07 to +0.17% a weekend; a gap between the week's first session and the other sessions of about -0.04 to -0.09% a day for IWM, about 0 to +0.02% for SPY and QQQ, about 0 for EFA and EEM, about -0.02 to 0% for the five funds' average; the base's alpha over the five held always about 0 to 0.8% a year before costs of about 5.2% a year, an appraisal ratio of about 0 to 0.1 before costs; the variant's about zero before the same costs; both expected to fail gate 2 on their costs
+universe: [SPY, QQQ, IWM, EFA, EEM]
+horizon: days
+signal: >
+  Sessions are placed on the New York Stock Exchange's calendar of scheduled sessions, derived from
+  its holiday rules alone and read from no price: weekdays less New Year's Day (on 2 January when 1
+  January is a Sunday, not observed when it is a Saturday), Martin Luther King Jr. Day, Washington's
+  Birthday, Good Friday, Memorial Day, Juneteenth from 2022, Independence Day, Labor Day,
+  Thanksgiving and Christmas, with Juneteenth, Independence Day and Christmas moved to the Friday
+  before when they fall on a Saturday and to the Monday after when on a Sunday. A calendar week runs
+  from Monday to Sunday; its scheduled sessions are counted from its first, 1, 2, and so on, and
+  from its last, 1, 2, and so on back. With day first, a scheduled session is out when it is among
+  the first count sessions of its week; with day last, a scheduled session is in when it is among
+  the last count sessions of its week, and out otherwise. On each session of the market, from the
+  first, the target is the five funds in equal parts, among those that trade, if the next scheduled
+  session is in, and nothing, the bill's rate on cash, if it is out, so that the portfolio holds
+  equities over the returns of the sessions that are in; a target is set only on the sessions on
+  which it changes, and on the first. A scheduled session on which the exchange does not open, an
+  unscheduled closure, is counted as the calendar counts it and is absent from the market.
+parameters:
+  day: first, the week's first sessions left out, or last, the week's last sessions alone held
+  count: how many of the week's first sessions are out, or of its last sessions are in
+variants:
+  - {day: first, count: 1}
+  - {day: last, count: 1}
+neighbours:
+  count: {25: [2], 50: [2]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs on the form of the claim the sources hold for recent years, the small caps',
+  and on the weekend effect as Singal defines it, which holds both its halves: for each pair of a
+  calendar week's last scheduled session and the next week's first, from the base's first held
+  session, IWM's return less the bill's rate over the market session whose return spans the week's
+  last scheduled session, less the same over the market session whose return spans the next week's
+  first scheduled session, each from the market's previous close; the mean over the pairs, its
+  standard error, the standard deviation of the pairs' differences over the square root of their
+  count, and its t statistic, computed apart from the battery. The theory is refuted in this form if
+  that t statistic is -0.35 or below. Above it, short of passing gates 1 to 7, it is not proven, not
+  refuted; a base that passes gates 1 to 7 while the clause refutes leaves the theory refuted in
+  this form. Of SC-001's refutation criteria the first is graded on IWM through the weekend effect
+  and reported half by half and on the other funds, the second reported through IWM's gap less
+  SPY's, the third and fifth beyond the lab's data, the fourth and sixth not tested. Reported, not
+  graded, each session placed by the market session whose return spans it: the gap of the week's
+  first session against the other sessions, with its standard error, the square root of the sum of
+  each group's variance over its count, for IWM, each of the other four funds and the five funds'
+  average, and for IWM's daily return less SPY's; the gap of the week's last session against the
+  other sessions and the weekend effect for each fund and the average; IWM's weekend effect and the
+  average's by the pairs of 2005-2010, 2011-2016 and 2017-2022, placed by the date of their last
+  session, over the pairs whose first session's return spans four calendar days or more against the
+  others, without the pairs whose last session falls in 2008 or 2020, and with both returns of each
+  pair divided by the standard deviation of IWM's daily returns over the 21 market sessions before
+  the pair's last session; the base's and the variant's alphas before and after costs.

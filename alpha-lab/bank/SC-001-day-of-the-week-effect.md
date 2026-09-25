@@ -6,7 +6,7 @@ mechanism: [microstructure, behavioural, information, limits to arbitrage]
 asset_classes: [stocks, equity indices, crypto]
 horizon: [days]
 data: [daily prices, market capitalisation, trading volumes, trades by investor type]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
