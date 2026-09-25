@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 259 untouched · 1 in-progress · 0 tested-conclusive · 3 tested-inconclusive · 0 not-testable.
+**263 theories**: 258 untouched · 1 in-progress · 0 tested-conclusive · 3 tested-inconclusive · 1 not-testable.
 
 **4 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 2, 2 stopped at gate 3; 1 under paper trading.
 
@@ -45,7 +45,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [CA-003](bank/CA-003-factor-momentum.md) Factor momentum | cross-asset relative value | untouched |  |
 | [CA-006](bank/CA-006-do-industries-lead-stock-markets.md) Do industries lead stock markets? | cross-asset relative value | untouched |  |
 | [CA-011](bank/CA-011-sector-rotation.md) Sector rotation | cross-asset relative value | untouched |  |
-| [CA-012](bank/CA-012-sector-rotation-monetary-conditions.md) Sector rotation and monetary conditions | cross-asset relative value | untouched |  |
+| [CA-012](bank/CA-012-sector-rotation-monetary-conditions.md) Sector rotation and monetary conditions | cross-asset relative value | not-testable | [CA-012-01-monetary-sector-rotation](strategies/CA-012-01-monetary-sector-rotation/) · not testable: [reasoning](strategies/CA-012-01-monetary-sector-rotation/reasoning.md) |
 | [CA-013](bank/CA-013-sector-rotation-business-cycle.md) Sector rotation across the business cycle | cross-asset relative value | untouched |  |
 | [CA-014](bank/CA-014-intermarket-analysis.md) Intermarket analysis | cross-asset relative value | untouched |  |
 | [CA-015](bank/CA-015-tactical-forecasting-conditional-factor-premia.md) Tactical return forecasting and conditional factor premia | cross-asset relative value | untouched |  |
