@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 239 untouched · 1 in-progress · 0 tested-conclusive · 21 tested-inconclusive · 2 not-testable.
+**263 theories**: 238 untouched · 1 in-progress · 0 tested-conclusive · 22 tested-inconclusive · 2 not-testable.
 
-**22 strategies**: 0 passing gates 1 to 7, 15 stopped at gate 2, 7 stopped at gate 3; 1 under paper trading.
+**23 strategies**: 0 passing gates 1 to 7, 16 stopped at gate 2, 7 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -225,7 +225,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [SC-011](bank/SC-011-macroeconomic-announcement-clustering.md) Macroeconomic announcement clustering hypothesis | seasonality and calendar effects | not-testable | [SC-011-01-announcement-clustering](strategies/SC-011-01-announcement-clustering/) · not testable: [reasoning](strategies/SC-011-01-announcement-clustering/reasoning.md) |
 | [SC-012](bank/SC-012-rebalancing-windows-institutional-flows.md) Rebalancing windows and end-of-period institutional flows | seasonality and calendar effects | untouched |  |
 | [SC-013](bank/SC-013-infrequent-rebalancing.md) Infrequent rebalancing | seasonality and calendar effects | untouched |  |
-| [SC-014](bank/SC-014-pre-holiday-effect.md) Pre-holiday effect | seasonality and calendar effects | untouched |  |
+| [SC-014](bank/SC-014-pre-holiday-effect.md) Pre-holiday effect | seasonality and calendar effects | tested-inconclusive | [SC-014-01-pre-holiday-sessions](strategies/SC-014-01-pre-holiday-sessions/) · stops at gate 2 · [report](strategies/SC-014-01-pre-holiday-sessions/report.ipynb) · [verdict](strategies/SC-014-01-pre-holiday-sessions/verdict.md) |
 | [SC-015](bank/SC-015-ramadan-effect.md) Ramadan effect | seasonality and calendar effects | untouched |  |
 | [SC-016](bank/SC-016-religious-and-cultural-calendar-effects.md) Religious and cultural calendar effects | seasonality and calendar effects | untouched |  |
 | [SC-017](bank/SC-017-month-of-the-year-effect.md) Month-of-the-year effect | seasonality and calendar effects | tested-inconclusive | [SC-017-01-september-october-in-cash](strategies/SC-017-01-september-october-in-cash/) · stops at gate 3 · [report](strategies/SC-017-01-september-october-in-cash/report.ipynb) · [verdict](strategies/SC-017-01-september-october-in-cash/verdict.md) |

@@ -94,7 +94,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [SC-011](SC-011-macroeconomic-announcement-clustering.md) | Macroeconomic announcement clustering hypothesis | information, risk premium | stocks, equity indices | days | not-testable |
 | [SC-012](SC-012-rebalancing-windows-institutional-flows.md) | Rebalancing windows and end-of-period institutional flows | flows, structural | stocks, equity indices | days, weeks | untouched |
 | [SC-013](SC-013-infrequent-rebalancing.md) | Infrequent rebalancing | flows, limits to arbitrage | stocks | days, weeks | untouched |
-| [SC-014](SC-014-pre-holiday-effect.md) | Pre-holiday effect | behavioural, microstructure, limits to arbitrage | stocks, equity indices | days | untouched |
+| [SC-014](SC-014-pre-holiday-effect.md) | Pre-holiday effect | behavioural, microstructure, limits to arbitrage | stocks, equity indices | days | tested-inconclusive |
 | [SC-015](SC-015-ramadan-effect.md) | Ramadan effect | behavioural | stocks, crypto | weeks | untouched |
 | [SC-016](SC-016-religious-and-cultural-calendar-effects.md) | Religious and cultural calendar effects | behavioural, flows | stocks, equity indices | days, weeks | untouched |
 | [SC-017](SC-017-month-of-the-year-effect.md) | Month-of-the-year effect | flows, risk premium, behavioural | stocks, equity indices | months | tested-inconclusive |
