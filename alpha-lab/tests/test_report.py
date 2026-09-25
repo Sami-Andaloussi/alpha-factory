@@ -534,7 +534,7 @@ def test_trying_a_strategy_checks_its_targets_and_shows_no_returns(lab, market):
     assert tried["dates checked"] == 2 * 2 * battery.CHECKED_DATES                 # both variants, both kinds of day
     assert tried["neighbours timed"] == 4 and tried["neighbour dates checked"] == 4 * 2 * battery.HOLDOUT_CHECKED_DATES
     assert tried["neighbour look-ahead breaks"] == 0 and tried["neighbour same-day breaks"] == 0
-    assert tried["blocks of gate 5 from the first holding"] == len(battery.BLOCKS) and "warning" not in tried
+    assert tried["blocks of gate 5 after the first target"] == len(battery.BLOCKS) and "warning" not in tried
     assert tried["neighbours that hold the base"] == []
     assert not {"Sharpe", "alpha", "returns"} & set(tried)
     assert not trials_file(root).exists()
@@ -544,7 +544,7 @@ def test_trying_a_strategy_that_first_holds_too_late_for_gate_5_warns(lab, marke
     root, _ = lab
     late = STRATEGY.replace("    every = ", '    weights.loc[:"2015-12-31"] = 0.0\n    every = ')
     tried = attempt(new_strategy(root, "demo-35-late", code=late), market)
-    assert tried["from"] >= "2016-01-01" and tried["blocks of gate 5 from the first holding"] == 2
+    assert tried["from"] >= "2016-01-01" and tried["blocks of gate 5 after the first target"] == 2
     assert "gate 5 needs 3: it would fail whatever the edge" in tried["warning"]
 
 
@@ -626,11 +626,11 @@ def test_trying_a_strategy_keeps_every_warning(lab, market):
 
 def test_trying_a_strategy_counts_a_block_of_exactly_126_sessions(lab, market):
     root, _ = lab
-    first = market.prices.loc["2010":"2014"].index[-battery.MIN_BLOCK_SESSIONS]
+    first = market.prices.loc["2010":"2014"].index[-battery.MIN_BLOCK_SESSIONS - 1]   # 126 sessions after it
     before = (first - pd.Timedelta(days=1)).date()
     exact = STRATEGY.replace("    every = ", f'    weights.loc[:"{before}"] = 0.0\n    every = ').replace("% 5 == 0", "% 1 == 0")
     tried = attempt(new_strategy(root, "demo-39-exact", code=exact), market)
-    assert tried["from"] == str(first.date()) and tried["blocks of gate 5 from the first holding"] == 3
+    assert tried["from"] == str(first.date()) and tried["blocks of gate 5 after the first target"] == 3
     assert "warning" not in tried
 
 

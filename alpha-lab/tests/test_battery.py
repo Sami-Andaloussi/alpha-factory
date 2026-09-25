@@ -51,7 +51,7 @@ def verdict(planted):
 
 def test_the_thresholds_are_those_of_their_version():
     """Changing a threshold is a versioned decision: this test changes with THRESHOLDS."""
-    assert battery.THRESHOLDS == 2
+    assert battery.THRESHOLDS == 4
     assert (battery.IN_SAMPLE, battery.HOLDOUT) == (("2005-01-01", "2022-12-31"), ("2023-01-01", "2025-12-31"))
     assert [b[0][:4] + "-" + b[1][:4] for b in battery.BLOCKS] == ["2005-2007", "2008-2009", "2010-2014",
                                                                    "2015-2019", "2020-2022"]
@@ -242,7 +242,8 @@ def own_runs(strategy, market, variants, crypto=NO_CRYPTO):
     fee = {m: costs.per_side(inside.prices.columns, m, crypto) for m in (1, 2)}
     return SimpleNamespace(
         inside=inside, positions=positions, fee=fee[1],
-        period=slice(battery.first_holding(positions[0]), pd.Timestamp(battery.IN_SAMPLE[1])),
+        period=slice(battery.first_held(positions[0]), pd.Timestamp(battery.IN_SAMPLE[1])),        # the returns
+        decided=slice(battery.first_holding(positions[0]), pd.Timestamp(battery.IN_SAMPLE[1])),     # the targets
         result=[engine.run(inside.prices, p, fee[1], inside.rf) for p in positions],
         doubled=[engine.run(inside.prices, p, fee[2], inside.rf) for p in positions],
         bench=[costs.benchmark(inside, p, 1, crypto) for p in positions],
@@ -260,7 +261,7 @@ def figures(verdict, number):
 
 def test_gate_one_counts_the_decisions_of_the_positions_the_other_gates_judge(verdict, runs):
     f = figures(verdict, 1)
-    assert f["clustered decisions"] == stats.decision_clusters(runs.positions[0].loc[runs.period])
+    assert f["clustered decisions"] == stats.decision_clusters(runs.positions[0].loc[runs.decided])
     assert f["data problems"] == [] and f["years needed"] == battery.MIN_YEARS
 
 
@@ -279,11 +280,13 @@ def test_gate_two_s_figures_are_those_of_the_run_and_its_benchmark(verdict, runs
 def test_gate_three_s_figures_are_those_of_the_run_and_its_placebos(verdict, runs):
     f, ev = figures(verdict, 3), verdict.evidence
     x = above(runs.result[0], runs.inside, runs.period)
+    window = above(runs.result[0], runs.inside, runs.decided)        # from the first target: each day but the first
     assert f["PSR"] == pytest.approx(stats.adjusted_psr(x), rel=1e-12)
-    assert f["placebo sessions"] == len(x) and f["placebos"] == len(ev["placebos"]) == battery.PLACEBOS
-    assert ev["placebo own Sharpe"] == pytest.approx(stats.sharpe(x.iloc[1:]), rel=1e-9)
+    assert f["placebo sessions"] == len(window) and f["placebos"] == len(ev["placebos"]) == battery.PLACEBOS
+    assert ev["placebo own Sharpe"] == pytest.approx(stats.sharpe(x), rel=1e-9)   # the returns gate 2 judges
+    assert ev["placebo own Sharpe"] == pytest.approx(stats.sharpe(window.iloc[1:]), rel=1e-9)
     assert f["placebos beaten"] == np.mean(ev["placebos"] < ev["placebo own Sharpe"])
-    assert ev["placebo window"] == (x.index[0], x.index[-1]) and ev["placebo late assets"] == []
+    assert ev["placebo window"] == (window.index[0], window.index[-1]) and ev["placebo late assets"] == []
 
 
 def test_gate_four_s_figures_are_those_of_the_card_s_trials(verdict, runs):
@@ -361,7 +364,7 @@ def test_gate_seven_s_floors_are_percentiles_of_a_bootstrap_of_the_in_sample_run
     assert (f["variants rewritten"], f["dates checked"], f["data problems"]) == (0, 2 * 2 * battery.HOLDOUT_CHECKED_DATES, [])
 
 
-def test_gate_seven_s_bootstrap_draws_from_the_first_holding_on(planted, monkeypatch):
+def test_gate_seven_s_bootstrap_draws_from_the_first_session_held_on(planted, monkeypatch):
     market, strategy, _ = planted
     seen, drawn = {}, battery.bootstrap
 
@@ -376,7 +379,7 @@ def test_gate_seven_s_bootstrap_draws_from_the_first_holding_on(planted, monkeyp
 
     monkeypatch.setattr(battery, "bootstrap", watched)
     judge(late, market)
-    first = pd.Timestamp("2010-01-04")
+    first = pd.Timestamp("2010-01-05")                                 # held into from the first target's close
     assert seen["x"].index[0] == seen["b"].index[0] == first         # the years before it hold nothing to draw
     assert seen["x"].index[-1] == seen["b"].index[-1] == market.prices.loc[:battery.IN_SAMPLE[1]].index[-1]
 
@@ -409,14 +412,14 @@ def test_a_card_that_chooses_is_judged_on_its_choices_in_every_gate(planted, cho
     verdict, mine, strategy = chooser
     inside, period, ev = mine.inside, mine.period, verdict.evidence
     f = {g.number: g.figures for g in verdict.gates}
-    choices, base = mine.composite.loc[period], mine.positions[0].loc[period]
+    choices, base = mine.composite.loc[mine.decided], mine.positions[0].loc[mine.decided]
     assert f[1]["clustered decisions"] == stats.decision_clusters(choices) != stats.decision_clusters(base)
     assert f[5]["walk-forward efficiency"] == pytest.approx(mine.wfe, rel=1e-12)
     x = above(mine.main, inside, period)
     b = above(costs.benchmark(inside, mine.composite, 1, NO_CRYPTO), inside, period)
     assert f[2]["Sharpe"] == pytest.approx(stats.sharpe(x), rel=1e-9) and f[2]["alpha"] == pytest.approx(stats.alpha(x, b), rel=1e-9)
     assert f[3]["PSR"] == pytest.approx(stats.adjusted_psr(x), rel=1e-9)
-    assert ev["placebo own Sharpe"] == pytest.approx(stats.sharpe(x.iloc[1:]), rel=1e-9)
+    assert ev["placebo own Sharpe"] == pytest.approx(stats.sharpe(x), rel=1e-9)   # the placebos start a session before
     assert f[4]["appraisal ratio"] == pytest.approx(stats.sharpe(stats.hedged(x, b)), rel=1e-9)
     blocks = {f"{first[:4]}-{last[:4]}": stats.alpha(x.loc[first:last], b.loc[first:last]) for first, last in battery.BLOCKS}
     assert ev["blocks"] == pytest.approx(blocks, rel=1e-9)
@@ -648,6 +651,33 @@ def test_the_first_holding_is_the_first_positive_weight():
     assert battery.first_holding(positions.fillna(0.0) * 0) is None
 
 
+def test_the_returns_are_judged_from_the_first_session_held_into():
+    positions = pd.DataFrame({"A": [np.nan, 0.0, 0.0, 0.5, np.nan]}, index=pd.bdate_range("2020-01-06", periods=5))
+    assert battery.first_held(positions) == positions.index[4]
+    assert battery.first_held(positions.iloc[:4]) is None             # a first target on the last session holds nothing
+    assert battery.first_held(positions.fillna(0.0) * 0) is None
+
+
+def test_a_late_start_s_first_target_session_counts_in_no_return(planted):
+    """On the session of its first target the rule holds nothing, its orders filled at the close,
+    while the benchmark, invested from the first session, earns the day: version 4 leaves that session
+    out of every return, and gate 1 still counts the targets from it."""
+    market, strategy, _ = planted
+
+    def late(market, span=10):
+        positions = strategy(market, span)
+        positions.loc[:"2009-12-31"] = np.nan
+        return positions
+
+    verdict = judge(late, market)
+    inside = market.window(*battery.IN_SAMPLE)
+    positions = battery.targets(late, inside, {"span": 10})
+    start, held = battery.first_holding(positions), battery.first_held(positions)
+    assert start.year == 2010 and held == inside.prices.index[inside.prices.index.get_loc(start) + 1]
+    assert verdict.evidence["excess"].index[0] == verdict.evidence["benchmark excess"].index[0] == held
+    assert verdict.gates[0].figures["years in-sample"] == len(inside.prices.loc[start:]) / battery.PERIODS
+
+
 def test_five_years_are_needed_unless_every_asset_is_crypto():
     coin = frozenset({"COIN"})
     assert battery.years_needed([*EIGHT, "COIN"], coin) == battery.MIN_YEARS
@@ -693,10 +723,87 @@ def test_placebos_are_shifted_a_year_or_more_each_way_and_need_two_years_and_two
         period = slice(sessions[0], sessions[years * 252 - 1])
         gate, _ = battery.significance(result, inside, period, np.random.default_rng(years))
         assert gate.figures["placebos"] == battery.PLACEBOS and gate.figures["placebo sessions"] == years * 252
-        assert drawn[-1].min() >= battery.MIN_SHIFT and drawn[-1].max() <= years * 252 - battery.MIN_SHIFT
-    for count, computed in ((2 * battery.MIN_SHIFT + 1, False), (2 * battery.MIN_SHIFT + 2, True)):
+        assert drawn[-1].min() >= battery.MIN_SHIFT and drawn[-1].max() <= years * 252 - battery.MIN_SHIFT - 2
+    forward = battery.MIN_SHIFT + 2          # a year's memory and two sessions, past the wrap
+    for count, computed in ((battery.MIN_SHIFT + forward + 1, False), (battery.MIN_SHIFT + forward + 2, True)):
         gate, _ = battery.significance(result, inside, slice(sessions[0], sessions[count - 1]), np.random.default_rng(1))
         assert (gate.figures["placebos beaten"] is not None) == computed, count
+
+
+def reaching(sessions):
+    """A rule that holds the assets whose price fell over the last `sessions` sessions: it reads
+    that far back."""
+    def positions(market, span=10):
+        past = market.signal_prices.shift(1) / market.signal_prices.shift(1 + sessions) - 1
+        cheap = past.lt(past.median(axis=1), axis=0).astype(float).where(past.notna())
+        total = cheap.sum(axis=1)
+        weights = cheap.div(total.where(total > 0), axis=0).fillna(0.0)
+        out = weights * np.nan
+        out.iloc[::21] = weights.iloc[::21]
+        return out.where(past.notna().any(axis=1), axis=0)
+    return positions
+
+
+def test_a_signal_that_reads_further_back_than_its_memory_breaks_hygiene(planted):
+    market = planted[0]
+    short = judge(reaching(300), market, battery.Card("reach-01", EIGHT, ({"span": 10},), NEIGHBOURS)).gates[0]
+    assert short.figures["memory"] == battery.MIN_SHIFT and short.figures["memory breaks"] > 0
+    assert not short.passed and "memory" in short.reason
+    told = judge(reaching(300), market,
+                 battery.Card("reach-02", EIGHT, ({"span": 10},), NEIGHBOURS, memory=300)).gates[0]
+    assert told.figures["memory dates checked"] > 0 and told.figures["memory breaks"] == 0
+    assert "memory" not in told.reason
+
+
+def test_a_card_s_memory_is_a_whole_number_of_sessions():
+    for wrong in (0, -5, 252.0, True, "252"):
+        with pytest.raises(ValueError, match="memory"):
+            battery.Card("memory-01", EIGHT, ({"span": 10},), NEIGHBOURS, memory=wrong)
+
+
+def test_placebos_keep_the_signal_s_memory_before_the_wrap(planted, monkeypatch):
+    market, strategy, _ = planted
+    inside = market.window(*battery.IN_SAMPLE)
+    positions = battery.targets(strategy, inside, {"span": 10})
+    result = engine.run(inside.prices, positions, battery.fees(inside, 1, NO_CRYPTO), inside.rf)
+    period = slice(battery.first_holding(positions), pd.Timestamp(battery.IN_SAMPLE[1]))
+    n = len(inside.prices.loc[period])
+    drawn, placebos = [], battery.placebo_sharpes
+
+    def watched(result, market, period, offsets):
+        drawn.append(offsets)
+        return placebos(result, market, period, offsets)
+
+    monkeypatch.setattr(battery, "placebo_sharpes", watched)
+    battery.significance(result, inside, period, np.random.default_rng(2), memory=1260)
+    assert drawn[-1].min() >= battery.MIN_SHIFT and drawn[-1].max() <= n - 1262
+    battery.significance(result, inside, period, np.random.default_rng(2), memory=100)
+    assert drawn[-1].max() <= n - battery.MIN_SHIFT and drawn[-1].max() > n - 1262
+
+
+def test_placebos_rank_a_cheapness_rule_without_skill_at_random_once_they_keep_its_memory():
+    """A rule that buys what fell over five years, on returns without an edge: placebos shifted past
+    the wrap by less than its memory hold weights that read the day they are paid on, which counts
+    against them; kept beyond it, they rank the rule at random."""
+    market, _ = synthetic_market(5, tickers=EIGHT[:4])
+    inside = market.window(*battery.IN_SAMPLE)
+    rng = np.random.default_rng(12)
+    rule, fixed, leaky = reaching(1260), [], []
+    for draw in range(12):
+        noise = pd.DataFrame(rng.normal(0.0003, 0.01, size=inside.prices.shape), index=inside.prices.index,
+                             columns=inside.prices.columns)
+        prices = ((1 + noise).cumprod() * 100).where(inside.tradable)
+        shaken = Market(prices, inside.tradable, inside.rf, prices)
+        positions = battery.targets(rule, shaken, {"span": 10})
+        result = engine.run(shaken.prices, positions, battery.fees(shaken, 1, NO_CRYPTO), shaken.rf)
+        period = slice(battery.first_holding(positions), pd.Timestamp(battery.IN_SAMPLE[1]))
+        n = len(shaken.prices.loc[period])
+        own, kept = battery.placebo_sharpes(result, shaken, period, stats.placebo_offsets(n, 150, 252, rng, 1262))
+        _, wrapped = battery.placebo_sharpes(result, shaken, period, stats.placebo_offsets(n, 150, 252, rng))
+        fixed.append(np.mean(kept < own))
+        leaky.append(np.mean(wrapped < own))
+    assert 0.25 < np.mean(fixed) < 0.7
+    assert np.mean(np.array(leaky) - np.array(fixed)) > 0.05
 
 
 def test_placebos_of_a_signal_with_no_edge_rank_it_at_random():
@@ -1023,7 +1130,7 @@ def test_a_card_that_chooses_is_judged_on_its_walk_forward_choices(planted):
     assert verdict.gates[4].figures["walk-forward efficiency"] > battery.MIN_WFE
     # the neighbours move the base variant, and are compared with the base, not with the choices
     inside = market.window(*battery.IN_SAMPLE)
-    period = slice(battery.first_holding(battery.targets(strategy, inside, {"span": 10})),
+    period = slice(battery.first_held(battery.targets(strategy, inside, {"span": 10})),
                    pd.Timestamp(battery.IN_SAMPLE[1]))
     sharpe = {span: stats.sharpe(battery.excess(battery.at_cost(inside, battery.targets(strategy, inside, {"span": span}),
                                                                 NO_CRYPTO), inside.rf, period)) for span in (10, 12)}
@@ -1087,7 +1194,7 @@ def test_a_neighbour_that_sets_the_base_s_targets_fails_robustness(planted, choo
         base = battery.targets(top, inside, variants[0])
         legs = [battery.Leg(p, r, r, r, r) for p in (base, battery.targets(top, inside, variants[1]))
                 for r in [battery.at_cost(inside, p, NO_CRYPTO)]]
-        period = slice(battery.first_holding(base), pd.Timestamp(battery.IN_SAMPLE[1]))
+        period = slice(battery.first_held(base), pd.Timestamp(battery.IN_SAMPLE[1]))
         assert not battery.same_rows(battery.walk_forward(legs, inside, period)[0].loc[period], base.loc[period])
     gate = verdict.gates[5]
     assert gate.figures["neighbours that hold the base"] == ["k=1.5", "k=2.5", "early=0.75", "early=1.25",
@@ -1166,7 +1273,7 @@ def test_gate_two_is_judged_again_without_bitcoin(verdict):
     with_coin = judge(strategy, market, battery.Card("coin-03", universe, ({"span": 10},), NEIGHBOURS), crypto=coin)
     inside = battery.restrict(market, universe).window(*battery.IN_SAMPLE)
     assert battery.targets(strategy, inside, {"span": 10})["COIN"].gt(0).any()
-    period = slice(battery.first_holding(battery.targets(strategy, inside, {"span": 10})), pd.Timestamp(battery.IN_SAMPLE[1]))
+    period = slice(battery.first_held(battery.targets(strategy, inside, {"span": 10})), pd.Timestamp(battery.IN_SAMPLE[1]))
     rest = battery.restrict(inside, EIGHT)
     positions = battery.targets(strategy, rest, {"span": 10}, left_out=["COIN"])
     x = above(engine.run(rest.prices, positions, costs.per_side(EIGHT, 1, coin), rest.rf), rest, period)
@@ -1410,9 +1517,9 @@ def test_a_card_has_one_to_three_variants_and_declared_neighbours():
 def test_a_card_s_in_sample_period_ends_where_the_lab_s_does():
     battery.Card("x", EIGHT, ({},), in_sample=("2010-01-01", "2022-12-31"))
     battery.Card("x", EIGHT, ({},), in_sample=("2014-06-30", "2022-12-31"))
-    battery.Card("x", EIGHT, ({},), in_sample=("2014-07-09", "2022-12-31"))    # 126 weekdays left in 2014
+    battery.Card("x", EIGHT, ({},), in_sample=("2014-07-08", "2022-12-31"))    # 126 weekdays after it in 2014
     with pytest.raises(ValueError, match="leaves 2 blocks of 126 sessions or more, and gate 5 needs 3"):
-        battery.Card("x", EIGHT, ({},), in_sample=("2014-07-10", "2022-12-31"))    # gate 5 could never pass
+        battery.Card("x", EIGHT, ({},), in_sample=("2014-07-09", "2022-12-31"))    # gate 5 could never pass
     for dates in (("2004-01-01", "2022-12-31"), ("2005-01-01", "2015-12-31"), ("2005", "2022")):
         with pytest.raises(ValueError, match="ends on 2022-12-31"):
             battery.Card("x", EIGHT, ({},), in_sample=dates)

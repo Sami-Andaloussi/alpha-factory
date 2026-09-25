@@ -23,7 +23,7 @@ its own, beside the snapshot, whose files never change.
 | `python -m lab.calibration` | Calibrates the battery again (about twenty minutes on nine workers); needed whenever the battery changes. |
 | `python -m lab.status` | Regenerates the board, `STATUS.md`; every run does it too, and the tests refuse a board out of date. |
 | `python -m lab.bank` | Checks every theory file of `bank/` and regenerates the bank's index, `bank/README.md`; the tests refuse an index out of date. |
-| `python -m lab.compare strategies/<card> strategies/<reference>` | The card's alpha less the reference rule's, over the card's in-sample sessions from its base's first holding, at the lab's stated costs, with the standard error of the monthly differences — the measure of a card judged against a rule it refines. Refused until both cards have run as they stand, so it cannot size a band before a run. |
+| `python -m lab.compare strategies/<card> strategies/<reference>` | The card's alpha less the reference rule's, over the card's in-sample sessions from the first its base holds an asset into, at the lab's stated costs, with the standard error of the monthly differences — the measure of a card judged against a rule it refines. Refused until both cards have run as they stand, so it cannot size a band before a run. |
 
 ## One theory, step by step
 
@@ -57,12 +57,30 @@ its own, beside the snapshot, whose files never change.
      always carries more than 30% of the profit, and gate 6 fails whatever the edge. A theory about
      one asset is tested across several, or is `not-testable`.
    - Parameters are numbers, text or lists of them.
+   - `memory`: the sessions the signal reads back from the session before a target, over every
+     variant — the longest window, lags included; 252, a year, when left out. Gate 3's placebos
+     shift the strategy's weights in time circularly, so that past the wrap a placebo holds weights
+     set later than the day it is paid on: the shifts keep the memory and two sessions between them,
+     so that no placebo holds weights whose signal read that day. Gate 1 checks the memory: the
+     targets must not change when the prices older than it are scrambled, and `--try` warns before
+     the run. A rule that reads its whole history — an expanding average, or an exponential one,
+     which pandas computes over the whole series — reads further back than any memory; it bounds its
+     window instead. Two gaps the check does not see: a rule that goes more than a year without
+     setting a target holds weights drifted by the returns since, and the bill rate is not
+     scrambled; a card whose signal does either declares a memory that covers it.
+   - What would refute it: a clause that asks for an alpha of zero or less *and* a rank among the
+     placebos at half or below assumes that the placebos earn about the benchmark. Shifting the
+     weights in time keeps their average: a slow rule whose holdings persist averages far from equal
+     weight, and if that average loses at every timing, the placebos lose too, and the second
+     condition spares a theory on which the first alone would count (CA-024-01). For such a rule
+     the card says which condition carries the claim, and why.
    - The split dates are the lab's: in-sample from 2005, or a later start, to the end of 2022; the
      holdout 2023 to 2025 for every card. A start that leaves fewer than three of gate 5's blocks
-     with 126 sessions cannot pass gate 5. The card counts weekdays, which outnumber sessions, so it
-     refuses only the starts that cannot pass whatever the calendar, from 2014-07-10 on; a start a
-     few days earlier is accepted and may still leave fewer than 126 sessions in 2010-2014, which
-     `--try`, counting the sessions from the strategy's first holding, warns about.
+     with 126 sessions cannot pass gate 5. The card counts the weekdays after the start, which
+     outnumber sessions, so it refuses only the starts that cannot pass whatever the calendar, from
+     2014-07-09 on; a start a few days earlier is accepted and may still leave fewer than 126
+     sessions in 2010-2014, which `--try`, counting the sessions after the strategy's first target,
+     warns about.
 
    `python -m lab.report --check strategies/<folder>` checks all of this, and that no run of the
    registry bears this id or this card; like the run, it refuses while the registry is not whole

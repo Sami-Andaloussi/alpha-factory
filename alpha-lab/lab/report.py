@@ -142,7 +142,7 @@ def card_of(spec: dict) -> battery.Card:
                         {p: {int(k): v for k, v in steps.items()} for p, steps in (spec.get("neighbours") or {}).items()},
                         tuple(str(d) for d in splits.get("in_sample", battery.IN_SAMPLE)),
                         tuple(str(d) for d in splits.get("holdout", battery.HOLDOUT)),
-                        bool(spec.get("choose", False)))
+                        bool(spec.get("choose", False)), spec.get("memory", battery.MIN_SHIFT))
 
 
 def locked(path: Path) -> str:
@@ -739,30 +739,37 @@ def tried(folder: Path, market, crypto, cluster) -> dict:
     rng = np.random.default_rng(seed_of(card_hash_of(folder / "card.yaml")))
     timing = [battery.timing_breaks(strategy, p, inside, positions, period, rng, battery.CHECKED_DATES)
               for p, positions in zip(card.variants, variants)]
+    memory = [battery.memory_breaks(strategy, p, inside, positions, period, rng, battery.CHECKED_DATES, card.memory)
+              for p, positions in zip(card.variants, variants)]
     near = [battery.timing_breaks(strategy, p, inside, positions, period, rng, battery.HOLDOUT_CHECKED_DATES)
             for p, positions in zip(moved, neighbours)]
     blocks = sum(1 for first, last in battery.BLOCKS
-                 if (inside.prices.loc[first:last].index >= start).sum() >= battery.MIN_BLOCK_SESSIONS)
+                 if (inside.prices.loc[first:last].index > start).sum() >= battery.MIN_BLOCK_SESSIONS)
     tried = {"holds an asset": True, "from": str(start.date()),
              "sessions with a target": int(variants[0].loc[period].notna().any(axis=1).sum()),
              "clustered decisions": stats.decision_clusters(variants[0].loc[period]),
              "dates checked": sum(t.checked for t in timing),
              "look-ahead breaks": sum(len(t.look_ahead) for t in timing),
              "same-day breaks": sum(len(t.same_day) for t in timing),
+             "memory": card.memory, "memory dates checked": sum(m[0] for m in memory),
+             "memory breaks": sum(len(m[1]) for m in memory),
              "neighbours timed": len(moved), "neighbour dates checked": sum(t.checked for t in near),
              "neighbour look-ahead breaks": sum(len(t.look_ahead) for t in near),
              "neighbour same-day breaks": sum(len(t.same_day) for t in near),
-             "blocks of gate 5 from the first holding": blocks,
+             "blocks of gate 5 after the first target": blocks,
              "neighbours that hold the base": [f"{p}={v}" for (p, v), positions in zip(named, neighbours)
                                                if battery.same_rows(positions.loc[period], variants[0].loc[period])]}
     warnings = []
     if blocks < battery.MIN_POSITIVE_BLOCKS:
-        warnings.append(f"from its first holding, {blocks} blocks hold {battery.MIN_BLOCK_SESSIONS} sessions or "
+        warnings.append(f"after its first target, {blocks} blocks hold {battery.MIN_BLOCK_SESSIONS} sessions or "
                         f"more, and gate 5 needs {battery.MIN_POSITIVE_BLOCKS}: it would fail whatever the edge")
     if tried["neighbours that hold the base"]:
         warnings.append(f"{', '.join(tried['neighbours that hold the base'])} set the base's targets on every "
                         f"session from its first holding, and gate 6 fails a neighbour that does not move the "
                         f"strategy: it would fail whatever the edge")
+    if tried["memory breaks"]:
+        warnings.append(f"the targets change when the prices older than the card's memory of {card.memory} "
+                        f"sessions are scrambled: gate 1 would fail; the card declares the memory its signal reads")
     if warnings:
         tried["warning"] = "; ".join(warnings)
     return tried

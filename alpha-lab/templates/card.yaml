@@ -21,6 +21,7 @@ variants:                    # three at most; the first is the base
 neighbours:                  # gate 6: every numeric base parameter, moved alone by 25% and 50% each way
   lookback: {25: [95, 158], 50: [63, 189]}
 choose: false                # true only if the strategy must pick one variant: walk-forward selection
+memory: 252                  # sessions the signal reads back from the session before a target; a year unless more
 splits:                      # the lab's: in-sample from 2005 or later to 2022-12-31, holdout 2023-2025
   in_sample: [2005-01-01, 2022-12-31]
   holdout: [2023-01-01, 2025-12-31]

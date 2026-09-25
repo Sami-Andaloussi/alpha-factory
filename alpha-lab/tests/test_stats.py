@@ -130,6 +130,16 @@ def test_placebo_shifts_stay_at_least_a_year_away_each_way():
         stats.placebo_offsets(504, 10, 252, np.random.default_rng(8))
 
 
+def test_placebo_shifts_keep_the_signal_s_memory_before_the_wrap():
+    """A shift s holds, on the first s days, the weights of n - s days later: that distance stays
+    beyond the memory the signal reads, so that no placebo holds weights that read its own day."""
+    offsets = stats.placebo_offsets(3000, 2000, 252, np.random.default_rng(8), forward=1262)
+    assert offsets.min() >= 252 and offsets.max() <= 3000 - 1262 and offsets.max() > 3000 - 1300
+    with pytest.raises(ValueError, match="memory"):
+        stats.placebo_offsets(1514, 10, 252, np.random.default_rng(8), forward=1262)
+    assert len(stats.placebo_offsets(1515, 10, 252, np.random.default_rng(8), forward=1262)) == 10
+
+
 def test_decisions_close_in_time_are_one_episode():
     positions = pd.DataFrame(np.nan, index=range(60), columns=["A"])
     for day, weight in [(0, 1.0), (2, 0.5), (3, 0.7), (20, 0.0), (40, 1.0), (41, 0.9)]:
