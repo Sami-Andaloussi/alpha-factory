@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 249 untouched · 1 in-progress · 0 tested-conclusive · 11 tested-inconclusive · 2 not-testable.
+**263 theories**: 248 untouched · 1 in-progress · 0 tested-conclusive · 12 tested-inconclusive · 2 not-testable.
 
-**12 strategies**: 0 passing gates 1 to 7, 7 stopped at gate 2, 5 stopped at gate 3; 1 under paper trading.
+**13 strategies**: 0 passing gates 1 to 7, 7 stopped at gate 2, 6 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -228,7 +228,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [SC-014](bank/SC-014-pre-holiday-effect.md) Pre-holiday effect | seasonality and calendar effects | untouched |  |
 | [SC-015](bank/SC-015-ramadan-effect.md) Ramadan effect | seasonality and calendar effects | untouched |  |
 | [SC-016](bank/SC-016-religious-and-cultural-calendar-effects.md) Religious and cultural calendar effects | seasonality and calendar effects | untouched |  |
-| [SC-017](bank/SC-017-month-of-the-year-effect.md) Month-of-the-year effect | seasonality and calendar effects | untouched |  |
+| [SC-017](bank/SC-017-month-of-the-year-effect.md) Month-of-the-year effect | seasonality and calendar effects | tested-inconclusive | [SC-017-01-september-october-in-cash](strategies/SC-017-01-september-october-in-cash/) · stops at gate 3 · [report](strategies/SC-017-01-september-october-in-cash/report.ipynb) · [verdict](strategies/SC-017-01-september-october-in-cash/verdict.md) |
 | [SC-018](bank/SC-018-halloween-effect-sell-in-may.md) Halloween effect (Sell in May and go away) | seasonality and calendar effects | untouched |  |
 | [SC-019](bank/SC-019-january-barometer.md) January barometer | seasonality and calendar effects | untouched |  |
 | [SC-020](bank/SC-020-presidential-election-cycle.md) Presidential election cycle (political cycle) | seasonality and calendar effects | untouched |  |
