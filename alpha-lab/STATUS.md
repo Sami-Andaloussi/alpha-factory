@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 238 untouched · 1 in-progress · 0 tested-conclusive · 22 tested-inconclusive · 2 not-testable.
+**263 theories**: 237 untouched · 1 in-progress · 0 tested-conclusive · 23 tested-inconclusive · 2 not-testable.
 
-**23 strategies**: 0 passing gates 1 to 7, 16 stopped at gate 2, 7 stopped at gate 3; 1 under paper trading.
+**24 strategies**: 0 passing gates 1 to 7, 16 stopped at gate 2, 7 stopped at gate 3, 1 stopped at gate 4; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -220,7 +220,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [SC-006](bank/SC-006-december-effect.md) December effect (deferral of capital gains) | seasonality and calendar effects | tested-inconclusive | [SC-006-01-sector-winners-before-the-year-end](strategies/SC-006-01-sector-winners-before-the-year-end/) · stops at gate 2 · [report](strategies/SC-006-01-sector-winners-before-the-year-end/report.ipynb) · [verdict](strategies/SC-006-01-sector-winners-before-the-year-end/verdict.md) |
 | [SC-007](bank/SC-007-santa-claus-rally.md) Santa Claus rally | seasonality and calendar effects | tested-inconclusive | [SC-007-01-santa-claus-window](strategies/SC-007-01-santa-claus-window/) · stops at gate 2 · [report](strategies/SC-007-01-santa-claus-window/report.ipynb) · [verdict](strategies/SC-007-01-santa-claus-window/verdict.md) |
 | [SC-008](bank/SC-008-turn-of-the-month-effect.md) Turn-of-the-month effect | seasonality and calendar effects | tested-inconclusive | [SC-008-01-turn-of-the-month](strategies/SC-008-01-turn-of-the-month/) · stops at gate 2 · [report](strategies/SC-008-01-turn-of-the-month/report.ipynb) · [verdict](strategies/SC-008-01-turn-of-the-month/verdict.md) |
-| [SC-009](bank/SC-009-payday-hypothesis-dash-for-cash.md) Payday hypothesis (Dash for Cash) | seasonality and calendar effects | untouched |  |
+| [SC-009](bank/SC-009-payday-hypothesis-dash-for-cash.md) Payday hypothesis (Dash for Cash) | seasonality and calendar effects | tested-inconclusive | [SC-009-01-dash-for-cash-week](strategies/SC-009-01-dash-for-cash-week/) · stops at gate 4 · [report](strategies/SC-009-01-dash-for-cash-week/report.ipynb) · [verdict](strategies/SC-009-01-dash-for-cash-week/verdict.md) |
 | [SC-010](bank/SC-010-semi-month-effect.md) Semi-month effect (first half of the month) | seasonality and calendar effects | untouched |  |
 | [SC-011](bank/SC-011-macroeconomic-announcement-clustering.md) Macroeconomic announcement clustering hypothesis | seasonality and calendar effects | not-testable | [SC-011-01-announcement-clustering](strategies/SC-011-01-announcement-clustering/) · not testable: [reasoning](strategies/SC-011-01-announcement-clustering/reasoning.md) |
 | [SC-012](bank/SC-012-rebalancing-windows-institutional-flows.md) Rebalancing windows and end-of-period institutional flows | seasonality and calendar effects | untouched |  |
