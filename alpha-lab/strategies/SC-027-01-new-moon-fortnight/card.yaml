@@ -1,0 +1,58 @@
+id: SC-027-01-new-moon-fortnight
+theory: SC-027
+parent: null
+mechanism: >
+  The phases of the moon affect investors' mood, sleep or agitation, and with them their appetite
+  for risk: equity markets earn less in the days around the full moon than in the days around the
+  new moon.
+prediction:
+  sign: positive (the rule's alpha before costs; the new-moon fortnight's gap to the full-moon fortnight positive)
+  size: a judgment, from the sources -- the five equity funds' average daily excess return over the sessions within seven days of the new moon about 0 to +0.020% a day above the other sessions', from Yuan, Zheng and Zhu's 3 to 5% a year if their window is the fortnight, and below it after Ilmanen's and Singal's warnings; the rule's alpha over the five held always about 0 to +1.25% a year before costs of about 1.24% a year, -1.24 to 0% after, moved by a regression beta away from the 0.51 of sessions held, an appraisal ratio of about -0.12 to 0; the base expected to fail gate 2, which would need about 0.044% a day, gates 3, 4 and 5, and likely gate 6 on one fund's share of the profit
+universe: [SPY, QQQ, IWM, EFA, EEM]
+horizon: weeks
+signal: >
+  Sessions are placed on the New York Stock Exchange's calendar of scheduled sessions, derived
+  from its holiday rules alone and read from no price: weekdays less New Year's Day (on 2 January
+  when 1 January is a Sunday, not observed when it is a Saturday), Martin Luther King Jr. Day,
+  Washington's Birthday, Good Friday, Memorial Day, Juneteenth from 2022, Independence Day, Labor
+  Day, Thanksgiving and Christmas, with Juneteenth, Independence Day and Christmas moved to the
+  Friday before when they fall on a Saturday and to the Monday after when on a Sunday. The moon's
+  mean new moons are the Julian ephemeris days JDE = 2451550.09765 + 29.530588853 k + 0.0001337
+  T^2 - 0.000000150 T^3 + 0.00000000073 T^4, T = k / 1236.85, for every whole k, k = 0 giving 6
+  January 2000; each JDE is taken as universal time, its calendar date that of floor(JDE + 0.5). A
+  date is in the new moon's fortnight when it lies within `days` days of the nearest new moon's
+  date. On each session of the market, from the first, the target is the five funds in equal
+  parts, among those that trade, if the next scheduled session's date is in the new moon's
+  fortnight, and nothing otherwise; a target is set only on the first session and on the sessions
+  on which it changes.
+parameters:
+  days: how many days on each side of a new moon's date are held
+variants:
+  - {days: 7}
+neighbours:
+  days: {25: [5, 9], 50: [4, 10]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, over the in-sample sessions from 4 January 2005, each session's return
+  taken from the market's previous close: the five funds' average daily return less the bill's
+  rate over the sessions whose date is within 7 days of the nearest new moon's date, less the same
+  over the other sessions; the standard error of that difference from the two groups' daily
+  variances, and its t statistic, computed apart from the battery. The theory is refuted in this
+  form if that t statistic is -0.35 or below: the full moon's fortnight no weaker than the new
+  moon's. Above it, short of passing gates 1 to 7, it is not proven, not refuted; a base that
+  passes gates 1 to 7 while the clause refutes leaves the theory refuted in this form. Of SC-027's
+  refutation criteria the first and the fourth, the new sample, are graded; the second and the
+  third are reported. Reported, not graded: the gap by fund, for the sector funds' average, and
+  for GLD, SLV and DBC; the waning half, from a full moon's date to the next new moon's, less the
+  waxing half, for the five funds and for GLD, SLV and DBC; lunar month by lunar month, the
+  new-moon fortnight's mean log traded volume of SPY, QQQ and IWM less the adjacent full-moon
+  fortnight's, and the same for the log of each fortnight's realised variance, with standard
+  errors across the months; the gap without the turn of the month's sessions -1 to +3, and without
+  -5 to +2; the gap by the moon's quarter, days -7 to -1 and 0 to +7 of the new moon, and the full
+  moon's side split at its date; over 2005-2013, 2014-2022, without 2008 and without 2020; the
+  same gap over the holdout, 2023 to 2025; the base's alpha before and after costs, at the
+  regression beta and at a beta equal to the share of sessions held, and the neighbours' and the
+  one-day-late rule's alphas and appraisal ratios.
