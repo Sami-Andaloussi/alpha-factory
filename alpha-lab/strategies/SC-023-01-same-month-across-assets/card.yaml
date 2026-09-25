@@ -1,0 +1,74 @@
+id: SC-023-01-same-month-across-assets
+theory: SC-023
+parent: null
+mechanism: >
+  Assets carry a recurring calendar signature of their own: recurring cycles of demand, risk,
+  investor clienteles, sentiment or constraints return at the same time each year, so that an
+  asset that did well relative to others in a calendar month in past years, beyond what its
+  exposure to the market's month gave it, tends to do so in that month again, across asset classes
+  and indices as in stocks.
+prediction:
+  sign: positive
+  size: a judgment, from the sources -- each month, the equal-weighted residual return, beyond each asset's beta to the universe's average, of the two assets ranked highest on their past residual returns in that calendar month about 0 to +0.25% a month above the equal-weighted residual of all the assets ranked, from February 2010 to December 2022; the rule's alpha over the assets held always in equal parts about 0 to +3% a year before costs of about 1.0 to 1.2% a year, an appraisal ratio of about -0.12 to +0.18 after costs; the base expected to fail gate 2 or gate 3, gate 4 and gate 5, and perhaps gate 6 on one asset's share of the profit if the ranking keeps returning to a few volatile assets
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY, SPY, QQQ, IWM, EFA, EEM, GLD, SLV, DBC, IEF, TLT]
+horizon: months
+signal: >
+  Sessions are placed on the New York Stock Exchange's calendar of scheduled sessions, derived
+  from its holiday rules alone and read from no price: weekdays less New Year's Day (on 2 January
+  when 1 January is a Sunday, not observed when it is a Saturday), Martin Luther King Jr. Day,
+  Washington's Birthday, Good Friday, Memorial Day, Juneteenth from 2022, Independence Day, Labor
+  Day, Thanksgiving and Christmas, with Juneteenth, Independence Day and Christmas moved to the
+  Friday before when they fall on a Saturday and to the Monday after when on a Sunday. An asset's
+  return in a calendar month is its return from its last close before the month to its last close
+  in it, on the market's closes, raw, not less the bill; the average's return in a month is the
+  equal-weighted return of the universe's assets that have a return in it. On each session of the
+  market whose next scheduled session falls in a new calendar month m, reading the closes up to
+  the session before, the window is the calendar months from 12 times `years` months before month
+  m to the month before the month in progress, which is left out, its return ending at the
+  session's own close: 59 months for the base. An asset is ranked when it trades and its returns
+  in every month of the window are known: its beta is the slope of its monthly returns on the
+  average's over the window, by ordinary least squares with an intercept; its residual in a month
+  of the window is its return less its beta times the average's; its signal is the mean of its
+  residuals in the window's months m. The target is the `top` assets ranked highest on the signal,
+  in equal parts, or all those ranked when fewer; no asset ranked, nothing. No target is set on
+  the other sessions.
+parameters:
+  years: the previous years of the same calendar month averaged, and of the beta's window
+  top: how many of the assets ranked highest are held
+variants:
+  - {years: 5, top: 2}
+neighbours:
+  years: {25: [4, 6], 50: [2, 8]}
+  top: {25: [1, 3], 50: [1, 3]}
+choose: false
+memory: 1290
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs: over the in-sample calendar months from February 2010 to December 2022,
+  each ranked asset's return in the month, compounded from the daily returns of the market's
+  sessions in it, less its beta, estimated before the month as in the signal, times the average's
+  return that month; the equal-weighted residual of the top assets the base ranks highest for the
+  month, less the equal-weighted residual of all the assets it ranks; the mean of that difference
+  over the months, its standard error, the standard deviation of the monthly differences over the
+  square root of their number, and its t statistic, computed apart from the battery; returns,
+  betas and residuals are raw, not less the bill. The theory is refuted in this form if that t
+  statistic is -0.35 or below. Above it, short of passing gates 1 to 7, it is not proven, not
+  refuted; a base that passes gates 1 to 7 while the clause refutes leaves the theory refuted in
+  this form. Of SC-023's refutation criteria the first is graded at the monthly frequency on each
+  asset's calendar beyond its beta, the weekday frequency being out of reach; the second and third
+  are reported. Reported, not graded: the same gap with the assets ranked on their raw past
+  returns in the same month and graded on raw returns; each month's rank correlation between the
+  signal and the month's residuals across the ranked assets, its mean and t statistic, and the
+  same for the raw ranking; the two assets ranked lowest less the average; the same gap with the
+  signal read on the last year alone; the same gap with the signal less the asset's mean residual
+  over all the window's months; the same gap with the assets ranked on their residual return over
+  the twelve months before the month, and the rank correlation of that ranking with the signal;
+  for each month's top group, its average residual over the other eleven months of the same year
+  less the ranked assets' average over them, and its beta to the average in the matching month
+  against its beta in the other months; the rule's average weights held fixed over the period,
+  against the rule; the gap within the sector funds alone and across the other assets alone; over
+  2010-2016, 2017-2022 and without 2020; how often each asset was held, the months a Treasury fund
+  was, and each asset's share of the profit; the base's alpha before and after costs, and the
+  neighbours' and the one-day-late rule's alphas and appraisal ratios.
