@@ -1,0 +1,50 @@
+id: TM-002-01-sector-52-week-high
+theory: TM-002
+parent: null
+mechanism: >
+  Investors anchor on an asset's highest price of the past year: near it, they hesitate to pay a
+  price the news already justifies, and the adjustment is slow; far below it, they hesitate to sell.
+  An asset whose price is close to its 52-week high keeps rising more than one far from it.
+prediction:
+  sign: positive
+  size: an alpha of about 1 to 2% a year over the sector funds that trade held in equal parts, an appraisal ratio of about 0.2 to 0.3, and between nothing and about 1% a year more than the same rule ranked on the past six months' return (TM-003-01's base, recomputed over this base's sessions)
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY]
+horizon: months
+signal: >
+  On the first session of each month, the sector funds that trade on that session and have at
+  least high_window closes up to the session before it are ranked by the close of the session before
+  over the highest of the last high_window of those closes, 1 when that close is the high. The three
+  nearest their high, together with any fund tied with the third, or all the ranked funds if fewer
+  than three, form that month's tranche, held in equal parts. The
+  portfolio holds, in equal shares, the tranches of the last hold months, the current one included,
+  and before hold tranches exist those formed so far; within a tranche, a fund that does not trade
+  on that session is dropped and the others share its part. The targets start on the first month in
+  which a fund is ranked; from then the portfolio is always fully invested, its holdings drifting
+  with prices between monthly targets and set back to the tranches' weights on each first session.
+parameters:
+  high_window: sessions of closes, up to the session before, whose highest is the reference high
+  hold: months for which each month's tranche is held
+variants:
+  - {high_window: 252, hold: 6}
+  - {high_window: 252, hold: 12}
+neighbours:
+  high_window: {25: [189, 315], 50: [126, 378]}
+  hold: {25: [5, 7], 50: [3, 9]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the base, at the lab's stated costs, by its appraisal ratio over the sector funds that
+  trade held in equal parts (gate 4's figure), measured to about ±0.24 over these 17 years. The
+  theory's first claim, that nearness to the high predicts, is refuted in this form if that ratio is
+  -0.1 or less and the base beats half of its placebos shifted in time or fewer. Its second claim,
+  that nearness predicts better than past returns, is judged by the base's alpha less that of
+  TM-003-01's base, the latter recomputed over this base's in-sample sessions from its first
+  holding, at the same costs (TM-003-01 earned 1.13% a year over its own sessions from 2005-08-01):
+  refuted in this form if the difference is below -1% a year and more than one standard error of the
+  monthly differences, as the verdict measures it, below zero. The card cannot show the second
+  claim: a difference within 1% either way is not shown, and one above 1% a year is reported with
+  its measured standard error, outside the prediction, and not taken as proof. Any other result
+  short of passing gates 1 to 7 is not proven, not refuted. The variant is read by its appraisal
+  ratio alone, against the same prediction.
