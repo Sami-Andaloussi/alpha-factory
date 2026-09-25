@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 246 untouched · 1 in-progress · 0 tested-conclusive · 14 tested-inconclusive · 2 not-testable.
+**263 theories**: 245 untouched · 1 in-progress · 0 tested-conclusive · 15 tested-inconclusive · 2 not-testable.
 
-**15 strategies**: 0 passing gates 1 to 7, 9 stopped at gate 2, 6 stopped at gate 3; 1 under paper trading.
+**16 strategies**: 0 passing gates 1 to 7, 10 stopped at gate 2, 6 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -267,7 +267,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-037](bank/TM-037-investor-sentiment-momentum.md) Investor sentiment and momentum | trend and momentum | untouched |  |
 | [TM-038](bank/TM-038-adaptive-markets-hypothesis.md) Adaptive markets hypothesis | trend and momentum | untouched |  |
 | [TM-039](bank/TM-039-return-dispersion-momentum.md) Cross-asset return dispersion and momentum | trend and momentum | tested-inconclusive | [TM-039-01-dispersion-conditioned-momentum](strategies/TM-039-01-dispersion-conditioned-momentum/) · stops at gate 2 · [report](strategies/TM-039-01-dispersion-conditioned-momentum/report.ipynb) · [verdict](strategies/TM-039-01-dispersion-conditioned-momentum/verdict.md) |
-| [TM-040](bank/TM-040-value-momentum-combination.md) Value and momentum combination (trending value) | trend and momentum | untouched |  |
+| [TM-040](bank/TM-040-value-momentum-combination.md) Value and momentum combination (trending value) | trend and momentum | tested-inconclusive | [TM-040-01-trending-value-within-groups](strategies/TM-040-01-trending-value-within-groups/) · stops at gate 2 · [report](strategies/TM-040-01-trending-value-within-groups/report.ipynb) · [verdict](strategies/TM-040-01-trending-value-within-groups/verdict.md) |
 | [TM-041](bank/TM-041-size-momentum-interaction.md) Size-momentum interaction (stronger momentum in small capitalisations) | trend and momentum | untouched |  |
 | [TM-043](bank/TM-043-positive-return-autocorrelation.md) Positive return autocorrelation (variance ratio) | trend and momentum | untouched |  |
 | [TM-045](bank/TM-045-long-range-dependence.md) Long-range dependence (Hurst exponent) | trend and momentum | untouched |  |

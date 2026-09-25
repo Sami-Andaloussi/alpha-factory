@@ -1,0 +1,66 @@
+id: TM-040-01-trending-value-within-groups
+theory: TM-040
+parent: null
+mechanism: >
+  Within a group of comparable assets, momentum captures slow underreaction and value long-run
+  overreaction; the two are negatively correlated, recent winners tending to be dear and cheap
+  members recent losers. Selecting on both at once, cheap members that have started to rise,
+  diversifies each one's risk and avoids both value traps and momentum bubbles, so that the
+  combination earns more for its risk than either selection alone.
+prediction:
+  sign: positive
+  size: an alpha of about 0.7 to 1.8% a year over the same funds held in equal parts, about the average of the two halves' predicted alphas (CA-001-01's about 2%, CA-024-01's 0.7 to 1.5%) from half to all of the long record; an appraisal ratio of about 0.25 to 0.6 against about 0.33 for momentum alone over the long record, above the better half only if the halves' negative correlation, often near -0.5, lowers the composite's tracking error near a blend's, a gain long-only evidence shows as marginal; no gain in alpha over momentum alone is predicted
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY, SPY, QQQ, IWM, EFA, EEM, GLD, SLV, DBC]
+horizon: months
+signal: >
+  On the first session of each month, within each of three groups -- the eleven sector funds; the
+  five equity markets SPY, QQQ, IWM, EFA and EEM; the commodities GLD, SLV and DBC -- the members
+  trading on that session and on the session value sessions before the session before it, with both
+  returns, defined below, are ranked. Value: the return from value sessions before the session
+  before the target to that session before, rank 1 the lowest. Momentum: the return from momentum
+  sessions before the session before the target to skip sessions before that session before, rank 1
+  the highest. The group holds k places, the top third of its n ranked members, rounded, one at
+  least. With form composite, the members with the lowest average of the two ranks take them, and
+  the members whose average equals the k-th lowest share equally the places not taken by members
+  with a lower average; with form screen, the cheaper half of the ranked members by value, rounded
+  up, are kept, and the k of them with the best momentum ranks take them. Of the N assets trading, a
+  group of n ranked members holds n/N of the portfolio, each place k-th of it; an asset trading but
+  not ranked is held at 1/N, its benchmark weight. The targets start on the first month in which an
+  asset is ranked; from then the portfolio is always fully invested.
+parameters:
+  value: sessions from the start of the value window to the session before the target
+  momentum: sessions from the start of the momentum window to the session before the target
+  skip: sessions before the session before the target left out of the momentum window
+  form: composite, the average of the two ranks, or screen, the cheaper half then momentum
+variants:
+  - {value: 1260, momentum: 252, skip: 21, form: composite}
+  - {value: 1260, momentum: 126, skip: 0, form: composite}
+  - {value: 1260, momentum: 126, skip: 0, form: screen}
+neighbours:
+  value: {25: [945, 1575], 50: [630, 1890]}
+  momentum: {25: [189, 315], 50: [126, 378]}
+  skip: {25: [16, 26], 50: [10, 32]}
+choose: false
+memory: 1260
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the base's appraisal ratio, its alpha over the same funds held in equal parts over the
+  tracking error of its hedged returns, against the better half's: of CA-001-01's base (momentum)
+  and CA-024-01's base (value), each rebuilt from its locked code over this base's evaluation
+  sessions at the same costs, the one with the higher appraisal ratio over those sessions, fixed on
+  the whole sample. The difference and its standard error are python -m lab.compare's against that
+  half, from 1,000 paired draws of whole calendar months of the two hedged daily series. The theory
+  is refuted in this form if the base's appraisal ratio is below the better half's by more than one
+  standard error of the difference. Any other result short of passing gates 1 to 7 is not proven,
+  not refuted; an appraisal ratio above the better half's is reported with its standard error, not
+  taken as proof; a base that passes gates 1 to 7 while the clause refutes leaves the theory refuted
+  in this form. Reported, not graded: the variants by the same comparison; each rule's alpha and
+  tracking error and the halves' (the base's tracking error against each half's is the bank's test
+  of a reduced volatility); the base's alpha less each half's, with its standard error; an equal
+  blend of the halves, the average of their hedged daily returns, and the base's appraisal ratio
+  less the blend's with its standard error, by lab.compare.ratio_difference of the base's hedged
+  series against the blend's; the correlation of the base's
+  hedged monthly returns with each half's, and of the halves' with each other; the base's alpha by
+  group; the alpha by year, and in 2020 and 2022.

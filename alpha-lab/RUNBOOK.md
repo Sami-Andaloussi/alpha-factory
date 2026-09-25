@@ -23,7 +23,7 @@ its own, beside the snapshot, whose files never change.
 | `python -m lab.calibration` | Calibrates the battery again (about twenty minutes on nine workers); needed whenever the battery changes. |
 | `python -m lab.status` | Regenerates the board, `STATUS.md`; every run does it too, and the tests refuse a board out of date. |
 | `python -m lab.bank` | Checks every theory file of `bank/` and regenerates the bank's index, `bank/README.md`; the tests refuse an index out of date. |
-| `python -m lab.compare strategies/<card> strategies/<reference>` | The card's alpha less the reference rule's, over the card's in-sample sessions from the first its base holds an asset into, at the lab's stated costs, with the standard error of the monthly differences — the measure of a card judged against a rule it refines. Refused until both cards have run as they stand, so it cannot size a band before a run. |
+| `python -m lab.compare strategies/<card> strategies/<reference>` | The card's alpha less the reference rule's, over the card's in-sample sessions from the first its base holds an asset into, at the lab's stated costs, with the standard error of the monthly differences, and the two appraisal ratios' difference with its standard error from paired draws of whole months — the measures of a card judged against a rule it refines. Refused until both cards have run as they stand, so it cannot size a band before a run. |
 
 ## One theory, step by step
 

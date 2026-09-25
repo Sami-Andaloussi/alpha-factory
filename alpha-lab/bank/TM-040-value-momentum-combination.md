@@ -6,7 +6,7 @@ mechanism: [behavioural]
 asset_classes: [stocks, equity indices, bonds, currencies, commodities]
 horizon: [months, years]
 data: [daily prices, price-to-earnings ratios, price-to-book ratios, price-to-cash-flow ratios, price-to-sales ratios, dividend yields]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

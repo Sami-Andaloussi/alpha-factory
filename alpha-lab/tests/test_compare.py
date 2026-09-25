@@ -87,6 +87,22 @@ def test_a_rule_against_itself_differs_by_nothing(judged):
     result = compare.difference(inside, rule, {}, rule, {}, CARD.in_sample[1], crypto=frozenset())
     assert result["difference"] == 0.0 and result["standard error"] == 0.0
     assert result["alpha"] == result["reference alpha"]
+    assert result["ratio difference"] == 0.0 and result["ratio difference's standard error"] == 0.0
+
+
+def test_the_ratio_difference_and_its_error_come_from_paired_months():
+    """Two independent hedged series with no edge, thirteen years: each ratio is measured to about
+    1/sqrt(13), their difference to about sqrt(2/13), from draws of whole months, repeatable."""
+    rng = np.random.default_rng(4)
+    days = pd.bdate_range("2010-01-01", periods=13 * 252)
+    h = pd.Series(rng.normal(0.0, 0.003, len(days)), index=days)
+    rh = pd.Series(rng.normal(0.0, 0.004, len(days)), index=days)
+    gap, error = compare.ratio_difference(h, rh)
+    assert gap == pytest.approx(stats.sharpe(h) - stats.sharpe(rh), rel=1e-12)
+    assert 0.8 * np.sqrt(2 / 13) < error < 1.2 * np.sqrt(2 / 13)
+    assert compare.ratio_difference(h, rh) == (gap, error)                   # a fixed seed
+    together, apart = compare.ratio_difference(h, h + rh / 4)[1], error      # correlated series differ less
+    assert together < apart / 2
 
 
 def test_a_reference_that_holds_later_is_refused(judged):

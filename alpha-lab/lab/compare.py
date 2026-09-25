@@ -7,7 +7,10 @@ alpha less the reference rule's: both over the card's in-sample sessions from th
 the card's base variant, as the battery counts every variant's sessions, at the lab's stated costs,
 each hedged of its own benchmark with its whole-sample beta, as gate 4 hedges it. The difference's
 standard error comes from the monthly differences of the two hedged series; it ignores the error in
-estimating each beta.
+estimating each beta. The two appraisal ratios' difference has its standard error too, from 1,000
+paired draws of whole calendar months, with replacement, of the two hedged daily series, each hedged
+with its whole-sample beta held fixed, from a fixed seed: the measure of a card that claims a better
+ratio rather than a larger alpha.
 
 Both cards must have run as they stand: each folder in the lab's own strategies/, its card the one a
 registry line of its id recorded, and its strategy unchanged since the commit that line names. A
@@ -32,6 +35,7 @@ from lab import battery, costs, data, registry, stats
 from lab.data import Market
 
 PERIODS = stats.PERIODS
+DRAWS, SEED = 1000, 20260925        # the ratio difference's bootstrap: paired draws of whole months
 STRATEGIES = Path(__file__).resolve().parent.parent / "strategies"
 
 
@@ -76,6 +80,7 @@ def difference(market: Market, strategy, parameters: dict, reference, reference_
     spread = float(monthly.std(ddof=1) * np.sqrt(12)) if len(monthly) > 1 else float("nan")
     error = spread / np.sqrt(years) if years > 0 else float("nan")
     estimate = float(gap.mean() * PERIODS)
+    ratio_gap, ratio_error = ratio_difference(both.iloc[:, 0], both.iloc[:, 1])
     return {"from": start, "reference from": reference_start, "to": pd.Timestamp(end), "years": years,
             "alpha": stats.alpha(x, b), "reference alpha": stats.alpha(rx, rb),
             "appraisal ratio": stats.sharpe(h), "reference appraisal ratio": stats.sharpe(rh),
@@ -84,7 +89,28 @@ def difference(market: Market, strategy, parameters: dict, reference, reference_
             "difference": estimate, "standard error": error,
             "t": estimate / error if np.isfinite(error) and error > 0 else float("nan"),
             "difference's volatility": spread,
+            "ratio difference": ratio_gap, "ratio difference's standard error": ratio_error,
             "correlation of the bets": float(both.corr().iloc[0, 1]) if len(both) > 2 else float("nan")}
+
+
+def ratio_difference(h: pd.Series, rh: pd.Series, draws: int = DRAWS, seed: int = SEED) -> tuple[float, float]:
+    """The appraisal ratio of `h` less that of `rh`, two hedged daily series over the same sessions,
+    and its standard error: the spread of the difference over `draws` paired draws of whole calendar
+    months, with replacement, the same months for both series."""
+    both = pd.concat([h, rh], axis=1).dropna()
+    estimate = stats.sharpe(both.iloc[:, 0]) - stats.sharpe(both.iloc[:, 1])
+    months = both.index.to_period("M")
+    blocks = [both.to_numpy()[months == m] for m in months.unique()]
+    if len(blocks) < 2:
+        return float(estimate), float("nan")
+    rng = np.random.default_rng(seed)
+    spreads = []
+    for _ in range(draws):
+        drawn = np.concatenate([blocks[k] for k in rng.integers(0, len(blocks), len(blocks))])
+        sd = drawn.std(axis=0, ddof=1)
+        ratios = np.where(sd > 0, drawn.mean(axis=0) / np.where(sd > 0, sd, 1.0), 0.0) * np.sqrt(PERIODS)
+        spreads.append(ratios[0] - ratios[1])
+    return float(estimate), float(np.std(spreads, ddof=1))
 
 
 def ran(folder: Path, lines: list[dict]) -> str | None:
@@ -160,6 +186,9 @@ def main(argv: list[str] | None = None) -> int:
           f"t {result['t']:.2f}")
     spread = result["difference's volatility"]
     print(f"  the difference moves by {spread:.2%} a year; the bets correlate at {result['correlation of the bets']:.3f}")
+    ratio_error = result["ratio difference's standard error"]
+    print(f"  appraisal ratio difference {result['ratio difference']:.3f}, standard error {ratio_error:.3f} "
+          f"({DRAWS} paired draws of whole months)")
     return 0
 
 
