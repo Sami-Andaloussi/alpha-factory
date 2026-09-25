@@ -1,0 +1,28 @@
+# The hypothesis card: everything fixed before any backtest. It is committed alone, before any
+# code, and never changes afterwards: a changed hypothesis is a new card, which names this one as
+# its parent. `python -m lab.report --check strategies/<folder>` checks it before the commit.
+id: SC-004-01-slug           # the strategy folder's name, <theory id>-<nn>-<slug>; used once
+theory: SC-004               # the theory's id in bank/
+parent: null                 # a card that rewords an earlier one names that card here
+mechanism: >
+  Who is on the other side of the trade, and why the effect should last.
+prediction:
+  sign: positive             # positive or negative
+  size: a Sharpe ratio of about 0.5 net of costs
+universe: [SPY, QQQ, IWM, EFA]   # tickers of lab/universe.py, four at least, each once
+horizon: weeks to months
+signal: >
+  How the mechanism becomes target weights, in words.
+parameters:                  # each parameter in words; its values are the variants'
+  lookback: sessions of the return that ranks the assets
+variants:                    # three at most; the first is the base
+  - {lookback: 126}
+  - {lookback: 252}
+neighbours:                  # gate 6: every numeric base parameter, moved alone by 25% and 50% each way
+  lookback: {25: [95, 158], 50: [63, 189]}
+choose: false                # true only if the strategy must pick one variant: walk-forward selection
+splits:                      # the lab's: in-sample from 2005 or later to 2022-12-31, holdout 2023-2025
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  The result that would refute the hypothesis.

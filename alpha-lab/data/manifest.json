@@ -1,0 +1,410 @@
+{
+ "snapshot": "2026-09-22",
+ "source": "Yahoo Finance through yfinance 1.7.0, daily bars adjusted for dividends and splits",
+ "period": [
+  "2005-01-01",
+  "2025-12-31"
+ ],
+ "downloaded": "2026-09-22T21:13:52Z",
+ "tickers": [
+  "XLB",
+  "XLC",
+  "XLE",
+  "XLF",
+  "XLI",
+  "XLK",
+  "XLP",
+  "XLRE",
+  "XLU",
+  "XLV",
+  "XLY",
+  "SPY",
+  "QQQ",
+  "IWM",
+  "EFA",
+  "EEM",
+  "GLD",
+  "SLV",
+  "DBC",
+  "BTC-USD"
+ ],
+ "risk_free": "^IRX",
+ "lagged": [
+  "BTC-USD"
+ ],
+ "files": {
+  "XLB.csv": {
+   "sha256": "963adcca14fe6fbf38f757196936af79b67dc52df77cd89bc59a58ef543e5a47",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "XLC.csv": {
+   "sha256": "b50725257847326e93dc200196a71d0c35558b522629e22df78f5185a7d0bf5b",
+   "rows": 1895,
+   "first": "2018-06-19",
+   "last": "2025-12-31"
+  },
+  "XLE.csv": {
+   "sha256": "1c12bc42e8ae8cf849b03fc2f5195a7aaf97f1e833bd477716419dc4402e7177",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "XLF.csv": {
+   "sha256": "4356df61d93162f008249c67a6bb4d77d037007b04161259ce2dd7bfe11cd8e6",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "XLI.csv": {
+   "sha256": "996bf9233219d05a640685110b3f21a9d7b34735437cec63fd8b86ff73337c80",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "XLK.csv": {
+   "sha256": "607bbe7b083d9d404872d2fa7c3162968372c7f1802391679e63875935fe9f21",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "XLP.csv": {
+   "sha256": "d3971e2d03324c42087e3dff1f05347038833dbc351f514e0fbbc7ad1e7a015c",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "XLRE.csv": {
+   "sha256": "71c9f7e07a779a111d72fe64bc1063306a6da7d5817726fa8d62f25228d52ddd",
+   "rows": 2573,
+   "first": "2015-10-08",
+   "last": "2025-12-31"
+  },
+  "XLU.csv": {
+   "sha256": "840e3cdb5d945149a7a0983cd709ec54bd93238ee529b74371e734a20a8fe131",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "XLV.csv": {
+   "sha256": "d4c2c11c3ea6063b20647c49296e76dcb7f74029248120358b8f2c7992c975f8",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "XLY.csv": {
+   "sha256": "e189144dbe63dac84cc8111d73318ffacd9954d338ee9b6e34b1d2a3372a1191",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "SPY.csv": {
+   "sha256": "797ac8f99ed5cf42bd8a631c7e0dc7cc1988fe6d9a645460b21793fc61d37233",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "QQQ.csv": {
+   "sha256": "4afe134f6efa86b045042734ab5d77edb218f2296ffa483df2c9dd0ed22a47c8",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "IWM.csv": {
+   "sha256": "9fed9b53d247cca5a75cc5be23fdf7b5a481fb04411d5ea7e848b754975265ac",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "EFA.csv": {
+   "sha256": "11fef2dd4eeedac55f5eb8ac104302e6a5ec485ae2e934cada1782e82d820656",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "EEM.csv": {
+   "sha256": "89947e4cb3ebce7888b7a7664279dfaa4313517155c0e3c0465422895cb8d301",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "GLD.csv": {
+   "sha256": "185b0a27275c1a1746697cb5c4097a5efebf2f754df786e6601751cfdc983cc1",
+   "rows": 5283,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  },
+  "SLV.csv": {
+   "sha256": "50d25ec1ac9c43d59b46c48d148e30203f523905d4c231775eb01a553cf622c9",
+   "rows": 4951,
+   "first": "2006-04-28",
+   "last": "2025-12-31"
+  },
+  "DBC.csv": {
+   "sha256": "d1801532a4748b99dfbb7d5b3330430906ee5e6cdb0982d5bc17c373c67e8b13",
+   "rows": 5008,
+   "first": "2006-02-06",
+   "last": "2025-12-31"
+  },
+  "BTC-USD.csv": {
+   "sha256": "9f4e10bf72e1eb889ec05a62658bb6684c7f8248321de1fadae114daa71a492f",
+   "rows": 4124,
+   "first": "2014-09-17",
+   "last": "2025-12-31"
+  },
+  "IRX.csv": {
+   "sha256": "4328d0d0cfd1f2d58abc4fc682dc5928acf0e2d1e8a86c51cc9bfea5e347b537",
+   "rows": 5278,
+   "first": "2005-01-03",
+   "last": "2025-12-31"
+  }
+ },
+ "integrity": [
+  {
+   "ticker": "XLE",
+   "check": "large move",
+   "date": "2008-10-13",
+   "value": 0.1647
+  },
+  {
+   "ticker": "XLE",
+   "check": "large move",
+   "date": "2008-10-28",
+   "value": 0.1525
+  },
+  {
+   "ticker": "XLE",
+   "check": "large move",
+   "date": "2020-03-09",
+   "value": -0.2014
+  },
+  {
+   "ticker": "XLE",
+   "check": "large move",
+   "date": "2020-03-24",
+   "value": 0.1604
+  },
+  {
+   "ticker": "XLF",
+   "check": "large move",
+   "date": "2008-10-28",
+   "value": 0.1571
+  },
+  {
+   "ticker": "XLF",
+   "check": "large move",
+   "date": "2008-11-24",
+   "value": 0.1519
+  },
+  {
+   "ticker": "XLF",
+   "check": "large move",
+   "date": "2008-12-01",
+   "value": -0.1667
+  },
+  {
+   "ticker": "XLF",
+   "check": "large move",
+   "date": "2009-01-20",
+   "value": -0.1653
+  },
+  {
+   "ticker": "XLF",
+   "check": "large move",
+   "date": "2009-03-23",
+   "value": 0.1646
+  },
+  {
+   "ticker": "XLF",
+   "check": "large move",
+   "date": "2009-04-09",
+   "value": 0.1554
+  },
+  {
+   "ticker": "XLRE",
+   "check": "large move",
+   "date": "2020-03-16",
+   "value": -0.16
+  },
+  {
+   "ticker": "EFA",
+   "check": "large move",
+   "date": "2008-10-13",
+   "value": 0.1589
+  },
+  {
+   "ticker": "EEM",
+   "check": "large move",
+   "date": "2008-10-13",
+   "value": 0.2277
+  },
+  {
+   "ticker": "EEM",
+   "check": "large move",
+   "date": "2008-10-15",
+   "value": -0.1617
+  },
+  {
+   "ticker": "EEM",
+   "check": "large move",
+   "date": "2008-10-28",
+   "value": 0.2093
+  },
+  {
+   "ticker": "SLV",
+   "check": "large move",
+   "date": "2008-10-10",
+   "value": -0.1799
+  }
+ ],
+ "integrity_review": "All 16 findings are daily moves above 15% during the 2008 crisis and the 2020 crash, each matched by a large move of SPY on the same day and not reversed the next: real market moves, kept as they are.",
+ "cross_check": {
+  "source": "Stooq",
+  "status": "not run",
+  "tickers": [
+   "SPY",
+   "XLF",
+   "XLE",
+   "EEM",
+   "SLV"
+  ],
+  "reason": "stooq.com answers scripted requests with a JavaScript verification page: its daily closes are saved by hand, then compared by python -m lab.data crosscheck <folder>"
+ },
+ "additions": [
+  {
+   "snapshot": "2026-09-23",
+   "source": "Yahoo Finance through yfinance 1.7.0, daily bars adjusted for dividends and splits",
+   "downloaded": "2026-09-23T19:38:44Z",
+   "tickers": [
+    "SHY",
+    "IEF",
+    "TLT"
+   ],
+   "rates": [
+    "USDCHF=X",
+    "EURCHF=X"
+   ],
+   "lagged": [],
+   "files": {
+    "SHY.csv": {
+     "sha256": "b8ea4f4dca284f245c8910979fc93464c82b601e09b1b628d24f4395d66a47a8",
+     "rows": 5283,
+     "first": "2005-01-03",
+     "last": "2025-12-31"
+    },
+    "IEF.csv": {
+     "sha256": "4998784ea22d8d7f141a89aba702eeaa3a462f867b4b7359a58c0723ee34a543",
+     "rows": 5283,
+     "first": "2005-01-03",
+     "last": "2025-12-31"
+    },
+    "TLT.csv": {
+     "sha256": "e4686d5766300ac56214cef7dbda4fb590f924075229e4e4b6b1aca44f6461c3",
+     "rows": 5283,
+     "first": "2005-01-03",
+     "last": "2025-12-31"
+    },
+    "USDCHF=X.csv": {
+     "sha256": "2e978f9cfce78a2c88a284595fdffda56d2f5b4e96a04db1b902c2842c2d15be",
+     "rows": 5459,
+     "first": "2005-01-03",
+     "last": "2025-12-31"
+    },
+    "EURCHF=X.csv": {
+     "sha256": "deb6071040415b0950c27cf787f885d3876c90607511523d20953c0c8870daf6",
+     "rows": 5447,
+     "first": "2005-01-03",
+     "last": "2025-12-31"
+    }
+   },
+   "integrity": [
+    {
+     "ticker": "SHY",
+     "check": "zero returns",
+     "date": "2011-12-09",
+     "value": 3
+    },
+    {
+     "ticker": "SHY",
+     "check": "zero returns",
+     "date": "2012-11-08",
+     "value": 3
+    },
+    {
+     "ticker": "SHY",
+     "check": "zero returns",
+     "date": "2012-12-06",
+     "value": 4
+    },
+    {
+     "ticker": "SHY",
+     "check": "zero returns",
+     "date": "2013-04-09",
+     "value": 3
+    },
+    {
+     "ticker": "SHY",
+     "check": "zero returns",
+     "date": "2013-04-16",
+     "value": 4
+    },
+    {
+     "ticker": "SHY",
+     "check": "zero returns",
+     "date": "2014-08-15",
+     "value": 3
+    },
+    {
+     "ticker": "SHY",
+     "check": "zero returns",
+     "date": "2018-05-10",
+     "value": 3
+    },
+    {
+     "ticker": "SHY",
+     "check": "zero returns",
+     "date": "2021-08-18",
+     "value": 4
+    },
+    {
+     "ticker": "USDCHF=X",
+     "check": "large move",
+     "date": "2015-01-16",
+     "value": -0.1615
+    },
+    {
+     "ticker": "EURCHF=X",
+     "check": "gap",
+     "date": "2008-08-01",
+     "value": 17
+    },
+    {
+     "ticker": "EURCHF=X",
+     "check": "zero returns",
+     "date": "2010-05-03",
+     "value": 3
+    },
+    {
+     "ticker": "EURCHF=X",
+     "check": "zero returns",
+     "date": "2012-05-18",
+     "value": 4
+    },
+    {
+     "ticker": "EURCHF=X",
+     "check": "zero returns",
+     "date": "2012-07-12",
+     "value": 3
+    },
+    {
+     "ticker": "EURCHF=X",
+     "check": "large move",
+     "date": "2015-01-16",
+     "value": -0.1721
+    }
+   ],
+   "integrity_review": "SHY's eight runs of unchanged closes are days on which a fund of one- to three-year Treasuries moved by less than the precision of Yahoo's closes: real. EURCHF's runs from 2012-05-18 and 2012-07-12 are the Swiss National Bank's floor at 1.20 (September 2011 to January 2015), which held the rate still: real. The moves of USDCHF (-16%) and EURCHF (-17%) that Yahoo's series shows on 2015-01-16 are the end of that floor, announced on 15 January 2015: real. EURCHF's three unchanged days from 2010-05-03, which repeat the close of 30 April, and its 17 missing sessions from 2008-08-01 are holes in Yahoo's series: kept as Yahoo gives them, and named here so that an account in francs carries the last close over them."
+  }
+ ]
+}

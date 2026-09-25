@@ -39,3 +39,11 @@ runs/
 output/
 output_*/
 *.pstats
+
+# --- The lab's frozen snapshot: never in git; its manifest is ---
+alpha-lab/data/*
+!alpha-lab/data/manifest.json
+
+# --- The data a report notebook reads while it runs; deleted after, never committed ---
+alpha-lab/strategies/*/.run.pkl
+alpha-lab/strategies/*/.run.pkl.part
