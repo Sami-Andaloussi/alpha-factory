@@ -4,8 +4,8 @@ The research lab annexed to the factory. It takes a theory from its bank, turns 
 tests it, and returns a verdict. A strategy that survives leaves as a dossier that meets the
 [handoff contract](../handoff/README.md), and the factory re-validates it in depth.
 
-**Everything the lab touches is shown**: every theory, and every strategy with its written trail,
-failures included. The [status board](STATUS.md) lists them all.
+**Every theory and every strategy is shown**, each strategy with its written trail, failures
+included. The [status board](STATUS.md) lists them all.
 
 ## How a theory is processed
 
