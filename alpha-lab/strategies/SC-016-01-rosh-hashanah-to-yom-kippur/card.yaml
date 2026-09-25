@@ -1,0 +1,71 @@
+id: SC-016-01-rosh-hashanah-to-yom-kippur
+theory: SC-016
+parent: null
+mechanism: >
+  Religious calendars charged with social meaning change attention, participation and flows: Jewish
+  investors in the United States are said to liquidate their portfolios, or to stop trading, over
+  the High Holy Days, from Rosh Hashanah, the Jewish New Year, to Yom Kippur, nine days later, so
+  that US equity prices are weak from the last close before Rosh Hashanah to the last close before
+  Yom Kippur, dated by its eve.
+prediction:
+  sign: positive (the rule's alpha; the window's gap to the other sessions negative)
+  size: a judgment, from the sources -- the three US funds' sessions from the last close before Rosh Hashanah to the last close before the eve of Yom Kippur about -0.13% to 0% a day below their other sessions, EFA and EEM about 0, the five funds' average about -0.08% to 0; the rule's alpha over the five funds held always about 0 to +0.45% a year before costs of about 0.1% a year, an appraisal ratio of about -0.03 to +0.11 after costs, a Sharpe ratio of about 0.39 to 0.42; the base expected to fail gate 2, or gate 3 if it passes gate 2, and gate 6 on one fund's share of the profit, which at 98% of sessions held is about the benchmark's own split over 2005-2022
+universe: [SPY, QQQ, IWM, EFA, EEM]
+horizon: days
+signal: >
+  The five funds held in equal parts on every session but those of a window each autumn, and
+  nothing, the bill's rate on cash, over the window's sessions. Rosh Hashanah's first day, 1 Tishri,
+  is computed from the rules of the Hebrew calendar alone, read from no price: the mean conjunction
+  of the month of Tishri and the four postponements of the new year. Sessions are placed on the New
+  York Stock Exchange's calendar of scheduled sessions, derived from its holiday rules alone and
+  read from no price: weekdays less New Year's Day (on 2 January when 1 January is a Sunday, not
+  observed when it is a Saturday), Martin Luther King Jr. Day, Washington's Birthday, Good Friday,
+  Memorial Day, Juneteenth from 2022, Independence Day, Labor Day, Thanksgiving and Christmas, with
+  Juneteenth, Independence Day and Christmas moved to the Friday before when they fall on a Saturday
+  and to the Monday after when on a Sunday. A scheduled session is in the window when it lies after
+  the last scheduled session before Rosh Hashanah's first day and no later than the last scheduled
+  session before the day `days` calendar days after Rosh Hashanah's first day (the eve of Yom
+  Kippur at 8). On each session of the market, from the first, the target is nothing if the next
+  scheduled session is in the window, and the five funds in equal parts, among those that trade,
+  otherwise; a target is set only on the sessions on which it changes, and on the first. A
+  scheduled session on which the exchange does not open is counted as the calendar counts it and is
+  absent from the market.
+parameters:
+  days: the calendar days after Rosh Hashanah's first day of the day before which the window ends, 8 for the eve of Yom Kippur
+variants:
+  - {days: 8}
+neighbours:
+  days: {25: [6, 10], 50: [4, 12]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs: over the in-sample sessions of the market from the first, the three US funds'
+  (SPY, QQQ, IWM) average daily return less the bill's rate, each from the market's previous close;
+  the mean over the sessions after the last scheduled session before Rosh Hashanah's first day up to
+  and including the last scheduled session before the eve of Yom Kippur, less the mean over the
+  other sessions, with the standard error of that difference, the square root of the sum of each
+  group's variance over its count, and its t statistic, computed apart from the battery. The theory
+  is refuted in this form if that t statistic is +0.35 or above. Below it, short of passing gates 1
+  to 7, it is not proven, not refuted; a base that passes gates 1 to 7 while the clause refutes
+  leaves the theory refuted in this form. Of SC-016's refutation criteria the first is graded in the
+  source's form, weakness through the window, the bank's form reported, its Ramadan and Golden Week
+  patterns being out of the lab's reach; the second is read through the two eves and the season, the
+  third through EFA and EEM, the fourth crudely through the US funds' traded volume. Reported, not
+  graded, each gap with the standard error from the two groups' variances, for the three US funds'
+  average unless stated: the same gap for each fund, for the five funds' average and for EFA and EEM
+  together, also net of their beta to the US funds' average over all in-sample sessions; the gap of
+  the window's sessions against the other sessions from 1 September to 15 October, and the gap of
+  those other sessions against the sessions outside that span; the gap of the last session before
+  Rosh Hashanah, and of the session after the window in the years in which it falls on the eve of
+  Yom Kippur, each against the sessions outside the window and the two eves; the gap of the window's
+  sessions that fall on Rosh Hashanah's two days and of its later sessions, each against the
+  sessions outside the window; each year's return over the window less the average of the other
+  sessions over as many sessions, and the number of the 18 below zero; the gap without 2008, over
+  2005-2011 and over 2012-2022; the gap from the session after the window to the year's last
+  session; for each year, the mean log traded volume of SPY, QQQ and IWM over the window less that
+  over the year's other sessions from 1 September to 15 October, the third Friday of September and
+  September's last session left out of both, and the mean of the 18 with its standard error; the
+  base's alpha before and after costs and at a beta equal to the share of sessions held, and the
+  neighbours' and the one-day-late rule's alphas and appraisal ratios.

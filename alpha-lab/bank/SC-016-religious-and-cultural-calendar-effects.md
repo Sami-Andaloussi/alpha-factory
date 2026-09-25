@@ -6,7 +6,7 @@ mechanism: [behavioural, flows]
 asset_classes: [stocks, equity indices]
 horizon: [days, weeks]
 data: [daily prices, trading volumes, religious and cultural calendars]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

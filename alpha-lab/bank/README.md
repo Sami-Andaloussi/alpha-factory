@@ -96,7 +96,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [SC-013](SC-013-infrequent-rebalancing.md) | Infrequent rebalancing | flows, limits to arbitrage | stocks | days, weeks | not-testable |
 | [SC-014](SC-014-pre-holiday-effect.md) | Pre-holiday effect | behavioural, microstructure, limits to arbitrage | stocks, equity indices | days | tested-inconclusive |
 | [SC-015](SC-015-ramadan-effect.md) | Ramadan effect | behavioural | stocks, crypto | weeks | not-testable |
-| [SC-016](SC-016-religious-and-cultural-calendar-effects.md) | Religious and cultural calendar effects | behavioural, flows | stocks, equity indices | days, weeks | untouched |
+| [SC-016](SC-016-religious-and-cultural-calendar-effects.md) | Religious and cultural calendar effects | behavioural, flows | stocks, equity indices | days, weeks | tested-inconclusive |
 | [SC-017](SC-017-month-of-the-year-effect.md) | Month-of-the-year effect | flows, risk premium, behavioural | stocks, equity indices | months | tested-inconclusive |
 | [SC-018](SC-018-halloween-effect-sell-in-may.md) | Halloween effect (Sell in May and go away) | behavioural, risk premium, macroeconomic | stocks, equity indices, crypto | months | tested-inconclusive |
 | [SC-019](SC-019-january-barometer.md) | January barometer | behavioural, macroeconomic | equity indices | months | untouched |

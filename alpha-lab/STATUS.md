@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 233 untouched · 1 in-progress · 0 tested-conclusive · 24 tested-inconclusive · 5 not-testable.
+**263 theories**: 232 untouched · 1 in-progress · 0 tested-conclusive · 25 tested-inconclusive · 5 not-testable.
 
-**26 strategies**: 0 passing gates 1 to 7, 17 stopped at gate 2, 7 stopped at gate 3, 1 stopped at gate 4, 1 not run yet; 1 under paper trading.
+**27 strategies**: 0 passing gates 1 to 7, 17 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -227,7 +227,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [SC-013](bank/SC-013-infrequent-rebalancing.md) Infrequent rebalancing | seasonality and calendar effects | not-testable | [SC-013-01-infrequent-rebalancing](strategies/SC-013-01-infrequent-rebalancing/) · not testable: [reasoning](strategies/SC-013-01-infrequent-rebalancing/reasoning.md) |
 | [SC-014](bank/SC-014-pre-holiday-effect.md) Pre-holiday effect | seasonality and calendar effects | tested-inconclusive | [SC-014-01-pre-holiday-sessions](strategies/SC-014-01-pre-holiday-sessions/) · stops at gate 2 · [report](strategies/SC-014-01-pre-holiday-sessions/report.ipynb) · [verdict](strategies/SC-014-01-pre-holiday-sessions/verdict.md) |
 | [SC-015](bank/SC-015-ramadan-effect.md) Ramadan effect | seasonality and calendar effects | not-testable | [SC-015-01-ramadan](strategies/SC-015-01-ramadan/) · not testable: [reasoning](strategies/SC-015-01-ramadan/reasoning.md) |
-| [SC-016](bank/SC-016-religious-and-cultural-calendar-effects.md) Religious and cultural calendar effects | seasonality and calendar effects | untouched |  |
+| [SC-016](bank/SC-016-religious-and-cultural-calendar-effects.md) Religious and cultural calendar effects | seasonality and calendar effects | tested-inconclusive | [SC-016-01-rosh-hashanah-to-yom-kippur](strategies/SC-016-01-rosh-hashanah-to-yom-kippur/) · stops at gate 4 · [report](strategies/SC-016-01-rosh-hashanah-to-yom-kippur/report.ipynb) · [verdict](strategies/SC-016-01-rosh-hashanah-to-yom-kippur/verdict.md) |
 | [SC-017](bank/SC-017-month-of-the-year-effect.md) Month-of-the-year effect | seasonality and calendar effects | tested-inconclusive | [SC-017-01-september-october-in-cash](strategies/SC-017-01-september-october-in-cash/) · stops at gate 3 · [report](strategies/SC-017-01-september-october-in-cash/report.ipynb) · [verdict](strategies/SC-017-01-september-october-in-cash/verdict.md) |
 | [SC-018](bank/SC-018-halloween-effect-sell-in-may.md) Halloween effect (Sell in May and go away) | seasonality and calendar effects | tested-inconclusive | [SC-018-01-november-to-april](strategies/SC-018-01-november-to-april/) · stops at gate 2 · [report](strategies/SC-018-01-november-to-april/report.ipynb) · [verdict](strategies/SC-018-01-november-to-april/verdict.md) |
 | [SC-019](bank/SC-019-january-barometer.md) January barometer | seasonality and calendar effects | untouched |  |
