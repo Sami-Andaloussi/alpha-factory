@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 229 untouched · 1 in-progress · 0 tested-conclusive · 26 tested-inconclusive · 7 not-testable.
+**263 theories**: 228 untouched · 1 in-progress · 0 tested-conclusive · 26 tested-inconclusive · 8 not-testable.
 
 **28 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 17 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -233,7 +233,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [SC-019](bank/SC-019-january-barometer.md) January barometer | seasonality and calendar effects | tested-inconclusive | [SC-019-01-january-barometer](strategies/SC-019-01-january-barometer/) · stops at gate 1 · [report](strategies/SC-019-01-january-barometer/report.ipynb) · [verdict](strategies/SC-019-01-january-barometer/verdict.md) |
 | [SC-020](bank/SC-020-presidential-election-cycle.md) Presidential election cycle (political cycle) | seasonality and calendar effects | not-testable | [SC-020-01-presidential-cycle](strategies/SC-020-01-presidential-cycle/) · not testable: [reasoning](strategies/SC-020-01-presidential-cycle/reasoning.md) |
 | [SC-021](bank/SC-021-same-calendar-month-seasonality.md) Same-calendar-month seasonality (cross-section of stock returns) | seasonality and calendar effects | not-testable | [SC-021-01-same-calendar-month](strategies/SC-021-01-same-calendar-month/) · not testable: [reasoning](strategies/SC-021-01-same-calendar-month/reasoning.md) |
-| [SC-022](bank/SC-022-information-cycle-return-seasonality.md) Information-cycle explanation of return seasonality | seasonality and calendar effects | untouched |  |
+| [SC-022](bank/SC-022-information-cycle-return-seasonality.md) Information-cycle explanation of return seasonality | seasonality and calendar effects | not-testable | [SC-022-01-information-cycle](strategies/SC-022-01-information-cycle/) · not testable: [reasoning](strategies/SC-022-01-information-cycle/reasoning.md) |
 | [SC-023](bank/SC-023-return-seasonalities.md) Return seasonalities | seasonality and calendar effects | untouched |  |
 | [SC-024](bank/SC-024-overnight-return-premium.md) Overnight return premium | seasonality and calendar effects | untouched |  |
 | [SC-025](bank/SC-025-seasonal-affective-disorder-effect.md) Seasonal affective disorder (SAD) effect | seasonality and calendar effects | untouched |  |
