@@ -134,7 +134,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [LL-019](LL-019-common-institutional-ownership-shareholder-coordination.md) | Common institutional ownership and shareholder coordination | information, behavioural, flows | stocks | weeks, months | untouched |
 | [LL-020](LL-020-information-cascades-observational-learning.md) | Information cascades and rational observational learning | behavioural, information | stocks | weeks, months | untouched |
 | [LL-021](LL-021-complicated-firms-pseudo-conglomerate-diffusion.md) | Complicated firms and pseudo-conglomerate information diffusion | information, behavioural, limits to arbitrage | stocks | weeks, months | untouched |
-| [LL-023](LL-023-frog-in-the-pan.md) | Frog-in-the-pan | behavioural, information | stocks, equity indices, bonds, commodities, currencies | months | untouched |
+| [LL-023](LL-023-frog-in-the-pan.md) | Frog-in-the-pan | behavioural, information | stocks, equity indices, bonds, commodities, currencies | months | tested-inconclusive |
 | [LL-024](LL-024-media-limited-information-diffusion.md) | Media-limited information diffusion | information, behavioural | stocks | days, weeks | untouched |
 | [LL-025](LL-025-information-discreteness-lead-lag-puzzle.md) | Information discreteness and the lead-lag returns puzzle | behavioural, information | stocks | weeks, months | untouched |
 | [LL-026](LL-026-etf-arbitrage-creation-redemption-tether.md) | ETF arbitrage and the creation-redemption tether | structural, limits to arbitrage, microstructure, information | equity indices, stocks | intraday, days | untouched |
