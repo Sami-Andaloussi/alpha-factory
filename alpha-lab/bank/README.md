@@ -84,7 +84,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 
 | Id | Theory | Mechanism | Asset classes | Horizon | Status |
 |---|---|---|---|---|---|
-| [SC-001](SC-001-day-of-the-week-effect.md) | Day-of-the-week effect (weekend effect) | microstructure, behavioural, information, limits to arbitrage | stocks, equity indices, crypto | days | untouched |
+| [SC-001](SC-001-day-of-the-week-effect.md) | Day-of-the-week effect (weekend effect) | microstructure, behavioural, information, limits to arbitrage | stocks, equity indices, crypto | days | tested-inconclusive |
 | [SC-002](SC-002-january-effect.md) | January effect (turn-of-the-year effect) | flows, limits to arbitrage, microstructure | stocks, equity indices | days, weeks | untouched |
 | [SC-006](SC-006-december-effect.md) | December effect (deferral of capital gains) | flows | stocks | days, weeks | untouched |
 | [SC-007](SC-007-santa-claus-rally.md) | Santa Claus rally | behavioural, flows, microstructure | stocks, equity indices | days | untouched |
