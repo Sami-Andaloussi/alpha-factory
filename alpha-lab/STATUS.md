@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 258 untouched · 1 in-progress · 0 tested-conclusive · 3 tested-inconclusive · 1 not-testable.
+**263 theories**: 257 untouched · 1 in-progress · 0 tested-conclusive · 4 tested-inconclusive · 1 not-testable.
 
-**4 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 2, 2 stopped at gate 3; 1 under paper trading.
+**5 strategies**: 0 passing gates 1 to 7, 3 stopped at gate 2, 2 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -256,7 +256,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-018](bank/TM-018-market-divergence-crisis-alpha.md) Market divergence and crisis alpha | trend and momentum | untouched |  |
 | [TM-019](bank/TM-019-earnings-momentum.md) Earnings momentum | trend and momentum | untouched |  |
 | [TM-023](bank/TM-023-momentum-seasonality.md) Seasonality of momentum (tax-loss selling and window dressing) | trend and momentum | untouched |  |
-| [TM-024](bank/TM-024-momentum-crashes.md) Momentum crashes (state-dependent momentum risk) | trend and momentum | untouched |  |
+| [TM-024](bank/TM-024-momentum-crashes.md) Momentum crashes (state-dependent momentum risk) | trend and momentum | tested-inconclusive | [TM-024-01-crash-managed-momentum](strategies/TM-024-01-crash-managed-momentum/) · stops at gate 2 · [report](strategies/TM-024-01-crash-managed-momentum/report.ipynb) · [verdict](strategies/TM-024-01-crash-managed-momentum/verdict.md) |
 | [TM-025](bank/TM-025-bad-news-travels-slowly.md) Bad news travels slowly | trend and momentum | untouched |  |
 | [TM-027](bank/TM-027-volume-conditioned-momentum.md) Volume-conditioned momentum (momentum life cycle) | trend and momentum | untouched |  |
 | [TM-028](bank/TM-028-low-turnover-momentum.md) Low-turnover momentum (momentum filtered by low trading volume) | trend and momentum | untouched |  |

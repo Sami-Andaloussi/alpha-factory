@@ -1,0 +1,52 @@
+id: TM-024-01-crash-managed-momentum
+theory: TM-024
+parent: null
+mechanism: >
+  Momentum pays on average but crashes in panic states, after a market decline and when volatility
+  is high, as the market rebounds and the past losers rebound most. The crashes are partly
+  forecastable from a bear-market indicator and recent volatility: holding less of the momentum bet
+  when a crash is forecast keeps its gains and avoids much of its losses.
+prediction:
+  sign: positive
+  size: an alpha higher than the unmanaged rule's (CA-001-01, 0.20% a year) by about 0.3 to 1% a year, an appraisal ratio of 0.05 to 0.2 against the funds held in equal parts
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY, SPY, QQQ, IWM, EFA, EEM, GLD, SLV, DBC]
+horizon: months
+signal: >
+  CA-001-01's momentum rule sets each group's tilt: within each of three groups (the eleven sector
+  funds; SPY, QQQ, IWM, EFA and EEM; GLD, SLV and DBC), the funds are ranked by their return over a
+  window read up to the session before the target, ending 21 sessions and starting 252 sessions before
+  that session before; the top third of each group's ranked funds, rounded, one at least, share the
+  group's n/N of the portfolio, and a fund trading but not yet ranked holds 1/N. The tilt is those
+  weights less the group held in equal parts, 1/N for each fund trading. Each group holds its funds in
+  equal parts plus k times its tilt, k between 0 and 1. The group's market return on a session is the
+  average of the daily returns of its funds trading that session, chained over time. Under the rule
+  "panic", k is 0 when the group's market has a negative return over the past bear_window sessions
+  and a volatility of daily returns over the past vol_window sessions above the average of that
+  volatility up to then, and 1 otherwise, including while either has no such history. Under the rule
+  "scale", the tilt's daily return is the unmanaged tilt's (k = 1), its weights those of the last
+  first session of a month, times each fund's return that session; k is the average of that return's
+  past vol_window-session volatility up to then, divided by its current value, at most 1, and 1 while
+  it has no such history; bear_window is not used. Everything is read up to the session before;
+  targets are set on the first session of each month, fully invested.
+parameters:
+  rule: '"panic" switches the tilt off in a group''s panic states; "scale" scales it by the inverse of its own volatility'
+  vol_window: sessions of daily returns whose standard deviation measures a volatility
+  bear_window: sessions of the group market's past return whose sign marks a bear market
+variants:
+  - {rule: panic, vol_window: 126, bear_window: 504}
+  - {rule: scale, vol_window: 126, bear_window: 504}
+neighbours:
+  vol_window: {25: [94, 158], 50: [63, 189]}
+  bear_window: {25: [378, 630], 50: [252, 756]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  The theory is refuted in this form if the managed rule's alpha over the funds held in equal parts
+  falls short of the unmanaged rule's (CA-001-01, 0.20% a year over the same in-sample sessions) by
+  more than 0.5% a year, about one standard error of their difference. An alpha within 0.5% of
+  CA-001-01's either way is not proven; so is an alpha more than 0.5% above it that beats fewer than
+  90% of its placebos, keeps less than half its Sharpe ratio with one cluster left out, has one fund
+  carrying more than 30% of the profit, or turns to zero or less without its best year. The placebos
+  judge mostly the momentum selection, which CA-001-01 already found no better than chance.

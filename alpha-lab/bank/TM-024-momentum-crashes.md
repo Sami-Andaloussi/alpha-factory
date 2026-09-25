@@ -6,7 +6,7 @@ mechanism: [risk premium, limits to arbitrage]
 asset_classes: [stocks, crypto]
 horizon: [days, weeks, months]
 data: [daily prices, market index returns, realised volatility]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
