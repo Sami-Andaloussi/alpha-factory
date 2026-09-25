@@ -163,7 +163,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [CA-003](CA-003-factor-momentum.md) | Factor momentum | flows, behavioural, structural | stocks, sectors, equity indices, crypto | months | untouched |
 | [CA-006](CA-006-do-industries-lead-stock-markets.md) | Do industries lead stock markets? | information, macroeconomic | sectors, equity indices | weeks, months | untouched |
 | [CA-011](CA-011-sector-rotation.md) | Sector rotation | macroeconomic, flows | sectors | weeks, months | untouched |
-| [CA-012](CA-012-sector-rotation-monetary-conditions.md) | Sector rotation and monetary conditions | macroeconomic, information | sectors, stocks, equity indices | months | untouched |
+| [CA-012](CA-012-sector-rotation-monetary-conditions.md) | Sector rotation and monetary conditions | macroeconomic, information | sectors, stocks, equity indices | months | not-testable |
 | [CA-013](CA-013-sector-rotation-business-cycle.md) | Sector rotation across the business cycle | macroeconomic | sectors, equity indices, stocks, crypto | months, years | untouched |
 | [CA-014](CA-014-intermarket-analysis.md) | Intermarket analysis | macroeconomic, information | bonds, equity indices, commodities, currencies, sectors | weeks, months | untouched |
 | [CA-015](CA-015-tactical-forecasting-conditional-factor-premia.md) | Tactical return forecasting and conditional factor premia | risk premium, macroeconomic | stocks, sectors, equity indices | months | untouched |
