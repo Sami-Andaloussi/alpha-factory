@@ -92,7 +92,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [SC-009](SC-009-payday-hypothesis-dash-for-cash.md) | Payday hypothesis (Dash for Cash) | flows, limits to arbitrage | stocks, bonds | days | tested-inconclusive |
 | [SC-010](SC-010-semi-month-effect.md) | Semi-month effect (first half of the month) | flows, information | stocks, equity indices | days, weeks | tested-inconclusive |
 | [SC-011](SC-011-macroeconomic-announcement-clustering.md) | Macroeconomic announcement clustering hypothesis | information, risk premium | stocks, equity indices | days | not-testable |
-| [SC-012](SC-012-rebalancing-windows-institutional-flows.md) | Rebalancing windows and end-of-period institutional flows | flows, structural | stocks, equity indices | days, weeks | untouched |
+| [SC-012](SC-012-rebalancing-windows-institutional-flows.md) | Rebalancing windows and end-of-period institutional flows | flows, structural | stocks, equity indices | days, weeks | not-testable |
 | [SC-013](SC-013-infrequent-rebalancing.md) | Infrequent rebalancing | flows, limits to arbitrage | stocks | days, weeks | untouched |
 | [SC-014](SC-014-pre-holiday-effect.md) | Pre-holiday effect | behavioural, microstructure, limits to arbitrage | stocks, equity indices | days | tested-inconclusive |
 | [SC-015](SC-015-ramadan-effect.md) | Ramadan effect | behavioural | stocks, crypto | weeks | untouched |

@@ -6,7 +6,7 @@ mechanism: [flows, structural]
 asset_classes: [stocks, equity indices]
 horizon: [days, weeks]
 data: [daily prices, index membership changes, fund flows, payment dates]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
