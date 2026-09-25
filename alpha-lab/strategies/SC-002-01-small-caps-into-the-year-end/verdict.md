@@ -101,6 +101,10 @@ Reported, not graded, as the card stated them, each return compounded over its s
   the benchmark, not the tilt. The card said so before the run and reported the neighbours' alphas;
   the battery still compares Sharpe ratios. No code measures a neighbour's alpha in gate 6: the card
   and the verdict carry it.
+- **The order of the work.** The strategy's code was drafted outside the folder while the logic
+  audit read the card, before the card was locked, and redrafted to the audited card; it read no
+  return, and the code was committed after the lock, as the run requires. The departure is written
+  here, as the runbook asks.
 
 SC-002 is `tested-inconclusive`: on the lab's funds from 2005 to 2022, small caps beat the S&P 500
 in the second half of December, significantly over the eighteen years and inside the prediction, but

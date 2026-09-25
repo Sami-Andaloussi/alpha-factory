@@ -6,7 +6,7 @@ mechanism: [flows]
 asset_classes: [stocks]
 horizon: [days, weeks]
 data: [daily prices, market capitalisation]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

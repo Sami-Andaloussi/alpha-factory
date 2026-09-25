@@ -86,7 +86,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 |---|---|---|---|---|---|
 | [SC-001](SC-001-day-of-the-week-effect.md) | Day-of-the-week effect (weekend effect) | microstructure, behavioural, information, limits to arbitrage | stocks, equity indices, crypto | days | tested-inconclusive |
 | [SC-002](SC-002-january-effect.md) | January effect (turn-of-the-year effect) | flows, limits to arbitrage, microstructure | stocks, equity indices | days, weeks | tested-inconclusive |
-| [SC-006](SC-006-december-effect.md) | December effect (deferral of capital gains) | flows | stocks | days, weeks | untouched |
+| [SC-006](SC-006-december-effect.md) | December effect (deferral of capital gains) | flows | stocks | days, weeks | tested-inconclusive |
 | [SC-007](SC-007-santa-claus-rally.md) | Santa Claus rally | behavioural, flows, microstructure | stocks, equity indices | days | untouched |
 | [SC-008](SC-008-turn-of-the-month-effect.md) | Turn-of-the-month effect | flows, information, limits to arbitrage | stocks, equity indices, crypto | days | tested-inconclusive |
 | [SC-009](SC-009-payday-hypothesis-dash-for-cash.md) | Payday hypothesis (Dash for Cash) | flows, limits to arbitrage | stocks, bonds | days | untouched |
