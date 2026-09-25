@@ -6,7 +6,7 @@ mechanism: [flows, risk premium, information]
 asset_classes: [stocks]
 horizon: [months]
 data: [monthly stock returns, industry classifications, earnings announcement dates]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
