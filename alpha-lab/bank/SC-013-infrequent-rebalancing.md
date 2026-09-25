@@ -6,7 +6,7 @@ mechanism: [flows, limits to arbitrage]
 asset_classes: [stocks]
 horizon: [days, weeks]
 data: [daily prices, institutional holdings, trading volumes, trade-level data]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
