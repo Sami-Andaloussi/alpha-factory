@@ -1,0 +1,57 @@
+id: CA-006-01-financials-lead-the-sectors
+theory: CA-006
+parent: null
+mechanism: >
+  Some industries, banking first, are closer to changes in real activity and credit and price that
+  news before the rest of the market; investors are slow to draw its implication for the broad
+  market, so that a month in which financials lead the market is followed by a better month for the
+  market than one in which they lag.
+prediction:
+  sign: positive
+  size: a judgment, not derived -- the sector funds' average excess return about 0.3 to 0.8% a month higher after a month of financials leading them than after one of their lagging; a slope of about 0.06 to 0.16 on XLF's relative month with the market's own month held fixed; an alpha of about 1 to 2.5% a year before costs of about 0.3% a year over the sector funds held always, an appraisal ratio of about 0.1 to 0.3 before costs; less from 2005 to 2022 than over the source's years
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY]
+horizon: months
+signal: >
+  On the first session of each month, each sector fund trading on that session and on the session
+  lookback sessions before the session before it has a return from that earlier session to the
+  session before the target. With lead relative, the signal is XLF's return less the average return
+  of those funds; with lead absolute, XLF's return less the bill's over the same sessions; with lead
+  composite, the average of XLF's, XLY's and XLRE's returns, those of them with a return, less the
+  average of XLE's and XLB's. When the signal is positive, every sector fund trading is held in
+  equal parts; when it is zero or negative, or cannot be read, the portfolio holds nothing and earns
+  the bill. The targets start on the first month in which the signal can be read.
+parameters:
+  lookback: sessions of the returns the signal compares, to the session before the target
+  lead: relative, absolute or composite, the signal described above
+variants:
+  - {lookback: 21, lead: relative}
+  - {lookback: 21, lead: absolute}
+  - {lookback: 21, lead: composite}
+neighbours:
+  lookback: {25: [16, 26], 50: [10, 32]}
+choose: false
+memory: 21
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs on the source's claim, that financials' past month predicts the market's next
+  beyond the market's own past month: on each monthly target session from the base's first,
+  2005-03-01, whose next target session is on or before 2022-12-30 (213 months), the equal average
+  of the returns of the sector funds trading on the target session, each from the target's close to
+  the next target's close, less the bill's return compounded over the same sessions, regressed by
+  ordinary least squares, with a constant, on XLF's relative return over the base's 21-session
+  window and on the funds' average return over that window; the slope on XLF's relative return,
+  equal to the slope on XLF's own return with the market's past month held fixed, and its t
+  statistic from the usual standard error. The theory is refuted in this form if that t statistic is
+  -0.35 or below. Above it, short of passing gates 1 to 7, it is not proven, not refuted; a base
+  that passes gates 1 to 7 while the clause refutes leaves the theory refuted in this form. Of
+  CA-006's refutation criteria the first and third are graded, the second reported through the
+  single funds, the source's other countries not tested. Reported, not graded: the difference of the
+  market's mean return after positive and non-positive base signals, with its standard error, the
+  square root of the sum of each group's variance over its count, and the same for the two variants;
+  the market's own coefficient in the graded regression; the slope and the difference by the targets
+  set in 2005-2010, 2011-2016 and 2017-2022, and without the twelve months whose target is set in
+  2008; each variant's alpha before and after costs and its months invested; the same difference and
+  slope with each of XLF, XLY, XLRE, XLE and XLB alone, its return less the funds' average in XLF's
+  place, the same sign rule, the source's sign negative for XLE and XLB.

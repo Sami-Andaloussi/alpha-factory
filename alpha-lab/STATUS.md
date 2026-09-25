@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 244 untouched · 1 in-progress · 0 tested-conclusive · 16 tested-inconclusive · 2 not-testable.
+**263 theories**: 243 untouched · 1 in-progress · 0 tested-conclusive · 17 tested-inconclusive · 2 not-testable.
 
-**17 strategies**: 0 passing gates 1 to 7, 11 stopped at gate 2, 6 stopped at gate 3; 1 under paper trading.
+**18 strategies**: 0 passing gates 1 to 7, 12 stopped at gate 2, 6 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -43,7 +43,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [AS-044](bank/AS-044-dex-amm-design-mev.md) DEX and AMM design, MEV extraction and DeFi token economics | asset-specific mechanisms | untouched |  |
 | [CA-001](bank/CA-001-momentum-sectors-countries-asset-classes.md) Momentum across sectors, countries and asset classes | cross-asset relative value | tested-inconclusive | [CA-001-01-momentum-within-groups](strategies/CA-001-01-momentum-within-groups/) · stops at gate 2 · [report](strategies/CA-001-01-momentum-within-groups/report.ipynb) · [verdict](strategies/CA-001-01-momentum-within-groups/verdict.md) |
 | [CA-003](bank/CA-003-factor-momentum.md) Factor momentum | cross-asset relative value | untouched |  |
-| [CA-006](bank/CA-006-do-industries-lead-stock-markets.md) Do industries lead stock markets? | cross-asset relative value | untouched |  |
+| [CA-006](bank/CA-006-do-industries-lead-stock-markets.md) Do industries lead stock markets? | cross-asset relative value | tested-inconclusive | [CA-006-01-financials-lead-the-sectors](strategies/CA-006-01-financials-lead-the-sectors/) · stops at gate 2 · [report](strategies/CA-006-01-financials-lead-the-sectors/report.ipynb) · [verdict](strategies/CA-006-01-financials-lead-the-sectors/verdict.md) |
 | [CA-011](bank/CA-011-sector-rotation.md) Sector rotation | cross-asset relative value | untouched |  |
 | [CA-012](bank/CA-012-sector-rotation-monetary-conditions.md) Sector rotation and monetary conditions | cross-asset relative value | not-testable | [CA-012-01-monetary-sector-rotation](strategies/CA-012-01-monetary-sector-rotation/) · not testable: [reasoning](strategies/CA-012-01-monetary-sector-rotation/reasoning.md) |
 | [CA-013](bank/CA-013-sector-rotation-business-cycle.md) Sector rotation across the business cycle | cross-asset relative value | untouched |  |

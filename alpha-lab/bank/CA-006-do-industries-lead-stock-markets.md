@@ -6,7 +6,7 @@ mechanism: [information, macroeconomic]
 asset_classes: [sectors, equity indices]
 horizon: [weeks, months]
 data: [industry index returns, market index returns, industry classifications]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
