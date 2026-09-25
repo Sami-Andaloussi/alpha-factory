@@ -6,7 +6,7 @@ mechanism: [behavioural, macroeconomic]
 asset_classes: [equity indices]
 horizon: [months]
 data: [monthly index returns]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

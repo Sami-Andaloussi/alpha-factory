@@ -1,0 +1,64 @@
+id: SC-019-01-january-barometer
+theory: SC-019
+parent: null
+mechanism: >
+  January reveals a latent state of the market, risk appetite, confidence and flows at the start of
+  the year: a market that rises in January tends to rise over the rest of the year, while a market
+  that falls in January is followed by a weaker rest of the year, on which a negative January says
+  less than a positive one says about a strong one.
+prediction:
+  sign: positive
+  size: a judgment, from the sources -- the three US funds' average daily excess return from February to December about 0 to +0.034% a day higher after a positive January than after a negative one, EFA's and EEM's about 0 to +0.02%, the five funds' about 0 to +0.028%; out of a fund after about three Januarys in eight, about 34% of the time, the rule's alpha over the five funds held always about 0 to +1.6% a year before costs of about 0.04% a year, an appraisal ratio of about 0 to 0.16, a Sharpe ratio of about 0.32 to 0.42; the base expected to fail gate 1 on its count of decisions, a year adding two only when one of the five Januarys is zero or negative, and, if it passes, gate 2, or gate 3 or 4, and gate 6 on one fund's share of the profit
+universe: [SPY, QQQ, IWM, EFA, EEM]
+horizon: months
+signal: >
+  Each fund holds a fifth of the portfolio, among the five, or leaves it in cash, the bill's rate.
+  Sessions are placed on the New York Stock Exchange's calendar of scheduled sessions, derived from
+  its holiday rules alone and read from no price: weekdays less New Year's Day (on 2 January when 1
+  January is a Sunday, not observed when it is a Saturday), Martin Luther King Jr. Day, Washington's
+  Birthday, Good Friday, Memorial Day, Juneteenth from 2022, Independence Day, Labor Day,
+  Thanksgiving and Christmas, with Juneteenth, Independence Day and Christmas moved to the Friday
+  before when they fall on a Saturday and to the Monday after when on a Sunday. A fund's signal in a
+  year is its return over the year's first `months` calendar months, from its last close before the
+  year to its last close of the last of those months, on the market's closes, from its first close
+  in the market when it has none before the year. On each session of the market whose next scheduled
+  session falls in the next year, and on the first session of the market, the target is the five
+  funds in equal parts among those that trade. On the market's first session of the calendar month
+  after those months, which reads the signal from the closes up to the session before, the target is
+  a fifth in each fund that trades and whose signal is positive, and cash for the others' fifths. No
+  target is set on the other sessions.
+parameters:
+  months: the calendar months from the year's start whose return is read, 1 for January
+variants:
+  - {months: 1}
+neighbours:
+  months: {25: [2], 50: [2]}
+choose: false
+memory: 45
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, on the years: for each year from 2005 to 2022, the three US funds' (SPY, QQQ,
+  IWM) average daily return less the bill's rate, each from the market's previous close, averaged
+  over the year's sessions from February to December; its January return, the mean of the three
+  funds' returns from their last close of December to their last close of January (from their first
+  close, 3 January, in 2005). The mean of the years' February-December means over the years whose
+  January return was positive, less that over the years whose January return was zero or negative,
+  with the standard error of that difference, the square root of the sum of each group's sample
+  variance of the years' means (over n - 1) divided by its number of years, and its t statistic,
+  computed apart from the battery. The theory is refuted in this form if that t statistic is -0.35
+  or below. Above it, short of passing gates 1 to 7, it is not proven, not refuted; a base that
+  passes gates 1 to 7 while the clause refutes leaves the theory refuted in this form. Of SC-019's
+  refutation criteria the first is graded, the second reported, the third beyond the lab's data.
+  Reported, not graded, for the three US funds' average unless stated: the same gap on the daily
+  returns pooled over the sessions of each group of years, with each group's variance of daily
+  returns over its number of sessions; the same gap for each of the five funds on its own January,
+  for the five funds' average on its January, and for EFA and EEM each; the rest of the year's mean
+  after positive and after negative Januarys, each against the mean over all years, the count of
+  years whose rest of the year rose after each sign, and the regression of the rest of the year's
+  return on January's; the same gap with the years grouped by the sign of their first five sessions;
+  the gap over 2005-2011 and 2012-2022, without 2008 and without 2005; each year's January and
+  rest-of-year returns; the battery's count of decisions and the years with a negative January among
+  the five; the base's alpha before and after costs and at a beta equal to its share of sessions
+  held, and the neighbour's and the one-day-late rule's alphas and appraisal ratios.
