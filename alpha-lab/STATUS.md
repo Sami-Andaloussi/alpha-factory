@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 251 untouched · 1 in-progress · 0 tested-conclusive · 10 tested-inconclusive · 1 not-testable.
+**263 theories**: 250 untouched · 1 in-progress · 0 tested-conclusive · 10 tested-inconclusive · 2 not-testable.
 
 **11 strategies**: 0 passing gates 1 to 7, 6 stopped at gate 2, 5 stopped at gate 3; 1 under paper trading.
 
@@ -222,7 +222,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [SC-008](bank/SC-008-turn-of-the-month-effect.md) Turn-of-the-month effect | seasonality and calendar effects | untouched |  |
 | [SC-009](bank/SC-009-payday-hypothesis-dash-for-cash.md) Payday hypothesis (Dash for Cash) | seasonality and calendar effects | untouched |  |
 | [SC-010](bank/SC-010-semi-month-effect.md) Semi-month effect (first half of the month) | seasonality and calendar effects | untouched |  |
-| [SC-011](bank/SC-011-macroeconomic-announcement-clustering.md) Macroeconomic announcement clustering hypothesis | seasonality and calendar effects | untouched |  |
+| [SC-011](bank/SC-011-macroeconomic-announcement-clustering.md) Macroeconomic announcement clustering hypothesis | seasonality and calendar effects | not-testable | [SC-011-01-announcement-clustering](strategies/SC-011-01-announcement-clustering/) · not testable: [reasoning](strategies/SC-011-01-announcement-clustering/reasoning.md) |
 | [SC-012](bank/SC-012-rebalancing-windows-institutional-flows.md) Rebalancing windows and end-of-period institutional flows | seasonality and calendar effects | untouched |  |
 | [SC-013](bank/SC-013-infrequent-rebalancing.md) Infrequent rebalancing | seasonality and calendar effects | untouched |  |
 | [SC-014](bank/SC-014-pre-holiday-effect.md) Pre-holiday effect | seasonality and calendar effects | untouched |  |

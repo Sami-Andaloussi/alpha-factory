@@ -6,7 +6,7 @@ mechanism: [information, risk premium]
 asset_classes: [stocks, equity indices]
 horizon: [days]
 data: [daily prices, macroeconomic releases]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
