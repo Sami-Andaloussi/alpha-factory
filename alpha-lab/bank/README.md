@@ -12,7 +12,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 |---|---|---|---|---|---|
 | [TM-001](TM-001-cross-sectional-price-momentum.md) | Cross-sectional price momentum (relative strength) | behavioural, information, flows, limits to arbitrage | stocks, equity indices, bonds, commodities, currencies | months | untouched |
 | [TM-002](TM-002-52-week-high-momentum.md) | 52-week high momentum (anchoring on the annual high) | behavioural, limits to arbitrage | stocks, equity indices, bonds, currencies, commodities | months | untouched |
-| [TM-003](TM-003-industry-momentum.md) | Industry momentum (information spillovers) | information, behavioural, flows, limits to arbitrage | stocks, sectors, equity indices, commodities | months | untouched |
+| [TM-003](TM-003-industry-momentum.md) | Industry momentum (information spillovers) | information, behavioural, flows, limits to arbitrage | stocks, sectors, equity indices, commodities | months | tested-inconclusive |
 | [TM-005](TM-005-conservatism-and-representativeness.md) | Conservatism and representativeness (investor sentiment model) | behavioural, limits to arbitrage | stocks, crypto | months, years | untouched |
 | [TM-006](TM-006-overconfidence-biased-self-attribution.md) | Overconfidence and biased self-attribution | behavioural, limits to arbitrage | stocks, crypto | months, years | untouched |
 | [TM-007](TM-007-underreaction-to-public-information.md) | Behavioural underreaction to public information (conservatism) | behavioural, information, limits to arbitrage | stocks, credit, commodities, equity indices, bonds, currencies | weeks, months, years | untouched |
