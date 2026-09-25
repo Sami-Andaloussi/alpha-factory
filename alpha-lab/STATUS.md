@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 242 untouched · 1 in-progress · 0 tested-conclusive · 18 tested-inconclusive · 2 not-testable.
+**263 theories**: 241 untouched · 1 in-progress · 0 tested-conclusive · 19 tested-inconclusive · 2 not-testable.
 
-**19 strategies**: 0 passing gates 1 to 7, 13 stopped at gate 2, 6 stopped at gate 3; 1 under paper trading.
+**20 strategies**: 0 passing gates 1 to 7, 13 stopped at gate 2, 7 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -216,7 +216,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [MR-043](bank/MR-043-markov-switching-regime-reversion.md) Markov switching and regime-conditional reversion | mean reversion and relative value | untouched |  |
 | [MR-044](bank/MR-044-countercyclical-expected-returns.md) Countercyclical expected returns | mean reversion and relative value | untouched |  |
 | [SC-001](bank/SC-001-day-of-the-week-effect.md) Day-of-the-week effect (weekend effect) | seasonality and calendar effects | tested-inconclusive | [SC-001-01-mondays-in-cash](strategies/SC-001-01-mondays-in-cash/) · stops at gate 2 · [report](strategies/SC-001-01-mondays-in-cash/report.ipynb) · [verdict](strategies/SC-001-01-mondays-in-cash/verdict.md) |
-| [SC-002](bank/SC-002-january-effect.md) January effect (turn-of-the-year effect) | seasonality and calendar effects | untouched |  |
+| [SC-002](bank/SC-002-january-effect.md) January effect (turn-of-the-year effect) | seasonality and calendar effects | tested-inconclusive | [SC-002-01-small-caps-into-the-year-end](strategies/SC-002-01-small-caps-into-the-year-end/) · stops at gate 3 · [report](strategies/SC-002-01-small-caps-into-the-year-end/report.ipynb) · [verdict](strategies/SC-002-01-small-caps-into-the-year-end/verdict.md) |
 | [SC-006](bank/SC-006-december-effect.md) December effect (deferral of capital gains) | seasonality and calendar effects | untouched |  |
 | [SC-007](bank/SC-007-santa-claus-rally.md) Santa Claus rally | seasonality and calendar effects | untouched |  |
 | [SC-008](bank/SC-008-turn-of-the-month-effect.md) Turn-of-the-month effect | seasonality and calendar effects | tested-inconclusive | [SC-008-01-turn-of-the-month](strategies/SC-008-01-turn-of-the-month/) · stops at gate 2 · [report](strategies/SC-008-01-turn-of-the-month/report.ipynb) · [verdict](strategies/SC-008-01-turn-of-the-month/verdict.md) |

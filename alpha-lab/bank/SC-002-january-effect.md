@@ -6,7 +6,7 @@ mechanism: [flows, limits to arbitrage, microstructure]
 asset_classes: [stocks, equity indices]
 horizon: [days, weeks]
 data: [daily prices, market capitalisation, bid-ask spreads, index futures prices]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

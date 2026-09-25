@@ -1,0 +1,61 @@
+id: SC-002-01-small-caps-into-the-year-end
+theory: SC-002
+parent: null
+mechanism: >
+  Tax-loss selling of small losers in December and their buying back in January, the rebalancing of
+  delegated managers and new money at the start of the year make small caps outperform large ones
+  around the turn of the year; since the effect became known and tradable through small-minus-large
+  index futures, traders anticipate it, and the small caps' advantage moved into the second half of
+  December.
+prediction:
+  sign: positive
+  size: a judgment, from the sources -- IWM's return less SPY's from the first session on or after 15 December to the third-to-last session of December about +0.5 to +1.5% a year, positive in most years, less than in the futures of the sources' years; the rule's alpha over the five funds held always a fifth of it, about 0.1 to 0.3% a year before costs of about 0.04% a year, an appraisal ratio of about 0.25 to 0.8, a Sharpe ratio about the benchmark's; gate 4 out of reach at that size
+universe: [SPY, QQQ, IWM, EFA, EEM]
+horizon: days to weeks
+signal: >
+  Sessions are placed on the New York Stock Exchange's calendar of scheduled sessions, derived from
+  its holiday rules alone and read from no price: weekdays less New Year's Day (on 2 January when 1
+  January is a Sunday, not observed when it is a Saturday), Martin Luther King Jr. Day, Washington's
+  Birthday, Good Friday, Memorial Day, Juneteenth from 2022, Independence Day, Labor Day,
+  Thanksgiving and Christmas, with Juneteenth, Independence Day and Christmas moved to the Friday
+  before when they fall on a Saturday and to the Monday after when on a Sunday. Each year's window
+  holds the scheduled sessions after the first scheduled session on or after day start of December,
+  up to and including the scheduled session of December counted back from its last by end, -1 the
+  last. On each session of the market, from the first, if the next scheduled session is in a window,
+  the target is IWM at two fifths and QQQ, EFA and EEM at a fifth each, SPY's fifth moved to IWM;
+  otherwise it is the five funds in equal parts; among the funds that trade. A target is set on the
+  sessions on which the state changes, on the market's first session of each month outside the
+  windows, which sets the five back to equal parts, and on the first. A scheduled session on which
+  the exchange does not open is counted as the calendar counts it and is absent from the market.
+parameters:
+  start: the day of December from whose first scheduled session on or after it the window starts
+  end: the window's last session, counted back from December's last scheduled session, -1 the last
+variants:
+  - {start: 15, end: -3}
+neighbours:
+  start: {25: [11, 19], 50: [8, 22]}
+  end: {25: [-2, -4], 50: [-2, -4]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs on the effect's form in the sources' latest years, its migration into
+  December: for each of the eighteen turns of the year from 2005-06 to 2022-23, IWM's return less
+  SPY's from the close of the first scheduled session on or after 15 December to the close of the
+  third-to-last scheduled session of December, each compounded over the window's sessions; the mean
+  over the years, its standard error, the standard deviation over the years (with n - 1) over the
+  square root of eighteen, and its t statistic, computed apart from the battery. The theory is
+  refuted in this form if that t statistic is -0.35 or below. Above it, short of passing gates 1 to
+  7, it is not proven, not refuted; a base that passes gates 1 to 7 while the clause refutes leaves
+  the theory refuted in this form. Of SC-002's refutation criteria the fourth is graded, the first
+  and fifth reported, the second the measure itself, the third not tested. Reported, not graded,
+  each return compounded over its sessions: IWM less SPY over the window year by year, with the
+  years positive; IWM less 1.13 times SPY, IWM's beta on SPY from the in-sample daily returns, and
+  IWM less QQQ, over the window; over the seventeen turns 2005-06 to 2021-22, IWM less SPY from the
+  close of December's last scheduled session to the close of January's tenth, and to the close of
+  January's last, with their means, standard errors and years positive, the 2022-23 turn's January
+  apart after the run; IWM less SPY from the close of the window's end to the close of December's
+  last scheduled session; SPY's and IWM's own returns over the window less the bill's; the graded
+  mean over the turns 2005-06 to 2011-12 and 2012-13 to 2022-23; the rule's alpha before and after
+  costs, and the neighbours' and the one-day-late rule's alphas and appraisal ratios.
