@@ -6,7 +6,7 @@ mechanism: [flows, information, limits to arbitrage]
 asset_classes: [stocks, equity indices, crypto]
 horizon: [days]
 data: [daily prices, index futures prices, fund flows, macroeconomic releases]
-status: untouched
+status: in-progress
 ---
 
 ## Mechanism

@@ -131,7 +131,7 @@ after the target, when the engine holds them.
 - **About the sources.** The bank's attribution of the claim to Greyserman and Kaminski does not
   hold (their chapter on return dispersion measures dispersion between trend following programmes);
   the lab read the three studies of the relation only in their abstracts. The trend following half
-  of TM-039 is untested, as the campaign's decisions record.
+  of TM-039 is recorded as untested.
 - **About the lab.** The card's first draft read the dispersion over the ranking's own twelve-month
   window, and justified it by the bet's size, which rank-only weights do not have; the logic audit
   moved the reading to the month just past, argued from the claim alone. The charge of the switch

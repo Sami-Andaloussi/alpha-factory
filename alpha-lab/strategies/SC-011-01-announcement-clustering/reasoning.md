@@ -50,8 +50,8 @@ and then finding large moves on them is circular.
 - **Testing only the claim that returns are high on announcement days**, as a trade: a rule holding
   equities on those days alone would be a one-day position, and gate 6's check of a day's delay,
   which must keep 70% of the Sharpe ratio, fails such a rule by construction — a failure built in,
-  on which the campaign's decisions refuse to spend a trial. It would also be a different claim from
-  the control the source runs.
+  on which the lab does not spend a trial. It would also be a different claim from the control the
+  source runs.
 - **Dates copied by hand into a card's parameters**, which a card could carry as a list: data with
   no hash, entered by hand, which the rule of a frozen snapshot exists to prevent.
 - **Adding a release calendar to the lab's data**: public calendars exist (the Bureau of Labor

@@ -55,8 +55,8 @@ over its noise. This card tests the part of TM-039 that TM-018 did not: the sort
 each other, cross-sectional momentum, whose mechanism the bank states — long the winners, short the
 losers, earning what the assets differ by. The trend following half of TM-039, a rule holding each
 fund against cash switched by the dispersion across funds, is not tested: its bet is on each fund's
-own direction, which dispersion across funds does not size. The campaign's decisions list it as an
-untested form.
+own direction, which dispersion across funds does not size. It is recorded as an untested form, not
+run.
 
 The bank's neighbours: **CA-001**, momentum within groups, whose rule this card switches;
 **TM-018**, trend following switched by market divergence; **TM-024**, momentum switched off in
