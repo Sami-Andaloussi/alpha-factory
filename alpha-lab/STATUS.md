@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 236 untouched · 1 in-progress · 0 tested-conclusive · 24 tested-inconclusive · 2 not-testable.
+**263 theories**: 235 untouched · 1 in-progress · 0 tested-conclusive · 24 tested-inconclusive · 3 not-testable.
 
 **26 strategies**: 0 passing gates 1 to 7, 17 stopped at gate 2, 7 stopped at gate 3, 1 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -223,7 +223,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [SC-009](bank/SC-009-payday-hypothesis-dash-for-cash.md) Payday hypothesis (Dash for Cash) | seasonality and calendar effects | tested-inconclusive | [SC-009-01-dash-for-cash-week](strategies/SC-009-01-dash-for-cash-week/) · stops at gate 4 · [report](strategies/SC-009-01-dash-for-cash-week/report.ipynb) · [verdict](strategies/SC-009-01-dash-for-cash-week/verdict.md) |
 | [SC-010](bank/SC-010-semi-month-effect.md) Semi-month effect (first half of the month) | seasonality and calendar effects | tested-inconclusive | [SC-010-01-first-half-of-the-month](strategies/SC-010-01-first-half-of-the-month/) · not run yet · [verdict](strategies/SC-010-01-first-half-of-the-month/verdict.md)<br>[SC-010-02-first-half-of-the-month](strategies/SC-010-02-first-half-of-the-month/) · stops at gate 2 · [report](strategies/SC-010-02-first-half-of-the-month/report.ipynb) · [verdict](strategies/SC-010-02-first-half-of-the-month/verdict.md) |
 | [SC-011](bank/SC-011-macroeconomic-announcement-clustering.md) Macroeconomic announcement clustering hypothesis | seasonality and calendar effects | not-testable | [SC-011-01-announcement-clustering](strategies/SC-011-01-announcement-clustering/) · not testable: [reasoning](strategies/SC-011-01-announcement-clustering/reasoning.md) |
-| [SC-012](bank/SC-012-rebalancing-windows-institutional-flows.md) Rebalancing windows and end-of-period institutional flows | seasonality and calendar effects | untouched |  |
+| [SC-012](bank/SC-012-rebalancing-windows-institutional-flows.md) Rebalancing windows and end-of-period institutional flows | seasonality and calendar effects | not-testable | [SC-012-01-forced-flow-windows](strategies/SC-012-01-forced-flow-windows/) · not testable: [reasoning](strategies/SC-012-01-forced-flow-windows/reasoning.md) |
 | [SC-013](bank/SC-013-infrequent-rebalancing.md) Infrequent rebalancing | seasonality and calendar effects | untouched |  |
 | [SC-014](bank/SC-014-pre-holiday-effect.md) Pre-holiday effect | seasonality and calendar effects | tested-inconclusive | [SC-014-01-pre-holiday-sessions](strategies/SC-014-01-pre-holiday-sessions/) · stops at gate 2 · [report](strategies/SC-014-01-pre-holiday-sessions/report.ipynb) · [verdict](strategies/SC-014-01-pre-holiday-sessions/verdict.md) |
 | [SC-015](bank/SC-015-ramadan-effect.md) Ramadan effect | seasonality and calendar effects | untouched |  |
