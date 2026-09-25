@@ -1,0 +1,105 @@
+# Gate 8 of the lab: paper trading after every US close. The first job computes the next session's
+# targets of each strategy under paper trading, sends the paper orders and writes its log and its
+# tracking page; the second, on a machine of its own, commits them on the branch `paper`, never on
+# `main`. The broker's two keys are this repository's secrets, handed to the step that trades; the
+# token that may push is handed to the second job alone, which runs no code of the lab's or of its
+# libraries. The broker's address is a literal in alpha-lab/lab/paper.py, never a setting, so that
+# the job can reach the paper account only.
+name: paper trading
+
+on:
+  schedule:
+    - cron: "30 22 * * 1-5"      # 22:30 UTC: 18:30 in New York in summer, 17:30 in winter
+    - cron: "30 1 * * 2-6"       # 01:30 UTC, the same evening in New York: a second try, which a
+                                 # session already written leaves untouched
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: paper
+  cancel-in-progress: false
+
+jobs:
+  trade:
+    if: github.repository == 'Sami-Andaloussi/alpha-factory'   # the public repository only, where its secrets live
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    outputs:
+      written: ${{ steps.written.outputs.written }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: alpha-lab/requirements.txt
+      - name: The lab's libraries
+        run: python -m pip install -r alpha-lab/requirements.txt
+      - name: The log so far
+        run: |
+          if git ls-remote --exit-code --heads origin paper > /dev/null; then
+            git fetch --depth=1 origin paper
+            git worktree add -B paper log FETCH_HEAD
+          else
+            git worktree add --orphan -b paper log
+          fi
+      - name: The day's signals and orders
+        working-directory: alpha-lab
+        env:
+          APCA_API_KEY_ID: ${{ secrets.APCA_API_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.APCA_API_SECRET_KEY }}
+        run: python -m lab.paper --log ../log/paper
+      - name: Anything written
+        id: written
+        working-directory: log
+        run: |
+          git add paper 2> /dev/null || true
+          if git diff --cached --quiet; then
+            echo "written=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "written=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/upload-artifact@v4
+        if: steps.written.outputs.written == 'true'
+        with:
+          name: paper
+          path: log/paper/
+          retention-days: 7
+
+  log:
+    needs: trade
+    if: needs.trade.outputs.written == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: paper
+          path: written
+      - name: The log, on its branch
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          public="https://github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$public" paper > /dev/null; then
+            git clone -q --depth=1 --branch paper "$public" log
+          else
+            git init -q -b paper log
+          fi
+          rm -rf log/paper
+          cp -R written log/paper
+          cd log
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add paper
+          if ! git diff --cached --quiet; then
+            git commit -q -m "paper: $(TZ=America/New_York date +%F)"
+            git push -q "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" paper
+          fi

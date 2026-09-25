@@ -1,0 +1,34 @@
+id: TM-017-01-time-series-momentum
+theory: TM-017
+parent: null
+mechanism: >
+  Prices absorb news slowly: the most reactive traders reposition first and the information spreads
+  to the rest of the market over weeks or months; institutional capital reallocates slowly under
+  mandates and committees; hedgers delay and trend followers add to a move once it is seen. An
+  asset's own past return therefore predicts the direction of its next months, in equity indices,
+  bonds and commodities alike.
+prediction:
+  sign: positive
+  size: a Sharpe ratio of about 0.5 net of costs, with a positive alpha over the same assets held always
+universe: [SPY, EFA, EEM, IEF, TLT, GLD, DBC]
+horizon: months
+signal: >
+  On the first session of each month, each asset whose return over the past lookback sessions,
+  read up to the session before, beats the Treasury bill over the same sessions is held in a
+  seventh of the portfolio; an asset whose return does not beat the bill, or without a full
+  lookback of prices, leaves its seventh in cash.
+parameters:
+  lookback: sessions of the past return that decides whether an asset is in trend
+variants:
+  - {lookback: 252}
+  - {lookback: 126}
+neighbours:
+  lookback: {25: [189, 315], 50: [126, 378]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Holding each asset only while its past return beats cash earns no alpha over holding the same seven
+  assets always, in equal parts; or it beats no more of its placebos, shifted in time, than chance;
+  or its gains come from one asset, one class or one episode.
