@@ -68,9 +68,9 @@ its own, beside the snapshot, whose files never change.
    (step 7), and while the folder holds anything but the card and its reasoning: the build plan and
    the code are written after the card is locked, not before. Then **commit the card alone**
    (`card: <id>`), before any code: from that commit, the card never changes. The lock proves the
-   order of the commits; the order of the work is the operator's to keep, and a departure from it is
-   written in the verdict. A changed hypothesis is a new card, `<nn>` plus
-   one, which names this one as its `parent`; its trials add to the registry's count.
+   order of the commits; the order of the work is for whoever runs the lab to keep, and a departure
+   from it is written in the verdict. A changed hypothesis is a new card, `<nn>` plus one, which
+   names this one as its `parent`; its trials add to the registry's count.
 5. **Build plan**, `build-plan.md`: what code, in what order, and why.
 6. **Strategy code**, `strategy.py`: a function `positions(market, **parameters)` that returns a
    target weight for each session and asset, commented against the build plan.
@@ -193,5 +193,5 @@ its own, beside the snapshot, whose files never change.
 - The thresholds are the battery's, set before any card (`lab/battery.py`), and their version is
   written with every verdict; changing one is a versioned decision that applies only to later cards.
 - Nothing is deleted: a rejected strategy stays where it is, with its verdict.
-- Every file speaks about the theory, the market and the strategy: never about who wrote it,
-  with which tools, or who asked for what.
+- Every file speaks about the theory, the market and the strategy, for a reader who knows
+  nothing else.

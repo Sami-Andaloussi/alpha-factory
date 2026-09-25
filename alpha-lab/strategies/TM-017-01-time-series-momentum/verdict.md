@@ -86,5 +86,5 @@ The theory is not refuted; its plainest form is not proven here.
   refutation was reworded once before its commit, "its past year" becoming "its past return", so
   that it holds for both lookbacks. No return of the strategy was computed before the card's commit:
   the clone's record holds one run, 30 seconds after the card's commit, and `--try` shows no return.
-  The lock proves the order of commits, not the order of work, which only the operator can keep. No
-  bug was found after the run.
+  The lock proves the order of commits, not the order of work, which only whoever runs the lab can
+  keep. No bug was found after the run.

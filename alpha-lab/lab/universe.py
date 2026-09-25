@@ -53,7 +53,7 @@ UNIVERSE = (
 TICKERS = tuple(asset.ticker for asset in UNIVERSE)
 CLUSTERS = tuple(dict.fromkeys(asset.cluster for asset in UNIVERSE))
 LAGGED = tuple(asset.ticker for asset in UNIVERSE if asset.lagged)
-# Francs per dollar and per euro, which a campaign run in francs needs: not assets, never traded.
+# Francs per dollar and per euro, so that a return can be read in francs: data, not assets, never traded.
 CHF_RATES = ("USDCHF=X", "EURCHF=X")
 
 

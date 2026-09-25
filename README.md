@@ -12,17 +12,18 @@ A systematic trading research lab that runs, and the blueprint of the factory it
 
 **The lab** asks one question of every theory: does a strategy built from it earn more than its
 benchmark, after costs, in a way luck cannot explain? A theory is picked from the
-[bank](alpha-lab/bank/) and written as a hypothesis card, committed before any code so that the test
-cannot be bent to fit the result; the strategy is then coded and run through seven gates: hygiene,
+[bank](alpha-lab/bank/) and written as a hypothesis card, fixed before any return is computed so
+that the test cannot be bent to fit the result, and kept in the registry by its hash, which anyone
+can check against the card; the strategy is then coded and run through seven gates: hygiene,
 economic edge, significance, multiple testing, stability, robustness, and a holdout sealed until
-then and opened once. A survivor enters the eighth, paper trading, where its live signals must
-match its backtest's. Every trial is kept in a registry that only grows, and the multiple-testing
-gate judges each strategy against all of them: the more the lab tries, the higher the bar.
+then and opened once. A survivor enters the eighth, paper trading, where its live signals must match
+its backtest's. Every trial is kept in a registry that only grows, and the multiple-testing gate
+judges each strategy against all of them: the more the lab tries, the higher the bar.
 
 **The factory** is what a survivor meets next: the blueprint of the pipeline an institution would
 run to take a strategy from its dossier to capital, re-validating it on its own data before any
-money is at stake. The lab hands over a [strategy dossier](handoff/README.md); the factory admits
-it, improves it and judges it.
+money is at stake. The lab hands over a [strategy dossier](handoff/README.md); the factory would
+admit it, improve it and judge it.
 
 ## What to check in five minutes
 
