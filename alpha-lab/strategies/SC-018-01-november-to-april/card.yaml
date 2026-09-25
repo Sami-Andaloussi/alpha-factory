@@ -1,0 +1,55 @@
+id: SC-018-01-november-to-april
+theory: SC-018
+parent: null
+mechanism: >
+  Investors' appetite for risk runs high from late in the year to the spring and fades over the
+  summer and autumn, through a cycle of optimism about the year ahead, the New Year's fresh limits
+  and bonuses, and summer's lower participation: equity returns have been higher from November to
+  April than from May to October, in the US over the long record and in most markets studied.
+prediction:
+  sign: positive
+  size: an alpha of about 0.9 to 1.7% a year before costs over the five equity funds held in equal parts, about 0.8 to 1.6% after costs of about 0.1% a year, an appraisal ratio of about 0.08 to 0.16; from half to all of the long US record's gap of about 0.58% a month between the halves (Ilmanen's figure of the equity premium, 1927 to 2009, read by eye), Ziemba's futures rule from 1993 to 2011 pointing above that range; SC-017-01's published table of calendar months puts the in-sample alpha at about 1.9% before costs at a beta of one half, just above that range, known before the card
+universe: [SPY, QQQ, IWM, EFA, EEM]
+horizon: months
+signal: >
+  The five funds held in equal parts except in the months out, the `months` consecutive calendar
+  months from the month named `first`, when the portfolio holds nothing and earns the bill's rate
+  on cash; the first `late` scheduled sessions of the first month out are still held, and the last
+  `early` scheduled sessions of the last month out are held again. Sessions are placed on the New
+  York Stock Exchange's calendar of scheduled sessions, derived from its holiday rules alone and
+  read from no price: weekdays less New Year's Day (on 2 January when 1 January is a Sunday, not
+  observed when it is a Saturday), Martin Luther King Jr. Day, Washington's Birthday, Good Friday,
+  Memorial Day, Juneteenth from 2022, Independence Day, Labor Day, Thanksgiving and Christmas, with
+  Juneteenth, Independence Day and Christmas moved to the Friday before when they fall on a
+  Saturday and to the Monday after when on a Sunday. On each session of the market, from the first,
+  the target is the five funds in equal parts, among those that trade, if the next scheduled session
+  is held, and nothing otherwise; a target is set only on the sessions on which it changes.
+parameters:
+  first: the name of the first calendar month out of equities
+  months: how many consecutive calendar months are out, from `first`
+  late: how many of the first month out's first scheduled sessions are still held
+  early: how many of the last month out's last scheduled sessions are held again
+variants:
+  - {first: May, months: 6, late: 0, early: 0}
+  - {first: May, months: 6, late: 1, early: 5}
+neighbours:
+  months: {25: [5, 7], 50: [3, 9]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the base, before costs, by the mean over the in-sample sessions from November to April
+  of the five funds' average daily return less the bill's rate, each session's return taken from the
+  market's previous close, less their mean over the sessions from May to October, computed apart
+  from the battery from the base's first holding, with the standard error of that difference from
+  the daily returns; and by the share of its placebos, shifted in time, that the base beats at the
+  lab's costs. The theory is refuted in this form if the difference is zero or less and the base
+  beats half of its placebos or fewer: the winter half would then have earned no more than the
+  summer half, as the bank's first refutation reads. Any other result short of passing gates 1 to 7
+  is not proven, not refuted. The in-sample difference was known before the card to be about +0.030%
+  a day, from SC-017-01's published table, so that a refutation is excluded before the run and the
+  clause is read as known, not as evidence. Reported, not graded: the same difference for the
+  variant, its sessions held against the others; the difference by fund and by year, and without
+  2008; the base's alpha with its months shifted a month earlier and a month later; and the same
+  difference over the holdout, 2023 to 2025, new for this rule only.
