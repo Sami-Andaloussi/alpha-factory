@@ -1,0 +1,53 @@
+id: SC-017-01-september-october-in-cash
+theory: SC-017
+parent: null
+mechanism: >
+  Average equity returns differ from one calendar month to another in a pattern that recurs, from
+  the calendars of taxes, flows and year-end balance sheets and from seasonal cycles in risk
+  appetite: over the long US record September and October were the weak months, the only two with
+  a negative average equity premium, and the other ten months earned the premium.
+prediction:
+  sign: positive
+  size: an alpha of about 1.3 to 2.6% a year before costs over the five equity funds held in equal parts, about 1.1 to 2.5% after costs of about 0.1% a year, an appraisal ratio of about 0.15 to 0.35; from half to all of the long US record's gap of about 1.5% a month between the other ten months and September and October (Ilmanen's figure of the equity premium by calendar month, 1927 to 2009, read by eye), Ziemba's futures data from 1993 to 2010 pointing below that range
+universe: [SPY, QQQ, IWM, EFA, EEM]
+horizon: months
+signal: >
+  The five funds held in equal parts in the months held, and nothing, the bill's rate on cash, in
+  the months out: the `months` consecutive calendar months from the month named `first`. Sessions
+  are placed on the New York Stock Exchange's calendar of scheduled sessions, derived from its
+  holiday rules alone and read from no price: weekdays less New Year's Day (on 2 January when 1
+  January is a Sunday, not observed when it is a Saturday), Martin Luther King Jr. Day, Washington's
+  Birthday, Good Friday, Memorial Day, Juneteenth from 2022, Independence Day, Labor Day,
+  Thanksgiving and Christmas, with Juneteenth, Independence Day and Christmas moved to the Friday
+  before when they fall on a Saturday and to the Monday after when on a Sunday. On each session of
+  the market, from the first, the target is the five funds in equal parts, among those that trade,
+  if the next scheduled session falls in a month held, and nothing otherwise, so that the portfolio
+  holds equities over the sessions of the months held; a target is set only on the sessions on which
+  it changes.
+parameters:
+  first: the name of the first calendar month out of equities
+  months: how many consecutive calendar months are out, from `first`
+variants:
+  - {first: September, months: 2}
+  - {first: September, months: 1}
+neighbours:
+  months: {25: [1, 3], 50: [1, 3]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the base, before costs, by the mean over the in-sample sessions of the months held of
+  the five funds' average daily return less the bill's rate, each session's return taken from the
+  market's previous close, less their mean over the sessions of September and October, computed
+  apart from the battery from the base's first holding, with the standard error of that difference
+  from the daily returns; and by the share of its placebos, shifted in time, that the base beats at
+  the lab's costs. The theory is refuted in this form if the difference is zero or less and the base
+  beats half of its placebos or fewer: September and October would then have earned no less than the
+  other months, as the bank's first refutation reads. Any other result short of passing gates 1 to 7
+  is not proven, not refuted. Reported, not graded: the same difference for the variant, September
+  against the other eleven months, about 0.09% a day for the long record's gap; the five funds'
+  average daily excess return in each calendar month, with its standard error, and the rank
+  correlation of the twelve with the order of Ilmanen's figure; the difference by fund and by year,
+  and without 2008; and the base's alpha with its two months moved a month earlier and a month
+  later.
