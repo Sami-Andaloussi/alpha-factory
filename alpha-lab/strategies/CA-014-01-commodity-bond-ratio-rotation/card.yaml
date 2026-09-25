@@ -1,0 +1,55 @@
+id: CA-014-01-commodity-bond-ratio-rotation
+theory: CA-014
+parent: null
+mechanism: >
+  Markets absorb turns of growth and inflation at different speeds and through different channels:
+  commodities rise with inflationary pressure while bonds fall with rising rates, and the sectors of
+  the stock market follow, the inflation-type ones gaining when commodities outrun bonds and the
+  rate-sensitive ones when bonds outrun commodities. The trend of the commodity/bond ratio tells
+  which side leads, and the lead persists for months.
+prediction:
+  sign: positive
+  size: an appraisal ratio of about 0.2 to 0.3 over the nine funds held in equal parts, an alpha of about 2 to 3% a year on a tracking error of about 9 to 10%; an assumption, since the source reports charts, not statistics
+universe: [XLE, XLB, GLD, DBC, XLP, XLV, XLF, XLU, IEF]
+horizon: months
+signal: >
+  On the first session of each week, the ratio of DBC's close to IEF's close in the market's signal
+  prices on the session before is compared with the mean of that ratio over the last average
+  sessions up to and including the session before. When the ratio is above its mean, the inflation
+  side is held; otherwise the rate-sensitive side. Under legs "all", the inflation side is XLE, XLB,
+  GLD and DBC, and the rate-sensitive side XLP, XLV, XLF, XLU and IEF; under legs "stocks", the
+  inflation side is XLE and XLB, and the rate-sensitive side XLP, XLV, XLF and XLU. The funds of the
+  side held that trade on the session share the portfolio equally; if none trades, the targets are
+  zero on every fund. The ratio is read from the signal prices, whether DBC and IEF trade or not. The
+  targets start on the first session of the first week whose session before has the mean; from then
+  the portfolio is fully invested whenever a fund of the side held trades.
+parameters:
+  average: sessions of the commodity/bond ratio averaged to give its trend, Murphy's 200-day (40-week) average
+  legs: '"all" holds commodities and bonds with the sectors of each side; "stocks" holds the sector funds alone'
+variants:
+  - {average: 200, legs: all}
+  - {average: 200, legs: stocks}
+neighbours:
+  average: {25: [150, 250], 50: [100, 300]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the base, at the lab's stated costs, by its appraisal ratio over the nine funds held in
+  equal parts (gate 4's figure), measured to about ±0.25 over these 16 years, and by the same ratio
+  over the ordinary monetary regimes alone: the sessions whose bill rate, as the market's rf gives
+  it (the rate set the session before), is 0.25% a year or more, about two fifths of the sessions,
+  some seven years. That figure is the annualised Sharpe ratio of gate 4's daily series (the base's
+  excess returns hedged of the benchmark's with the whole-sample beta) restricted to those sessions,
+  computed by the verdict apart from the battery. The theory is refuted in this form if the
+  whole-sample ratio is -0.1 or less, the base beats half of its placebos shifted in time or fewer,
+  and the ratio over the ordinary regimes is zero or less: the ratio's trend, read by its average,
+  does not carry the sides' relative returns forward outside the zero-rate years. Any other result
+  short of passing gates 1 to 7 is not proven, not refuted. The variant, the sector funds alone,
+  tests the claim that the other markets' trend moves the stock market's sectors. The battery
+  measures it against the nine funds, three of which it never holds, so the verdict also computes,
+  apart from the battery, its appraisal ratio against the six sector funds held in equal parts,
+  reset when it sets targets, at the same costs and over the same sessions, and the same ratio over
+  the ordinary regimes. That claim is refuted in this form if this ratio is -0.1 or less and its
+  figure over the ordinary regimes is zero or less; any other result leaves it not shown.
