@@ -1,0 +1,42 @@
+id: LL-042-01-equity-bond-cross-momentum
+theory: LL-042
+parent: null
+mechanism: >
+  Capital moves slowly between equity and bond markets, so each prices the other's news late. A year
+  of rising bond prices has still to reach equities, which the equity legs read; a year of rising
+  equities has still to reach Treasuries, whose prices then fall as capital returns slowly to risk,
+  which the bond legs read. Past bond returns predict equity returns positively, and past equity
+  returns predict Treasury returns negatively.
+prediction:
+  sign: positive
+  size: a Sharpe ratio of about 0.55 in-sample and a positive alpha over the seven funds held always
+universe: [SPY, QQQ, IWM, EFA, EEM, IEF, TLT]
+horizon: months
+signal: >
+  On the first session of each month, each fund's past return is its return over the past lookback
+  sessions, read up to the session before, less the Treasury bill's over the same sessions. Under the
+  rule "both", an equity fund (SPY, QQQ, IWM, EFA, EEM) is held when its own past return and IEF's
+  are both positive, and a bond fund (IEF, TLT) when its own past return is positive and SPY's is
+  negative. Under the rule "cross", an equity fund is held when IEF's past return is positive, and a
+  bond fund when SPY's is negative, whatever their own. Each fund held takes a seventh of the
+  portfolio; a fund not held, not trading, or without lookback sessions of prices, leaves its seventh
+  in cash, and so does every fund whose signal market has no past return.
+parameters:
+  lookback: sessions of the past return that every signal reads
+  rule: '"both" requires the fund''s own past return to agree with the other market''s; "cross" reads the other market''s alone'
+variants:
+  - {lookback: 252, rule: both}
+  - {lookback: 252, rule: cross}
+neighbours:
+  lookback: {25: [189, 315], 50: [126, 378]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  The Treasury channel of the theory is refuted in this form if the rule earns an alpha of zero or
+  less over the seven funds held always, or if it beats 50% or fewer of its placebos shifted in time,
+  as a rule without skill does on average. A positive alpha that beats more than 50% of its placebos
+  but fewer than the battery's 90%, or that keeps less than half its Sharpe ratio with one cluster
+  left out, or of which one fund carries more than 30% of the profit, or that turns to zero or less
+  without its best year, is not proven, not refuted.

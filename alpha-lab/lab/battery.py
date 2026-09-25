@@ -10,8 +10,11 @@ close of t, so they may read the market up to t-1 only: every estimate on window
 and bitcoin through `signal_prices`, whose close is one day late. Gate 1 checks both, for every
 variant.
 
-The thresholds below were set before any card. `THRESHOLDS` is their version, written with every
-verdict: changing one is a versioned decision that applies only to later cards.
+The thresholds below were set before any card. `THRESHOLDS` is the battery's version, written with
+every verdict: changing a threshold, or how a gate computes its figures, is a versioned decision that
+applies only to later cards. Version 2 (2026-09-25): gate 6 leaves a cluster out by making its assets
+untradable, their prices still read, where version 1 removed them from the market; a rule that trades
+one market on another's signal keeps its signal when the market it reads is left out.
 """
 from __future__ import annotations
 
@@ -25,7 +28,7 @@ from lab import costs, engine, stats
 from lab.data import Market
 from lab.universe import cluster_of
 
-THRESHOLDS = 1
+THRESHOLDS = 2
 IN_SAMPLE = ("2005-01-01", "2022-12-31")
 HOLDOUT = ("2023-01-01", "2025-12-31")
 BLOCKS = (("2005-01-01", "2007-12-31"), ("2008-01-01", "2009-12-31"), ("2010-01-01", "2014-12-31"),
@@ -358,7 +361,8 @@ def robustness(card, strategy, market, base_leg, main, period, history, crypto, 
     """Gate 6 protects against a peak, one asset, timing too tight and a clone; it decides whether
     the edge survives what live trading will change. Neighbours, clusters left out and the market
     without bitcoin move the base variant, and are compared with it; the delay, the P&L shares and
-    the clones judge the positions the other gates judge."""
+    the clones judge the positions the other gates judge. A cluster left out is not held, but its
+    prices are still read (`unheld`); bitcoin left out is removed from the market."""
     rf, base = market.rf, card.variants[0]
     base_sharpe, sharpe = (stats.sharpe(excess(leg.result, rf, period)) for leg in (base_leg, main))
     figures: dict = {}
@@ -384,8 +388,9 @@ def robustness(card, strategy, market, base_leg, main, period, history, crypto, 
     if len(clusters) > 1:
         for c in clusters:
             out = [t for t in market.prices.columns if cluster(t) == c]
-            rest = restrict(market, [t for t in market.prices.columns if t not in out])
-            result = at_cost(rest, targets(strategy, rest, base, left_out=out), crypto)
+            others = [t for t in market.prices.columns if t not in out]
+            positions = targets(strategy, unheld(market, out), base)[others]
+            result = at_cost(restrict(market, others), positions, crypto)
             kept[c] = ratio(stats.sharpe(excess(result, rf, period)), base_sharpe)
     worst = min(kept, key=kept.get) if kept else None
     figures["worst cluster out"], figures["worst cluster out ratio"] = worst, kept.get(worst)
@@ -601,6 +606,15 @@ def decide_holdout(f: dict) -> Gate:
 def restrict(market: Market, tickers) -> Market:
     tickers = list(tickers)
     return Market(market.prices[tickers], market.tradable[tickers], market.rf, market.signal_prices[tickers])
+
+
+def unheld(market: Market, tickers) -> Market:
+    """The market with `tickers` never tradable, their prices still there to be read: a cluster as
+    gate 6 leaves it out. A weight the strategy sets on them anyway is dropped, as on any asset
+    `left_out` (`targets`)."""
+    tradable = market.tradable.copy()
+    tradable[list(tickers)] = False
+    return Market(market.prices, tradable, market.rf, market.signal_prices)
 
 
 def targets(strategy, market: Market, parameters: dict, left_out=()) -> pd.DataFrame:

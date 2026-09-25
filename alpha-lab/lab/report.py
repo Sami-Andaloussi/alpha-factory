@@ -681,14 +681,17 @@ def drawn_by() -> str | None:
 
 def smaller_markets(market, crypto=costs.CRYPTO, cluster=universe.cluster_of) -> list:
     """The markets gate 6 runs the base variant on, with the assets each one leaves out: one cluster
-    left out at a time, when there are two clusters at least, and bitcoin left out, when the
-    universe holds it and something else."""
+    left out at a time, when there are two clusters at least, its assets untradable and their prices
+    still read (`battery.unheld`), and bitcoin left out, removed, when the universe holds it and
+    something else."""
     tickers = list(market.prices.columns)
     clusters = sorted({cluster(t) for t in tickers})
     out = [[t for t in tickers if cluster(t) == c] for c in clusters] if len(clusters) > 1 else []
+    given = [(battery.unheld(market, left), left) for left in out]
     if set(tickers) & set(crypto) and set(tickers) - set(crypto):
-        out.append(sorted(set(tickers) & set(crypto)))
-    return [(battery.restrict(market, [t for t in tickers if t not in left]), left) for left in out]
+        left = sorted(set(tickers) & set(crypto))
+        given.append((battery.restrict(market, [t for t in tickers if t not in left]), left))
+    return given
 
 
 def try_strategy(folder: Path, market=None, crypto=costs.CRYPTO, cluster=universe.cluster_of) -> dict:
@@ -725,8 +728,10 @@ def tried(folder: Path, market, crypto, cluster) -> dict:
     neighbours = [battery.targets(strategy, inside, p) for p in moved]     # gate 6 moves these: they must run too
     for positions in neighbours:
         engine.check_positions(positions, inside.prices)
-    for rest, left in smaller_markets(inside, crypto, cluster):
-        engine.check_positions(battery.targets(strategy, rest, card.variants[0], left_out=left), rest.prices)
+    for given, left in smaller_markets(inside, crypto, cluster):
+        kept = [t for t in given.prices.columns if t not in left]
+        engine.check_positions(battery.targets(strategy, given, card.variants[0], left_out=left)[kept],
+                               given.prices[kept])
     start = battery.first_holding(variants[0])
     if start is None:
         return {"holds an asset": False}

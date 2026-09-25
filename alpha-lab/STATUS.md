@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 260 untouched · 1 in-progress · 0 tested-conclusive · 2 tested-inconclusive · 0 not-testable.
+**263 theories**: 259 untouched · 1 in-progress · 0 tested-conclusive · 3 tested-inconclusive · 0 not-testable.
 
-**3 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 2, 2 stopped at gate 3; 1 under paper trading.
+**4 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 2, 2 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -182,7 +182,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [LL-039](bank/LL-039-cross-cryptocurrency-return-predictability.md) Cross-cryptocurrency return predictability | lead-lag and information diffusion | untouched |  |
 | [LL-040](bank/LL-040-crypto-spot-etp-futures-price-discovery.md) Crypto spot, ETP and futures price discovery | lead-lag and information diffusion | untouched |  |
 | [LL-041](bank/LL-041-cross-impact.md) Cross-impact | lead-lag and information diffusion | untouched |  |
-| [LL-042](bank/LL-042-cross-asset-momentum-spillovers.md) Cross-asset momentum spillovers | lead-lag and information diffusion | untouched |  |
+| [LL-042](bank/LL-042-cross-asset-momentum-spillovers.md) Cross-asset momentum spillovers | lead-lag and information diffusion | tested-inconclusive | [LL-042-01-equity-bond-cross-momentum](strategies/LL-042-01-equity-bond-cross-momentum/) · stops at gate 2 · [report](strategies/LL-042-01-equity-bond-cross-momentum/report.ipynb) · [verdict](strategies/LL-042-01-equity-bond-cross-momentum/verdict.md) |
 | [MR-001](bank/MR-001-short-term-reversal-liquidity-provision.md) Short-term reversal as returns to liquidity provision | mean reversion and relative value | untouched |  |
 | [MR-002](bank/MR-002-short-term-overreaction-contrarian-reversal.md) Short-term overreaction and contrarian reversal | mean reversion and relative value | untouched |  |
 | [MR-003](bank/MR-003-information-asymmetry-overshoot.md) Information asymmetry overshoot | mean reversion and relative value | untouched |  |
