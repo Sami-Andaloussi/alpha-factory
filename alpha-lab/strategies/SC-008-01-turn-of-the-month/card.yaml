@@ -1,0 +1,57 @@
+id: SC-008-01-turn-of-the-month
+theory: SC-008
+parent: null
+mechanism: >
+  Salaries, pension contributions, interest and other payments fall at the turn of the month, and
+  part of that cash is put into equities on the same days, alongside institutional purchases and a
+  release of news that favours the start of the month: equity returns concentrate in a few sessions
+  from the last of a month to the first few of the next, and are low or negative on the other days.
+prediction:
+  sign: positive
+  size: an alpha of about 1.9 to 4.9% a year before costs over the five equity funds held in equal parts, about 0.7 to 3.7% after the lab's costs of about 1.2% a year, an appraisal ratio of about 0.1 to 0.5; from all to about half of an assumed equity premium of 6% a year earned in the window, the sources finding all of the US market's gain there from 1897 to 2005 and it shifting earlier since, with anticipation in futures since 1982
+universe: [SPY, QQQ, IWM, EFA, EEM]
+horizon: days
+signal: >
+  The five funds held in equal parts over the sessions of a window around each turn of the month,
+  and nothing, the bill's rate on cash, over the other sessions. Sessions are placed on the New York
+  Stock Exchange's calendar of scheduled sessions, derived from its holiday rules alone and read
+  from no price: weekdays less New Year's Day (on 2 January when 1 January is a Sunday, not
+  observed when it is a Saturday), Martin Luther King Jr. Day, Washington's Birthday, Good Friday,
+  Memorial Day, Juneteenth from 2022, Independence Day, Labor Day, Thanksgiving and Christmas, with
+  Juneteenth, Independence Day and Christmas moved to the Friday before when they fall on a
+  Saturday and to the Monday after when on a Sunday. The last scheduled session of a month is -1,
+  the one before it -2, and so on back; the first scheduled session of the next month is +1, the
+  one after it +2, and so on. A scheduled session is in the window when it is among the last -start
+  sessions of its month or among the first end sessions of its month. On each session of the
+  market, from the first, the target is the five funds in equal parts, among those that trade, if
+  the next scheduled session is in the window, and nothing otherwise, so that the portfolio holds
+  equities over the window's sessions; a target is set only on the sessions on which it changes. A
+  scheduled session on which the exchange does not open, an unscheduled closure, is counted as the
+  calendar counts it and is absent from the market.
+parameters:
+  start: the window's first session, counted back from the month's last scheduled session, -1
+  end: the window's last session, counted from the next month's first scheduled session, +1
+variants:
+  - {start: -1, end: 3}
+  - {start: -5, end: 2}
+neighbours:
+  start: {25: [-2], 50: [-2]}
+  end: {25: [2, 4], 50: [1, 5]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the base, before costs, by the mean over the window's scheduled sessions that the market
+  has of the five funds' average daily return less the bill's rate, each session's return taken from
+  the market's previous close, less their mean over the market's other sessions, computed apart from
+  the battery from the in-sample sessions from the base's first holding, with the standard error of
+  that difference from the daily returns; and by the share of its placebos, shifted in time, that
+  the base beats at the lab's costs. The theory is refuted in this form if the difference is zero or
+  less and the base beats half of its placebos or fewer: the window's sessions would then have
+  earned no more than the others, as the bank's first refutation reads. Any other result short of
+  passing gates 1 to 7 is not proven, not refuted. Reported, not graded: the same difference for the
+  variant's window, and the base's alpha before costs, gate 2's alpha with each session's costs
+  added back to the rule's returns. The variant, the span the sources report on US index futures
+  from 1993 to 2010, a little earlier than the base, is read by its appraisal ratio and its
+  difference, about 0.07% a day if its sessions carried the whole premium.
