@@ -6,7 +6,7 @@ mechanism: [behavioural]
 asset_classes: [stocks, crypto]
 horizon: [weeks]
 data: [daily prices, trading volumes, Islamic calendar dates]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
