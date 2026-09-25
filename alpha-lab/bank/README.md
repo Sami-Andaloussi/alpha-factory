@@ -101,7 +101,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [SC-018](SC-018-halloween-effect-sell-in-may.md) | Halloween effect (Sell in May and go away) | behavioural, risk premium, macroeconomic | stocks, equity indices, crypto | months | tested-inconclusive |
 | [SC-019](SC-019-january-barometer.md) | January barometer | behavioural, macroeconomic | equity indices | months | tested-inconclusive |
 | [SC-020](SC-020-presidential-election-cycle.md) | Presidential election cycle (political cycle) | macroeconomic, risk premium, behavioural | stocks, equity indices | years | not-testable |
-| [SC-021](SC-021-same-calendar-month-seasonality.md) | Same-calendar-month seasonality (cross-section of stock returns) | flows, risk premium, information | stocks | months | untouched |
+| [SC-021](SC-021-same-calendar-month-seasonality.md) | Same-calendar-month seasonality (cross-section of stock returns) | flows, risk premium, information | stocks | months | not-testable |
 | [SC-022](SC-022-information-cycle-return-seasonality.md) | Information-cycle explanation of return seasonality | information | stocks, sectors | months | untouched |
 | [SC-023](SC-023-return-seasonalities.md) | Return seasonalities | risk premium, behavioural, flows | stocks, equity indices, crypto | days, months | untouched |
 | [SC-024](SC-024-overnight-return-premium.md) | Overnight return premium | microstructure, limits to arbitrage | stocks, equity indices | intraday, days | untouched |
