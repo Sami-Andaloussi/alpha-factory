@@ -1,0 +1,60 @@
+id: SC-007-01-santa-claus-window
+theory: SC-007
+parent: null
+mechanism: >
+  Holiday optimism and a lower aversion to risk, the retreat of institutions, year-end flows and
+  bonuses, and the anticipation of the January effect lift the stock market over the last five
+  trading days of December and the first two of January.
+prediction:
+  sign: positive
+  size: a judgment, from the sources -- the five equity funds' excess return over the seven sessions about 0.5 to 1.3% a year, positive in about 55 to 70% of the years, a mean daily excess return about 0.04 to 0.16% above the other sessions'; the rule's alpha about 0.3 to 1.1% a year before costs of about 0.1% a year, a Sharpe ratio of about 0.1 to 0.3 and an appraisal ratio of about 0.05 to 0.25; gate 2 expected to fail
+universe: [SPY, QQQ, IWM, EFA, EEM]
+horizon: days
+signal: >
+  Sessions are placed on the New York Stock Exchange's calendar of scheduled sessions, derived from
+  its holiday rules alone and read from no price: weekdays less New Year's Day (on 2 January when 1
+  January is a Sunday, not observed when it is a Saturday), Martin Luther King Jr. Day, Washington's
+  Birthday, Good Friday, Memorial Day, Juneteenth from 2022, Independence Day, Labor Day,
+  Thanksgiving and Christmas, with Juneteenth, Independence Day and Christmas moved to the Friday
+  before when they fall on a Saturday and to the Monday after when on a Sunday. A scheduled session
+  is in the window when it is among the last december scheduled sessions of a December or the first
+  january scheduled sessions of a January. On each session of the market, from the first, the target
+  is the five funds in equal parts, among those that trade, if the next scheduled session is in the
+  window, and nothing, the bill's rate on cash, otherwise, so that the portfolio holds equities over
+  the window's sessions; a target is set only on the sessions on which it changes, and on the first.
+  A scheduled session on which the exchange does not open is counted as the calendar counts it and
+  is absent from the market.
+parameters:
+  december: how many of December's last scheduled sessions are in the window
+  january: how many of January's first scheduled sessions are in the window
+variants:
+  - {december: 5, january: 2}
+neighbours:
+  december: {25: [4, 6], 50: [2, 8]}
+  january: {25: [1, 3], 50: [1, 3]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs: over the in-sample sessions from the base's first held, the five funds'
+  average daily return less the bill's rate, each from the market's previous close; the mean over
+  the sessions whose return spans a scheduled session of the window, less the mean over the other
+  sessions, with the standard error of that difference, the square root of the sum of each group's
+  variance over its count, and its t statistic, computed apart from the battery. The theory is
+  refuted in this form if that t statistic is -0.35 or below. Above it, short of passing gates 1 to
+  7, it is not proven, not refuted; a base that passes gates 1 to 7 while the clause refutes leaves
+  the theory refuted in this form. Of SC-007's refutation criteria the first is graded, the second
+  and third reported, the fourth beyond the lab's data. Reported, not graded: the window's excess
+  return year by year, compounded, over the seventeen full windows 2005-06 to 2021-22, with the
+  years positive, against the share positive of all spans of seven consecutive in-sample market
+  returns, overlapping, one starting at each session, the window's own included, excess compounded,
+  the partial windows apart; the same difference and year by year for each fund, for the three US
+  funds' average and for IWM less SPY; the window's daily mean less the rest of December's and less
+  the rest of January's, and each part of those months against the sessions outside them; the
+  December part, from the close of -6 to the close of -1, and the January part, from the close of -1
+  to the close of +2, each as a daily mean less the other sessions' and compounded year by year; the
+  window's daily mean less the other months' sessions -5 to +2, and each of the seven sessions'
+  mean; each with its standard error, the square root of the sum of each group's variance over its
+  count; the rule's alpha before and after costs, and the neighbours' and the one-day-late rule's
+  alphas and appraisal ratios.
