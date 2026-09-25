@@ -6,7 +6,7 @@ mechanism: [information, limits to arbitrage, behavioural]
 asset_classes: [equity indices, bonds, credit, currencies]
 horizon: [months, years]
 data: [monthly equity index returns, corporate bond returns, government bond returns, exchange rates]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

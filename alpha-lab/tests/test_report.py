@@ -668,8 +668,10 @@ def test_trying_a_strategy_checks_every_variant_and_neighbour_s_targets(lab, mar
 
 def test_trying_a_strategy_runs_it_on_gate_6_s_smaller_markets(lab, market):
     root, _ = lab
-    needy = STRATEGY.replace(FIRST_LINE, FIRST_LINE + "    market.signal_prices['S1']\n")
-    with pytest.raises(KeyError):
+    reads = STRATEGY.replace(FIRST_LINE, FIRST_LINE + "    market.signal_prices['S1']\n")
+    attempt(new_strategy(root, "demo-33-reads", code=reads), market)          # a cluster left out is still read
+    needy = STRATEGY.replace(FIRST_LINE, FIRST_LINE + "    assert market.tradable['S1'].any()\n")
+    with pytest.raises(AssertionError):                                        # but it is never tradable
         attempt(new_strategy(root, "demo-34-needy", code=needy), market)
 
 
@@ -764,6 +766,20 @@ def test_a_registry_restored_or_merged_whole_lacks_nothing(tmp_path):
     path.write_text(held("a", "c"))                                        # a merge that keeps one side only
     commit(tmp_path, "merged, one side", "registry/trials.jsonl")
     assert registry.dropped(path) == [one("b"), one("d")]
+
+
+def test_the_board_links_the_reason_a_theory_is_not_testable(tmp_path):
+    (tmp_path / "bank").mkdir()
+    for ident, state in (("T-3", "not-testable"), ("T-4", "in-progress")):
+        (tmp_path / "bank" / f"{ident}.md").write_text(f"---\nid: {ident}\ntitle: t\nfamily: f\nstatus: {state}\n---\n")
+    for name in ("T-3-01-d", "T-4-01-e"):
+        (tmp_path / "strategies" / name).mkdir(parents=True)
+        (tmp_path / "strategies" / name / "reasoning.md").write_text("Why.\n")
+    (tmp_path / "trials.jsonl").write_text("")
+    board = status.render(tmp_path, tmp_path / "trials.jsonl")
+    assert "| not-testable | [T-3-01-d](strategies/T-3-01-d/) · not testable: [reasoning](strategies/T-3-01-d/reasoning.md) |" in board
+    assert "[T-4-01-e](strategies/T-4-01-e/) · no card: [reasoning](strategies/T-4-01-e/reasoning.md)" in board
+    assert "**0 strategies**" in board                                    # a reasoning without a card is no strategy
 
 
 def test_the_board_lists_every_theory_every_outcome_and_every_orphan(tmp_path):

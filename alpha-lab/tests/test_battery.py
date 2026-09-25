@@ -51,7 +51,7 @@ def verdict(planted):
 
 def test_the_thresholds_are_those_of_their_version():
     """Changing a threshold is a versioned decision: this test changes with THRESHOLDS."""
-    assert battery.THRESHOLDS == 1
+    assert battery.THRESHOLDS == 2
     assert (battery.IN_SAMPLE, battery.HOLDOUT) == (("2005-01-01", "2022-12-31"), ("2023-01-01", "2025-12-31"))
     assert [b[0][:4] + "-" + b[1][:4] for b in battery.BLOCKS] == ["2005-2007", "2008-2009", "2010-2014",
                                                                    "2015-2019", "2020-2022"]
@@ -335,8 +335,9 @@ def test_gate_six_moves_the_base_variant_and_judges_the_other_gates_positions(pl
     left = {}
     for cluster in ("a", "b", "c"):
         out = [t for t in EIGHT if CLUSTERS[t] == cluster]
-        rest = battery.restrict(inside, [t for t in EIGHT if t not in out])
-        left[cluster] = sharpe_of(rest, battery.targets(strategy, rest, {"span": 10}, left_out=out)) / base
+        others = [t for t in EIGHT if t not in out]
+        seen = battery.targets(strategy, battery.unheld(inside, out), {"span": 10})[others]
+        left[cluster] = sharpe_of(battery.restrict(inside, others), seen) / base
     assert ev["clusters out"] == pytest.approx(left, rel=1e-9)
     assert f["worst cluster out"] == min(left, key=left.get)
     assert f["worst cluster out ratio"] == pytest.approx(min(left.values()), rel=1e-9)
@@ -1105,6 +1106,39 @@ def test_an_edge_that_lives_in_one_cluster_fails_when_it_is_left_out():
     gate = judge(signal_strategy(signal), Market(prices, market.tradable, market.rf, prices.copy())).gates[5]
     assert gate.figures["worst cluster out"] == "a"
     assert gate.figures["worst cluster out ratio"] < battery.CLUSTER_OUT and not gate.passed
+
+
+def test_a_cluster_left_out_is_not_held_but_still_read():
+    """Gate 6, version 2: a rule that trades cluster b on cluster a's signal keeps its signal when a is
+    left out, and holds nothing of a; left out itself, b takes the rule's profit with it."""
+    market, signal = synthetic_market(6, beta=0.0)
+    edge, planted_signal = synthetic_market(1, beta=0.08)
+    prices = market.prices.copy()
+    for lag in ("S4", "S5", "S6"):                                  # b's returns reward a planted signal
+        prices[lag] = edge.prices[lag]
+    read = signal.copy()
+    for lead, lag in (("S1", "S4"), ("S2", "S5"), ("S3", "S6")):   # which a's signal carries: a leads b
+        read[lead] = planted_signal[lag]
+
+    def cross(market, span=10, every=5):
+        s = read.reindex(market.prices.index)[["S1", "S2", "S3"]].ewm(span=span).mean().shift(1)
+        lead = market.signal_prices[["S1", "S2", "S3"]]                          # read, never held
+        score = pd.DataFrame(s.clip(lower=0).to_numpy(), index=s.index, columns=["S4", "S5", "S6"])
+        score = score.where(market.tradable[["S4", "S5", "S6"]] & lead.notna().to_numpy(), 0.0).fillna(0.0)
+        total = score.sum(axis=1)
+        weights = score.div(total.where(total > 0), axis=0).fillna(0.0).reindex(columns=market.prices.columns,
+                                                                                   fill_value=0.0)
+        out = weights * np.nan
+        out.iloc[::every] = weights.iloc[::every]
+        return out
+
+    whole = Market(prices, market.tradable, market.rf, prices.copy())
+    clusters_out = judge(cross, whole).evidence["clusters out"]
+    assert clusters_out["a"] == pytest.approx(1.0, rel=1e-9)                 # a is read, never held: nothing moves
+    assert clusters_out["b"] == 0.0                                          # b held the profit: none is left
+    inside = whole.window(*battery.IN_SAMPLE)
+    unheld = battery.unheld(inside, ["S1", "S2", "S3"])
+    assert not unheld.tradable[["S1", "S2", "S3"]].any().any() and unheld.prices.equals(inside.prices)
 
 
 def test_a_clone_of_a_survivor_fails_robustness(planted, verdict):

@@ -81,9 +81,12 @@ its own, beside the snapshot, whose files never change.
    - a periodic rebalance sets its targets on the first session of each period, not the last:
      knowing that a session is the last of its month means knowing the next session's date, and
      gate 1 counts that as reading the future;
-   - no weight on an asset that is not trading yet (`market.tradable`);
-   - targets only on the sessions and assets of the market it is given, which gate 6 makes
-     smaller: a date or an asset outside it is refused;
+   - no weight on an asset that is not trading (`market.tradable`), and a rule that chooses among
+     assets chooses among those that trade;
+   - targets only on the sessions and assets of the market it is given: a date or an asset outside
+     it is refused. Gate 6 leaves each cluster out in turn by making its assets untradable, their
+     prices still there to be read, so that a rule reading one market to trade another keeps its
+     signal; it leaves bitcoin out by removing it from the market;
    - it reads nothing but its `market` argument (no file, no network, nothing of the lab: the run
      refuses a folder whose code imports `lab`), never edits that market (each call gets a copy of
      its frames, so an edit through pandas changes nothing the battery prices, only the strategy's

@@ -153,7 +153,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [LL-039](LL-039-cross-cryptocurrency-return-predictability.md) | Cross-cryptocurrency return predictability | information, behavioural, microstructure, structural | crypto | days, weeks | untouched |
 | [LL-040](LL-040-crypto-spot-etp-futures-price-discovery.md) | Crypto spot, ETP and futures price discovery | information, microstructure, limits to arbitrage | crypto | intraday, days | untouched |
 | [LL-041](LL-041-cross-impact.md) | Cross-impact | microstructure, information, limits to arbitrage | stocks, equity indices | intraday | untouched |
-| [LL-042](LL-042-cross-asset-momentum-spillovers.md) | Cross-asset momentum spillovers | information, limits to arbitrage, behavioural | equity indices, bonds, credit, currencies | months, years | untouched |
+| [LL-042](LL-042-cross-asset-momentum-spillovers.md) | Cross-asset momentum spillovers | information, limits to arbitrage, behavioural | equity indices, bonds, credit, currencies | months, years | tested-inconclusive |
 
 ## Cross-asset relative value (CA, 21)
 

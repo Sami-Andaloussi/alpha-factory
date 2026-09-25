@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -127,6 +128,22 @@ def reached(strategy: dict) -> str:
     return said
 
 
+def reasoned(lab: Path = LAB) -> dict[str, list[str]]:
+    """Strategy folders that hold a reasoning and no card, by the theory their name starts with: a
+    theory recorded `not-testable` keeps its reason there, in `reasoning.md`, and no card is drawn."""
+    found: dict[str, list[str]] = {}
+    for folder in sorted(p for p in (lab / "strategies").glob("*/") if p.is_dir()):
+        named = re.match(r"^(.+?)-\d{2}-", folder.name)
+        if named and (folder / "reasoning.md").exists() and not (folder / "card.yaml").exists():
+            found.setdefault(named.group(1), []).append(folder.relative_to(lab).as_posix())
+    return found
+
+
+def reason_cell(folder: str, status: str) -> str:
+    what = "not testable" if status == "not-testable" else "no card"
+    return f"[{folder.rsplit('/', 1)[-1]}]({folder}/) · {what}: [reasoning]({folder}/reasoning.md)"
+
+
 def cell(strategy: dict, live: dict | None = None) -> str:
     links = [f"[{strategy['id']}]({strategy['folder']}/)", reached(strategy)]
     if strategy["id"] in (live or {}):
@@ -146,6 +163,7 @@ def plural(n: int, one: str, many: str) -> str:
 
 def render(lab: Path = LAB, registry_path: Path = registry.REGISTRY) -> str:
     bank, runs, live = theories(lab), strategies(lab, registry_path), paper_trading(lab)
+    reasons = reasoned(lab)
     by_theory: dict[str, list[dict]] = {}
     for strategy in runs:
         by_theory.setdefault(strategy["theory"], []).append(strategy)
@@ -160,7 +178,8 @@ def render(lab: Path = LAB, registry_path: Path = registry.REGISTRY) -> str:
               else "") + ".", "",
            "| Theory | Family | Status | Strategies |", "|---|---|---|---|"]
     for theory in bank:
-        drawn = "<br>".join(cell(s, live) for s in by_theory.pop(theory["id"], []))
+        drawn = "<br>".join([*(cell(s, live) for s in by_theory.pop(theory["id"], [])),
+                             *(reason_cell(f, theory.get("status", "untouched")) for f in reasons.get(theory["id"], []))])
         out.append(f"| [{theory['id']}]({theory['file']}) {theory.get('title', '')} | {theory.get('family', '')} "
                    f"| {theory.get('status', 'untouched')} | {drawn} |")
     orphans = [s for group in by_theory.values() for s in group]
