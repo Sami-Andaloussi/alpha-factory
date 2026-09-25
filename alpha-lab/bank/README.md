@@ -67,7 +67,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [MR-026](MR-026-closed-end-fund-discount.md) | Closed-end fund discount mean reversion | limits to arbitrage, behavioural | stocks | months, years | untouched |
 | [MR-029](MR-029-profitability-fade-competitive-pressure.md) | Profitability fade under competitive pressure | behavioural | stocks | years | untouched |
 | [MR-031](MR-031-intra-industry-reversal-sector-relative-value.md) | Intra-industry reversal and sector relative value | flows, microstructure, limits to arbitrage | stocks, equity indices, sectors, bonds, commodities, currencies | weeks, months | untouched |
-| [MR-032](MR-032-cross-sectional-mean-reversion.md) | Cross-sectional mean reversion | microstructure, behavioural | stocks, equity indices, bonds, commodities, currencies | days, weeks | untouched |
+| [MR-032](MR-032-cross-sectional-mean-reversion.md) | Cross-sectional mean reversion | microstructure, behavioural | stocks, equity indices, bonds, commodities, currencies | days, weeks | tested-inconclusive |
 | [MR-033](MR-033-relative-versus-intrinsic-mean-reversion.md) | Relative versus intrinsic mean reversion | structural, macroeconomic | equity indices, bonds, commodities, currencies | weeks, months, years | untouched |
 | [MR-035](MR-035-cointegration-error-correction.md) | Cointegration and error correction | limits to arbitrage, structural, flows | stocks, equity indices, bonds, commodities, currencies, crypto | days, weeks, months | untouched |
 | [MR-036](MR-036-threshold-cointegration.md) | Threshold cointegration | limits to arbitrage, microstructure | stocks, equity indices, bonds, commodities, currencies | intraday, days, weeks | untouched |

@@ -6,7 +6,7 @@ mechanism: [microstructure, behavioural]
 asset_classes: [stocks, equity indices, bonds, commodities, currencies]
 horizon: [days, weeks]
 data: [daily prices, market capitalisation, trading volumes]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
