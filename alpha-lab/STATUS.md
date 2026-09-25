@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 231 untouched · 1 in-progress · 0 tested-conclusive · 26 tested-inconclusive · 5 not-testable.
+**263 theories**: 230 untouched · 1 in-progress · 0 tested-conclusive · 26 tested-inconclusive · 6 not-testable.
 
 **28 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 17 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -231,7 +231,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [SC-017](bank/SC-017-month-of-the-year-effect.md) Month-of-the-year effect | seasonality and calendar effects | tested-inconclusive | [SC-017-01-september-october-in-cash](strategies/SC-017-01-september-october-in-cash/) · stops at gate 3 · [report](strategies/SC-017-01-september-october-in-cash/report.ipynb) · [verdict](strategies/SC-017-01-september-october-in-cash/verdict.md) |
 | [SC-018](bank/SC-018-halloween-effect-sell-in-may.md) Halloween effect (Sell in May and go away) | seasonality and calendar effects | tested-inconclusive | [SC-018-01-november-to-april](strategies/SC-018-01-november-to-april/) · stops at gate 2 · [report](strategies/SC-018-01-november-to-april/report.ipynb) · [verdict](strategies/SC-018-01-november-to-april/verdict.md) |
 | [SC-019](bank/SC-019-january-barometer.md) January barometer | seasonality and calendar effects | tested-inconclusive | [SC-019-01-january-barometer](strategies/SC-019-01-january-barometer/) · stops at gate 1 · [report](strategies/SC-019-01-january-barometer/report.ipynb) · [verdict](strategies/SC-019-01-january-barometer/verdict.md) |
-| [SC-020](bank/SC-020-presidential-election-cycle.md) Presidential election cycle (political cycle) | seasonality and calendar effects | untouched |  |
+| [SC-020](bank/SC-020-presidential-election-cycle.md) Presidential election cycle (political cycle) | seasonality and calendar effects | not-testable | [SC-020-01-presidential-cycle](strategies/SC-020-01-presidential-cycle/) · not testable: [reasoning](strategies/SC-020-01-presidential-cycle/reasoning.md) |
 | [SC-021](bank/SC-021-same-calendar-month-seasonality.md) Same-calendar-month seasonality (cross-section of stock returns) | seasonality and calendar effects | untouched |  |
 | [SC-022](bank/SC-022-information-cycle-return-seasonality.md) Information-cycle explanation of return seasonality | seasonality and calendar effects | untouched |  |
 | [SC-023](bank/SC-023-return-seasonalities.md) Return seasonalities | seasonality and calendar effects | untouched |  |

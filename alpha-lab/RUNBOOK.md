@@ -190,7 +190,13 @@ its own, beside the snapshot, whose files never change.
    of its own: the measure is then the same for every such card.
 9. **The theory's status**, once no other strategy will be drawn from it: `tested-conclusive` if
    one of its strategies passed gates 1 to 7, `tested-inconclusive` if they all failed, or
-   `not-testable`, with the reason in `reasoning.md`.
+   `not-testable`, with the reason in `reasoning.md`. A form whose rule is certain to fail a gate
+   whatever the prices — a calendar rule whose count of decisions, fixed in advance, falls short of
+   gate 1's thirty (SC-020-01), a one-day rule against gate 6's day of delay (SC-011-01) — buys only
+   its clause and adds a trial to gate 4's count for every later card: no card is drawn for it, and
+   if no other form remains the theory is `not-testable`, the count in its reasoning. A failure only
+   likely, a count that depends on the prices, is written into the card, which is drawn
+   (SC-019-01).
 10. **Commit**: first `python -m lab.status` and `python -m lab.bank`, so that the board and the
     bank's index show the verdict and the status; then the folder, `STATUS.md`, the theory's file
     and `bank/README.md`.

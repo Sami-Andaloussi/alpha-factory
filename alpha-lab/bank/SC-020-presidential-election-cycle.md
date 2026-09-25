@@ -6,7 +6,7 @@ mechanism: [macroeconomic, risk premium, behavioural]
 asset_classes: [stocks, equity indices]
 horizon: [years]
 data: [monthly index returns, election dates, Congress session dates, market capitalisation]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
