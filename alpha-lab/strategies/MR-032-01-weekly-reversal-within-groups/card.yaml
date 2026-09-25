@@ -1,0 +1,58 @@
+id: MR-032-01-weekly-reversal-within-groups
+theory: MR-032
+parent: null
+mechanism: >
+  Selling or buying pressure pushes a member of a basket of comparable assets away from the basket
+  for a short while; whoever buys the laggard and sells the leader supplies liquidity and is paid
+  for it, and the member's return reverts towards the basket's over the next days: an asset's past
+  short-term return relative to its basket predicts its next one with a negative sign.
+prediction:
+  sign: positive (the laggards' alpha before costs; the rank correlation negative)
+  size: a judgment, not derived -- a weekly rank correlation between a fund's past week and its next week, within its group, of about -0.01, between -0.02 and a little below zero; an alpha before costs of about 0.5 to 1.5% a year over the same funds held in equal parts, clearly negative after costs of about 3.2% a year; a correlation near -0.045 would break even at the lab's costs, and gate 2, which asks a positive alpha at twice the costs, would need one near -0.09; these alphas map the correlation over the returns the rule holds, from the target's close, which may be up to half the graded one if the reversal decays within days; the sources expect the reversal weakest in liquid instruments, and momentum at short horizons among industries and futures
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY, SPY, QQQ, IWM, EFA, EEM, GLD, SLV, DBC]
+horizon: weeks
+signal: >
+  On the first session of each calendar week, Monday to Sunday (pace week), or of each month (pace
+  month), within each basket -- with basket groups, the eleven sector funds, the five equity markets
+  SPY, QQQ, IWM, EFA and EEM, and the commodities GLD, SLV and DBC; with basket universe, the
+  nineteen together -- the members trading on that session and on the session lookback sessions
+  before the session before it are ranked by their return from that earlier session to the session
+  before the target. The bottom third of each basket's ranked members, rounded, one at least, is
+  held: its laggards, a tie at the cut held by the member listed first in the universe. Of the N
+  assets trading, a basket of n ranked members holds n/N of the portfolio, split equally among its
+  laggards; an asset trading but not ranked is held at 1/N, its benchmark weight. The targets start
+  on the first period in which an asset is ranked; from then the portfolio is always fully invested.
+parameters:
+  lookback: sessions of the return that ranks the members, to the session before the target
+  pace: week or month, the period on whose first session the targets are set
+  basket: groups, the three groups apart, or universe, the nineteen together
+variants:
+  - {lookback: 5, pace: week, basket: groups}
+  - {lookback: 21, pace: month, basket: groups}
+  - {lookback: 5, pace: week, basket: universe}
+neighbours:
+  lookback: {25: [4, 6], 50: [2, 8]}
+choose: false
+memory: 21
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs on the base's own claim, a negative relation between a member's past relative
+  return and its next, on the weeks of the in-sample years: on each weekly target session from the
+  base's first, 2005-01-18, whose next window ends on or before 2022-12-30, within each group with
+  three ranked members or more, the rank correlation (Spearman's) between the members' returns over
+  the five-session window, to the close of the session before the target, and their returns from
+  that close to the close of the session before the next weekly target session, no session left out;
+  each week the groups' correlations averaged, each weighted by its number of ranked members; the
+  mean over the weeks, with its standard error, the weekly series' standard deviation over the
+  square root of the number of weeks. The theory is refuted in this form if that mean is +0.004 or
+  above. A mean below +0.004 short of passing gates 1 to 7 is not proven, not refuted; a base that
+  passes gates 1 to 7 while the clause refutes leaves the theory refuted in this form. Of MR-032's
+  refutation criteria the first is graded, the second (decay) reported, the third (small against
+  large capitalisations) not testable on these funds. Reported, not graded: the same correlation
+  with the groups weighted equally, and over the returns the rule can hold, from the target's close
+  to the next target's close; the monthly variant's and the pooled variant's correlations, measured
+  as the base's; the base's correlation with the target session's own return, with the first session
+  held, and with the week after next; the correlation by group and in 2008 and 2020; the weekly
+  series' lag-one autocorrelation; each variant's alpha before and after costs, and its costs.

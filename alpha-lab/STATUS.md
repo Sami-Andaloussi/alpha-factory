@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 245 untouched · 1 in-progress · 0 tested-conclusive · 15 tested-inconclusive · 2 not-testable.
+**263 theories**: 244 untouched · 1 in-progress · 0 tested-conclusive · 16 tested-inconclusive · 2 not-testable.
 
-**16 strategies**: 0 passing gates 1 to 7, 10 stopped at gate 2, 6 stopped at gate 3; 1 under paper trading.
+**17 strategies**: 0 passing gates 1 to 7, 11 stopped at gate 2, 6 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -203,7 +203,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [MR-026](bank/MR-026-closed-end-fund-discount.md) Closed-end fund discount mean reversion | mean reversion and relative value | untouched |  |
 | [MR-029](bank/MR-029-profitability-fade-competitive-pressure.md) Profitability fade under competitive pressure | mean reversion and relative value | untouched |  |
 | [MR-031](bank/MR-031-intra-industry-reversal-sector-relative-value.md) Intra-industry reversal and sector relative value | mean reversion and relative value | untouched |  |
-| [MR-032](bank/MR-032-cross-sectional-mean-reversion.md) Cross-sectional mean reversion | mean reversion and relative value | untouched |  |
+| [MR-032](bank/MR-032-cross-sectional-mean-reversion.md) Cross-sectional mean reversion | mean reversion and relative value | tested-inconclusive | [MR-032-01-weekly-reversal-within-groups](strategies/MR-032-01-weekly-reversal-within-groups/) · stops at gate 2 · [report](strategies/MR-032-01-weekly-reversal-within-groups/report.ipynb) · [verdict](strategies/MR-032-01-weekly-reversal-within-groups/verdict.md) |
 | [MR-033](bank/MR-033-relative-versus-intrinsic-mean-reversion.md) Relative versus intrinsic mean reversion | mean reversion and relative value | untouched |  |
 | [MR-035](bank/MR-035-cointegration-error-correction.md) Cointegration and error correction | mean reversion and relative value | untouched |  |
 | [MR-036](bank/MR-036-threshold-cointegration.md) Threshold cointegration | mean reversion and relative value | untouched |  |
