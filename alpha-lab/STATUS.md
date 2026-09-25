@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 225 untouched · 1 in-progress · 0 tested-conclusive · 28 tested-inconclusive · 9 not-testable.
+**263 theories**: 224 untouched · 1 in-progress · 0 tested-conclusive · 29 tested-inconclusive · 9 not-testable.
 
-**30 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 19 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
+**31 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 20 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -237,7 +237,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [SC-023](bank/SC-023-return-seasonalities.md) Return seasonalities | seasonality and calendar effects | tested-inconclusive | [SC-023-01-same-month-across-assets](strategies/SC-023-01-same-month-across-assets/) · stops at gate 2 · [report](strategies/SC-023-01-same-month-across-assets/report.ipynb) · [verdict](strategies/SC-023-01-same-month-across-assets/verdict.md) |
 | [SC-024](bank/SC-024-overnight-return-premium.md) Overnight return premium | seasonality and calendar effects | not-testable | [SC-024-01-overnight-premium](strategies/SC-024-01-overnight-premium/) · not testable: [reasoning](strategies/SC-024-01-overnight-premium/reasoning.md) |
 | [SC-025](bank/SC-025-seasonal-affective-disorder-effect.md) Seasonal affective disorder (SAD) effect | seasonality and calendar effects | tested-inconclusive | [SC-025-01-equinox-to-solstice](strategies/SC-025-01-equinox-to-solstice/) · stops at gate 2 · [report](strategies/SC-025-01-equinox-to-solstice/report.ipynb) · [verdict](strategies/SC-025-01-equinox-to-solstice/verdict.md) |
-| [SC-026](bank/SC-026-daylight-saving-time-anomaly.md) Daylight saving time anomaly | seasonality and calendar effects | untouched |  |
+| [SC-026](bank/SC-026-daylight-saving-time-anomaly.md) Daylight saving time anomaly | seasonality and calendar effects | tested-inconclusive | [SC-026-01-sessions-after-the-clock-change](strategies/SC-026-01-sessions-after-the-clock-change/) · stops at gate 2 · [report](strategies/SC-026-01-sessions-after-the-clock-change/report.ipynb) · [verdict](strategies/SC-026-01-sessions-after-the-clock-change/verdict.md) |
 | [SC-027](bank/SC-027-lunar-cycle-effect.md) Lunar cycle effect | seasonality and calendar effects | untouched |  |
 | [SC-028](bank/SC-028-sunshine-effect.md) Sunshine effect | seasonality and calendar effects | untouched |  |
 | [TM-001](bank/TM-001-cross-sectional-price-momentum.md) Cross-sectional price momentum (relative strength) | trend and momentum | untouched |  |

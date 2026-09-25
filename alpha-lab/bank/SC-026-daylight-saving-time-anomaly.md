@@ -6,7 +6,7 @@ mechanism: [behavioural]
 asset_classes: [stocks, equity indices]
 horizon: [days]
 data: [daily prices, daylight saving time change dates]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

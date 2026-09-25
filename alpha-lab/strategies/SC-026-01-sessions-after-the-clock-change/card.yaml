@@ -1,0 +1,59 @@
+id: SC-026-01-sessions-after-the-clock-change
+theory: SC-026
+parent: null
+mechanism: >
+  A change of the clocks disrupts investors' sleep and circadian rhythm, which lowers their
+  attention and raises their aversion to risk for a short while: the US equity market's first
+  session after each change of the clocks earns less than comparable sessions, after the spring
+  change most.
+prediction:
+  sign: positive (the rule's alpha; the sessions after the changes' gap to the other Friday-to-Monday sessions negative)
+  size: a judgment, no source in the library giving a figure -- the sector funds' return on the first session after a spring change about 0 to 0.3% below the other Friday-to-Monday sessions, after an autumn change about 0 to 0.1%, over the thirty-six about 0 to -0.2% a day leaving aside 2020-03-09's pull, which adds about -0.2% a day more, the gap without that session read against the range; the rule out of them over those sessions an alpha of about +0.1 to +0.5% a year before costs of about 0.2% a year, an estimate that adds the week's first session's published weakness, and about +0.4% a year more from 2020-03-09 alone, a session known to have fallen about 7.6%; an appraisal ratio of about -0.1 to +0.3; gate 4 expected to fail, gate 2 may pass carried by 2020-03-09, gate 3 uncertain, gate 5 likely to fail
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY]
+horizon: days
+signal: >
+  Sessions are placed on the New York Stock Exchange's calendar of scheduled sessions, derived from
+  its holiday rules alone and read from no price: weekdays less New Year's Day (on 2 January when 1
+  January is a Sunday, not observed when it is a Saturday), Martin Luther King Jr. Day, Washington's
+  Birthday, Good Friday, Memorial Day, Juneteenth from 2022, Independence Day, Labor Day,
+  Thanksgiving and Christmas, with Juneteenth, Independence Day and Christmas moved to the Friday
+  before when they fall on a Saturday and to the Monday after when on a Sunday. The United States'
+  changes of the clocks fall, from 2007, on the second Sunday of March and the first Sunday of
+  November, and before 2007 on the first Sunday of April and the last Sunday of October. A session
+  is out when it is one of the `sessions` first scheduled sessions after a change's Sunday. On each
+  session of the market, from the first, the target is the sector funds in equal parts, among those
+  that trade, if the next scheduled session is not out, and nothing otherwise, so that the portfolio
+  holds the funds over the other sessions and the bill's rate over those out; a target is set only
+  on the first session and on the sessions on which it changes.
+parameters:
+  sessions: how many of the first scheduled sessions after each change of the clocks are out
+variants:
+  - {sessions: 1}
+neighbours:
+  sessions: {25: [2], 50: [2]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, over the in-sample sessions from 4 January 2005, each placed by the market
+  session whose return spans it: the sector funds' equal-weighted average daily return, over those
+  that trade, less the bill's rate, over the thirty-six sessions whose return spans the Sunday of a
+  change of the clocks, from a Friday's close to a Monday's close, less the same over the other
+  sessions whose return spans a Saturday and a Sunday alone, from a Friday's close to the next
+  Monday's; the standard error of that difference from the two groups' daily variances, and its t
+  statistic, computed apart from the battery. The theory is refuted in this form if that t
+  statistic is +0.35 or above: the sessions after the changes no weaker than comparable sessions.
+  Below it, short of passing gates 1 to 7, it is not proven, not refuted; a base that passes gates
+  1 to 7 while the clause refutes leaves the theory refuted in this form. Known before the run:
+  2020-03-09, one of the thirty-six, fell about 7.6% in the US market, which tilts the clause toward
+  not refuted by a session no source ties to sleep; and the autumn Monday is an election eve in
+  seven even years from 2008. Of SC-026's refutation criteria the first is graded, and with it the
+  second's new sample; investors' sleep and risk-taking are out of reach. Reported, not graded: the
+  gap by sector fund, and for SPY, QQQ, IWM, EFA and EEM; the spring and the autumn changes apart,
+  and the autumn without the election eves; without 2020-03-09, and without 2020; the same gap
+  against all other sessions; the second session after each change; EFA on the session whose
+  return spans the Sunday of its European markets' change, against the other Friday-to-Monday
+  sessions; 2007-2022, and 2005-2006 as too few to inform; the same gap over the holdout, 2023 to
+  2025; the base's alpha before and after costs, with and without 2020-03-09, and the neighbour's
+  and the one-day-late rule's alphas and appraisal ratios.
