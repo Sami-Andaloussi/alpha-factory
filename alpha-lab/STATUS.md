@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 262 untouched · 1 in-progress · 0 tested-conclusive · 0 tested-inconclusive · 0 not-testable.
+**263 theories**: 261 untouched · 1 in-progress · 0 tested-conclusive · 1 tested-inconclusive · 0 not-testable.
 
-**1 strategy**: 0 passing gates 1 to 7, 1 stopped at gate 3; 1 under paper trading.
+**2 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 2, 1 stopped at gate 3; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -41,7 +41,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [AS-042](bank/AS-042-on-chain-transparency.md) Open data and on-chain transparency | asset-specific mechanisms | untouched |  |
 | [AS-043](bank/AS-043-blockspace-scarcity-congestion.md) Blockspace scarcity and blockchain congestion | asset-specific mechanisms | untouched |  |
 | [AS-044](bank/AS-044-dex-amm-design-mev.md) DEX and AMM design, MEV extraction and DeFi token economics | asset-specific mechanisms | untouched |  |
-| [CA-001](bank/CA-001-momentum-sectors-countries-asset-classes.md) Momentum across sectors, countries and asset classes | cross-asset relative value | untouched |  |
+| [CA-001](bank/CA-001-momentum-sectors-countries-asset-classes.md) Momentum across sectors, countries and asset classes | cross-asset relative value | tested-inconclusive | [CA-001-01-momentum-within-groups](strategies/CA-001-01-momentum-within-groups/) · stops at gate 2 · [report](strategies/CA-001-01-momentum-within-groups/report.ipynb) · [verdict](strategies/CA-001-01-momentum-within-groups/verdict.md) |
 | [CA-003](bank/CA-003-factor-momentum.md) Factor momentum | cross-asset relative value | untouched |  |
 | [CA-006](bank/CA-006-do-industries-lead-stock-markets.md) Do industries lead stock markets? | cross-asset relative value | untouched |  |
 | [CA-011](bank/CA-011-sector-rotation.md) Sector rotation | cross-asset relative value | untouched |  |

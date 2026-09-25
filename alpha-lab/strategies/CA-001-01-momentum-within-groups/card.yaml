@@ -1,0 +1,42 @@
+id: CA-001-01-momentum-within-groups
+theory: CA-001
+parent: null
+mechanism: >
+  News, a change of regime or an imbalance of flows reaches the prices of comparable assets at
+  different speeds, and capital reallocates slowly between them, through recency, delayed updates and
+  herding: within a group of sectors, equity markets or commodities, the members that led over the
+  past year keep leading over the next months, in each group and across asset classes.
+prediction:
+  sign: positive
+  size: an alpha of about 2% a year over the same funds held in equal parts, with a Sharpe ratio a little above theirs; about half the premium of the sources' top third among country indices and commodities
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY, SPY, QQQ, IWM, EFA, EEM, GLD, SLV, DBC]
+horizon: months
+signal: >
+  On the first session of each month, within each of three groups -- the eleven sector funds; the
+  five equity markets SPY, QQQ, IWM, EFA and EEM; the commodities GLD, SLV and DBC -- the members
+  are ranked by their return over a window read up to the session before the target: it ends skip
+  sessions before that session before, and starts lookback sessions before it. The top third of each
+  group's ranked members, rounded, one at least, is held. Of the N assets trading, a group of n ranked
+  members holds n/N of the portfolio, split equally among its leaders; an asset trading without
+  lookback sessions of prices is not ranked and is held at 1/N, its benchmark weight. The targets
+  start on the first month in which an asset is ranked; from then the portfolio is always fully
+  invested.
+parameters:
+  lookback: sessions from the start of the ranking window to the session before the target
+  skip: sessions before the session before the target left out of the ranking window
+variants:
+  - {lookback: 252, skip: 21}
+  - {lookback: 252, skip: 0}
+neighbours:
+  lookback: {25: [189, 315], 50: [126, 378]}
+  skip: {25: [16, 26], 50: [10, 32]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  The relative half of the theory is refuted if holding the leaders of each group by their past year
+  earns an alpha of zero or less over holding every member in equal parts, or if it beats about half
+  of its placebos shifted in time or fewer, as a rule without skill does. A positive alpha that beats
+  more than half of its placebos but fewer than the battery's 90%, or that rests on one of the lab's
+  clusters, one asset or one episode, is not proven, not refuted.

@@ -251,6 +251,18 @@ def cross_check_folder(folder: Path, root: Path = DATA, source: str = "Stooq") -
     return manifest["cross_check"]
 
 
+def unexamined(manifest: dict) -> list[str]:
+    """The assets the last cross-check did not confirm and whose days no review examined: the
+    manifest's `cross_check_review` names each such asset, with what its flagged days are, and
+    carries the date of the cross-check it examined, so that a new cross-check asks for a new one."""
+    checked = manifest.get("cross_check", {})
+    if checked.get("status") != "run":
+        return []
+    review = manifest.get("cross_check_review", {})
+    examined = review.get("tickers", {}) if review.get("checked") == checked["checked"] else {}
+    return sorted(t for t, result in checked["tickers"].items() if not result["confirmed"] and t not in examined)
+
+
 # --------------------------------------------------------------------------- the snapshot
 
 def download(root: Path = DATA, snapshot: str | None = None) -> dict:
@@ -379,6 +391,9 @@ def check(root: Path = DATA) -> int:
             problems.append(f"{t}: the data start on {starts}, after the universe's first session {first[t]}")
         if str(market.tradable[t].idxmax().date()) != first[t]:
             problems.append(f"{t}: first traded on {market.tradable[t].idxmax().date()}, not {first[t]}")
+    for t in unexamined(manifest):
+        problems.append(f"{t}: not confirmed by the cross-check, and its days not examined in the "
+                        "manifest's cross_check_review")
     print(f"snapshot {manifest['snapshot']}: {len(manifest['files'])} files, hashes match")
     for addition in additions:
         print(f"addition {addition['snapshot']}: {len(addition['files'])} files, hashes match")
