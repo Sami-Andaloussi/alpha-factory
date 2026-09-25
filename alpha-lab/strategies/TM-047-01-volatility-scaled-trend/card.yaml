@@ -1,0 +1,42 @@
+id: TM-047-01-volatility-scaled-trend
+theory: TM-047
+parent: null
+mechanism: >
+  Momentum is rewarded better when volatility is low than when it is high, and suffers its worst
+  drawdowns when volatility is high. Sizing each position by the inverse of its asset's recent
+  volatility makes every position carry about the same risk and takes less risk when volatility
+  rises: an implicit timing of the exposure that raises the Sharpe ratio of the same momentum rule.
+prediction:
+  sign: positive
+  size: a Sharpe ratio of about 0.58 in-sample, above the 0.495 of the same rule in equal shares (TM-017-01), and a positive alpha over the seven assets held always
+universe: [SPY, EFA, EEM, IEF, TLT, GLD, DBC]
+horizon: months
+signal: >
+  On the first session of each month, an asset is in trend when its return over the past 252
+  sessions, read up to the session before, beats the Treasury bill's over the same sessions. Each
+  asset in trend is held at a weight of risk divided by its daily volatility, the standard deviation
+  of its daily returns over the past vol_window sessions, read up to the session before; when these
+  weights add up to more than one, all are cut in the same proportion until they add up to one. An
+  asset out of trend, or without 252 sessions of prices and vol_window returns, is not held; what the
+  weights leave is cash.
+parameters:
+  risk: the daily move, as a fraction of the portfolio, that each position's typical daily move is set to
+  vol_window: sessions of daily returns whose standard deviation measures an asset's volatility
+variants:
+  - {risk: 0.00125, vol_window: 100}
+  - {risk: 0.00125, vol_window: 21}
+neighbours:
+  risk: {25: [0.00094, 0.00156], 50: [0.000625, 0.001875]}
+  vol_window: {25: [75, 125], 50: [50, 150]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  The theory is refuted in this form if the scaled rule's Sharpe ratio falls short of the 0.495 of
+  the same rule in equal shares over the same years by more than 0.1, about one standard error of the
+  difference between two rules this close; or if it earns an alpha of zero or less over the seven
+  assets held always; or if it beats about half of its placebos shifted in time or fewer. A Sharpe
+  ratio within 0.1 of 0.495, or a positive alpha that beats more than half of its placebos but fewer
+  than the battery's 90%, or a result that rests on one cluster, one asset or one episode, is not
+  proven, not refuted.
