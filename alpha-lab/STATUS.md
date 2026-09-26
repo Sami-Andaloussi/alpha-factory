@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 218 untouched · 1 in-progress · 0 tested-conclusive · 32 tested-inconclusive · 12 not-testable.
+**263 theories**: 217 untouched · 1 in-progress · 0 tested-conclusive · 32 tested-inconclusive · 13 not-testable.
 
 **34 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 23 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -246,7 +246,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-005](bank/TM-005-conservatism-and-representativeness.md) Conservatism and representativeness (investor sentiment model) | trend and momentum | not-testable | [TM-005-01-investor-sentiment-model](strategies/TM-005-01-investor-sentiment-model/) · not testable: [reasoning](strategies/TM-005-01-investor-sentiment-model/reasoning.md) |
 | [TM-006](bank/TM-006-overconfidence-biased-self-attribution.md) Overconfidence and biased self-attribution | trend and momentum | tested-inconclusive | [TM-006-01-momentum-after-market-gains](strategies/TM-006-01-momentum-after-market-gains/) · stops at gate 2 · [report](strategies/TM-006-01-momentum-after-market-gains/report.ipynb) · [verdict](strategies/TM-006-01-momentum-after-market-gains/verdict.md) |
 | [TM-007](bank/TM-007-underreaction-to-public-information.md) Behavioural underreaction to public information (conservatism) | trend and momentum | not-testable | [TM-007-01-underreaction-to-public-information](strategies/TM-007-01-underreaction-to-public-information/) · not testable: [reasoning](strategies/TM-007-01-underreaction-to-public-information/reasoning.md) |
-| [TM-008](bank/TM-008-gradual-information-diffusion.md) Gradual information diffusion (newswatchers and momentum traders) | trend and momentum | untouched |  |
+| [TM-008](bank/TM-008-gradual-information-diffusion.md) Gradual information diffusion (newswatchers and momentum traders) | trend and momentum | not-testable | [TM-008-01-gradual-information-diffusion](strategies/TM-008-01-gradual-information-diffusion/) · not testable: [reasoning](strategies/TM-008-01-gradual-information-diffusion/reasoning.md) |
 | [TM-011](bank/TM-011-informational-cascades.md) Informational cascades (herding) | trend and momentum | untouched |  |
 | [TM-012](bank/TM-012-mutual-fund-momentum-trading.md) Momentum trading by mutual funds (chasing past winners) | trend and momentum | untouched |  |
 | [TM-014](bank/TM-014-slow-moving-arbitrage-capital.md) Slow-moving arbitrage capital | trend and momentum | untouched |  |
