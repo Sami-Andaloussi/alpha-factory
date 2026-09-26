@@ -92,8 +92,12 @@ recorded not testable.
 **What was considered, and why it does not rescue a card:** the sector funds sorted by their
 barriers — utilities regulated, health care with patents, technology with networks and scale — as a
 static tilt: Koller puts utilities among the low earners and ranks profitability, not later returns;
-the one return sign, Hou and Robinson's, needs a concentration series the lab does not hold; and any
-fixed ranking makes at most three decisions, certain to fail gate 1.
+the one return sign on the barriers' structure, Hou and Robinson's, needs a concentration series the
+lab does not hold; O'Shaughnessy's ranking of the ten sectors by their compound returns from 1967 to
+2009 (*What Works on Wall Street*, fourth edition, 2011, chapter 24) — consumer staples first, which
+he explains after the fact by wide moats and monopoly or brand power, information technology last —
+measures no barrier, and was found only after this judgement was first recorded; and any fixed
+ranking makes at most three decisions, certain to fail gate 1.
 
 What would make it testable: the concentration of the funds' industries over the lab's years, or
 dated changes of barriers within them, with firms' or industries' profits — outside the lab's data.

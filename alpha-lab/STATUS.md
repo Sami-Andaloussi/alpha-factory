@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 188 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 37 not-testable.
+**263 theories**: 187 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 38 not-testable.
 
 **41 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 26 stopped at gate 2, 10 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -19,7 +19,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [AS-012](bank/AS-012-signalling-theory-of-dividends.md) Signalling theory of dividends | asset-specific mechanisms | not-testable | [AS-012-01-signalling-theory-of-dividends](strategies/AS-012-01-signalling-theory-of-dividends/) · not testable: [reasoning](strategies/AS-012-01-signalling-theory-of-dividends/reasoning.md) |
 | [AS-013](bank/AS-013-firm-life-cycle-dividends.md) Firm life cycle theory of dividends | asset-specific mechanisms | not-testable | [AS-013-01-firm-life-cycle-dividends](strategies/AS-013-01-firm-life-cycle-dividends/) · not testable: [reasoning](strategies/AS-013-01-firm-life-cycle-dividends/reasoning.md) |
 | [AS-014](bank/AS-014-barriers-to-entry.md) Barriers to entry | asset-specific mechanisms | not-testable | [AS-014-01-barriers-to-entry](strategies/AS-014-01-barriers-to-entry/) · not testable: [reasoning](strategies/AS-014-01-barriers-to-entry/reasoning.md) |
-| [AS-015](bank/AS-015-switching-costs-customer-captivity.md) Switching costs and customer captivity | asset-specific mechanisms | untouched |  |
+| [AS-015](bank/AS-015-switching-costs-customer-captivity.md) Switching costs and customer captivity | asset-specific mechanisms | not-testable | [AS-015-01-switching-costs-customer-captivity](strategies/AS-015-01-switching-costs-customer-captivity/) · not testable: [reasoning](strategies/AS-015-01-switching-costs-customer-captivity/reasoning.md) |
 | [AS-016](bank/AS-016-economies-of-scale.md) Economies of scale | asset-specific mechanisms | untouched |  |
 | [AS-017](bank/AS-017-network-effects-installed-base.md) Network effects and installed base | asset-specific mechanisms | untouched |  |
 | [AS-018](bank/AS-018-experience-curve.md) Experience curve | asset-specific mechanisms | untouched |  |

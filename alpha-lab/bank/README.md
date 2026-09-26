@@ -286,7 +286,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [AS-012](AS-012-signalling-theory-of-dividends.md) | Signalling theory of dividends | information | stocks | days, months | not-testable |
 | [AS-013](AS-013-firm-life-cycle-dividends.md) | Firm life cycle theory of dividends | structural | stocks | years | not-testable |
 | [AS-014](AS-014-barriers-to-entry.md) | Barriers to entry | structural | stocks, sectors | years | not-testable |
-| [AS-015](AS-015-switching-costs-customer-captivity.md) | Switching costs and customer captivity | structural | stocks, sectors | years | untouched |
+| [AS-015](AS-015-switching-costs-customer-captivity.md) | Switching costs and customer captivity | structural | stocks, sectors | years | not-testable |
 | [AS-016](AS-016-economies-of-scale.md) | Economies of scale | structural | stocks, sectors | years | untouched |
 | [AS-017](AS-017-network-effects-installed-base.md) | Network effects and installed base | structural | stocks, sectors | years | untouched |
 | [AS-018](AS-018-experience-curve.md) | Experience curve | structural | stocks, sectors | years | untouched |
