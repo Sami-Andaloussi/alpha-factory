@@ -6,7 +6,7 @@ mechanism: [structural, limits to arbitrage]
 asset_classes: [stocks, crypto]
 horizon: [days, years]
 data: [share class prices, foreign ownership restrictions, tradability changes, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
