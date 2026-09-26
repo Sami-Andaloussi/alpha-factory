@@ -6,7 +6,7 @@ mechanism: [structural]
 asset_classes: [crypto]
 horizon: [months, years]
 data: [on-chain data, validator and miner rewards, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
