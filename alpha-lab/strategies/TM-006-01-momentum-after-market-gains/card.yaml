@@ -1,0 +1,66 @@
+id: TM-006-01-momentum-after-market-gains
+theory: TM-006
+parent: null
+mechanism: >
+  Investors overconfident in their own information grow more confident when the market confirms
+  them and less so when it does not: after the market has risen, their confidence and the momentum
+  it feeds are strong; after it has fallen, momentum is weak, absent or reversed.
+prediction:
+  sign: negative (the leaders' gap to their group's ranked funds lower in the months after the group's market has fallen over two years, outside TM-024-01's panic states, than in the months after it has not); the rule's alpha over CA-001-01's of uncertain sign
+  size: a judgment -- the gap about 1 to 5% a year lower in those down states, momentum weak, absent or reversed after losses, the library giving the direction and no size; the managed rule's raw return about 0 to +0.6% a year above CA-001-01's, its alpha about -0.8 to +0.4% a year above CA-001-01's 0.20% once the market exposure the switch restores is charged as beta (TM-024-01, +0.37% raw, -0.11% of alpha); the base expected to fail gates 2, 3, 4 and 5
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY, SPY, QQQ, IWM, EFA, EEM, GLD, SLV, DBC]
+horizon: months
+signal: >
+  CA-001-01's momentum rule sets each group's tilt: within each of three groups (the eleven sector
+  funds; SPY, QQQ, IWM, EFA and EEM; GLD, SLV and DBC), the funds are ranked by their return over
+  a window read up to the session before the target, ending 21 sessions and starting 252 sessions
+  before that session before; a fund is ranked when it trades on the target's session and traded
+  on the window's first session, with a return over the window; the top third of each group's
+  ranked funds, rounded half to even, one at least, share the group's n/N of the portfolio, and a
+  fund trading but not yet ranked holds 1/N. The tilt is those weights less the group held in
+  equal parts, 1/N for each fund trading. The group's market return on a session is the average of
+  the daily returns of its funds trading that session, chained over time. A group is in a down
+  state when its market, read on the session before the target, is below its level bear_window
+  sessions earlier. Each group holds its funds in equal parts plus k times its tilt, k = 0 in a
+  down state and 1 otherwise, including while its market has not bear_window sessions of history.
+  Everything is read up to the session before; targets are set on the first session of each month
+  on which a fund is ranked, fully invested.
+parameters:
+  bear_window: sessions over which the group's market is compared with its earlier level
+variants:
+  - {bear_window: 504}
+neighbours:
+  bear_window: {25: [378, 630], 50: [252, 756]}
+memory: 504
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, on the market's closes, over the in-sample months from the first target on
+  which a group's state is known, each group-month from the close of the month's first session to
+  the close of the next month's first session, the last ending at the close of 2022-12-30, over
+  the group-months with two ranked funds or more: the return of the group's leaders -- CA-001-01's
+  top third of the group's ranked funds, bought in equal parts at the first session's close and
+  held -- less the return of all the group's ranked funds bought and held the same way. The down
+  set is the group-months in a down state, with bear_window 504, other than TM-024-01's 41 panic
+  group-months (its base's states, vol_window 126 and bear_window 504, read from its signal),
+  which are left out; the others are the group-months not in a down state. The coefficient on the
+  down-set indicator in an ordinary least-squares regression of the gaps on that indicator and one
+  constant for each group, its standard error clustered by calendar month, and its t statistic,
+  computed apart from the battery. The theory is refuted in this form if that t statistic is +0.35
+  or above: momentum no weaker after the market's losses than after its gains, outside the panic
+  states. Below it, short of passing gates 1 to 7, it is not proven, not refuted; a base that
+  passes gates 1 to 7 while the clause refutes leaves the theory refuted in this form. Of TM-006's
+  refutation criteria the third is graded in prices, as a consequence of its confidence part; the
+  first and second are read by other verdicts or are MR-021's claim; its trading part reads
+  turnover, which the lab does not pass a strategy. Reported, not graded: the same regression over
+  every down-state group-month, and over the 41 panic group-months alone against the others; the
+  gap by group and the number of down-set group-months in each; the gap hedged of its group's
+  market, with one beta for each state; the unmanaged tilt's contribution to the portfolio in down
+  and in other group-months; the managed rule against CA-001-01 and against TM-024-01 by
+  lab.compare, the alpha's difference and its standard error on the monthly differences, and the
+  difference with each rule's beta allowed to differ in the months in which any group is in a down
+  state; the clause over 2007-2013 and 2014-2022, without the months whose target falls in 2009,
+  and over the holdout, 2023 to 2025; the base's alpha before and after costs, and the neighbours'
+  and the one-day-late rule's alphas and appraisal ratios.
