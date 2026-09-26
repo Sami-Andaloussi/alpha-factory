@@ -282,7 +282,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [AS-008](AS-008-clientele-effects.md) | Clientele effects | flows, limits to arbitrage | stocks | months, years | not-testable |
 | [AS-009](AS-009-market-segmentation.md) | Market segmentation (tradability and access to capital) | structural, limits to arbitrage | stocks, crypto | days, years | not-testable |
 | [AS-010](AS-010-separation-of-ownership-and-control.md) | Separation of ownership and control | structural | stocks | weeks, months | not-testable |
-| [AS-011](AS-011-free-cash-flow-theory.md) | Free cash flow theory | structural | stocks | years | untouched |
+| [AS-011](AS-011-free-cash-flow-theory.md) | Free cash flow theory | structural | stocks | years | not-testable |
 | [AS-012](AS-012-signalling-theory-of-dividends.md) | Signalling theory of dividends | information | stocks | days, months | untouched |
 | [AS-013](AS-013-firm-life-cycle-dividends.md) | Firm life cycle theory of dividends | structural | stocks | years | untouched |
 | [AS-014](AS-014-barriers-to-entry.md) | Barriers to entry | structural | stocks, sectors | years | untouched |
