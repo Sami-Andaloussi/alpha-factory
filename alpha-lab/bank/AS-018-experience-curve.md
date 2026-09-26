@@ -6,7 +6,7 @@ mechanism: [structural]
 asset_classes: [stocks, sectors]
 horizon: [years]
 data: [cumulative production, unit costs, profit margins, market shares]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
