@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 171 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 54 not-testable.
+**263 theories**: 170 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 55 not-testable.
 
 **41 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 26 stopped at gate 2, 10 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -36,7 +36,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [AS-036](bank/AS-036-governance-tokens-voting-design.md) Governance tokens and DAO voting design | asset-specific mechanisms | not-testable | [AS-036-01-governance-tokens-voting-design](strategies/AS-036-01-governance-tokens-voting-design/) · not testable: [reasoning](strategies/AS-036-01-governance-tokens-voting-design/reasoning.md) |
 | [AS-037](bank/AS-037-asset-collateralised-stablecoins.md) Asset-collateralised stablecoins | asset-specific mechanisms | not-testable | [AS-037-01-asset-collateralised-stablecoins](strategies/AS-037-01-asset-collateralised-stablecoins/) · not testable: [reasoning](strategies/AS-037-01-asset-collateralised-stablecoins/reasoning.md) |
 | [AS-038](bank/AS-038-crypto-collateralised-stablecoins.md) Crypto-collateralised stablecoins | asset-specific mechanisms | not-testable | [AS-038-01-crypto-collateralised-stablecoins](strategies/AS-038-01-crypto-collateralised-stablecoins/) · not testable: [reasoning](strategies/AS-038-01-crypto-collateralised-stablecoins/reasoning.md) |
-| [AS-039](bank/AS-039-algorithmic-stablecoins-reflexivity.md) Algorithmic stablecoins and mint-burn reflexivity | asset-specific mechanisms | untouched |  |
+| [AS-039](bank/AS-039-algorithmic-stablecoins-reflexivity.md) Algorithmic stablecoins and mint-burn reflexivity | asset-specific mechanisms | not-testable | [AS-039-01-algorithmic-stablecoins-reflexivity](strategies/AS-039-01-algorithmic-stablecoins-reflexivity/) · not testable: [reasoning](strategies/AS-039-01-algorithmic-stablecoins-reflexivity/reasoning.md) |
 | [AS-040](bank/AS-040-bonding-curves.md) Bonding curves | asset-specific mechanisms | untouched |  |
 | [AS-042](bank/AS-042-on-chain-transparency.md) Open data and on-chain transparency | asset-specific mechanisms | untouched |  |
 | [AS-043](bank/AS-043-blockspace-scarcity-congestion.md) Blockspace scarcity and blockchain congestion | asset-specific mechanisms | untouched |  |
