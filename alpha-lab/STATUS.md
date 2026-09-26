@@ -3,13 +3,13 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 198 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 27 not-testable.
+**263 theories**: 197 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 28 not-testable.
 
 **41 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 26 stopped at gate 2, 10 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
-| [AS-003](bank/AS-003-ipo-lock-up-expiration.md) IPO lock-up expiration overhang | asset-specific mechanisms | untouched |  |
+| [AS-003](bank/AS-003-ipo-lock-up-expiration.md) IPO lock-up expiration overhang | asset-specific mechanisms | not-testable | [AS-003-01-ipo-lock-up-expiration](strategies/AS-003-01-ipo-lock-up-expiration/) · not testable: [reasoning](strategies/AS-003-01-ipo-lock-up-expiration/reasoning.md) |
 | [AS-005](bank/AS-005-seasoned-equity-offerings.md) Seasoned equity offerings | asset-specific mechanisms | untouched |  |
 | [AS-007](bank/AS-007-spin-off-clientele-pressure.md) Institutional clientele pressure in spin-offs | asset-specific mechanisms | untouched |  |
 | [AS-008](bank/AS-008-clientele-effects.md) Clientele effects | asset-specific mechanisms | untouched |  |
