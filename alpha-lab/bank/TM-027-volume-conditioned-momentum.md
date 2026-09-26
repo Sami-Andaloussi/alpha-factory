@@ -6,7 +6,7 @@ mechanism: [behavioural, information, flows, microstructure]
 asset_classes: [stocks, equity indices, bonds, currencies, commodities]
 horizon: [months]
 data: [daily prices, trading volumes, open interest]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
