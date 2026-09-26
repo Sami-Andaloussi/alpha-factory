@@ -68,18 +68,19 @@ untouched or in progress:
   continuous half 2.04% a year lower (standard error 1.44%), on the first sign's side and within
   chance, most of it in months when the pool held funds that had lost. The comparison is read, and
   it is no test of TM-005.
-- **The reversal over 3 to 5 years**, and the series against mixed news over the following years:
-  on prices, a long record of good news implies a high return over the past three to five years, by
-  the source's own inference; that is De Bondt and Thaler's reversal, the claim of **MR-021**,
-  long-term overreaction and reversal, untouched, whose refutations name the transitory component of
-  index returns and the momentum-then-reversal sequence as well. Within groups, **CA-024-01** read
-  it as value: the cheapest third of each group by its past five years earned 0.63% a year less
-  than the groups from 2010 to 2022, stopped at gate 2, not refuted, not proven; its reasoning left
-  MR-021's own forms — the transitory component of each index's price and the reversal on the
-  extremes of past performance — to MR-021. The series of earnings, Zarowin's form, and the value
-  and glamour evidence read fundamentals the lab does not hold; the latter is **EF-008**'s claim,
-  and La Porta's analysts' forecasts are **MR-039**'s, diagnostic expectations. Campbell and
-  Shiller's dividend yield needs yields the lab does not hold.
+- **The reversal over 3 to 5 years**, and the series against mixed news over the following years: on
+  prices, a long record of good news implies a high return over the past three to five years, by the
+  source's own inference; that is De Bondt and Thaler's reversal, the claim of **MR-021**, long-term
+  overreaction and reversal, untouched, whose refutations name the transitory component of index
+  returns and the momentum-then-reversal sequence as well. Within groups, **CA-024-01** read it as
+  value: the cheapest third of each group by its past five years earned 0.63% a year less than the
+  groups from 2010 to 2022, stopped at gate 2, not refuted, not proven; its reasoning left MR-021's
+  own forms — the transitory component of each index's price and the reversal on the extremes of
+  past performance — to MR-021. The series of earnings, Zarowin's form, and the value and glamour
+  evidence read fundamentals the lab does not hold; the latter is **EF-008**'s claim, and La Porta's
+  analysts' forecasts are **MR-039**'s, diagnostic expectations. Campbell and Shiller's dividend
+  yield is MR-044's; the lab's adjusted bars encode the funds' distributions (a correction recorded
+  at AS-008), so it is not ruled out for want of data.
 - **Arbitrage capital closing the gap quickly**: no price form with a sign; it would need the
   capital's positions, and it is the claim of **MR-025**, limits to arbitrage.
 - **Crypto-assets**, which the bank names for TM-005: the source's evidence is on stocks and
