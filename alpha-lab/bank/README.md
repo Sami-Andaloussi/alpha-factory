@@ -17,7 +17,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [TM-006](TM-006-overconfidence-biased-self-attribution.md) | Overconfidence and biased self-attribution | behavioural, limits to arbitrage | stocks, crypto | months, years | tested-inconclusive |
 | [TM-007](TM-007-underreaction-to-public-information.md) | Behavioural underreaction to public information (conservatism) | behavioural, information, limits to arbitrage | stocks, credit, commodities, equity indices, bonds, currencies | weeks, months, years | not-testable |
 | [TM-008](TM-008-gradual-information-diffusion.md) | Gradual information diffusion (newswatchers and momentum traders) | information, behavioural, limits to arbitrage | stocks, equity indices, bonds, commodities, currencies | months | not-testable |
-| [TM-011](TM-011-informational-cascades.md) | Informational cascades (herding) | behavioural, information | stocks | days, weeks | untouched |
+| [TM-011](TM-011-informational-cascades.md) | Informational cascades (herding) | behavioural, information | stocks | days, weeks | not-testable |
 | [TM-012](TM-012-mutual-fund-momentum-trading.md) | Momentum trading by mutual funds (chasing past winners) | flows, behavioural | stocks, crypto | weeks, months, years | untouched |
 | [TM-014](TM-014-slow-moving-arbitrage-capital.md) | Slow-moving arbitrage capital | limits to arbitrage, flows | credit, bonds, stocks | weeks, months | untouched |
 | [TM-015](TM-015-slow-moving-capital-delegated-management.md) | Slow-moving capital and delegated management (benchmark hugging, career risk) | flows, limits to arbitrage, microstructure | stocks, equity indices, bonds, commodities, currencies | weeks, months | untouched |
