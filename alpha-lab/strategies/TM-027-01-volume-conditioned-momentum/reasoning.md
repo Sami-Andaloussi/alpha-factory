@@ -122,3 +122,20 @@ strategy no volume; its futures and index forms have no measured sign, so passin
 no form; on the winners' side the library's signs favour low volume, TM-028's claim; the volume
 continuation handed by TM-011-01 needs news the lab does not hold; its reversal is MR-021's, and
 over days MR-011's. No card is drawn, and no trial is spent.
+
+## Addendum (2026-09-26)
+
+Two statements above no longer hold: that no source splits funds or indices by their own volume, and
+that the lab passes a strategy its closes only. TM-028's reader found Fosback's positive and
+negative volume indices (Aronson, *Evidence-Based Technical Analysis*, 2007, chapter 8, p. 411 and
+note 30; Kaufman, *Trading Systems and Methods*, chapter 12, p. 542): from 1941 to 1975, with an
+index's trend made on its loud sessions, those of rising volume, above its average, a bull market
+held 79% of the time, against 96% for the trend made on its quiet sessions and a base rate of 70%
+(the 79% as Kaufman reports it, for the variant he says is decided by the close's direction; the 96%
+in both; the base rate Aronson's). On an index the library's sign runs against TM-027 and for
+TM-028. The lab now passes a strategy the funds' volumes, lagged as their closes. TM-027's index
+form, the trend on high volume against the trend on low volume, is the contrast TM-028-01's clause
+grades from the other side: a t statistic of +0.35 or above refutes it in this form; one of −0.35 or
+below, which refutes TM-028 in this form, leans TM-027's way without proving it. TM-027 stays
+`not-testable` as a theory of its own: its stock and futures forms remain unreadable, and its index
+form is graded by TM-028-01.

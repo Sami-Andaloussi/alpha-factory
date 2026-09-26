@@ -1,0 +1,71 @@
+id: TM-028-01-low-turnover-momentum
+theory: TM-028
+parent: null
+mechanism: >
+  Unsophisticated investors trade most on days of rising volume, informed buyers and sellers on the
+  quieter days of falling volume; a move made on low volume is still under the radar of most
+  investors, with more room to run, while one made on high volume is already widely known and near
+  its end. The trend an index makes on its quiet sessions is therefore a better sign of the months
+  ahead than the trend it makes on its loud sessions.
+prediction:
+  sign: positive (the fund-months with the quiet sessions' trend up earn more over the bill than the fund-months with the loud sessions' trend up)
+  size: a judgment -- about +0.5 to +5% a year more, Fosback's bull-market probabilities of 0.96 against 0.79 (1941-1975; the 0.79 as Kaufman reports it, for his close-decided variant of the indices) worth some 8% a year on a stock index, cut for a fund's own volume, for the two indices' months of agreement, and for Aronson's null on 1980-2005; the rule's alpha over the fourteen funds in equal parts about -1 to +1.5% a year, its Sharpe ratio close to theirs; the base expected to fail gates 3 and 4, likely 2 and 5
+universe: [SPY, QQQ, IWM, XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY]
+horizon: months
+signal: >
+  For each fund, from its first session, a session's return counts in the fund's quiet index when
+  the deciding volume on that session is below the deciding volume on the session before, and in its
+  loud index when it is above; an equal volume counts in neither. Each index is the cumulative
+  product of one plus the returns it counts. The deciding volume is the fund's own in the base and
+  SPY's in the variant. An index is up when, at the session before the target, it stands above its
+  average over the last window sessions to that session, the ratio reading only the returns and
+  volumes of those sessions and of the session before the first. On the first session of each month,
+  each fund trading holds 1/N of the portfolio, N the funds trading, when its quiet index is up, and
+  its 1/N is held in cash when its quiet index is not up; a fund without window sessions and the
+  session before them holds its 1/N. Everything is read up to the session before; targets are traded
+  at the close.
+parameters:
+  window: sessions of the moving average against which an index's trend is judged
+  volume: 'the volume that decides a session quiet or loud, a text naming the variant, with no neighbours: "own", each fund''s own; "market", SPY''s'
+variants:
+  - {window: 255, volume: own}
+  - {window: 255, volume: market}
+neighbours:
+  window: {25: [191, 319], 50: [127, 383]}
+choose: false
+memory: 256
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, on the market's closes, over the in-sample fund-months of the base, each from
+  the close of a target's session to the close of the next target's session, the first target on the
+  first session of February 2006 and the last on the first session of December 2022, whose month
+  ends at the close of 2022-12-30, the last in-sample session, over the fund-months with both of the
+  fund's indices defined for the target (window 255, the fund's own volume): each fund-month's
+  return less the bill's over the same sessions. The fund-months with the quiet index up and the
+  fund-months with the loud index up are stacked, a fund-month with both up entering both sets, and
+  the stacked excess returns are regressed by ordinary least squares on an indicator of the quiet
+  set and one constant for each fund, the standard errors clustered by month, the funds' months in
+  each of the 203 months from February 2006 to December 2022 one cluster, the t statistic computed
+  apart from the battery. The theory is refuted in this form if the indicator's t statistic is -0.35
+  or below: the trend of the quiet sessions no better a sign than the trend of the loud sessions,
+  the continuation after a rise on high volume as strong as or stronger than after a rise on low
+  volume. Between, short of passing gates 1 to 7, not proven, not refuted; a base that passes gates
+  1 to 7 while the clause refutes leaves the theory refuted in this form. Of TM-028's refutation
+  criteria both are graded, in their index form: the first from the quiet side, the second from the
+  loud side, by the same contrast; on stocks, by each stock's own turnover, neither can be read.
+  TM-027's index form, the trend of the loud sessions the better sign, is the same contrast read
+  from the other side: the same t statistic at +0.35 or above refutes it in this form; TM-027 draws
+  no card of its own. The volumes are read as Yahoo reports them, IWM's seven bars that python -m
+  lab.data check lists (2008-03-25 to 2008-07-03, and 2019-07-30) among them. Reported, not graded:
+  the same regression for the variant, SPY's volume deciding; for each index, the fund-months with
+  it up less those with it not up, one constant for each fund, and the difference of the two spreads
+  (Fosback's bear side); the trend on every session, each fund's close above its average over the
+  window, its fund-months up against the quiet index's and the loud index's; the share of sessions
+  quiet, loud and equal, by fund, and the share of fund-months with each index up and with the two
+  in disagreement; the clause for SPY, QQQ and IWM and for the sector funds; the clause without
+  IWM's fund-months whose indices read one of its listed bars; the clause over the months of 2006 to
+  2013, over those of 2014 to 2022, over the in-sample months without 2008 and 2009, and over the
+  holdout, 2023 to 2025; the base's alpha before and after costs, and the neighbours' and the
+  one-day-late rule's alphas and appraisal ratios.

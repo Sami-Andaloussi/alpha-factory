@@ -11,8 +11,8 @@ change, so no result computed on them moves.
 `load()` reads the snapshot the manifest names and its additions, refuses any file whose hash
 changed, and returns
 the market on the ETF calendar: prices, the tradable mask, the daily risk-free rate, and the
-prices a signal may read at each close, in which bitcoin is lagged one day. An asset has no price
-before the session the universe lets the lab trade it.
+prices and traded volumes a signal may read at each close, in which bitcoin is lagged one day. An
+asset has no price, and no volume, before the session the universe lets the lab trade it.
 
     python -m lab.data download             # once: the snapshot and its manifest
     python -m lab.data extend               # what the universe gained since, in a folder of its own
@@ -41,6 +41,11 @@ FIELDS = ("Open", "High", "Low", "Close", "Volume")
 MAX_GAP = 3
 ZERO_RUN = 3
 MAX_MOVE = {"etf": 0.15, "crypto": 0.40}
+# Volume: a session whose volume is missing or zero while the asset has a price, or below 1% or above
+# 20 times the median of the 21 sessions before it, is listed by `check`. It is not written into the
+# manifest, whose findings were frozen with the snapshot, nor refused by gate 1, which would change
+# the figures of cards that read no volume: a card that reads volumes says what it does with them.
+LOW_VOLUME, HIGH_VOLUME, VOLUME_MEDIAN = 0.01, 20, 21
 # A sample is compared with Stooq: SPY, and the four assets with integrity findings. stooq.com
 # answers scripted requests with a JavaScript verification page, which the lab does not get around,
 # so the closes are saved by hand and compared by `crosscheck`. An asset is confirmed when its daily
@@ -74,17 +79,25 @@ class Market:
     rf             the Treasury-bill return that cash earns overnight into each session, at the
                    rate of the session before
     signal_prices  what a signal may read at each close: bitcoin's close of the day before
+    signal_volumes each asset's traded volume as a signal may read it, lagged as `signal_prices`
+                   is: a fund's own shares traded across the US venues (consolidated), in shares,
+                   split-adjusted, and bitcoin's in dollars, as Yahoo reports them; None where the
+                   bars carry no volume
 
-    A strategy reads bitcoin through `signal_prices`, never through `prices`.
+    A strategy reads bitcoin through `signal_prices`, never through `prices`. A fund's volume is
+    its own shares' trading, not the trading of what it holds.
     """
     prices: pd.DataFrame
     tradable: pd.DataFrame
     rf: pd.Series
     signal_prices: pd.DataFrame
+    signal_volumes: pd.DataFrame | None = None
 
     def window(self, start=None, end=None) -> "Market":
         cut = slice(pd.Timestamp(start) if start else None, pd.Timestamp(end) if end else None)
-        return Market(self.prices.loc[cut], self.tradable.loc[cut], self.rf.loc[cut], self.signal_prices.loc[cut])
+        volumes = None if self.signal_volumes is None else self.signal_volumes.loc[cut]
+        return Market(self.prices.loc[cut], self.tradable.loc[cut], self.rf.loc[cut], self.signal_prices.loc[cut],
+                      volumes)
 
     def asof(self, when) -> "Market":
         """No session after `when`. Bitcoin's close of `when`, in `prices`, is still to come at
@@ -138,14 +151,18 @@ def verified(manifest: dict, root: Path) -> dict[str, str]:
 
 
 def traded_from(market: Market, first: dict) -> Market:
-    """No price, and no signal, for an asset before the session the universe lets the lab trade it."""
+    """No price, no signal and no volume for an asset before the session the universe lets the lab
+    trade it."""
     prices, signal = market.prices.copy(), market.signal_prices.copy()
+    volumes = None if market.signal_volumes is None else market.signal_volumes.copy()
     for ticker, when in first.items():
         if ticker in prices.columns:
             before = prices.index < pd.Timestamp(when)
             prices.loc[before, ticker] = np.nan
             signal.loc[before, ticker] = np.nan
-    return Market(prices, prices.notna(), market.rf, signal)
+            if volumes is not None:
+                volumes.loc[before, ticker] = np.nan
+    return Market(prices, prices.notna(), market.rf, signal, volumes)
 
 
 def read(path: Path) -> pd.DataFrame:
@@ -153,7 +170,9 @@ def read(path: Path) -> pd.DataFrame:
 
 
 def assemble(raw: dict[str, pd.DataFrame], irx: pd.DataFrame, lagged) -> Market:
-    """Align every close on the ETF calendar; bitcoin's weekend moves land on Monday."""
+    """Align every close, and every volume, on the ETF calendar; bitcoin's weekend moves land on
+    Monday, and its volume, as its close, is the calendar day before's: Monday reads Sunday's, and
+    Friday's and Saturday's, and the volume of the day before a holiday, are read by no session."""
     etfs = [t for t in raw if t not in lagged]
     calendar = pd.DatetimeIndex(sorted(set().union(*(raw[t].index for t in etfs))))
     closes = {t: raw[t]["Close"] for t in raw}
@@ -161,9 +180,17 @@ def assemble(raw: dict[str, pd.DataFrame], irx: pd.DataFrame, lagged) -> Market:
     signal = prices.copy()
     for t in lagged:  # the close of the calendar day before is the last one known at the US close
         signal[t] = closes[t].reindex(calendar - pd.Timedelta(days=1)).to_numpy()
+    volumes = None
+    if all("Volume" in raw[t] for t in raw):
+        volumes = pd.DataFrame({t: raw[t]["Volume"].reindex(calendar).where(prices[t].notna()) for t in raw},
+                               dtype=float)
+        for t in lagged:
+            day_before = calendar - pd.Timedelta(days=1)
+            volumes[t] = (raw[t]["Volume"].reindex(day_before).where(closes[t].reindex(day_before).notna())
+                          .to_numpy(dtype=float))
     rate = irx["Close"].reindex(calendar).ffill(limit=5).shift(1)  # cash held overnight earns the rate set before
     rf = (rate / 100.0 / TRADING_DAYS).rename("rf")
-    return Market(prices, prices.notna(), rf, signal)
+    return Market(prices, prices.notna(), rf, signal, volumes)
 
 
 # --------------------------------------------------------------------------- integrity
@@ -206,6 +233,24 @@ def integrity(raw: dict[str, pd.DataFrame], lagged) -> list[dict]:
         for when, move in returns[returns.abs() > limit].items():
             findings.append({"ticker": ticker, "check": "large move", "date": str(when.date()),
                              "value": round(float(move), 4)})
+    return findings
+
+
+def volume_findings(market: Market) -> list[dict]:
+    """The sessions whose volume, as a signal reads it, is missing or zero while the asset has a
+    price, or far from the median of the sessions before it: bars to examine before a card reads
+    them."""
+    if market.signal_volumes is None:
+        return []
+    findings = []
+    for ticker in market.signal_volumes.columns:
+        volume = market.signal_volumes[ticker][market.signal_prices[ticker].notna()]
+        for when, value in volume[volume.isna() | (volume <= 0)].items():
+            findings.append({"ticker": ticker, "check": "no volume", "date": str(when.date()), "value": value})
+        ratio = volume / volume.rolling(VOLUME_MEDIAN, min_periods=VOLUME_MEDIAN).median().shift(1)
+        for when, value in ratio[(ratio < LOW_VOLUME) | (ratio > HIGH_VOLUME)].items():
+            findings.append({"ticker": ticker, "check": "volume outlier", "date": str(when.date()),
+                             "value": round(float(value), 4)})
     return findings
 
 
@@ -400,6 +445,8 @@ def check(root: Path = DATA) -> int:
     print(f"{len(market.prices)} sessions, {market.prices.index[0].date()} to {market.prices.index[-1].date()}")
     for finding in [*manifest["integrity"], *(f for addition in additions for f in addition["integrity"])]:
         print(f"  {finding['ticker']:8} {finding['check']:13} {finding['date']}  {finding['value']}")
+    for finding in volume_findings(market):
+        print(f"  {finding['ticker']:8} {finding['check']:13} {finding['date']}  {finding['value']}  (volume, not frozen)")
     for problem in problems:
         print(f"  mismatch: {problem}")
     return 1 if problems else 0

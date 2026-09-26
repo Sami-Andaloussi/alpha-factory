@@ -114,7 +114,13 @@ its own, beside the snapshot, whose files never change.
    - long only, weights summing to 1 at most; a row of NaN holds, and a row with any target
      sells every asset it does not name;
    - the weights of session t read the market up to t-1 (`.shift(1)`), and bitcoin through
-     `market.signal_prices`, one day late; gate 1 checks both;
+     `market.signal_prices`, one day late; a traded volume is read through `market.signal_volumes`,
+     lagged as the closes are, a fund's being its own shares traded across the US venues, not the
+     trading of what it holds (passed to strategies since 2026-09-26, TM-028-01); gate 1 checks
+     both, the volumes moved wherever it moves the prices. `python -m lab.data check` lists the
+     volume bars to examine (missing, zero, or far from their median), which no gate refuses: a card
+     that reads volumes says what it does with them. Bitcoin's lagged volume is Sunday's on Monday,
+     and Friday's and Saturday's are read by no session;
    - a periodic rebalance sets its targets on the first session of each period, not the last:
      knowing that a session is the last of its month means knowing the next session's date, and
      gate 1 counts that as reading the future;
