@@ -32,7 +32,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [TM-028](TM-028-low-turnover-momentum.md) | Low-turnover momentum (momentum filtered by low trading volume) | information, behavioural | stocks, equity indices, bonds, currencies, commodities | months | tested-inconclusive |
 | [TM-029](TM-029-reputational-herding.md) | Reputational herding (career concerns) | flows, limits to arbitrage | stocks, equity indices, bonds, credit, commodities, currencies | months | not-testable |
 | [TM-031](TM-031-behavioural-herding.md) | Behavioural herding | behavioural, flows | stocks, bonds, commodities, currencies, crypto | weeks, months | not-testable |
-| [TM-035](TM-035-procyclical-leverage-value-at-risk.md) | Procyclical leverage and value-at-risk constraints | flows, limits to arbitrage | stocks, equity indices, bonds, credit, commodities, currencies | weeks, months | untouched |
+| [TM-035](TM-035-procyclical-leverage-value-at-risk.md) | Procyclical leverage and value-at-risk constraints | flows, limits to arbitrage | stocks, equity indices, bonds, credit, commodities, currencies | weeks, months | not-testable |
 | [TM-036](TM-036-extrapolative-expectations.md) | Extrapolative expectations (X-CAPM, return extrapolation) | behavioural, limits to arbitrage | equity indices, stocks | months, years | untouched |
 | [TM-037](TM-037-investor-sentiment-momentum.md) | Investor sentiment and momentum | behavioural, limits to arbitrage, flows | stocks, crypto, commodities | days, weeks, months | untouched |
 | [TM-038](TM-038-adaptive-markets-hypothesis.md) | Adaptive markets hypothesis | behavioural, limits to arbitrage, macroeconomic | equity indices, bonds, currencies, commodities | months, years | untouched |
@@ -41,7 +41,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [TM-041](TM-041-size-momentum-interaction.md) | Size-momentum interaction (stronger momentum in small capitalisations) | information, limits to arbitrage | stocks, equity indices, commodities | weeks, months | untouched |
 | [TM-043](TM-043-positive-return-autocorrelation.md) | Positive return autocorrelation (variance ratio) | behavioural, information, microstructure | equity indices, stocks | weeks, months | untouched |
 | [TM-045](TM-045-long-range-dependence.md) | Long-range dependence (Hurst exponent) | macroeconomic | equity indices | months, years | untouched |
-| [TM-047](TM-047-volatility-targeted-momentum.md) | Volatility-targeted momentum (risk-adjusted momentum) | risk premium | equity indices, bonds, currencies, commodities | weeks, months | tested-inconclusive |
+| [TM-047](TM-047-volatility-targeted-momentum.md) | Volatility-targeted momentum (risk-adjusted momentum) | risk premium | equity indices, bonds, currencies, commodities | weeks, months | in-progress |
 
 ## Mean reversion and relative value (MR, 32)
 

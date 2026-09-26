@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 205 untouched · 1 in-progress · 0 tested-conclusive · 34 tested-inconclusive · 23 not-testable.
+**263 theories**: 204 untouched · 2 in-progress · 0 tested-conclusive · 33 tested-inconclusive · 24 not-testable.
 
 **36 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 24 stopped at gate 2, 8 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -262,7 +262,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-028](bank/TM-028-low-turnover-momentum.md) Low-turnover momentum (momentum filtered by low trading volume) | trend and momentum | tested-inconclusive | [TM-028-01-low-turnover-momentum](strategies/TM-028-01-low-turnover-momentum/) · stops at gate 3 · [report](strategies/TM-028-01-low-turnover-momentum/report.ipynb) · [verdict](strategies/TM-028-01-low-turnover-momentum/verdict.md) |
 | [TM-029](bank/TM-029-reputational-herding.md) Reputational herding (career concerns) | trend and momentum | not-testable | [TM-029-01-reputational-herding](strategies/TM-029-01-reputational-herding/) · not testable: [reasoning](strategies/TM-029-01-reputational-herding/reasoning.md) |
 | [TM-031](bank/TM-031-behavioural-herding.md) Behavioural herding | trend and momentum | not-testable | [TM-031-01-behavioural-herding](strategies/TM-031-01-behavioural-herding/) · not testable: [reasoning](strategies/TM-031-01-behavioural-herding/reasoning.md) |
-| [TM-035](bank/TM-035-procyclical-leverage-value-at-risk.md) Procyclical leverage and value-at-risk constraints | trend and momentum | untouched |  |
+| [TM-035](bank/TM-035-procyclical-leverage-value-at-risk.md) Procyclical leverage and value-at-risk constraints | trend and momentum | not-testable | [TM-035-01-procyclical-leverage](strategies/TM-035-01-procyclical-leverage/) · not testable: [reasoning](strategies/TM-035-01-procyclical-leverage/reasoning.md) |
 | [TM-036](bank/TM-036-extrapolative-expectations.md) Extrapolative expectations (X-CAPM, return extrapolation) | trend and momentum | untouched |  |
 | [TM-037](bank/TM-037-investor-sentiment-momentum.md) Investor sentiment and momentum | trend and momentum | untouched |  |
 | [TM-038](bank/TM-038-adaptive-markets-hypothesis.md) Adaptive markets hypothesis | trend and momentum | untouched |  |
@@ -271,4 +271,4 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-041](bank/TM-041-size-momentum-interaction.md) Size-momentum interaction (stronger momentum in small capitalisations) | trend and momentum | untouched |  |
 | [TM-043](bank/TM-043-positive-return-autocorrelation.md) Positive return autocorrelation (variance ratio) | trend and momentum | untouched |  |
 | [TM-045](bank/TM-045-long-range-dependence.md) Long-range dependence (Hurst exponent) | trend and momentum | untouched |  |
-| [TM-047](bank/TM-047-volatility-targeted-momentum.md) Volatility-targeted momentum (risk-adjusted momentum) | trend and momentum | tested-inconclusive | [TM-047-01-volatility-scaled-trend](strategies/TM-047-01-volatility-scaled-trend/) · stops at gate 3 · [report](strategies/TM-047-01-volatility-scaled-trend/report.ipynb) · [verdict](strategies/TM-047-01-volatility-scaled-trend/verdict.md) |
+| [TM-047](bank/TM-047-volatility-targeted-momentum.md) Volatility-targeted momentum (risk-adjusted momentum) | trend and momentum | in-progress | [TM-047-01-volatility-scaled-trend](strategies/TM-047-01-volatility-scaled-trend/) · stops at gate 3 · [report](strategies/TM-047-01-volatility-scaled-trend/report.ipynb) · [verdict](strategies/TM-047-01-volatility-scaled-trend/verdict.md) |
