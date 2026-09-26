@@ -298,7 +298,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [AS-029](AS-029-staking-and-slashing.md) | Staking and slashing | structural | crypto | weeks, months | not-testable |
 | [AS-030](AS-030-staking-ratio-float-scarcity.md) | Staking ratio, float scarcity and unstaking fragility | structural | crypto | days, weeks, months | not-testable |
 | [AS-031](AS-031-exchange-listing-shock.md) | Exchange listing and cross-listing shock | structural, microstructure | crypto | days, months | not-testable |
-| [AS-032](AS-032-exchange-clientele-comovement.md) | Exchange clientele comovement | microstructure, flows, limits to arbitrage | crypto | days, weeks | untouched |
+| [AS-032](AS-032-exchange-clientele-comovement.md) | Exchange clientele comovement | microstructure, flows, limits to arbitrage | crypto | days, weeks | not-testable |
 | [AS-035](AS-035-supply-concentration-whale-overhang.md) | Supply concentration, whale overhang and validator concentration | structural, flows, information | crypto, stocks | days, months, years | untouched |
 | [AS-036](AS-036-governance-tokens-voting-design.md) | Governance tokens and DAO voting design | structural, limits to arbitrage | crypto | days, months, years | untouched |
 | [AS-037](AS-037-asset-collateralised-stablecoins.md) | Asset-collateralised stablecoins | structural, limits to arbitrage | crypto | days, weeks | untouched |
