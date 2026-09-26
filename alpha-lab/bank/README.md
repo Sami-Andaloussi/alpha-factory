@@ -40,7 +40,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [TM-040](TM-040-value-momentum-combination.md) | Value and momentum combination (trending value) | behavioural | stocks, equity indices, bonds, currencies, commodities | months, years | tested-inconclusive |
 | [TM-041](TM-041-size-momentum-interaction.md) | Size-momentum interaction (stronger momentum in small capitalisations) | information, limits to arbitrage | stocks, equity indices, commodities | weeks, months | tested-inconclusive |
 | [TM-043](TM-043-positive-return-autocorrelation.md) | Positive return autocorrelation (variance ratio) | behavioural, information, microstructure | equity indices, stocks | weeks, months | not-testable |
-| [TM-045](TM-045-long-range-dependence.md) | Long-range dependence (Hurst exponent) | macroeconomic | equity indices | months, years | untouched |
+| [TM-045](TM-045-long-range-dependence.md) | Long-range dependence (Hurst exponent) | macroeconomic | equity indices | months, years | not-testable |
 | [TM-047](TM-047-volatility-targeted-momentum.md) | Volatility-targeted momentum (risk-adjusted momentum) | risk premium | equity indices, bonds, currencies, commodities | weeks, months | tested-inconclusive |
 
 ## Mean reversion and relative value (MR, 32)

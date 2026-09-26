@@ -6,7 +6,7 @@ mechanism: [macroeconomic]
 asset_classes: [equity indices]
 horizon: [months, years]
 data: [daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
