@@ -6,7 +6,7 @@ mechanism: [structural, limits to arbitrage]
 asset_classes: [crypto]
 horizon: [days]
 data: [collateralisation ratios, oracle prices, liquidation events, stablecoin prices, governance token prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
