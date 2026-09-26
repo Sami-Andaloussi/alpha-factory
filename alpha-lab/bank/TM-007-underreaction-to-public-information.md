@@ -6,7 +6,7 @@ mechanism: [behavioural, information, limits to arbitrage]
 asset_classes: [stocks, credit, commodities, equity indices, bonds, currencies]
 horizon: [weeks, months, years]
 data: [daily prices, monthly prices, earnings announcement dates, dividend announcements, share repurchase announcements, analyst forecasts, analyst coverage, macroeconomic releases, futures prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
