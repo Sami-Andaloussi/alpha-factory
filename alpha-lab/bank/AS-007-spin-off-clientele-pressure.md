@@ -6,7 +6,7 @@ mechanism: [flows, limits to arbitrage]
 asset_classes: [stocks]
 horizon: [weeks, months]
 data: [spin-off distribution dates, institutional holdings, daily prices, analyst coverage]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
