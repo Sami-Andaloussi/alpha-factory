@@ -130,3 +130,13 @@ reversal, and the series over the following years, are MR-021's claim, read with
 CA-024-01; its announcement drift is TM-007's and needs dates the lab does not hold; its strong
 single news is MR-002's; and the library gives its crypto form no sign. No card is drawn, and no
 trial is spent.
+
+## Addendum (2026-09-26)
+
+The statement that the library gives bitcoin's continuation or reversal no sign needs one
+qualification. Ilmanen (*Expected Returns*, 2011, Box 6.1) offers as "perhaps a broader lesson" that
+greater uncertainty about the true process — "new assets, limited data, lack of valuation anchors" —
+makes investors more prone to extrapolation and markets more susceptible to trending: a conjecture
+about new, anchorless assets in general, with no evidence, horizon or size, and not a measure on
+bitcoin. TM-036-01, which read it, places its readable part with TM-017, and bitcoin alone is one
+asset; the judgement above stands.

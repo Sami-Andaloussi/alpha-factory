@@ -6,7 +6,7 @@ mechanism: [behavioural, limits to arbitrage, flows]
 asset_classes: [stocks, crypto, commodities]
 horizon: [days, weeks, months]
 data: [IPO volumes, closed-end fund premiums, market turnover, fund flows, perpetual futures funding rates, futures positioning reports]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
@@ -47,4 +47,4 @@ information about subsequent returns.
 - Baker, M. & Wurgler, J. (2006). Investor Sentiment and the Cross-Section of Stock Returns. Journal of Finance.
 - Stambaugh, R. F., Yu, J. & Yuan, Y. (2012). The Short of It: Investor Sentiment and Anomalies. Journal of Financial Economics.
 - Stambaugh, R. F., Yu, J. & Yuan, Y. (2014). The Long of It: Odds That Investor Sentiment Spuriously Predicts Anomaly Returns. Journal of Financial Economics.
-- Bali, T. G., Engle, R. F. & Murray, S. (2016). Empirical Asset Pricing: The Cross Section of Stock Returns, ch. 18, sec. 18.1, pp. 479-481. Wiley.
+- Bali, T. G., Engle, R. F. & Murray, S. (2016). Empirical Asset Pricing: The Cross Section of Stock Returns, ch. 18, sec. 18.2, pp. 479-481. Wiley.

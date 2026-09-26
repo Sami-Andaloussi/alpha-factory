@@ -107,3 +107,17 @@ TM-047 is `tested-inconclusive`: its two strategies failed gate 3, the first als
 second gates 4 to 6; the trend form's timing added nothing, and the risk-premium form is not proven
 and not refuted. A third trial on SPY alone, whose figure is reported above, would be chosen from
 this result.
+
+## Addendum (2026-09-26)
+
+The card did not read the library's closest source to its rule, found while TM-038 was judged: Lo
+(*Adaptive Markets*, 2017, chapter 8, "Disbanding the Alpha Beta Sigma Fraternity", table 8.2 and
+note 13) scales the CRSP value-weighted index by a 21-day rolling volatility, one day lagged, to a
+target of 16.9% — the index's volatility over his whole sample, 1926 to 2014, known only afterwards
+— with a leverage cap of 1.3, trading costs of 5 basis points: a Sharpe ratio of 0.48 against 0.36
+for the index, 0.50 against 0.31 over 2005 to 2014, a maximum drawdown of −72% against −84%. He
+reads the gain through Black's negative correlation of prices and volatility. The card's window is
+his, its target, Ang's 16%, near his, and its cap at one gives up the leverage he adds in calm
+months. The card's result — a Sharpe ratio before costs of 0.47 against 0.42, an alpha of 1.56% a
+year, not proven — lies in his direction; the source would not have changed the card's parameters,
+and it raises no figure of the verdict.

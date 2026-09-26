@@ -1,0 +1,70 @@
+id: TM-037-01-investor-sentiment-momentum
+theory: TM-037
+parent: null
+mechanism: >
+  Market turnover rises with investor sentiment, the propensity to speculate: when optimistic
+  investors trade more, prices run ahead of value, and the market's later returns are lower. High
+  turnover of the market, measured against its own five-year level, is therefore a contrarian sign,
+  and the US stock market earns less over the months after high turnover than over those after low.
+prediction:
+  sign: negative (the fund-months after high market turnover earn less over the bill than the fund-months after low market turnover)
+  size: a judgment -- about 1 to 8% a year less, Jones's sign on the market's previous-year turnover (as Acharya and Pedersen report it) and Ilmanen's -0.11 for the Baker-Wurgler composite (its horizon not legible in the library's copy), cut for turnover alone and for SPY's share volume as its proxy; the rule's alpha over the fourteen funds held always about -1 to +2% a year; the base expected to fail gate 1, its decisions likely fewer than thirty (perhaps 5 to 20), gates 3 and 4, and gate 5, whose blocks of 2005-07 and 2008-09 hold the benchmark itself and give no alpha, so that its three positive blocks need all of 2010-14, 2015-19 and 2020-22; possibly gate 2
+universe: [SPY, QQQ, IWM, XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY]
+horizon: months
+signal: >
+  The measure is SPY's log traded volume, as the market's signal volumes give it, averaged over the
+  last window sessions to the session before the target, less its average over the last 1,260
+  sessions to the session before the target, the five-year detrending fixed; a missing or zero volume
+  is left out of both averages. Turnover is high when the measure is above zero. On the first session
+  of each month, when turnover is high the portfolio is in cash; otherwise each fund trading holds
+  1/N of the portfolio, N the funds trading. While fewer than 1,260 sessions precede the target the
+  measure is not defined and each fund trading holds 1/N. Everything is read up to the session
+  before; targets are traded at the close.
+parameters:
+  window: sessions of SPY's log volume whose average is compared with its five-year average, Jones's previous year in the base and Baker and Wurgler's month in the variant
+variants:
+  - {window: 252}
+  - {window: 21}
+neighbours:
+  window: {25: [189, 315], 50: [126, 378]}
+choose: false
+memory: 1260
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, on the market's closes, over the in-sample fund-months of the base, each
+  from the close of a target's session to the close of the next target's session, the first target
+  on the first session of February 2010, the first on which 1,260 sessions precede it, and the
+  last on the first session of December 2022, whose month ends at the close of 2022-12-30, the
+  last in-sample session, over the funds trading at the target, without the fund-months of the six
+  months of TM-024-01's published panic states inside this window (the months whose targets fall
+  in July, August and September 2010, April and May 2020, and October 2022), left out for all
+  fourteen funds: each fund-month's return less the bill's over the same sessions, regressed by
+  ordinary least squares on an indicator of high turnover at the target (window 252) and one
+  constant for each fund, the standard errors clustered by month, the funds' months in each of the
+  149 months left one cluster, the t statistic computed apart from the battery. The theory is
+  refuted in this form if the indicator's t statistic is +0.35 or above: the months after high
+  market turnover no worse than the months after low. Between, short of passing gates 1 to 7, not
+  proven, not refuted; a base that passes gates 1 to 7 while the clause refutes leaves the theory
+  refuted in this form. Of TM-037's refutation criteria the second is graded, in its
+  market-turnover form and from the contrarian side the library signs; its other proxies, IPOs,
+  closed-end fund discounts, fund flows and issuance, are not held, and its first, anomalies and
+  momentum stronger after high sentiment, reads the composite the lab does not hold and single
+  stocks' short legs, and is not graded. The clause is not graded for CA-029, whose own card would
+  read the illiquidity premium through its own measure; the result is reported to it. The volumes
+  are read as Yahoo reports them; python -m lab.data check lists none of SPY's bars. TM-028-01's
+  published same-session returns on quiet and loud sessions and its variant's contrast on the
+  trend of SPY's quiet sessions, SC-016-01's and SC-027-01's published volume gaps, SC-019-01's
+  returns by year, and TM-047-02's published volatility-managed alpha, its alpha at a beta equal
+  to its average scale and its scale by year are not the graded quantity; their fund-months stay
+  in the graded sample, disclosed. Reported, not graded: the same regression for the variant,
+  window 21; the clause with TM-024-01's six months; the share of months in the high state, and
+  the months in which the state turned; the same regression with SPY's return over the 252
+  sessions to the session before the target as a control; the same regression with the measure
+  itself as the regressor; the high-turnover months that are months in which TM-047-02's scale,
+  from the five equity funds' 21 sessions of risk, was below one, and the clause without those
+  months; the clause for SPY, QQQ and IWM and for the sector funds; the clause over the months of
+  2010 to 2016, over those of 2017 to 2022, and over the holdout, 2023 to 2025; the base's alpha
+  before and after costs, and the neighbours' and the one-day-late rule's alphas and appraisal
+  ratios.
