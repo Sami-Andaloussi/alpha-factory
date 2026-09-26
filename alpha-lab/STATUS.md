@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 207 untouched · 1 in-progress · 0 tested-conclusive · 34 tested-inconclusive · 21 not-testable.
+**263 theories**: 206 untouched · 1 in-progress · 0 tested-conclusive · 34 tested-inconclusive · 22 not-testable.
 
 **36 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 24 stopped at gate 2, 8 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -260,7 +260,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-025](bank/TM-025-bad-news-travels-slowly.md) Bad news travels slowly | trend and momentum | not-testable | [TM-025-01-bad-news-travels-slowly](strategies/TM-025-01-bad-news-travels-slowly/) · not testable: [reasoning](strategies/TM-025-01-bad-news-travels-slowly/reasoning.md) |
 | [TM-027](bank/TM-027-volume-conditioned-momentum.md) Volume-conditioned momentum (momentum life cycle) | trend and momentum | not-testable | [TM-027-01-volume-conditioned-momentum](strategies/TM-027-01-volume-conditioned-momentum/) · not testable: [reasoning](strategies/TM-027-01-volume-conditioned-momentum/reasoning.md) |
 | [TM-028](bank/TM-028-low-turnover-momentum.md) Low-turnover momentum (momentum filtered by low trading volume) | trend and momentum | tested-inconclusive | [TM-028-01-low-turnover-momentum](strategies/TM-028-01-low-turnover-momentum/) · stops at gate 3 · [report](strategies/TM-028-01-low-turnover-momentum/report.ipynb) · [verdict](strategies/TM-028-01-low-turnover-momentum/verdict.md) |
-| [TM-029](bank/TM-029-reputational-herding.md) Reputational herding (career concerns) | trend and momentum | untouched |  |
+| [TM-029](bank/TM-029-reputational-herding.md) Reputational herding (career concerns) | trend and momentum | not-testable | [TM-029-01-reputational-herding](strategies/TM-029-01-reputational-herding/) · not testable: [reasoning](strategies/TM-029-01-reputational-herding/reasoning.md) |
 | [TM-031](bank/TM-031-behavioural-herding.md) Behavioural herding | trend and momentum | untouched |  |
 | [TM-035](bank/TM-035-procyclical-leverage-value-at-risk.md) Procyclical leverage and value-at-risk constraints | trend and momentum | untouched |  |
 | [TM-036](bank/TM-036-extrapolative-expectations.md) Extrapolative expectations (X-CAPM, return extrapolation) | trend and momentum | untouched |  |
