@@ -6,7 +6,7 @@ mechanism: [structural]
 asset_classes: [stocks]
 horizon: [weeks, months]
 data: [board composition, ownership concentration, takeover and activism events, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
