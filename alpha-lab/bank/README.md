@@ -302,7 +302,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [AS-035](AS-035-supply-concentration-whale-overhang.md) | Supply concentration, whale overhang and validator concentration | structural, flows, information | crypto, stocks | days, months, years | not-testable |
 | [AS-036](AS-036-governance-tokens-voting-design.md) | Governance tokens and DAO voting design | structural, limits to arbitrage | crypto | days, months, years | not-testable |
 | [AS-037](AS-037-asset-collateralised-stablecoins.md) | Asset-collateralised stablecoins | structural, limits to arbitrage | crypto | days, weeks | not-testable |
-| [AS-038](AS-038-crypto-collateralised-stablecoins.md) | Crypto-collateralised stablecoins | structural, limits to arbitrage | crypto | days | untouched |
+| [AS-038](AS-038-crypto-collateralised-stablecoins.md) | Crypto-collateralised stablecoins | structural, limits to arbitrage | crypto | days | not-testable |
 | [AS-039](AS-039-algorithmic-stablecoins-reflexivity.md) | Algorithmic stablecoins and mint-burn reflexivity | structural, limits to arbitrage | crypto | days, months | untouched |
 | [AS-040](AS-040-bonding-curves.md) | Bonding curves | structural | crypto | days, months | untouched |
 | [AS-042](AS-042-on-chain-transparency.md) | Open data and on-chain transparency | information | crypto | intraday, days | untouched |
