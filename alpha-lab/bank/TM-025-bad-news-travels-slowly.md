@@ -6,7 +6,7 @@ mechanism: [information, behavioural]
 asset_classes: [stocks]
 horizon: [months]
 data: [daily prices, market capitalisation, analyst coverage]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
