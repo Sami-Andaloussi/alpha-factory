@@ -80,10 +80,10 @@ no equal-weighted index. On those data:
   S&P 500 from 1994 to 2007. This is the one-month form of **TM-017**'s claim — the sign of past
   returns over 1 to 12 months predicting the next, across equity indices, bonds, currencies and
   commodities — which TM-017-01, reading six and twelve months, left unread; earlier judgements
-  placed it with TM-017 (TM-005-01, TM-036-01), some with TM-043 too (TM-007-01, TM-015-01). It is
-  drawn whole, as **TM-017-02**, next: the one-month continuation of the lab's funds across TM-017's
-  asset classes, the equity index funds among them, TM-043's monthly form judged through it.
-  TM-041-01's twenty-session slopes of SPY and IWM, +0.019 and −0.031, are already published and
+  placed it with TM-017 (TM-036-01), or with TM-017 and TM-043 (TM-005-01, TM-007-01, TM-015-01). It
+  is drawn whole, as **TM-017-02**, next: the one-month continuation of the lab's funds across
+  TM-017's asset classes, the equity index funds among them, TM-043's monthly form judged through
+  it. TM-041-01's twenty-session slopes of SPY and IWM, +0.019 and −0.031, are already published and
   that card must treat them so.
 
 **The bank's siblings.** **TM-017**, time-series momentum, in progress, which draws the monthly

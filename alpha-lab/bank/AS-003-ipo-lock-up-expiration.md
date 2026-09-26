@@ -6,7 +6,7 @@ mechanism: [structural, information, limits to arbitrage]
 asset_classes: [stocks, crypto]
 horizon: [days]
 data: [IPO lock-up expiration dates, daily prices, shares outstanding, insider and venture capital ownership]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
