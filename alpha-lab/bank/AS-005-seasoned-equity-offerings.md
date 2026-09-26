@@ -6,7 +6,7 @@ mechanism: [information]
 asset_classes: [stocks]
 horizon: [days]
 data: [equity offering announcement dates, offer prices, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
