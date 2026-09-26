@@ -51,7 +51,11 @@ its own, beside the snapshot, whose files never change.
    own graded contrast). A state whose outcome was published only pooled, and falls across the sets
    a new clause contrasts, stays in the graded sample, disclosed, and the clause without it is
    reported (TM-023-01, which kept TM-024-01's panic months across its calendar sets; read literally
-   the rule would have left them out, and both versions gave the same conclusions).
+   the rule would have left them out, and both versions gave the same conclusions). The registry is
+   published too: each trial's line carries its monthly returns hedged of its benchmark, from which
+   a state's outcome or a strategy's own autocorrelation can be computed; a card whose graded
+   quantity such a series approximates names the series in its reasoning and computes nothing from
+   it before the lock (TM-038-01, whose clause reads TM-017-01's own record).
 4. **Hypothesis card**, `card.yaml`, from `templates/card.yaml`: the mechanism, the prediction
    (sign and rough size), the universe, the horizon, the signal, the parameters, three variants at
    most with the base first, and what would refute it.

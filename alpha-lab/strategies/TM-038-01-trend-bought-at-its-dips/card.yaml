@@ -1,0 +1,68 @@
+id: TM-038-01-trend-bought-at-its-dips
+theory: TM-038
+parent: null
+mechanism: >
+  A strategy's profitability moves in cycles with the capital that follows it: flows chase its past
+  performance, crowd it after success and leave it after losses, and its returns revive once the
+  capital has left. Trend following's own returns therefore revert: the lab's trend rule earns more,
+  at the same exposure to its funds, in the months after its own losing stretch than in the months
+  after a winning one.
+prediction:
+  sign: positive (the trend rule's months after its own losing stretch earn more over the bill, at the same exposure to the seven funds, than its months after a winning stretch)
+  size: a judgment -- about 0.5 to 3.5% a year more, from an autocorrelation of the book's hedged monthly returns of about -0.02 to -0.05 at each of five lags (Greyserman and Kaminski's typical programme at -0.1, whether by lag or summed they do not say, their evidence at lags of up to five months) on the hedged volatility of about 5.2% a year that TM-017-01's published alpha and appraisal ratio give, widened for the transfer from long-short programmes to a long-only book; the rule's alpha over the seven funds in equal parts about 0 to 2% a year, its return below the book's held in full, as Greyserman and Kaminski's table gives at such a Sharpe ratio and autocorrelation; the base expected to fail gates 3 and 4, likely gate 6 on SPY's share of the profit (TM-017-01's 33%), possibly gates 2 and 5
+universe: [SPY, EFA, EEM, IEF, TLT, GLD, DBC]
+horizon: months
+signal: >
+  The book is TM-017-01's rule: on the first session of each month, each fund whose return over the
+  past 252 sessions, read up to the session before, beats the Treasury bill's over the same sessions
+  and that trades holds a seventh of the portfolio, the rest in cash; its weights drift with the
+  funds' closes and the bill until the next target. The book's daily excess return is the sum over
+  the funds of each drifting weight times the fund's return less the bill's, before costs, and zero
+  before the book's first holding. The book is in a dip when the sum of its daily excess returns over
+  the last dip sessions to the session before the target is below zero. On the first session of each
+  month the portfolio holds the book's weights at a scale k, 1 when the book is in a dip and 0.5
+  otherwise, the rest in cash; while fewer than dip sessions precede the target, k is 0.5.
+  Everything is read up to the session before; targets are traded at the close.
+parameters:
+  dip: sessions of the book's own excess returns whose sum decides the dip, the five months of the Newedge study's negative autocorrelation in the base and the book's own lookback, a choice of the lab's, in the variant
+variants:
+  - {dip: 105}
+  - {dip: 252}
+neighbours:
+  dip: {25: [79, 131], 50: [53, 158]}
+choose: false
+memory: 530
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, on the market's closes, over the in-sample months from the first target
+  whose 105 sessions before it all fall on or after the session of the book's first holding, the
+  first session of July 2006, to December 2022, the last month ending at the close of 2022-12-30,
+  the 198 months each from the close of a target's session to the close of the next target's
+  session: the book's return over the month held in full (k = 1), less the bill's over the same
+  sessions, regressed by ordinary least squares on an indicator of the dip state at the target
+  (dip 105) and on the return less the bill's of the seven funds held in equal parts from the same
+  closes, the funds trading at the target, with standard errors robust to heteroskedasticity, the
+  t statistic computed apart from the battery. The theory is refuted in this form if the
+  indicator's t statistic is -0.35 or below: the trend rule no better after its own losing stretch
+  than after a winning one. Between, short of passing gates 1 to 7, not proven, not refuted; a
+  base that passes gates 1 to 7 while the clause refutes leaves the theory refuted in this form.
+  Of TM-038's refutation criteria the second is graded, in its own-performance form, both of its
+  sides by the one contrast; the first, the regime form, is TM-018's, read by TM-018-01, and its
+  capital form is not held; the third is not graded. TM-018-01's equity-crisis months and its
+  divergent months, whose edge of TM-017-01's rule it published, each state apart: if 90% or more
+  of the state's months among the 198 fall in one of the dip and no-dip sets, they leave the
+  graded sample, the graded months fewer by as many, and the clause with them is reported;
+  otherwise they stay, disclosed, and the clause without them is reported. TM-017-01's and
+  TM-018-01's published years and blocks, and the registry's monthly hedged returns of TM-017-01,
+  TM-018-01 and TM-047-01, from which nothing was computed, stay, disclosed. Reported, not graded:
+  the same regression for the variant, dip 252, over its own 190 months from March 2007; the same
+  regression without the seven funds as a regressor, and with a beta for each state; the share of
+  months in a dip, the base's average scale, and the autocorrelations at lags 1 to 5, and their
+  sum, of the book's hedged monthly returns; where TM-018-01's crisis and divergent months fall;
+  the clause over the months of 2006 to 2013, over those of 2014 to 2022, and over the holdout,
+  2023 to 2025; the Sharpe ratios before costs of the base and of the book held in full; the alpha
+  and the return of the book held constantly at the base's average scale, against the base's;
+  python -m lab.compare against TM-017-01; the base's alpha before and after costs, and the
+  neighbours' and the one-day-late rule's alphas and appraisal ratios.
