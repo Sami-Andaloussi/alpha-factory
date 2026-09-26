@@ -6,7 +6,7 @@ mechanism: [information, behavioural]
 asset_classes: [stocks, equity indices, bonds, currencies, commodities]
 horizon: [months]
 data: [daily prices, trading volumes]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

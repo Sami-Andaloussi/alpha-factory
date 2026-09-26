@@ -1,5 +1,6 @@
 """The battery, gate by gate: each decision on both sides of its thresholds, and each computation on
 synthetic markets where the truth is known."""
+from dataclasses import replace
 from types import SimpleNamespace
 
 import numpy as np
@@ -545,6 +546,54 @@ def test_bitcoin_read_through_its_own_close_breaks_hygiene():
     assert lagged.gates[0].figures["years needed"] == battery.MIN_YEARS      # bitcoin is one asset of nine
     unlagged = judge(trend, market, battery.Card("coin-02", universe, ({"source": "prices"},)), crypto=coin)
     assert unlagged.gates[0].figures["same-day breaks"] > 0
+
+
+def with_volumes(market, seed=7):
+    """The market with volumes that move from session to session."""
+    rng = np.random.default_rng(seed)
+    volumes = pd.DataFrame(rng.lognormal(13, 0.4, market.prices.shape), index=market.prices.index,
+                           columns=market.prices.columns)
+    return replace(market, signal_volumes=volumes.where(market.prices.notna()))
+
+
+def quiet(read, back=1):
+    """Momentum over the sessions whose volume fell, the returns read clean and the volumes `read`
+    sessions late: 1 is clean, 0 reads the bar it trades on, -1 reads tomorrow; `back` compares each
+    volume with the one that many sessions before."""
+    def positions(market, span=20, every=5):
+        volumes = market.signal_volumes
+        fell = (volumes < volumes.shift(back)).shift(read).fillna(False).astype(bool)
+        returns = market.signal_prices.pct_change().shift(1).where(fell, 0.0)
+        score = returns.rolling(span, min_periods=1).sum().clip(lower=0).fillna(0.0)
+        total = score.sum(axis=1)
+        weights = score.div(total.where(total > 0), axis=0).fillna(0.0)
+        out = weights * np.nan
+        out.iloc[::every] = weights.iloc[::every]
+        return out
+    return positions
+
+
+def test_a_rule_that_reads_volumes_is_checked_as_one_that_reads_prices(planted):
+    market = with_volumes(planted[0])
+    clean = judge(quiet(1), market).gates[0]
+    assert clean.figures["look-ahead breaks"] == 0 and clean.figures["same-day breaks"] == 0
+    assert clean.figures["memory breaks"] == 0
+    today = judge(quiet(0), market).gates[0]
+    assert today.figures["look-ahead breaks"] == 0 and today.figures["same-day breaks"] > 0 and not today.passed
+    tomorrow = judge(quiet(-1), market).gates[0]
+    assert tomorrow.figures["look-ahead breaks"] > 0 and not tomorrow.passed
+    reaching = judge(quiet(1, back=300), market).gates[0]
+    assert reaching.figures["memory breaks"] > 0 and not reaching.passed
+
+
+def test_a_rule_that_reads_no_volume_keeps_every_figure(planted):
+    """The volumes are moved from a stream of their own: a card that reads none is judged as on a
+    market without them."""
+    without = judge(planted[1], replace(planted[0], signal_volumes=None))
+    moving = judge(planted[1], with_volumes(planted[0]))
+    for a, b in zip(without.gates, moving.gates):
+        assert a.passed == b.passed and a.reason == b.reason
+        assert repr(a.figures) == repr(b.figures)
 
 
 def test_every_variant_is_checked_for_look_ahead(planted):

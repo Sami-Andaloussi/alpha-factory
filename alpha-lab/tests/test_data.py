@@ -52,6 +52,51 @@ def test_bitcoin_signal_is_the_close_of_the_day_before(snapshot):
     assert market.prices.loc[monday, "COIN"] == raw.loc["2020-03-09"]
 
 
+def test_volumes_are_read_as_the_closes_are():
+    days = pd.bdate_range("2020-03-02", "2020-03-13")
+    every_day = pd.date_range("2020-03-01", "2020-03-13")
+    etf = pd.DataFrame({"Close": np.arange(len(days)) + 100.0, "Volume": np.arange(len(days)) * 10.0 + 1}, index=days)
+    coin = pd.DataFrame({"Close": np.arange(len(every_day)) + 5000.0, "Volume": np.arange(len(every_day)) + 0.5},
+                        index=every_day)
+    irx = pd.DataFrame({"Close": np.full(len(days), 2.0)}, index=days)
+    market = data.assemble({"ETF": etf, "COIN": coin}, irx, ("COIN",))
+    assert market.signal_volumes.index.equals(market.prices.index)
+    assert market.signal_volumes.loc["2020-03-05", "ETF"] == etf.loc["2020-03-05", "Volume"]
+    monday = pd.Timestamp("2020-03-09")
+    assert market.signal_volumes.loc[monday, "COIN"] == coin.loc["2020-03-08", "Volume"]   # Sunday's, as its close
+    assert market.signal_volumes.loc["2020-03-03", "COIN"] == coin.loc["2020-03-02", "Volume"]
+    cut = market.window("2020-03-09", "2020-03-10")
+    assert cut.signal_volumes.index.equals(cut.prices.index)
+    late = data.traded_from(market, {"ETF": "2020-03-06"})
+    assert late.signal_volumes.loc[:"2020-03-05", "ETF"].isna().all()
+    assert late.signal_volumes.loc["2020-03-06", "ETF"] == etf.loc["2020-03-06", "Volume"]
+    assert data.assemble({"ETF": etf[["Close"]]}, irx, ()).signal_volumes is None   # bars with no volume
+
+
+def test_integer_volumes_come_out_as_floats_and_outliers_are_listed():
+    days = pd.bdate_range("2020-03-02", "2020-04-30")
+    every_day = pd.date_range("2020-02-01", "2020-04-30")                  # the coin starts first
+    volume = np.full(len(days), 1_000_000, dtype=np.int64)
+    volume[30] = 1_200                                                     # a bad print
+    etf = pd.DataFrame({"Close": np.linspace(100, 110, len(days)), "Volume": volume}, index=days)
+    coin = pd.DataFrame({"Close": np.linspace(5000, 6000, len(every_day)),
+                         "Volume": np.arange(len(every_day), dtype=np.int64) + 10}, index=every_day)
+    irx = pd.DataFrame({"Close": np.full(len(days), 2.0)}, index=days)
+    market = data.assemble({"ETF": etf, "COIN": coin}, irx, ("COIN",))
+    assert (market.signal_volumes.dtypes == float).all()
+    found = data.volume_findings(market)
+    assert [(f["ticker"], f["check"], f["date"]) for f in found] == [("ETF", "volume outlier", str(days[30].date()))]
+
+
+def test_the_snapshot_s_volumes_are_those_of_its_files(snapshot):
+    market = data.load(root=snapshot)
+    assert list(market.signal_volumes.columns) == list(SYNTHETIC)
+    assert market.signal_volumes.index.equals(market.prices.index)
+    assert market.signal_volumes["CCC"].isna().equals(market.prices["CCC"].isna())
+    assert market.signal_volumes.loc["2020-03-09", "AAA"] == data.read(snapshot / "2020-12-31" / "AAA.csv").loc[
+        "2020-03-09", "Volume"]
+
+
 def test_a_weekend_move_lands_on_monday(snapshot):
     market = data.load(root=snapshot)
     raw = data.read(snapshot / "2020-12-31" / "COIN.csv")["Close"]

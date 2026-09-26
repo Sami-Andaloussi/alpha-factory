@@ -164,7 +164,7 @@ def planted_market(market: Market, strength: float, rng) -> tuple[Market, pd.Dat
     lagged = [t for t in prices.columns if not market.prices[t].equals(market.signal_prices[t])]
     signal_prices = prices.copy()
     signal_prices[lagged] = prices[lagged].shift(1)
-    return Market(prices, market.tradable, market.rf, signal_prices), signal
+    return Market(prices, market.tradable, market.rf, signal_prices, market.signal_volumes), signal
 
 
 def in_sample(market: Market, strategy, parameters) -> tuple[battery.Leg, slice]:

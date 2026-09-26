@@ -212,7 +212,7 @@ def live(raw: dict, irx: pd.DataFrame, session: pd.Timestamp | None = None) -> M
         return market
     tradable = market.tradable.copy()
     tradable.iloc[-1] = tradable.iloc[-2]
-    return Market(market.prices, tradable, market.rf, market.signal_prices)
+    return Market(market.prices, tradable, market.rf, market.signal_prices, market.signal_volumes)
 
 
 def targets(paper: Paper, market: Market) -> pd.DataFrame:

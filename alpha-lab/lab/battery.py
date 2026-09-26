@@ -7,8 +7,10 @@ failed. Gate 8, paper trading, runs on its own clock.
 A strategy is a function `positions(market, **parameters)` returning target weights for each
 session of `market`, NaN to hold (`lab/engine.py`). The weights set for session t are traded at the
 close of t, so they may read the market up to t-1 only: every estimate on windows ending at t-1,
-and bitcoin through `signal_prices`, whose close is one day late. Gate 1 checks both, for every
-variant.
+and bitcoin through `signal_prices`, whose close is one day late, and a traded volume through
+`signal_volumes`, lagged in the same way. Gate 1 checks both, for every variant, moving the volumes
+wherever it moves the prices; their draws come from a stream of their own, so that a card that reads
+no volume keeps every figure it had before the volumes were passed (2026-09-26): the version stays.
 
 The thresholds below were set before any card. `THRESHOLDS` is the battery's version, written with
 every verdict: changing a threshold, or how a gate computes its figures, is a versioned decision that
@@ -33,7 +35,7 @@ from it too, and are version 3's.
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 import numpy as np
 import pandas as pd
@@ -52,6 +54,7 @@ PERIODS = stats.PERIODS
 # Gate 1: hygiene
 CHECKED_DATES = 50            # per variant: dates where it sets a target, and as many where it holds
 HOLDOUT_CHECKED_DATES = 10    # the same checks inside the holdout (gate 7)
+VOLUME_SEED = 20260926        # the volumes' own stream, when gate 1 moves them (`volumes_moved`)
 MIN_DECISIONS = 30            # clustered decisions, in-sample
 MIN_YEARS, MIN_YEARS_CRYPTO = 5, 4
 # Gate 2: economic edge
@@ -649,7 +652,8 @@ def decide_holdout(f: dict) -> Gate:
 
 def restrict(market: Market, tickers) -> Market:
     tickers = list(tickers)
-    return Market(market.prices[tickers], market.tradable[tickers], market.rf, market.signal_prices[tickers])
+    volumes = None if market.signal_volumes is None else market.signal_volumes[tickers]
+    return Market(market.prices[tickers], market.tradable[tickers], market.rf, market.signal_prices[tickers], volumes)
 
 
 def unheld(market: Market, tickers) -> Market:
@@ -658,7 +662,7 @@ def unheld(market: Market, tickers) -> Market:
     `left_out` (`targets`)."""
     tradable = market.tradable.copy()
     tradable[list(tickers)] = False
-    return Market(market.prices, tradable, market.rf, market.signal_prices)
+    return replace(market, tradable=tradable)
 
 
 def targets(strategy, market: Market, parameters: dict, left_out=()) -> pd.DataFrame:
@@ -684,8 +688,9 @@ def targets(strategy, market: Market, parameters: dict, left_out=()) -> pd.DataF
 def handed(market: Market) -> Market:
     """The market as a strategy gets it: each frame copied, which costs nothing until the strategy
     edits one, so that an edit through pandas changes nothing the battery prices."""
+    volumes = None if market.signal_volumes is None else market.signal_volumes.copy(deep=False)
     return Market(market.prices.copy(deep=False), market.tradable.copy(deep=False), market.rf.copy(deep=False),
-                  market.signal_prices.copy(deep=False))
+                  market.signal_prices.copy(deep=False), volumes)
 
 
 def fees(market: Market, multiplier: float, crypto) -> pd.Series:
@@ -806,7 +811,7 @@ def timing_breaks(strategy, parameters, market: Market, positions, period, rng, 
 def memory_breaks(strategy, parameters, market: Market, positions, period, rng, dates, memory: int) -> tuple[int, list]:
     """Dates where a target changes when the prices older than the signal's memory are scrambled:
     every price before the one `memory` sessions before the session before the target moved at
-    random, the dates, the assets that trade and the bill rate kept, the future cut off. `dates` are
+    random, and every volume with it, from their own stream (`volumes_moved`), the dates, the assets that trade and the bill rate kept, the future cut off. `dates` are
     drawn among the sessions where the strategy sets a target with older prices to scramble. Returns
     the number of dates checked and those that broke."""
     index = market.prices.index
@@ -824,15 +829,16 @@ def memory_breaks(strategy, parameters, market: Market, positions, period, rng, 
         width = prices.shape[1]
         prices.iloc[:cut] = prices.iloc[:cut].to_numpy() * rng.uniform(0.5, 1.5, (cut, width))
         signal.iloc[:cut] = signal.iloc[:cut].to_numpy() * rng.uniform(0.5, 1.5, (cut, width))
-        moved = Market(prices, seen.tradable, seen.rf, signal)
+        moved = Market(prices, seen.tradable, seen.rf, signal, volumes_moved(seen.signal_volumes, slice(None, cut)))
         if not same_rows(targets(strategy, moved, parameters).loc[[day]], positions.loc[[day]]):
             breaks.append(day)
     return len(chosen), breaks
 
 
 def scrambled(market: Market, lagged, rng) -> Market:
-    """The market with its last bar moved at random, and the close before it of assets whose signal
-    is lagged: what the strategy may not have read. The bill rate of the last session stays: it was
+    """The market with its last bar moved at random, its volumes too from their own stream
+    (`volumes_moved`), and the close before it of assets whose signal is lagged: what the strategy
+    may not have read. The bill rate of the last session stays: it was
     set the session before."""
     prices, signal = market.prices.copy(), market.signal_prices.copy()
     width = prices.shape[1]
@@ -840,7 +846,20 @@ def scrambled(market: Market, lagged, rng) -> Market:
     signal.iloc[-1] = signal.iloc[-1].to_numpy() * rng.uniform(0.5, 1.5, width)
     if len(prices) > 1 and lagged:
         prices.loc[prices.index[-2], lagged] = prices.loc[prices.index[-2], lagged].to_numpy() * rng.uniform(0.5, 1.5, len(lagged))
-    return Market(prices, market.tradable, market.rf, signal)
+    return Market(prices, market.tradable, market.rf, signal, volumes_moved(market.signal_volumes, slice(-1, None)))
+
+
+def volumes_moved(volumes: pd.DataFrame | None, rows: slice) -> pd.DataFrame | None:
+    """The volumes with `rows` moved at random, as gate 1 moves the prices it scrambles. The draws
+    come from a stream of their own, seeded by the last session, so that the prices' draws, and every
+    figure of a card that reads no volume, are those of a market without volumes."""
+    if volumes is None or not len(volumes):
+        return volumes
+    moved = volumes.copy()
+    part = moved.iloc[rows]
+    noise = np.random.default_rng([VOLUME_SEED, int(volumes.index[-1].value // 10**9)]).uniform(0.5, 1.5, part.shape)
+    moved.iloc[rows] = part.to_numpy() * noise
+    return moved
 
 
 def asset_returns(market: Market) -> pd.DataFrame:
