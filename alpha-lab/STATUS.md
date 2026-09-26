@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 177 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 48 not-testable.
+**263 theories**: 176 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 49 not-testable.
 
 **41 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 26 stopped at gate 2, 10 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -30,7 +30,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [AS-028](bank/AS-028-vesting-unlock-treasury-overhang.md) Vesting, unlock and treasury overhang | asset-specific mechanisms | not-testable | [AS-028-01-vesting-unlock-treasury-overhang](strategies/AS-028-01-vesting-unlock-treasury-overhang/) · not testable: [reasoning](strategies/AS-028-01-vesting-unlock-treasury-overhang/reasoning.md) |
 | [AS-029](bank/AS-029-staking-and-slashing.md) Staking and slashing | asset-specific mechanisms | not-testable | [AS-029-01-staking-and-slashing](strategies/AS-029-01-staking-and-slashing/) · not testable: [reasoning](strategies/AS-029-01-staking-and-slashing/reasoning.md) |
 | [AS-030](bank/AS-030-staking-ratio-float-scarcity.md) Staking ratio, float scarcity and unstaking fragility | asset-specific mechanisms | not-testable | [AS-030-01-staking-ratio-float-scarcity](strategies/AS-030-01-staking-ratio-float-scarcity/) · not testable: [reasoning](strategies/AS-030-01-staking-ratio-float-scarcity/reasoning.md) |
-| [AS-031](bank/AS-031-exchange-listing-shock.md) Exchange listing and cross-listing shock | asset-specific mechanisms | untouched |  |
+| [AS-031](bank/AS-031-exchange-listing-shock.md) Exchange listing and cross-listing shock | asset-specific mechanisms | not-testable | [AS-031-01-exchange-listing-shock](strategies/AS-031-01-exchange-listing-shock/) · not testable: [reasoning](strategies/AS-031-01-exchange-listing-shock/reasoning.md) |
 | [AS-032](bank/AS-032-exchange-clientele-comovement.md) Exchange clientele comovement | asset-specific mechanisms | untouched |  |
 | [AS-035](bank/AS-035-supply-concentration-whale-overhang.md) Supply concentration, whale overhang and validator concentration | asset-specific mechanisms | untouched |  |
 | [AS-036](bank/AS-036-governance-tokens-voting-design.md) Governance tokens and DAO voting design | asset-specific mechanisms | untouched |  |
