@@ -63,11 +63,12 @@ this judgement. On those data:
   lab's one token, bitcoin, is secured by proof of work and has no staking, slashing or exit queue;
   no staked asset is in the lab's universe, and no staking ratio, reward or slashing event is held;
   bitcoin's own payment for security, by mining, is AS-021's and EF-047's.
-- **Dated staking events**: the library dates Ethereum's move to proof of stake to the year only,
-  2022, inside the in-sample years (Huang and others, section 3.3.4; Schianchi and Mantovi, chapter
-  1), and Terra's collapse to May 2022; it dates no staking event in the holdout. Both are on tokens
-  the lab does not hold; a rule around them on bitcoin or the funds makes at most six decisions,
-  certain to fail gate 1's thirty whatever the prices (RUNBOOK step 9).
+- **Dated staking events**: the library dates Ethereum's move to proof of stake to September 2022,
+  inside the in-sample years (Schianchi and Mantovi, section 2.1.5; the year alone in Huang and
+  others, section 3.3.4), and Terra's collapse to May 2022; it dates no staking event in the
+  holdout. Both are on tokens the lab does not hold; a rule entering and leaving around them on
+  bitcoin or the funds makes at most five decisions, certain to fail gate 1's thirty whatever the
+  prices (RUNBOOK step 9).
 - **A staking yield against the bill's yield**: the lab holds the bill's yield but no staking yield;
   the library gives only illustrative levels — about 5%, a 10% example, nearly 20% on Terra — so a
   comparison would be a rule on the bill's yield against a constant, not this theory.
@@ -93,5 +94,5 @@ exit queues over the lab's years — outside the lab's data — and a timed rule
 AS-029 is recorded `not-testable`: its claim and every refutation read staked assets and their
 staking data, while the lab's one token, bitcoin, has no staking and no staked asset is in its
 universe; the library's signs on staking are untimed claims or a past episode on tokens the lab does
-not hold; its dated staking events are two, in 2022, at most six decisions. No card is drawn, and no
-trial is spent.
+not hold; its dated staking events are two, in 2022, at most five decisions. No card is drawn, and
+no trial is spent.
