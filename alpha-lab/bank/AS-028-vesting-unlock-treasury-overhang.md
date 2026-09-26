@@ -6,7 +6,7 @@ mechanism: [structural, information, behavioural, limits to arbitrage]
 asset_classes: [crypto]
 horizon: [days, weeks, months]
 data: [token unlock schedules, circulating supply, treasury holdings, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism

@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 180 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 45 not-testable.
+**263 theories**: 179 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 46 not-testable.
 
 **41 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 26 stopped at gate 2, 10 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -27,7 +27,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [AS-020](bank/AS-020-two-sided-platforms.md) Two-sided platforms | asset-specific mechanisms | not-testable | [AS-020-01-two-sided-platforms](strategies/AS-020-01-two-sided-platforms/) · not testable: [reasoning](strategies/AS-020-01-two-sided-platforms/reasoning.md) |
 | [AS-021](bank/AS-021-native-network-token.md) Native token (network token) | asset-specific mechanisms | not-testable | [AS-021-01-native-network-token](strategies/AS-021-01-native-network-token/) · not testable: [reasoning](strategies/AS-021-01-native-network-token/reasoning.md) |
 | [AS-026](bank/AS-026-token-design-characteristics.md) Valuation of token design characteristics | asset-specific mechanisms | not-testable | [AS-026-01-token-design-characteristics](strategies/AS-026-01-token-design-characteristics/) · not testable: [reasoning](strategies/AS-026-01-token-design-characteristics/reasoning.md) |
-| [AS-028](bank/AS-028-vesting-unlock-treasury-overhang.md) Vesting, unlock and treasury overhang | asset-specific mechanisms | untouched |  |
+| [AS-028](bank/AS-028-vesting-unlock-treasury-overhang.md) Vesting, unlock and treasury overhang | asset-specific mechanisms | not-testable | [AS-028-01-vesting-unlock-treasury-overhang](strategies/AS-028-01-vesting-unlock-treasury-overhang/) · not testable: [reasoning](strategies/AS-028-01-vesting-unlock-treasury-overhang/reasoning.md) |
 | [AS-029](bank/AS-029-staking-and-slashing.md) Staking and slashing | asset-specific mechanisms | untouched |  |
 | [AS-030](bank/AS-030-staking-ratio-float-scarcity.md) Staking ratio, float scarcity and unstaking fragility | asset-specific mechanisms | untouched |  |
 | [AS-031](bank/AS-031-exchange-listing-shock.md) Exchange listing and cross-listing shock | asset-specific mechanisms | untouched |  |
