@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 210 untouched · 1 in-progress · 0 tested-conclusive · 33 tested-inconclusive · 19 not-testable.
+**263 theories**: 209 untouched · 1 in-progress · 0 tested-conclusive · 33 tested-inconclusive · 20 not-testable.
 
 **35 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 24 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -257,7 +257,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-019](bank/TM-019-earnings-momentum.md) Earnings momentum | trend and momentum | not-testable | [TM-019-01-earnings-momentum](strategies/TM-019-01-earnings-momentum/) · not testable: [reasoning](strategies/TM-019-01-earnings-momentum/reasoning.md) |
 | [TM-023](bank/TM-023-momentum-seasonality.md) Seasonality of momentum (tax-loss selling and window dressing) | trend and momentum | tested-inconclusive | [TM-023-01-quarter-end-momentum](strategies/TM-023-01-quarter-end-momentum/) · stops at gate 2 · [report](strategies/TM-023-01-quarter-end-momentum/report.ipynb) · [verdict](strategies/TM-023-01-quarter-end-momentum/verdict.md) |
 | [TM-024](bank/TM-024-momentum-crashes.md) Momentum crashes (state-dependent momentum risk) | trend and momentum | tested-inconclusive | [TM-024-01-crash-managed-momentum](strategies/TM-024-01-crash-managed-momentum/) · stops at gate 2 · [report](strategies/TM-024-01-crash-managed-momentum/report.ipynb) · [verdict](strategies/TM-024-01-crash-managed-momentum/verdict.md) |
-| [TM-025](bank/TM-025-bad-news-travels-slowly.md) Bad news travels slowly | trend and momentum | untouched |  |
+| [TM-025](bank/TM-025-bad-news-travels-slowly.md) Bad news travels slowly | trend and momentum | not-testable | [TM-025-01-bad-news-travels-slowly](strategies/TM-025-01-bad-news-travels-slowly/) · not testable: [reasoning](strategies/TM-025-01-bad-news-travels-slowly/reasoning.md) |
 | [TM-027](bank/TM-027-volume-conditioned-momentum.md) Volume-conditioned momentum (momentum life cycle) | trend and momentum | untouched |  |
 | [TM-028](bank/TM-028-low-turnover-momentum.md) Low-turnover momentum (momentum filtered by low trading volume) | trend and momentum | untouched |  |
 | [TM-029](bank/TM-029-reputational-herding.md) Reputational herding (career concerns) | trend and momentum | untouched |  |
