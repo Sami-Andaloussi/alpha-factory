@@ -6,7 +6,7 @@ mechanism: [structural]
 asset_classes: [stocks, sectors]
 horizon: [years]
 data: [vertical integration measures, profit margins, capital intensity, supplier concentration]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
