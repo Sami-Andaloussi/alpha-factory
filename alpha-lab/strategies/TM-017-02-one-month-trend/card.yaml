@@ -1,0 +1,57 @@
+id: TM-017-02-one-month-trend
+theory: TM-017
+parent: null
+mechanism: >
+  Prices absorb news slowly and flows follow recent moves, so an asset's return over its last month
+  is continued over the next, in equity indices, bonds and commodities alike: the shortest horizon of
+  time-series momentum, which TM-017-01 read at six and twelve months.
+prediction:
+  sign: positive (a fund's return over a month, less the bill's, rises with its return over the previous month, across the funds)
+  size: a judgment -- a pooled slope of about +0.02 to +0.12 across EFA, EEM, IEF, TLT, GLD and DBC, each fund's returns scaled by its own recent volatility, from the sources fund by fund (Ilmanen's adjacent-month bars, read off his figure 20.1, and Cutler, Poterba and Summers for equity markets and bonds, near zero for US bonds; Lo's and Chevallier and Ielpo's negative monthly autocorrelation of gold; mixed signs among commodities; Pedersen's one-month time-series momentum, about 0.10 as an autocorrelation), cut for the fading of the equity sign and for funds' prices carrying no smoothing; the rule's alpha over the seven funds in equal parts about -1.5 to +1.0% a year, TM-041-01's one-month variant on the US equity funds having earned -1.05%; the base expected to fail gate 2 about half the time, gates 3, 4 and 5, possibly gate 6 on SPY's share of the profit
+universe: [SPY, EFA, EEM, IEF, TLT, GLD, DBC]
+horizon: months
+signal: >
+  On the first session of each month, each fund whose return over the past lookback sessions, read
+  up to the session before, beats the Treasury bill's over the same sessions and that trades holds a
+  seventh of the portfolio; the rest in cash, and a fund's seventh while it has fewer than lookback + 1
+  closes. Everything is read up to the session before; targets are traded at the close.
+parameters:
+  lookback: sessions of the past return that decides whether a fund is held, a month
+variants:
+  - {lookback: 21}
+neighbours:
+  lookback: {25: [16, 26], 50: [11, 32]}
+choose: false
+memory: 22
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, on the market's closes, over the in-sample months from the first target with 64
+  closes and a month before it, the first session of May 2005, to December 2022, the last month ending
+  at the close of 2022-12-30, 212 months, each month from the close of a target's session to the close
+  of the next target's session, for EFA, EEM, IEF, TLT, GLD and DBC, each fund in the months it traded
+  at both the month's and the previous month's targets with 64 closes before the month's target: each
+  fund-month's return less the bill's compounded over the same sessions, divided by the standard
+  deviation of the fund's daily returns over the 63 sessions to the session before the month's
+  target, regressed by ordinary least squares on the same fund's return less the bill's over the
+  previous month divided by the same standard deviation, with one constant for each fund and one
+  slope for all, the standard errors clustered by month, the t statistic computed apart from the
+  battery. The theory is refuted in this form if it is -0.35 or below: a fund's month no better after
+  a rising month than after a falling one. Between, short of passing gates 1 to 7, not proven, not
+  refuted; a base that passes gates 1 to 7 while the clause refutes leaves the theory refuted in this
+  form. Of TM-017's refutation criteria the first is graded, at one month on the funds outside the US
+  equity market; its six- and twelve-month forms were read by TM-017-01, its regime form by TM-018-01;
+  the others are not this card's. SPY's fund-months leave the graded sample, TM-041-01 having
+  published SPY's slope on its previous twenty sessions (+0.019) and its one-month rule on the US
+  equity funds, and CA-006-01 the US sector funds' own-month slope (-0.068); the clause with them is
+  reported. TM-017-01's, TM-001-01's, MR-032-01's, SC-019-01's and TM-024-01's published figures, and
+  the registry's monthly series of TM-017-01, TM-001-01, TM-047-01, TM-041-01, MR-032-01 and
+  CA-006-01, from which nothing was computed, stay, disclosed. Reported, not graded: the clause
+  unscaled; the clause with SPY's fund-months; each fund's own slope; the equity funds and the others
+  apart; the same regression with each fund's return over the 252 sessions to the session before the
+  month's target, scaled alike, as a control, from the first session of February 2006 on its own
+  sample; the clause without TM-024-01's equity panic months; the clause over the months of 2005 to
+  2013, over those of 2014 to 2022, without 2008 and 2009, and over the holdout, 2023 to 2025; the
+  base's alpha before and after costs, and the neighbours' and the one-day-late rule's alphas and
+  appraisal ratios.
