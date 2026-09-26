@@ -45,9 +45,10 @@ in the 1998 edition.
   the firms that came to dominate their industries (Greenwald and others, *Value Investing*, second
   edition, 2022, chapter 7, with its Table 7.2); industries consolidating into a few winners through
   scale or network effects (Damodaran, *Investment Valuation*, fourth edition, 2025);
-  winner-takes-all markets in which expectations for the winner rise as those for the losers
-  deflate, with many losers for every winner, and the advice to find first the sectors where network
-  effects are intense (Mauboussin and Rappaport, *Expectations Investing*, revised edition, 2021).
+  winner-takes-all markets in which the market raises its hopes for the leader while cutting them
+  for the rest, with many losers for every winner, and the advice to find first the sectors where
+  network effects are intense (Mauboussin and Rappaport, *Expectations Investing*, revised edition,
+  2021).
 
 **Return signs near the theory.**
 

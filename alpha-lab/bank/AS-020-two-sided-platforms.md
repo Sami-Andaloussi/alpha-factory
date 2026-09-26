@@ -6,7 +6,7 @@ mechanism: [structural]
 asset_classes: [stocks, sectors, crypto]
 horizon: [years]
 data: [participants on each side of the platform, platform revenues, profit margins, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism

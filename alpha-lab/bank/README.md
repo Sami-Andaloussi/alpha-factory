@@ -291,7 +291,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [AS-017](AS-017-network-effects-installed-base.md) | Network effects and installed base | structural | stocks, sectors | years | not-testable |
 | [AS-018](AS-018-experience-curve.md) | Experience curve | structural | stocks, sectors | years | not-testable |
 | [AS-019](AS-019-vertical-integration-asset-specificity.md) | Vertical integration and asset specificity | structural | stocks, sectors | years | not-testable |
-| [AS-020](AS-020-two-sided-platforms.md) | Two-sided platforms | structural | stocks, sectors, crypto | years | untouched |
+| [AS-020](AS-020-two-sided-platforms.md) | Two-sided platforms | structural | stocks, sectors, crypto | years | not-testable |
 | [AS-021](AS-021-native-network-token.md) | Native token (network token) | structural | crypto | months, years | untouched |
 | [AS-026](AS-026-token-design-characteristics.md) | Valuation of token design characteristics | structural | crypto | days, months, years | untouched |
 | [AS-028](AS-028-vesting-unlock-treasury-overhang.md) | Vesting, unlock and treasury overhang | structural, information, behavioural, limits to arbitrage | crypto | days, weeks, months | untouched |
