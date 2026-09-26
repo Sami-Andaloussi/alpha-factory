@@ -6,7 +6,7 @@ mechanism: [information]
 asset_classes: [stocks]
 horizon: [days, months]
 data: [dividend announcements, earnings, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
