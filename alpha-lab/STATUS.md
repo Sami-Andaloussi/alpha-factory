@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 184 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 41 not-testable.
+**263 theories**: 183 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 42 not-testable.
 
 **41 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 26 stopped at gate 2, 10 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -23,7 +23,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [AS-016](bank/AS-016-economies-of-scale.md) Economies of scale | asset-specific mechanisms | not-testable | [AS-016-01-economies-of-scale](strategies/AS-016-01-economies-of-scale/) · not testable: [reasoning](strategies/AS-016-01-economies-of-scale/reasoning.md) |
 | [AS-017](bank/AS-017-network-effects-installed-base.md) Network effects and installed base | asset-specific mechanisms | not-testable | [AS-017-01-network-effects-installed-base](strategies/AS-017-01-network-effects-installed-base/) · not testable: [reasoning](strategies/AS-017-01-network-effects-installed-base/reasoning.md) |
 | [AS-018](bank/AS-018-experience-curve.md) Experience curve | asset-specific mechanisms | not-testable | [AS-018-01-experience-curve](strategies/AS-018-01-experience-curve/) · not testable: [reasoning](strategies/AS-018-01-experience-curve/reasoning.md) |
-| [AS-019](bank/AS-019-vertical-integration-asset-specificity.md) Vertical integration and asset specificity | asset-specific mechanisms | untouched |  |
+| [AS-019](bank/AS-019-vertical-integration-asset-specificity.md) Vertical integration and asset specificity | asset-specific mechanisms | not-testable | [AS-019-01-vertical-integration-asset-specificity](strategies/AS-019-01-vertical-integration-asset-specificity/) · not testable: [reasoning](strategies/AS-019-01-vertical-integration-asset-specificity/reasoning.md) |
 | [AS-020](bank/AS-020-two-sided-platforms.md) Two-sided platforms | asset-specific mechanisms | untouched |  |
 | [AS-021](bank/AS-021-native-network-token.md) Native token (network token) | asset-specific mechanisms | untouched |  |
 | [AS-026](bank/AS-026-token-design-characteristics.md) Valuation of token design characteristics | asset-specific mechanisms | untouched |  |
