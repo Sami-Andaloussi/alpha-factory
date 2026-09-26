@@ -6,7 +6,7 @@ mechanism: [structural]
 asset_classes: [stocks]
 horizon: [years]
 data: [free cash flow, capital expenditure, dividends and repurchases, acquisitions, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
