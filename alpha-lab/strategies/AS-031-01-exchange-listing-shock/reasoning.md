@@ -32,14 +32,17 @@ shares and on tokens the lab does not hold:
 - **On tokens**: an unlisted token hardly having any market value, only a third of 2017's tokens
   being listed anywhere, and exchanges as the gatekeepers that gave Ethereum Classic its economic
   value by listing it after its hard fork of August 2016 (Voshmgir, *Token Economy*, second edition,
-  2020, Part 3, "Token Sales" and "Trading Tokens, Atomic Swaps & DEX"); Uniswap's token listed in
-  September 2020, opening near three dollars, spiking above eight and settling at four to five
-  (Harvey, Ramachandran and Santoro, *DeFi and the Future of Finance*, 2021); a listing on the large
-  exchanges as a sign of prestige and credibility, and buyers at the exchange launch price hurt by
-  later unlocks (Huang and others, *Web3*, 2024, section 6.3.2); being added by regulated exchanges
-  as a stamp of approval, and the number of exchanges supporting an asset as a measure of its
-  support (Burniske and Tatar, *Cryptoassets*, 2017, chapters 9 and 13) — past episodes or untimed
-  claims on tokens the lab does not hold.
+  2020, Part 3, "Token Sales" and "Trading Tokens, Atomic Swaps & DEX"), a listing Burniske and
+  Tatar date to 23 July 2016, after which people quickly speculated on its value (*Cryptoassets*,
+  2017, chapter 5), and Antonopoulos and Wood to 24 July, after a fork on 20 July (*Mastering
+  Ethereum*, 2018, Appendix A); Uniswap's token listed in September 2020, opening near three
+  dollars, spiking above eight and settling at four to five (Harvey, Ramachandran and Santoro, *DeFi
+  and the Future of Finance*, 2021); a listing on the large exchanges as a sign of prestige and
+  credibility, and buyers at the exchange launch price hurt by later unlocks (Huang and others,
+  *Web3*, 2024, section 6.3.2); being added by regulated exchanges as a stamp of approval, and the
+  number of exchanges supporting an asset as a measure of its support (Burniske and Tatar,
+  *Cryptoassets*, 2017, chapters 9 and 13) — past episodes or untimed claims on tokens the lab does
+  not hold.
 - **On access to bitcoin** (Burniske and Tatar, chapter 15): the Grayscale Bitcoin Trust's first
   trade over the counter in May 2015 at a premium near 100% to its bitcoin, the premium as the price
   of access — a wrapper's premium over its net asset value, **MR-026**'s form, as AS-009-01
