@@ -6,7 +6,7 @@ mechanism: [behavioural, limits to arbitrage, macroeconomic]
 asset_classes: [equity indices, bonds, currencies, commodities]
 horizon: [months, years]
 data: [daily prices, managed futures assets under management]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
