@@ -6,7 +6,7 @@ mechanism: [structural]
 asset_classes: [stocks]
 horizon: [years]
 data: [dividends, retained earnings, firm age, balance sheets, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
