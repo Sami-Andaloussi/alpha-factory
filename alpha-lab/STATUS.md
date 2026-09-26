@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 216 untouched · 1 in-progress · 0 tested-conclusive · 32 tested-inconclusive · 14 not-testable.
+**263 theories**: 215 untouched · 1 in-progress · 0 tested-conclusive · 32 tested-inconclusive · 15 not-testable.
 
 **34 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 23 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -248,7 +248,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-007](bank/TM-007-underreaction-to-public-information.md) Behavioural underreaction to public information (conservatism) | trend and momentum | not-testable | [TM-007-01-underreaction-to-public-information](strategies/TM-007-01-underreaction-to-public-information/) · not testable: [reasoning](strategies/TM-007-01-underreaction-to-public-information/reasoning.md) |
 | [TM-008](bank/TM-008-gradual-information-diffusion.md) Gradual information diffusion (newswatchers and momentum traders) | trend and momentum | not-testable | [TM-008-01-gradual-information-diffusion](strategies/TM-008-01-gradual-information-diffusion/) · not testable: [reasoning](strategies/TM-008-01-gradual-information-diffusion/reasoning.md) |
 | [TM-011](bank/TM-011-informational-cascades.md) Informational cascades (herding) | trend and momentum | not-testable | [TM-011-01-informational-cascades](strategies/TM-011-01-informational-cascades/) · not testable: [reasoning](strategies/TM-011-01-informational-cascades/reasoning.md) |
-| [TM-012](bank/TM-012-mutual-fund-momentum-trading.md) Momentum trading by mutual funds (chasing past winners) | trend and momentum | untouched |  |
+| [TM-012](bank/TM-012-mutual-fund-momentum-trading.md) Momentum trading by mutual funds (chasing past winners) | trend and momentum | not-testable | [TM-012-01-mutual-fund-momentum-trading](strategies/TM-012-01-mutual-fund-momentum-trading/) · not testable: [reasoning](strategies/TM-012-01-mutual-fund-momentum-trading/reasoning.md) |
 | [TM-014](bank/TM-014-slow-moving-arbitrage-capital.md) Slow-moving arbitrage capital | trend and momentum | untouched |  |
 | [TM-015](bank/TM-015-slow-moving-capital-delegated-management.md) Slow-moving capital and delegated management (benchmark hugging, career risk) | trend and momentum | untouched |  |
 | [TM-016](bank/TM-016-disposition-effect.md) Disposition effect (capital gains overhang) | trend and momentum | untouched |  |
