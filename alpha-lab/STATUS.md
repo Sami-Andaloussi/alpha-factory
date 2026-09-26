@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 175 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 50 not-testable.
+**263 theories**: 174 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 51 not-testable.
 
 **41 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 26 stopped at gate 2, 10 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -32,7 +32,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [AS-030](bank/AS-030-staking-ratio-float-scarcity.md) Staking ratio, float scarcity and unstaking fragility | asset-specific mechanisms | not-testable | [AS-030-01-staking-ratio-float-scarcity](strategies/AS-030-01-staking-ratio-float-scarcity/) · not testable: [reasoning](strategies/AS-030-01-staking-ratio-float-scarcity/reasoning.md) |
 | [AS-031](bank/AS-031-exchange-listing-shock.md) Exchange listing and cross-listing shock | asset-specific mechanisms | not-testable | [AS-031-01-exchange-listing-shock](strategies/AS-031-01-exchange-listing-shock/) · not testable: [reasoning](strategies/AS-031-01-exchange-listing-shock/reasoning.md) |
 | [AS-032](bank/AS-032-exchange-clientele-comovement.md) Exchange clientele comovement | asset-specific mechanisms | not-testable | [AS-032-01-exchange-clientele-comovement](strategies/AS-032-01-exchange-clientele-comovement/) · not testable: [reasoning](strategies/AS-032-01-exchange-clientele-comovement/reasoning.md) |
-| [AS-035](bank/AS-035-supply-concentration-whale-overhang.md) Supply concentration, whale overhang and validator concentration | asset-specific mechanisms | untouched |  |
+| [AS-035](bank/AS-035-supply-concentration-whale-overhang.md) Supply concentration, whale overhang and validator concentration | asset-specific mechanisms | not-testable | [AS-035-01-supply-concentration-whale-overhang](strategies/AS-035-01-supply-concentration-whale-overhang/) · not testable: [reasoning](strategies/AS-035-01-supply-concentration-whale-overhang/reasoning.md) |
 | [AS-036](bank/AS-036-governance-tokens-voting-design.md) Governance tokens and DAO voting design | asset-specific mechanisms | untouched |  |
 | [AS-037](bank/AS-037-asset-collateralised-stablecoins.md) Asset-collateralised stablecoins | asset-specific mechanisms | untouched |  |
 | [AS-038](bank/AS-038-crypto-collateralised-stablecoins.md) Crypto-collateralised stablecoins | asset-specific mechanisms | untouched |  |
