@@ -6,7 +6,7 @@ mechanism: [flows, limits to arbitrage]
 asset_classes: [stocks]
 horizon: [months, years]
 data: [dividend payments, payout ratios, institutional holdings, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism

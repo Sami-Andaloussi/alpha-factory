@@ -279,7 +279,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [AS-003](AS-003-ipo-lock-up-expiration.md) | IPO lock-up expiration overhang | structural, information, limits to arbitrage | stocks, crypto | days | not-testable |
 | [AS-005](AS-005-seasoned-equity-offerings.md) | Seasoned equity offerings | information | stocks | days | not-testable |
 | [AS-007](AS-007-spin-off-clientele-pressure.md) | Institutional clientele pressure in spin-offs | flows, limits to arbitrage | stocks | weeks, months | not-testable |
-| [AS-008](AS-008-clientele-effects.md) | Clientele effects | flows, limits to arbitrage | stocks | months, years | untouched |
+| [AS-008](AS-008-clientele-effects.md) | Clientele effects | flows, limits to arbitrage | stocks | months, years | not-testable |
 | [AS-009](AS-009-market-segmentation.md) | Market segmentation (tradability and access to capital) | structural, limits to arbitrage | stocks, crypto | days, years | untouched |
 | [AS-010](AS-010-separation-of-ownership-and-control.md) | Separation of ownership and control | structural | stocks | weeks, months | untouched |
 | [AS-011](AS-011-free-cash-flow-theory.md) | Free cash flow theory | structural | stocks | years | untouched |

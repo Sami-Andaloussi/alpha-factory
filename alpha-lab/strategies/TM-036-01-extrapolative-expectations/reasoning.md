@@ -57,7 +57,9 @@ reports and bibliographies, not the paper.
 ## What the lab can read of it, and where each form already stands
 
 The lab holds the daily closes and traded volumes of funds and of bitcoin, and the Treasury bill's
-yield; its closes are adjusted for dividends, so it holds no dividends or valuations. On those data:
+yield; its closes are adjusted for dividends, and hold no valuations; the adjusted bars encode the
+funds' distributions, which this judgement first took to be absent (a correction recorded at
+AS-008), and which bear on MR-044's forms below. On those data:
 
 - **Demand following past price moves**: investors' trades or expectations, which the lab does not
   hold. Survey expectations of returns — Greenwood and Shleifer's, cited by Shiller (appendix, note
@@ -80,7 +82,8 @@ yield; its closes are adjusted for dividends, so it holds no dividends or valuat
   the recovery after extreme falls, the momentum-then-reversal sequence), which Shiller's country
   extremes and Ilmanen's −0.11 sign; within groups over five years read as value by CA-024-01; read
   through valuations, and excess volatility, **MR-044**'s (countercyclical expected returns), which
-  needs dividends the lab's closes do not give; the bubble and its correction, **MR-023**'s.
+  reads dividends the lab's adjusted bars encode (the correction above); the bubble and its
+  correction, **MR-023**'s.
 - **Assets without valuation anchors trending more** (Ilmanen, Box 6.1): a conjecture, offered as
   "perhaps" a lesson, with no evidence, horizon or size. On the lab's funds such assets are GLD,
   SLV, DBC and bitcoin, outside the equity indices and stocks the bank names for TM-036; their
@@ -108,8 +111,8 @@ verdicts read the continuation.
   in-sample figures, a card chosen knowing them.
 - **The extrapolators' share of demand, or their expectations**: surveys and flows the lab does not
   hold.
-- **Excess volatility and price-dividend dynamics**: no timing sign, and dividends the lab's closes
-  do not give; MR-044's.
+- **Excess volatility and price-dividend dynamics**: no timing sign; MR-044's, whose dividends the
+  adjusted bars encode.
 
 What would make it testable as its own: survey expectations of returns, or investors' flows, frozen
 in the snapshot, against which the continuation could be conditioned.
