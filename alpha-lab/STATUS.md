@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 214 untouched · 1 in-progress · 0 tested-conclusive · 32 tested-inconclusive · 16 not-testable.
+**263 theories**: 213 untouched · 1 in-progress · 0 tested-conclusive · 32 tested-inconclusive · 17 not-testable.
 
 **34 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 23 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -250,7 +250,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-011](bank/TM-011-informational-cascades.md) Informational cascades (herding) | trend and momentum | not-testable | [TM-011-01-informational-cascades](strategies/TM-011-01-informational-cascades/) · not testable: [reasoning](strategies/TM-011-01-informational-cascades/reasoning.md) |
 | [TM-012](bank/TM-012-mutual-fund-momentum-trading.md) Momentum trading by mutual funds (chasing past winners) | trend and momentum | not-testable | [TM-012-01-mutual-fund-momentum-trading](strategies/TM-012-01-mutual-fund-momentum-trading/) · not testable: [reasoning](strategies/TM-012-01-mutual-fund-momentum-trading/reasoning.md) |
 | [TM-014](bank/TM-014-slow-moving-arbitrage-capital.md) Slow-moving arbitrage capital | trend and momentum | not-testable | [TM-014-01-slow-moving-arbitrage-capital](strategies/TM-014-01-slow-moving-arbitrage-capital/) · not testable: [reasoning](strategies/TM-014-01-slow-moving-arbitrage-capital/reasoning.md) |
-| [TM-015](bank/TM-015-slow-moving-capital-delegated-management.md) Slow-moving capital and delegated management (benchmark hugging, career risk) | trend and momentum | untouched |  |
+| [TM-015](bank/TM-015-slow-moving-capital-delegated-management.md) Slow-moving capital and delegated management (benchmark hugging, career risk) | trend and momentum | not-testable | [TM-015-01-slow-moving-capital-delegated-management](strategies/TM-015-01-slow-moving-capital-delegated-management/) · not testable: [reasoning](strategies/TM-015-01-slow-moving-capital-delegated-management/reasoning.md) |
 | [TM-016](bank/TM-016-disposition-effect.md) Disposition effect (capital gains overhang) | trend and momentum | untouched |  |
 | [TM-017](bank/TM-017-time-series-momentum.md) Time-series momentum (trend following, absolute momentum) | trend and momentum | in-progress | [TM-017-01-time-series-momentum](strategies/TM-017-01-time-series-momentum/) · stops at gate 3 · gate 8 since 2026-09-25, a test of the chain: 0 of 0 signals identical, +0.00% ([log](https://github.com/Sami-Andaloussi/alpha-factory/blob/paper/paper/README.md)) · [report](strategies/TM-017-01-time-series-momentum/report.ipynb) · [verdict](strategies/TM-017-01-time-series-momentum/verdict.md) |
 | [TM-018](bank/TM-018-market-divergence-crisis-alpha.md) Market divergence and crisis alpha | trend and momentum | tested-inconclusive | [TM-018-01-divergence-conditioned-trend](strategies/TM-018-01-divergence-conditioned-trend/) · stops at gate 2 · [report](strategies/TM-018-01-divergence-conditioned-trend/report.ipynb) · [verdict](strategies/TM-018-01-divergence-conditioned-trend/verdict.md) |

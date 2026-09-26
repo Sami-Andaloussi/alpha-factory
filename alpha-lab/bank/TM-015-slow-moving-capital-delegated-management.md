@@ -6,7 +6,7 @@ mechanism: [flows, limits to arbitrage, microstructure]
 asset_classes: [stocks, equity indices, bonds, commodities, currencies]
 horizon: [weeks, months]
 data: [daily prices, fund flows, institutional holdings, futures positioning reports]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
