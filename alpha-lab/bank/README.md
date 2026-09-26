@@ -293,7 +293,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [AS-019](AS-019-vertical-integration-asset-specificity.md) | Vertical integration and asset specificity | structural | stocks, sectors | years | not-testable |
 | [AS-020](AS-020-two-sided-platforms.md) | Two-sided platforms | structural | stocks, sectors, crypto | years | not-testable |
 | [AS-021](AS-021-native-network-token.md) | Native token (network token) | structural | crypto | months, years | not-testable |
-| [AS-026](AS-026-token-design-characteristics.md) | Valuation of token design characteristics | structural | crypto | days, months, years | untouched |
+| [AS-026](AS-026-token-design-characteristics.md) | Valuation of token design characteristics | structural | crypto | days, months, years | not-testable |
 | [AS-028](AS-028-vesting-unlock-treasury-overhang.md) | Vesting, unlock and treasury overhang | structural, information, behavioural, limits to arbitrage | crypto | days, weeks, months | untouched |
 | [AS-029](AS-029-staking-and-slashing.md) | Staking and slashing | structural | crypto | weeks, months | untouched |
 | [AS-030](AS-030-staking-ratio-float-scarcity.md) | Staking ratio, float scarcity and unstaking fragility | structural | crypto | days, weeks, months | untouched |
