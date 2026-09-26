@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 193 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 32 not-testable.
+**263 theories**: 192 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 33 not-testable.
 
 **41 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 26 stopped at gate 2, 10 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -14,7 +14,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [AS-007](bank/AS-007-spin-off-clientele-pressure.md) Institutional clientele pressure in spin-offs | asset-specific mechanisms | not-testable | [AS-007-01-spin-off-clientele-pressure](strategies/AS-007-01-spin-off-clientele-pressure/) · not testable: [reasoning](strategies/AS-007-01-spin-off-clientele-pressure/reasoning.md) |
 | [AS-008](bank/AS-008-clientele-effects.md) Clientele effects | asset-specific mechanisms | not-testable | [AS-008-01-clientele-effects](strategies/AS-008-01-clientele-effects/) · not testable: [reasoning](strategies/AS-008-01-clientele-effects/reasoning.md) |
 | [AS-009](bank/AS-009-market-segmentation.md) Market segmentation (tradability and access to capital) | asset-specific mechanisms | not-testable | [AS-009-01-market-segmentation](strategies/AS-009-01-market-segmentation/) · not testable: [reasoning](strategies/AS-009-01-market-segmentation/reasoning.md) |
-| [AS-010](bank/AS-010-separation-of-ownership-and-control.md) Separation of ownership and control | asset-specific mechanisms | untouched |  |
+| [AS-010](bank/AS-010-separation-of-ownership-and-control.md) Separation of ownership and control | asset-specific mechanisms | not-testable | [AS-010-01-separation-of-ownership-and-control](strategies/AS-010-01-separation-of-ownership-and-control/) · not testable: [reasoning](strategies/AS-010-01-separation-of-ownership-and-control/reasoning.md) |
 | [AS-011](bank/AS-011-free-cash-flow-theory.md) Free cash flow theory | asset-specific mechanisms | untouched |  |
 | [AS-012](bank/AS-012-signalling-theory-of-dividends.md) Signalling theory of dividends | asset-specific mechanisms | untouched |  |
 | [AS-013](bank/AS-013-firm-life-cycle-dividends.md) Firm life cycle theory of dividends | asset-specific mechanisms | untouched |  |
