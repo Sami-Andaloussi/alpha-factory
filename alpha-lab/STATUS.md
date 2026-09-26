@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 204 untouched · 1 in-progress · 0 tested-conclusive · 34 tested-inconclusive · 24 not-testable.
+**263 theories**: 203 untouched · 1 in-progress · 0 tested-conclusive · 34 tested-inconclusive · 25 not-testable.
 
 **37 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 24 stopped at gate 2, 9 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -263,7 +263,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-029](bank/TM-029-reputational-herding.md) Reputational herding (career concerns) | trend and momentum | not-testable | [TM-029-01-reputational-herding](strategies/TM-029-01-reputational-herding/) · not testable: [reasoning](strategies/TM-029-01-reputational-herding/reasoning.md) |
 | [TM-031](bank/TM-031-behavioural-herding.md) Behavioural herding | trend and momentum | not-testable | [TM-031-01-behavioural-herding](strategies/TM-031-01-behavioural-herding/) · not testable: [reasoning](strategies/TM-031-01-behavioural-herding/reasoning.md) |
 | [TM-035](bank/TM-035-procyclical-leverage-value-at-risk.md) Procyclical leverage and value-at-risk constraints | trend and momentum | not-testable | [TM-035-01-procyclical-leverage](strategies/TM-035-01-procyclical-leverage/) · not testable: [reasoning](strategies/TM-035-01-procyclical-leverage/reasoning.md) |
-| [TM-036](bank/TM-036-extrapolative-expectations.md) Extrapolative expectations (X-CAPM, return extrapolation) | trend and momentum | untouched |  |
+| [TM-036](bank/TM-036-extrapolative-expectations.md) Extrapolative expectations (X-CAPM, return extrapolation) | trend and momentum | not-testable | [TM-036-01-extrapolative-expectations](strategies/TM-036-01-extrapolative-expectations/) · not testable: [reasoning](strategies/TM-036-01-extrapolative-expectations/reasoning.md) |
 | [TM-037](bank/TM-037-investor-sentiment-momentum.md) Investor sentiment and momentum | trend and momentum | untouched |  |
 | [TM-038](bank/TM-038-adaptive-markets-hypothesis.md) Adaptive markets hypothesis | trend and momentum | untouched |  |
 | [TM-039](bank/TM-039-return-dispersion-momentum.md) Cross-asset return dispersion and momentum | trend and momentum | tested-inconclusive | [TM-039-01-dispersion-conditioned-momentum](strategies/TM-039-01-dispersion-conditioned-momentum/) · stops at gate 2 · [report](strategies/TM-039-01-dispersion-conditioned-momentum/report.ipynb) · [verdict](strategies/TM-039-01-dispersion-conditioned-momentum/verdict.md) |
