@@ -6,7 +6,7 @@ mechanism: [structural, flows, information]
 asset_classes: [crypto, stocks]
 horizon: [days, months, years]
 data: [on-chain holder distribution, validator and mining pool shares, exchange flows, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
