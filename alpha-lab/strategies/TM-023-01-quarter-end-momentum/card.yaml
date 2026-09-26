@@ -1,0 +1,75 @@
+id: TM-023-01-quarter-end-momentum
+theory: TM-023
+parent: null
+mechanism: >
+  Before quarter-ends and the year's end, fund managers dress their reports with the period's
+  winners and taxable investors sell its losers, pushing winners up and losers down; in January the
+  pressure lifts and the losers rebound. Momentum is therefore stronger in the months that end a
+  quarter and weaker in January than in the other months.
+prediction:
+  sign: positive (the leaders' gap to their group's ranked funds higher in the months that end a quarter than in the other months outside January); negative (lower in January)
+  size: a judgment -- the gap about +0.5 to +5% a year higher in the months that end a quarter and about -0.5 to -6% a year lower in January, the library's long-short spreads on stocks and industries halved for a long-only top third and cut to between a tenth and a third for a momentum the funds carried weakly (CA-001-01, its base, this ranking, a tenth of its prediction; its variant without the skip, a third); the rule's alpha over the groups in equal parts about -0.3 to +0.6% a year, its Sharpe ratio close to theirs; the base expected to fail gates 2, 3, 4 and 5
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY, SPY, QQQ, IWM, EFA, EEM, GLD, SLV, DBC]
+horizon: months
+signal: >
+  CA-001-01's momentum rule sets each group's tilt: within each of three groups (the eleven sector
+  funds; SPY, QQQ, IWM, EFA and EEM; GLD, SLV and DBC), the funds are ranked by their return over
+  a window read up to the session before the target, ending skip sessions and starting lookback
+  sessions before that session before; a fund is ranked when it trades on the target's session and
+  traded on the window's first session, with a return over the window; the top third of each
+  group's ranked funds, rounded half to even, one at least, share the group's n/N of the portfolio,
+  and a fund trading but not yet ranked holds 1/N. The tilt is those weights less the group held in
+  equal parts, 1/N for each fund trading. Each group holds its funds in equal parts plus k times its
+  tilt: in the base, k = 1 when the target's month is March, June, September or December, the
+  months that end a quarter, and 0 in the other months; in the variant, k = 0 when the target's
+  month is January and 1 in the other months. Everything is read up to the session before; targets
+  are set on the first session of each month on which a fund is ranked, fully invested.
+parameters:
+  lookback: sessions from the start of the ranking window to the session before the target
+  skip: sessions before the session before the target left out of the ranking window
+  months: 'the target months in which the tilt is held, a text naming the variant, with no neighbours: "quarter-ends", March, June, September and December; "all-but-january", every month but January'
+variants:
+  - {lookback: 252, skip: 21, months: quarter-ends}
+  - {lookback: 252, skip: 21, months: all-but-january}
+neighbours:
+  lookback: {25: [189, 315], 50: [126, 378]}
+  skip: {25: [16, 26], 50: [10, 32]}
+choose: false
+memory: 252
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, on the market's closes, over the in-sample calendar months from February 2006,
+  the month of the first target on which a fund is ranked, to December 2022, each group-month from
+  the close of the session before the month's first session to the close of the month's last session
+  -- the calendar month the sources measure -- the last ending at the close of 2022-12-30, over the
+  group-months with two ranked funds or more, the sector group's December and January group-months
+  left out (SC-006-01 has published the sector winners less the other sector funds over parts of
+  those months): the return of the group's leaders -- CA-001-01's top third of the group's funds
+  ranked for the month's target, with lookback 252 and skip 21, bought in equal parts at the close of
+  the session before the month's first session and held -- less the return of all the group's ranked
+  funds bought and held the same way. An ordinary least-squares regression of the gaps on two
+  indicators, the group-months of March, June, September and December, and those of January, and
+  one constant for each group, the standard errors clustered by month, the groups' gaps in each of
+  the 203 months from February 2006 to December 2022 one cluster, the coefficients' t statistics
+  computed apart from the battery. The quarter-end half of the theory is refuted in this form if its
+  coefficient's t statistic is -0.35 or below: momentum no stronger in the months that end a quarter
+  than in the other months outside January. The January half is refuted in this form if its
+  coefficient's t statistic is +0.35 or above: momentum no weaker in January. Between, short of
+  passing gates 1 to 7, each half is not proven, not refuted; a base that passes gates 1 to 7 while a
+  half refutes leaves that half refuted in this form. Of TM-023's refutation criteria the first and
+  second are graded, the first in its momentum part, against the other months outside the
+  quarter-ends; the losers' rebound is left to FP-026, whose graded quantity it is; the third cannot
+  be read apart from tax years and reporting dates, which every market the lab trades has; the fourth reads the production and consumption cycles the library signs on agricultural commodities, which the lab holds only inside a broad basket; the seasons it finds for silver are of returns, not of momentum. Reported, not graded: the
+  sector group's December and January group-months, apart; the same regression on the rule's months,
+  each group-month from the close of the month's first session to the close of the next month's first
+  session; the same regression without TM-024-01's panic group-months (its base's states, vol_window 126 and bear_window 504), the calendar group-months whose target falls in a panic state; January against every other month, one indicator and the group
+  constants; the gap by month of the year, pooled and by group, with the number of group-months in
+  each; December alone against the other months that end a quarter, over the graded group-months
+  (the equity markets and the commodities); the regression on the gaps hedged of their group's
+  market, one beta for each set; the rule and the variant against CA-001-01 by lab.compare, the
+  alpha's difference and its standard error on the monthly differences; the clause over the months
+  of 2006 to 2013, over those of 2014 to 2022, over the in-sample months without 2008 and 2009, and
+  over the holdout, 2023 to 2025; the base's alpha before and after costs, and the neighbours' and
+  the one-day-late rule's alphas and appraisal ratios.

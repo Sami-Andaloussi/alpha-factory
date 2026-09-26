@@ -25,7 +25,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [TM-017](TM-017-time-series-momentum.md) | Time-series momentum (trend following, absolute momentum) | behavioural, information, flows, limits to arbitrage, risk premium | equity indices, bonds, currencies, commodities | days, weeks, months | in-progress |
 | [TM-018](TM-018-market-divergence-crisis-alpha.md) | Market divergence and crisis alpha | macroeconomic, flows, risk premium, behavioural | equity indices, bonds, currencies, commodities | months, years | tested-inconclusive |
 | [TM-019](TM-019-earnings-momentum.md) | Earnings momentum | information, behavioural | stocks, equity indices, sectors | weeks, months | not-testable |
-| [TM-023](TM-023-momentum-seasonality.md) | Seasonality of momentum (tax-loss selling and window dressing) | flows, structural | stocks, commodities, equity indices, bonds, currencies | weeks, months | untouched |
+| [TM-023](TM-023-momentum-seasonality.md) | Seasonality of momentum (tax-loss selling and window dressing) | flows, structural | stocks, commodities, equity indices, bonds, currencies | weeks, months | tested-inconclusive |
 | [TM-024](TM-024-momentum-crashes.md) | Momentum crashes (state-dependent momentum risk) | risk premium, limits to arbitrage | stocks, crypto | days, weeks, months | tested-inconclusive |
 | [TM-025](TM-025-bad-news-travels-slowly.md) | Bad news travels slowly | information, behavioural | stocks | months | untouched |
 | [TM-027](TM-027-volume-conditioned-momentum.md) | Volume-conditioned momentum (momentum life cycle) | behavioural, information, flows, microstructure | stocks, equity indices, bonds, currencies, commodities | months | untouched |

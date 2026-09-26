@@ -6,7 +6,7 @@ mechanism: [flows, structural]
 asset_classes: [stocks, commodities, equity indices, bonds, currencies]
 horizon: [weeks, months]
 data: [daily prices, institutional holdings, tax calendar, fund reporting dates]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
