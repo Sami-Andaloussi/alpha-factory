@@ -33,7 +33,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [TM-029](TM-029-reputational-herding.md) | Reputational herding (career concerns) | flows, limits to arbitrage | stocks, equity indices, bonds, credit, commodities, currencies | months | not-testable |
 | [TM-031](TM-031-behavioural-herding.md) | Behavioural herding | behavioural, flows | stocks, bonds, commodities, currencies, crypto | weeks, months | not-testable |
 | [TM-035](TM-035-procyclical-leverage-value-at-risk.md) | Procyclical leverage and value-at-risk constraints | flows, limits to arbitrage | stocks, equity indices, bonds, credit, commodities, currencies | weeks, months | not-testable |
-| [TM-036](TM-036-extrapolative-expectations.md) | Extrapolative expectations (X-CAPM, return extrapolation) | behavioural, limits to arbitrage | equity indices, stocks | months, years | untouched |
+| [TM-036](TM-036-extrapolative-expectations.md) | Extrapolative expectations (X-CAPM, return extrapolation) | behavioural, limits to arbitrage | equity indices, stocks | months, years | not-testable |
 | [TM-037](TM-037-investor-sentiment-momentum.md) | Investor sentiment and momentum | behavioural, limits to arbitrage, flows | stocks, crypto, commodities | days, weeks, months | untouched |
 | [TM-038](TM-038-adaptive-markets-hypothesis.md) | Adaptive markets hypothesis | behavioural, limits to arbitrage, macroeconomic | equity indices, bonds, currencies, commodities | months, years | untouched |
 | [TM-039](TM-039-return-dispersion-momentum.md) | Cross-asset return dispersion and momentum | macroeconomic | equity indices, bonds, commodities, currencies, sectors | months | tested-inconclusive |
