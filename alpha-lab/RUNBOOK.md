@@ -45,9 +45,13 @@ its own, beside the snapshot, whose files never change.
    estimate is built from published figures — a verdict's tracking error or standard error — or
    from counts of the signal that read no return; where that rule was broken, the reasoning says
    so and the verdict records it (TM-001-01, whose in-sample estimate fell short of the tracking
-   error a verdict had already published). A part of the graded sample whose outcome a verdict has already published on the
-   same sessions — a state, a subset of months — is left out of the graded clause and reported apart
-   (TM-006-01, which left out TM-024-01's panic months).
+   error a verdict had already published). A part of the graded sample whose outcome a verdict has
+   already published on the same sessions — a state, a subset of months — is left out of the graded
+   clause and reported apart (TM-006-01, which left out TM-024-01's panic months, a subset of its
+   own graded contrast). A state whose outcome was published only pooled, and falls across the sets
+   a new clause contrasts, stays in the graded sample, disclosed, and the clause without it is
+   reported (TM-023-01, which kept TM-024-01's panic months across its calendar sets; read literally
+   the rule would have left them out, and both versions gave the same conclusions).
 4. **Hypothesis card**, `card.yaml`, from `templates/card.yaml`: the mechanism, the prediction
    (sign and rough size), the universe, the horizon, the signal, the parameters, three variants at
    most with the base first, and what would refute it.
