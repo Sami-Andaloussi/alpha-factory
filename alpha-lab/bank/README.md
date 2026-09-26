@@ -289,7 +289,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [AS-015](AS-015-switching-costs-customer-captivity.md) | Switching costs and customer captivity | structural | stocks, sectors | years | not-testable |
 | [AS-016](AS-016-economies-of-scale.md) | Economies of scale | structural | stocks, sectors | years | not-testable |
 | [AS-017](AS-017-network-effects-installed-base.md) | Network effects and installed base | structural | stocks, sectors | years | not-testable |
-| [AS-018](AS-018-experience-curve.md) | Experience curve | structural | stocks, sectors | years | untouched |
+| [AS-018](AS-018-experience-curve.md) | Experience curve | structural | stocks, sectors | years | not-testable |
 | [AS-019](AS-019-vertical-integration-asset-specificity.md) | Vertical integration and asset specificity | structural | stocks, sectors | years | untouched |
 | [AS-020](AS-020-two-sided-platforms.md) | Two-sided platforms | structural | stocks, sectors, crypto | years | untouched |
 | [AS-021](AS-021-native-network-token.md) | Native token (network token) | structural | crypto | months, years | untouched |
