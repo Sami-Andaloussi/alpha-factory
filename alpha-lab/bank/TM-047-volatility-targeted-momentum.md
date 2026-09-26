@@ -6,7 +6,7 @@ mechanism: [risk premium]
 asset_classes: [equity indices, bonds, currencies, commodities]
 horizon: [weeks, months]
 data: [daily prices, realised volatility]
-status: in-progress
+status: tested-inconclusive
 ---
 
 ## Mechanism
