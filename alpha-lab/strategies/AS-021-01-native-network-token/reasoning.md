@@ -56,7 +56,8 @@ Mantovi's *The Economics of Cryptocurrencies and Digital Money*, held in its Pal
 
 Each is a model, an untimed claim or a past episode; none gives a timed return rule on the security
 a token pays for or the activity it coordinates. The library holds no rule on a security budget, a
-miners'-revenue multiple, a stock-to-flow ratio or the hash rate's ribbons.
+miners'-revenue multiple — the Puell multiple is named once, as a vendor's indicator with no rule
+(Huang and others, *Web3*, 2024, section 7A.1.4) — a stock-to-flow ratio or the hash rate's ribbons.
 
 ## What the lab can read of it
 
