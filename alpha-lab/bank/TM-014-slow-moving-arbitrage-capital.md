@@ -6,7 +6,7 @@ mechanism: [limits to arbitrage, flows]
 asset_classes: [credit, bonds, stocks]
 horizon: [weeks, months]
 data: [daily prices, fund flows, hedge fund returns]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
