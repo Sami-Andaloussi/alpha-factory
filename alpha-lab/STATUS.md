@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 204 untouched · 2 in-progress · 0 tested-conclusive · 33 tested-inconclusive · 24 not-testable.
+**263 theories**: 204 untouched · 1 in-progress · 0 tested-conclusive · 34 tested-inconclusive · 24 not-testable.
 
-**36 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 24 stopped at gate 2, 8 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
+**37 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 24 stopped at gate 2, 9 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -271,4 +271,4 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-041](bank/TM-041-size-momentum-interaction.md) Size-momentum interaction (stronger momentum in small capitalisations) | trend and momentum | untouched |  |
 | [TM-043](bank/TM-043-positive-return-autocorrelation.md) Positive return autocorrelation (variance ratio) | trend and momentum | untouched |  |
 | [TM-045](bank/TM-045-long-range-dependence.md) Long-range dependence (Hurst exponent) | trend and momentum | untouched |  |
-| [TM-047](bank/TM-047-volatility-targeted-momentum.md) Volatility-targeted momentum (risk-adjusted momentum) | trend and momentum | in-progress | [TM-047-01-volatility-scaled-trend](strategies/TM-047-01-volatility-scaled-trend/) · stops at gate 3 · [report](strategies/TM-047-01-volatility-scaled-trend/report.ipynb) · [verdict](strategies/TM-047-01-volatility-scaled-trend/verdict.md) |
+| [TM-047](bank/TM-047-volatility-targeted-momentum.md) Volatility-targeted momentum (risk-adjusted momentum) | trend and momentum | tested-inconclusive | [TM-047-01-volatility-scaled-trend](strategies/TM-047-01-volatility-scaled-trend/) · stops at gate 3 · [report](strategies/TM-047-01-volatility-scaled-trend/report.ipynb) · [verdict](strategies/TM-047-01-volatility-scaled-trend/verdict.md)<br>[TM-047-02-volatility-managed-equities](strategies/TM-047-02-volatility-managed-equities/) · stops at gate 3 · [report](strategies/TM-047-02-volatility-managed-equities/report.ipynb) · [verdict](strategies/TM-047-02-volatility-managed-equities/verdict.md) |

@@ -1,0 +1,60 @@
+id: TM-047-02-volatility-managed-equities
+theory: TM-047
+parent: null
+mechanism: >
+  Market volatility is persistent and forecast well from its own recent past, while the equity
+  premium does not rise with it in the short run. A portfolio of equities scaled down when its
+  recent volatility is high, and held in full when it is at or below the long-run volatility of US
+  equities, keeps most of the premium and sheds risk when it is least rewarded, and so earns a
+  higher Sharpe ratio than the same equities held always.
+prediction:
+  sign: positive (the alpha of the equities managed by their own volatility over the same equities held always)
+  size: a judgment -- an alpha of about +0.3 to +2% a year, an appraisal ratio of about 0.05 to 0.35, Moreira and Muir's 0.30 for the capped market (1926-2015, as TM-047-01 reported it; the paper is not in the library) and Ang's timed equities (1986-2011) cut for five funds with the cap binding in calm months and for TM-047-01's timing worth 0.02 on the lab's funds; the Sharpe ratio above the five funds held always; the base expected to fail gate 3 or gate 4, likely gate 6 on QQQ's share of the profit (32 to 34% for rules close to the five in equal parts set back monthly, SC-002-01), and gate 2 if its Sharpe ratio falls below 0.4, where the five held always stand
+universe: [SPY, QQQ, IWM, EFA, EEM]
+horizon: months
+signal: >
+  The portfolio holds the funds trading on the target's session in equal parts. Its risk is the
+  standard deviation of the equal-weight portfolio's daily returns over the last window sessions to
+  the session before the target, each day's return the average of the returns of the funds that
+  traded it, annualized by the square root of 252. The scale k is min(1, (target / risk) squared)
+  when scaling is "variance" and min(1, target / risk) when it is "volatility", and 1 while the
+  window has fewer than window returns. On the first session of each month, each fund trading holds
+  k/N of the portfolio, N the funds trading, the rest in cash. Everything is read up to the session
+  before; targets are traded at the close.
+parameters:
+  window: sessions of daily returns whose standard deviation measures the portfolio's risk
+  target: annual volatility at or below which the portfolio is held in full, Ang's 16% for US equities over 1935-2010
+  scaling: 'how the scale follows the risk, a text naming the variant, with no neighbours: "variance", (target / risk) squared, Moreira and Muir''s baseline; "volatility", target / risk'
+variants:
+  - {window: 21, target: 0.16, scaling: variance}
+  - {window: 21, target: 0.16, scaling: volatility}
+neighbours:
+  window: {25: [16, 26], 50: [10, 32]}
+  target: {25: [0.12, 0.2], 50: [0.08, 0.24]}
+choose: false
+memory: 22
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, on the market's closes, over the in-sample months from the first target on
+  which the window has 21 returns, the first session of March 2005, to December 2022, the last month
+  ending at the close of 2022-12-30, each month from the close of a target's session to the close of
+  the next target's session: the base's monthly return less the bill's, regressed by ordinary least
+  squares on the monthly return less the bill's of the five funds held in equal parts from the same
+  closes, with standard errors robust to heteroskedasticity, the intercept's t statistic computed
+  apart from the battery. The theory is refuted in this form if the t statistic is -0.35 or below:
+  the equity premium managed by its own volatility no better than held always. Between, short of
+  passing gates 1 to 7, not proven, not refuted; a base that passes gates 1 to 7 while the clause
+  refutes leaves the theory refuted in this form. Of TM-047's refutation criteria the third is
+  graded, in its risk-premium form, the equity premium; its trend form was read by TM-047-01, and
+  the first and second, momentum's, are read in their panic-state form by TM-024-01 and TM-006-01;
+  this card holds no momentum and does not grade them. TM-024-01's equity panic months, published on
+  the momentum tilt's return and with two of the equity markets' monthly returns, stay in the graded
+  sample, disclosed. Reported, not graded: the same regression for the variant; the Sharpe ratios of
+  the base, the variant and the five funds held always, before costs; the share of months with the
+  scale below one, the average scale, and the base's alpha at a beta equal to its average scale; the
+  clause over the months of 2005 to 2013, over those of 2014 to 2022, over the in-sample months
+  without 2008 and 2009, without TM-024-01's equity panic months, and over the holdout, 2023 to
+  2025; the same regression for SPY alone, managed by its own risk; the base's alpha before and
+  after costs, and the neighbours' and the one-day-late rule's alphas and appraisal ratios.
