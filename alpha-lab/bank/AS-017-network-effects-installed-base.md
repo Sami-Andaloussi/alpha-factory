@@ -6,7 +6,7 @@ mechanism: [structural]
 asset_classes: [stocks, sectors]
 horizon: [years]
 data: [installed base, market shares, complementor counts, profit margins, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
