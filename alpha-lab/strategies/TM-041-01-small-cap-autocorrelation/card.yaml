@@ -1,0 +1,60 @@
+id: TM-041-01-small-cap-autocorrelation
+theory: TM-041
+parent: null
+mechanism: >
+  Information about small firms circulates more slowly: fewer analysts cover them, fewer
+  sophisticated investors trade them, and their prices take longer to complete their adjustment. A
+  week's move in the small capitalisations is therefore continued the next week more than a week's
+  move in the large ones, beyond what stale prices of rarely traded stocks produce.
+prediction:
+  sign: positive (IWM's weekly return continues its previous week's more strongly than SPY's does its own)
+  size: a judgment -- IWM's first-order weekly autocorrelation above SPY's by about 0.02 to 0.10, both near zero, from the sources' difference between the central and largest size quintiles, 0.14 over 1962-1994 and 0.18 from 1978 (Campbell, Lo and MacKinlay), 0.14 over 1962-1985 (Lo and MacKinlay), the Russell 2000 nearer the central quintile than the smallest, cut for the part of stale prices a fund's price carries little of and for the decline of daily autocorrelations to 1990 (Foerster and Keim) and after 2008 (Lo); the rule's alpha over the fourteen US equity funds in equal parts about -2 to +1% a year; the base expected to fail gate 2 or 3, gate 4 and gate 5
+universe: [SPY, QQQ, IWM, XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY]
+horizon: weeks
+signal: >
+  The sessions of the market are cut into consecutive blocks of period sessions, counted from the
+  session of 2005-01-03. On the first session of each block, each fund trading holds 1/N of the
+  portfolio, N the funds trading, when its own return over the last period sessions to the session
+  before beats the Treasury bill's over the same sessions; its share is in cash otherwise, and while
+  it has fewer than period + 1 closes. Everything is read up to the session before; targets are
+  traded at the close.
+parameters:
+  period: sessions in a block, about a trading week in the base and Lo and MacKinlay's four-week base in the variant
+variants:
+  - {period: 5}
+  - {period: 20}
+neighbours:
+  period: {25: [4, 6], 50: [3, 8]}
+choose: false
+memory: 21
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, on the market's closes, over the in-sample blocks of the base, each block of 5
+  sessions from the close of its first session to the close of the next block's first session, from
+  the first block with a full block before it to the last block whose end falls on or before
+  2022-12-30: each fund's block return less the bill's over the same sessions, stacked for SPY and
+  IWM, regressed by ordinary least squares on the fund's own return less the bill's over the block
+  before, with one constant and one slope for each fund, the standard errors clustered by block, the
+  two funds' returns in a block one cluster, the t statistic of IWM's slope less SPY's computed apart
+  from the battery. The theory is refuted in this form if that t statistic is -0.35 or below: IWM's
+  weekly continuation no larger than SPY's. Between, not proven, not refuted. The rule trades each
+  fund's own weekly continuation, thirteen of its fourteen funds large, TM-043's claim more than
+  TM-041's: a base that passes gates 1 to 7 proves the theory in this form only if the clause's t
+  statistic is +1.65 or above, and is otherwise read for weekly continuation, not size; with the
+  clause refuting, it leaves the theory refuted in this form. Of TM-041's refutation criteria the
+  first is graded, in its weekly autocorrelation form on the two funds; its four-week form is reported
+  by the variant; its cross-sectional form and the second criterion, analyst coverage, are not held.
+  SC-001-01's published returns by weekday, SC-009-01's of sessions -10 to -6 of each month,
+  SC-002-01's beta of IWM to SPY, and MR-032-01's weekly reversal within groups, across funds, are not
+  the graded quantity; SPY's close of 2009-07-16, listed 1.1% low by the snapshot's cross-check, is
+  never a boundary of the base's blocks. Reported, not graded: the same regression for the variant,
+  blocks of 20 sessions; the slopes of all fourteen funds from their stacked regression, each over
+  its own blocks, and each fund's first-order weekly autocorrelation; IWM's slope less QQQ's, and
+  less the average of the thirteen others' slopes; the same regression with the other fund's return
+  over the block before as a regressor too, LL-001's cross-autocorrelation; the same regression with
+  the block grid shifted forward by one to four sessions, under the same end rule; the clause over
+  the blocks starting in 2005 to 2013, in 2014 to 2022, without those of 2008 and 2009, and over the
+  holdout, 2023 to 2025; the base's alpha before and after costs, and the neighbours', the variant's
+  and the one-day-late rule's alphas and appraisal ratios.
