@@ -6,7 +6,7 @@ mechanism: [information, behavioural]
 asset_classes: [stocks, equity indices, sectors]
 horizon: [weeks, months]
 data: [daily prices, earnings announcement dates, reported earnings, analyst forecasts]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
