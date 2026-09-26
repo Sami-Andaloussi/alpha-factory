@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 200 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 25 not-testable.
+**263 theories**: 199 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 26 not-testable.
 
 **40 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 25 stopped at gate 2, 10 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -269,6 +269,6 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-039](bank/TM-039-return-dispersion-momentum.md) Cross-asset return dispersion and momentum | trend and momentum | tested-inconclusive | [TM-039-01-dispersion-conditioned-momentum](strategies/TM-039-01-dispersion-conditioned-momentum/) · stops at gate 2 · [report](strategies/TM-039-01-dispersion-conditioned-momentum/report.ipynb) · [verdict](strategies/TM-039-01-dispersion-conditioned-momentum/verdict.md) |
 | [TM-040](bank/TM-040-value-momentum-combination.md) Value and momentum combination (trending value) | trend and momentum | tested-inconclusive | [TM-040-01-trending-value-within-groups](strategies/TM-040-01-trending-value-within-groups/) · stops at gate 2 · [report](strategies/TM-040-01-trending-value-within-groups/report.ipynb) · [verdict](strategies/TM-040-01-trending-value-within-groups/verdict.md) |
 | [TM-041](bank/TM-041-size-momentum-interaction.md) Size-momentum interaction (stronger momentum in small capitalisations) | trend and momentum | tested-inconclusive | [TM-041-01-small-cap-autocorrelation](strategies/TM-041-01-small-cap-autocorrelation/) · stops at gate 2 · [report](strategies/TM-041-01-small-cap-autocorrelation/report.ipynb) · [verdict](strategies/TM-041-01-small-cap-autocorrelation/verdict.md) |
-| [TM-043](bank/TM-043-positive-return-autocorrelation.md) Positive return autocorrelation (variance ratio) | trend and momentum | untouched |  |
+| [TM-043](bank/TM-043-positive-return-autocorrelation.md) Positive return autocorrelation (variance ratio) | trend and momentum | not-testable | [TM-043-01-positive-return-autocorrelation](strategies/TM-043-01-positive-return-autocorrelation/) · not testable: [reasoning](strategies/TM-043-01-positive-return-autocorrelation/reasoning.md) |
 | [TM-045](bank/TM-045-long-range-dependence.md) Long-range dependence (Hurst exponent) | trend and momentum | untouched |  |
 | [TM-047](bank/TM-047-volatility-targeted-momentum.md) Volatility-targeted momentum (risk-adjusted momentum) | trend and momentum | tested-inconclusive | [TM-047-01-volatility-scaled-trend](strategies/TM-047-01-volatility-scaled-trend/) · stops at gate 3 · [report](strategies/TM-047-01-volatility-scaled-trend/report.ipynb) · [verdict](strategies/TM-047-01-volatility-scaled-trend/verdict.md)<br>[TM-047-02-volatility-managed-equities](strategies/TM-047-02-volatility-managed-equities/) · stops at gate 3 · [report](strategies/TM-047-02-volatility-managed-equities/report.ipynb) · [verdict](strategies/TM-047-02-volatility-managed-equities/verdict.md) |
