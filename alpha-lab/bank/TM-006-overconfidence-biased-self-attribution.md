@@ -6,7 +6,7 @@ mechanism: [behavioural, limits to arbitrage]
 asset_classes: [stocks, crypto]
 horizon: [months, years]
 data: [daily prices]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

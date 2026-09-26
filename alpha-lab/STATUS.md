@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 220 untouched · 1 in-progress · 0 tested-conclusive · 31 tested-inconclusive · 11 not-testable.
+**263 theories**: 219 untouched · 1 in-progress · 0 tested-conclusive · 32 tested-inconclusive · 11 not-testable.
 
-**33 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 22 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
+**34 strategies**: 0 passing gates 1 to 7, 1 stopped at gate 1, 23 stopped at gate 2, 7 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -244,7 +244,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [TM-002](bank/TM-002-52-week-high-momentum.md) 52-week high momentum (anchoring on the annual high) | trend and momentum | tested-inconclusive | [TM-002-01-sector-52-week-high](strategies/TM-002-01-sector-52-week-high/) · stops at gate 3 · [report](strategies/TM-002-01-sector-52-week-high/report.ipynb) · [verdict](strategies/TM-002-01-sector-52-week-high/verdict.md) |
 | [TM-003](bank/TM-003-industry-momentum.md) Industry momentum (information spillovers) | trend and momentum | tested-inconclusive | [TM-003-01-sector-momentum](strategies/TM-003-01-sector-momentum/) · stops at gate 3 · [report](strategies/TM-003-01-sector-momentum/report.ipynb) · [verdict](strategies/TM-003-01-sector-momentum/verdict.md) |
 | [TM-005](bank/TM-005-conservatism-and-representativeness.md) Conservatism and representativeness (investor sentiment model) | trend and momentum | not-testable | [TM-005-01-investor-sentiment-model](strategies/TM-005-01-investor-sentiment-model/) · not testable: [reasoning](strategies/TM-005-01-investor-sentiment-model/reasoning.md) |
-| [TM-006](bank/TM-006-overconfidence-biased-self-attribution.md) Overconfidence and biased self-attribution | trend and momentum | untouched |  |
+| [TM-006](bank/TM-006-overconfidence-biased-self-attribution.md) Overconfidence and biased self-attribution | trend and momentum | tested-inconclusive | [TM-006-01-momentum-after-market-gains](strategies/TM-006-01-momentum-after-market-gains/) · stops at gate 2 · [report](strategies/TM-006-01-momentum-after-market-gains/report.ipynb) · [verdict](strategies/TM-006-01-momentum-after-market-gains/verdict.md) |
 | [TM-007](bank/TM-007-underreaction-to-public-information.md) Behavioural underreaction to public information (conservatism) | trend and momentum | untouched |  |
 | [TM-008](bank/TM-008-gradual-information-diffusion.md) Gradual information diffusion (newswatchers and momentum traders) | trend and momentum | untouched |  |
 | [TM-011](bank/TM-011-informational-cascades.md) Informational cascades (herding) | trend and momentum | untouched |  |
