@@ -6,7 +6,7 @@ mechanism: [behavioural, flows]
 asset_classes: [stocks, bonds, commodities, currencies, crypto]
 horizon: [weeks, months]
 data: [daily prices, fund flows, institutional holdings]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism

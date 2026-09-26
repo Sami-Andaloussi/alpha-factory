@@ -31,7 +31,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [TM-027](TM-027-volume-conditioned-momentum.md) | Volume-conditioned momentum (momentum life cycle) | behavioural, information, flows, microstructure | stocks, equity indices, bonds, currencies, commodities | months | not-testable |
 | [TM-028](TM-028-low-turnover-momentum.md) | Low-turnover momentum (momentum filtered by low trading volume) | information, behavioural | stocks, equity indices, bonds, currencies, commodities | months | tested-inconclusive |
 | [TM-029](TM-029-reputational-herding.md) | Reputational herding (career concerns) | flows, limits to arbitrage | stocks, equity indices, bonds, credit, commodities, currencies | months | not-testable |
-| [TM-031](TM-031-behavioural-herding.md) | Behavioural herding | behavioural, flows | stocks, bonds, commodities, currencies, crypto | weeks, months | untouched |
+| [TM-031](TM-031-behavioural-herding.md) | Behavioural herding | behavioural, flows | stocks, bonds, commodities, currencies, crypto | weeks, months | not-testable |
 | [TM-035](TM-035-procyclical-leverage-value-at-risk.md) | Procyclical leverage and value-at-risk constraints | flows, limits to arbitrage | stocks, equity indices, bonds, credit, commodities, currencies | weeks, months | untouched |
 | [TM-036](TM-036-extrapolative-expectations.md) | Extrapolative expectations (X-CAPM, return extrapolation) | behavioural, limits to arbitrage | equity indices, stocks | months, years | untouched |
 | [TM-037](TM-037-investor-sentiment-momentum.md) | Investor sentiment and momentum | behavioural, limits to arbitrage, flows | stocks, crypto, commodities | days, weeks, months | untouched |
