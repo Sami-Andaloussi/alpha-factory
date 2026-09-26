@@ -74,10 +74,11 @@ first card. Nothing was computed from the bars for this judgement. On those data
   bitcoin alone breaks the RUNBOOK's rule of at least four assets.
 - **Repricing when a token changes its design**, the third refutation: inside bitcoin's in-sample
   years the library dates five changes — the BIP65 soft fork in December 2015, the CSV soft fork in
-  July 2016, SegWit in 2017, the Bitcoin Cash split on 1 August 2017 and taproot in November 2021 —
-  and none in the holdout; a rule that enters and leaves around each makes at most ten decisions,
-  fewer once gate 1 groups neighbours, certain to fail its thirty whatever the prices (RUNBOOK step
-  9). The halvings, steps in supply that follow the design rather than change it, are **EF-044**'s,
+  2016, dated to July in one chapter of *Mastering Bitcoin* and to May in another, SegWit in 2017,
+  the Bitcoin Cash split, trading from 1 August 2017 and taproot in November 2021 — and none in the
+  holdout; a rule that enters and leaves around each makes at most eleven decisions, fewer once gate
+  1 groups neighbours, certain to fail its thirty whatever the prices (RUNBOOK step 9). The
+  halvings, steps in supply that follow the design rather than change it, are **EF-044**'s,
   **FP-029**'s and **EF-047**'s, to which a recorded decision leaves bitcoin's schedule-based forms.
 
 **The bank's siblings, and how AS-026 differs.** AS-026 claims the cross-section of designs and
@@ -103,6 +104,6 @@ library.
 AS-026 is recorded `not-testable`: its claim and its first two refutations compare tokens of
 different designs, and the lab holds one token, whose design barely changes; its third reads
 repricing at design changes, of which the library dates five for bitcoin inside the in-sample years,
-at most ten decisions around them; its nearby return signs are untimed claims or past episodes on
+at most eleven decisions around them; its nearby return signs are untimed claims or past episodes on
 tokens the lab does not hold; its references are not in the library. No card is drawn, and no trial
 is spent.

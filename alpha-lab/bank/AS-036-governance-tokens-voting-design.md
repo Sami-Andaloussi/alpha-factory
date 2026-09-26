@@ -6,7 +6,7 @@ mechanism: [structural, limits to arbitrage]
 asset_classes: [crypto]
 horizon: [days, months, years]
 data: [governance votes, voting power distribution, token rights, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
