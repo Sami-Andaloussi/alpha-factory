@@ -6,7 +6,7 @@ mechanism: [microstructure, flows, limits to arbitrage]
 asset_classes: [crypto]
 horizon: [days, weeks]
 data: [exchange listings, daily prices, trading volumes by exchange]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
