@@ -6,7 +6,7 @@ mechanism: [structural, limits to arbitrage]
 asset_classes: [crypto]
 horizon: [days, months]
 data: [stablecoin prices, companion token prices and market capitalisation, mint and burn volumes]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
