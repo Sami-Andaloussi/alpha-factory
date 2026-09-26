@@ -1,1 +1,2 @@
 {"session":"2026-09-25","strategy":"TM-017-01-time-series-momentum","role":"test of the chain","targets":null,"fidelity":{"compared":0,"identical":0,"gaps":[]},"live":{"since":"2026-09-25","return":0.0},"account":{"equity":100000.0,"orders":[]}}
+{"session":"2026-09-28","strategy":"TM-017-01-time-series-momentum","role":"test of the chain","targets":null,"fidelity":{"compared":1,"identical":1,"gaps":[]},"live":{"since":"2026-09-25","return":0.0},"account":{"equity":100000.0,"orders":[]}}
