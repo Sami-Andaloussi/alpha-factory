@@ -6,7 +6,7 @@ mechanism: [information]
 asset_classes: [crypto]
 horizon: [intraday, days]
 data: [on-chain data, address clusters, custody flows, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
