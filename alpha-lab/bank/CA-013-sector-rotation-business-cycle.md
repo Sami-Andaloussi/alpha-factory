@@ -6,7 +6,7 @@ mechanism: [macroeconomic]
 asset_classes: [sectors, equity indices, stocks, crypto]
 horizon: [months, years]
 data: [sector index levels, business cycle dates, macroeconomic releases]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
