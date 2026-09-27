@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 164 untouched · 1 in-progress · 0 tested-conclusive · 39 tested-inconclusive · 59 not-testable.
+**263 theories**: 163 untouched · 1 in-progress · 0 tested-conclusive · 39 tested-inconclusive · 60 not-testable.
 
 **43 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 26 stopped at gate 2, 12 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -46,7 +46,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [CA-006](bank/CA-006-do-industries-lead-stock-markets.md) Do industries lead stock markets? | cross-asset relative value | tested-inconclusive | [CA-006-01-financials-lead-the-sectors](strategies/CA-006-01-financials-lead-the-sectors/) · stops at gate 2 · [report](strategies/CA-006-01-financials-lead-the-sectors/report.ipynb) · [verdict](strategies/CA-006-01-financials-lead-the-sectors/verdict.md) |
 | [CA-011](bank/CA-011-sector-rotation.md) Sector rotation | cross-asset relative value | tested-inconclusive | [CA-011-01-six-stage-sector-rotation](strategies/CA-011-01-six-stage-sector-rotation/) · stops at gate 3 · [report](strategies/CA-011-01-six-stage-sector-rotation/report.ipynb) · [verdict](strategies/CA-011-01-six-stage-sector-rotation/verdict.md) |
 | [CA-012](bank/CA-012-sector-rotation-monetary-conditions.md) Sector rotation and monetary conditions | cross-asset relative value | not-testable | [CA-012-01-monetary-sector-rotation](strategies/CA-012-01-monetary-sector-rotation/) · not testable: [reasoning](strategies/CA-012-01-monetary-sector-rotation/reasoning.md) |
-| [CA-013](bank/CA-013-sector-rotation-business-cycle.md) Sector rotation across the business cycle | cross-asset relative value | untouched |  |
+| [CA-013](bank/CA-013-sector-rotation-business-cycle.md) Sector rotation across the business cycle | cross-asset relative value | not-testable | [CA-013-01-business-cycle-sector-rotation](strategies/CA-013-01-business-cycle-sector-rotation/) · not testable: [reasoning](strategies/CA-013-01-business-cycle-sector-rotation/reasoning.md) |
 | [CA-014](bank/CA-014-intermarket-analysis.md) Intermarket analysis | cross-asset relative value | tested-inconclusive | [CA-014-01-commodity-bond-ratio-rotation](strategies/CA-014-01-commodity-bond-ratio-rotation/) · stops at gate 3 · [report](strategies/CA-014-01-commodity-bond-ratio-rotation/report.ipynb) · [verdict](strategies/CA-014-01-commodity-bond-ratio-rotation/verdict.md) |
 | [CA-015](bank/CA-015-tactical-forecasting-conditional-factor-premia.md) Tactical return forecasting and conditional factor premia | cross-asset relative value | untouched |  |
 | [CA-016](bank/CA-016-equity-country-allocation-home-bias.md) Equity country allocation and home bias | cross-asset relative value | untouched |  |
