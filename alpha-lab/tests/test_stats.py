@@ -25,6 +25,16 @@ def test_a_series_with_a_known_sharpe_ratio():
     assert stats.sharpe(excess) == pytest.approx(0.04 * np.sqrt(252), rel=1e-12)
 
 
+def test_a_run_that_held_only_cash_has_no_sharpe_ratio():
+    # the engine returns cash as (1 + 0)(1 + rate) - 1, which differs from the rate by rounding: the
+    # excess is noise of about 1e-16 a day, whose ratio to its own spread must not count (CA-011-01's
+    # audit found an all-cash run at -1.78, which gate 6 would have read as a Sharpe ratio)
+    rate = pd.Series(np.random.default_rng(5).uniform(0, 2e-4, size=2520))
+    excess = (1 + 0.0) * (1 + rate) - 1 - rate
+    assert stats.sharpe(excess) == 0.0
+    assert stats.lo_sharpe(excess) == 0.0
+
+
 def test_the_psr_of_a_zero_sharpe_ratio_is_one_half():
     assert stats.psr(0.0, 1000, 0.0, 3.0) == pytest.approx(0.5)
 
