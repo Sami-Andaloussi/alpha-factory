@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 166 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 59 not-testable.
+**263 theories**: 165 untouched · 1 in-progress · 0 tested-conclusive · 38 tested-inconclusive · 59 not-testable.
 
-**41 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 26 stopped at gate 2, 10 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
+**42 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 26 stopped at gate 2, 11 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -42,7 +42,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [AS-043](bank/AS-043-blockspace-scarcity-congestion.md) Blockspace scarcity and blockchain congestion | asset-specific mechanisms | not-testable | [AS-043-01-blockspace-scarcity-congestion](strategies/AS-043-01-blockspace-scarcity-congestion/) · not testable: [reasoning](strategies/AS-043-01-blockspace-scarcity-congestion/reasoning.md) |
 | [AS-044](bank/AS-044-dex-amm-design-mev.md) DEX and AMM design, MEV extraction and DeFi token economics | asset-specific mechanisms | not-testable | [AS-044-01-dex-amm-design-mev](strategies/AS-044-01-dex-amm-design-mev/) · not testable: [reasoning](strategies/AS-044-01-dex-amm-design-mev/reasoning.md) |
 | [CA-001](bank/CA-001-momentum-sectors-countries-asset-classes.md) Momentum across sectors, countries and asset classes | cross-asset relative value | tested-inconclusive | [CA-001-01-momentum-within-groups](strategies/CA-001-01-momentum-within-groups/) · stops at gate 2 · [report](strategies/CA-001-01-momentum-within-groups/report.ipynb) · [verdict](strategies/CA-001-01-momentum-within-groups/verdict.md) |
-| [CA-003](bank/CA-003-factor-momentum.md) Factor momentum | cross-asset relative value | untouched |  |
+| [CA-003](bank/CA-003-factor-momentum.md) Factor momentum | cross-asset relative value | tested-inconclusive | [CA-003-01-style-momentum-within-groups](strategies/CA-003-01-style-momentum-within-groups/) · stops at gate 3 · [report](strategies/CA-003-01-style-momentum-within-groups/report.ipynb) · [verdict](strategies/CA-003-01-style-momentum-within-groups/verdict.md) |
 | [CA-006](bank/CA-006-do-industries-lead-stock-markets.md) Do industries lead stock markets? | cross-asset relative value | tested-inconclusive | [CA-006-01-financials-lead-the-sectors](strategies/CA-006-01-financials-lead-the-sectors/) · stops at gate 2 · [report](strategies/CA-006-01-financials-lead-the-sectors/report.ipynb) · [verdict](strategies/CA-006-01-financials-lead-the-sectors/verdict.md) |
 | [CA-011](bank/CA-011-sector-rotation.md) Sector rotation | cross-asset relative value | untouched |  |
 | [CA-012](bank/CA-012-sector-rotation-monetary-conditions.md) Sector rotation and monetary conditions | cross-asset relative value | not-testable | [CA-012-01-monetary-sector-rotation](strategies/CA-012-01-monetary-sector-rotation/) · not testable: [reasoning](strategies/CA-012-01-monetary-sector-rotation/reasoning.md) |
