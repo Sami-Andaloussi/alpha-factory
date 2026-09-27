@@ -25,7 +25,9 @@ def sharpe(excess: pd.Series, periods: int = PERIODS) -> float:
     """Annual Sharpe ratio of returns above the risk-free rate."""
     excess = excess.dropna()
     sd = excess.std(ddof=1)
-    return float(excess.mean() / sd * np.sqrt(periods)) if sd > 0 else 0.0
+    # a series whose spread is rounding alone (a run that held only cash: its excess is the bill's
+    # return compounded and taken off again, about 1e-16 a day) has no Sharpe ratio, not a noise one
+    return float(excess.mean() / sd * np.sqrt(periods)) if sd > SAME else 0.0
 
 
 # Lo, A. W. (2002). The statistics of Sharpe ratios. Financial Analysts Journal, 58(4), 36-52.
@@ -42,7 +44,7 @@ def lo_sharpe(excess: pd.Series) -> float:
     """Annual Sharpe ratio adjusted for autocorrelation (Lo 2002)."""
     excess = excess.dropna()
     sd = excess.std(ddof=1)
-    return float(excess.mean() / sd * lo_factor(excess)) if sd > 0 else 0.0
+    return float(excess.mean() / sd * lo_factor(excess)) if sd > SAME else 0.0
 
 
 # Bailey, D. H., & Lopez de Prado, M. (2012). The Sharpe ratio efficient frontier.

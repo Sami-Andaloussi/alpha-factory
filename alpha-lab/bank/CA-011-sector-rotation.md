@@ -6,7 +6,7 @@ mechanism: [macroeconomic, flows]
 asset_classes: [sectors]
 horizon: [weeks, months]
 data: [sector index levels, macroeconomic releases, interest rates, credit spreads, commodity prices]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism

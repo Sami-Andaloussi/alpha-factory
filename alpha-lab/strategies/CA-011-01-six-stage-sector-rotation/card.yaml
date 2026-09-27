@@ -1,0 +1,75 @@
+id: CA-011-01-six-stage-sector-rotation
+theory: CA-011
+parent: null
+mechanism: >
+  Sectors respond differently to growth, inflation and interest rates, and investors identify the
+  phase of the cycle slowly, so that leadership passes in sequence from sector to sector. Bonds,
+  stocks and commodities turn in a regular order around the cycle, so that their three trends place
+  it: bonds turning up as the economy slips into recession, then stocks, then commodities, then
+  bonds turning down, then stocks, then commodities. The sectors that lead each phase -- staples,
+  utilities and real estate early in a contraction, utilities, financials and consumer cyclicals
+  late in it, technology, industrials and consumer cyclicals early in an expansion, energy and
+  materials late in it -- outperform the sectors held always while the stage lasts, and the asset
+  classes each stage favours outperform with them.
+prediction:
+  sign: positive (the sectors of each stage, held while it lasts, earn more than the sector funds held in equal parts)
+  size: a judgment -- the sources give charts and episodes, not statistics; for the sectors alone, graded, an appraisal ratio of about 0 to 0.2 against the sector funds in equal parts, an alpha of about 0 to 2% a year on a tracking error of about 8 to 10%, the average mix's own tilt about -0.2 to -0.4% a year by TM-002-01's published sector alphas; for the base against the fifteen funds, about 0 to 0.2; CA-014-01's sector funds, rotated on the commodity/bond ratio, earned 0.04 against their sectors; the base expected to fail gates 3, 4 and 5, possibly gate 2
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY, SPY, GLD, DBC, IEF]
+horizon: weeks to months
+signal: >
+  On the first session of each week, each of IEF, SPY and DBC is up if its signal close on the
+  session before is above the mean of its last average closes up to and including that session;
+  the three trends are read from the signal prices whether IEF, SPY and DBC trade or not. The three
+  signs give Pring's stage: 1, IEF up, SPY and DBC down; 2, IEF and SPY up, DBC down; 3, all three
+  up; 4, IEF down, SPY and DBC up; 5, IEF and SPY down, DBC up; 6, all three down; the two other
+  combinations are out of sequence. Under holdings "sectors", stage 1 holds XLP, XLU and XLRE;
+  stage 2 XLU, XLF and XLY; stage 3 XLK, XLI and XLY; stage 4 XLE and XLB; stage 5 XLE and XLP;
+  stage 6 XLP and XLU; out of sequence, the eleven sector funds. Under holdings "assets", stage 1
+  holds IEF; stage 2 SPY; stage 3 SPY and GLD; stage 4 DBC and GLD; stage 5 DBC, GLD and XLE; stage
+  6 nothing, all in cash; out of sequence, the fifteen funds. Under holdings "all", each stage holds
+  the funds of both lists -- stage 1 XLP, XLU, XLRE and IEF; stage 2 XLU, XLF, XLY and SPY; stage 3
+  XLK, XLI, XLY, SPY and GLD; stage 4 XLE, XLB, DBC and GLD; stage 5 XLE, XLP, DBC and GLD; stage 6
+  XLP and XLU -- and out of sequence the fifteen funds. The funds named that trade share the
+  portfolio equally; if none trades, the targets are zero on every fund. The targets start on the
+  first session of the first week at which all three means exist, and are set on the first session
+  of every week from then.
+parameters:
+  average: sessions of closes averaged to give each market's trend, Murphy's 200-day moving average
+  holdings: '"all" holds each stage''s sectors with Murphy''s asset classes for it; "sectors" the sectors alone; "assets" the asset classes alone'
+variants:
+  - {average: 200, holdings: all}
+  - {average: 200, holdings: sectors}
+  - {average: 200, holdings: assets}
+neighbours:
+  average: {25: [150, 250], 50: [100, 300]}
+choose: false
+memory: 301
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the variant "sectors", at the lab's stated costs, by its appraisal ratio against the
+  sector funds that trade held in equal parts, reset on each session the variant sets targets and
+  when a fund starts to trade (XLRE from 2016-09-19, XLC from 2018-06-19), at the same costs -- the
+  battery's benchmark built on the eleven sector funds alone -- over the in-sample sessions from the
+  first the variant holds an asset into, computed apart from the battery: the annualised Sharpe
+  ratio of the variant's daily returns less the benchmark's, hedged of the benchmark's excess
+  returns with the whole-sample beta. The theory is refuted in this form if that ratio is zero or
+  less: the sectors Pring's stage names, held in turn, earned nothing over the sectors held always,
+  as the bank's first refutation reads. Any other result short of the base passing gates 1 to 7 is
+  not proven, not refuted; a base that passes gates 1 to 7 while the clause refutes leaves the
+  theory refuted in this form. The second refutation, sectors adjusting at once, is not graded:
+  gate 6's day of delay reads the speed only coarsely; the third is not graded: the lab cannot tell
+  a shock or an intervention from a regime. The published results of CA-014-01, TM-002-01,
+  TM-017-01, TM-018-01, TM-001-01, LL-042-01, CA-006-01, TM-003-01 and CA-003-01, their years,
+  sectors and holdings, and the registry's monthly hedged returns of CA-014-01, from which nothing
+  was computed, stay, disclosed. Reported, not graded: the base's figures, as the battery gives
+  them, and the variant "assets"'s appraisal ratio against the fifteen funds; the variant
+  "sectors"'s average weights, held fixed and reset weekly, against the same sector benchmark, to
+  tell its tilt from its timing; each stage's share of the sessions, and the mean daily difference
+  between the variant "sectors"'s and its benchmark's returns, annualised, over the sessions held
+  under each stage and out of sequence; the clause's hedged daily series restricted to the sessions
+  held under one of the six stages, with the whole-sample beta, and restricted to 2006 to 2013 and
+  to 2014 to 2022; the correlation of the variant "sectors"'s monthly returns hedged of its sector
+  benchmark with CA-014-01's variant "stocks" as the registry gives it, hedged of its nine funds,
+  over their common months; the alpha by year.
