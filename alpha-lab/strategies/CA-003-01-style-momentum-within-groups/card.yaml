@@ -1,0 +1,78 @@
+id: CA-003-01-style-momentum-within-groups
+theory: CA-003
+parent: null
+mechanism: >
+  Capital moves slowly towards the styles that have just done well: managers are organised by
+  style, style products receive flows that chase past returns, and investors learn late which
+  premium is being paid. A style that has earned over the past month therefore tends to earn again
+  over the next: within the sector funds and within the equity markets, the momentum, value and
+  defensive styles built from the funds' own closes each persist from one month to the next.
+prediction:
+  sign: positive (a style's long/short return over the month after its last 21 sessions' return was above zero exceeds its return after that return was at or below zero)
+  size: a judgment -- a correlation between a style's adjacent months of about 0 to +0.2, at or below Ilmanen's +0.20 across asset classes and strategies from 1990 to 2009, since the lab's published books point lower (TM-038-01's trend book at -0.073 at one month); on a style volatility of about 3.5% a month, from CA-001-01's published tracking error, a coefficient of about 0 to 1.1% a month; an alpha of about 0 to 1.5% a year over the sixteen funds held in equal parts, an appraisal ratio of about 0 to 0.7; the base expected to fail gates 3, 4 and 5, possibly 2
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY, SPY, QQQ, IWM, EFA, EEM]
+horizon: months
+signal: >
+  Two groups: the eleven sector funds, and the equity markets SPY, QQQ, IWM, EFA and EEM. Three
+  styles, each set on the first session of each month from the signal prices up to the session
+  before, within each group among the members that trade and have the prices the style needs:
+  momentum ranks by the return from 252 sessions to 21 sessions before the session before, its
+  long leg the top third; value ranks by the return over the 1,260 sessions to the session before,
+  its long leg the bottom third; defensive ranks by the standard deviation of the daily returns
+  over the 252 sessions to the session before, its long leg the least volatile third. Each short
+  leg is the opposite third; a third is the number of ranked members divided by three, rounded
+  half to even, one at least, ties to the order of the universe; a group with fewer than two ranked members has no legs for the style, its members held at 1/N of the third. A style's daily
+  return is, on each session after its first legs are set, the mean daily return of its long leg
+  less that of its short leg in each group that has legs, the groups weighted by their numbers of
+  ranked members, from the legs set on the last first session of a month before that session. On
+  the first session of each month, a style has earned if it has a daily return on each of the last
+  window sessions to the session before and their sum is above zero. Each style holds a third of
+  the portfolio: a style that has earned holds it in its long leg -- of the N funds trading, a group
+  of n ranked members holds n/N of the third, split equally among its long leg, and a fund trading
+  but not ranked by the style holds 1/N of the third -- and a style that has not earned holds its
+  third in the N trading funds in equal parts. The targets are the three thirds added, set on the
+  first session of each month from the first month in which a style has earned or not, always
+  fully invested from then.
+parameters:
+  window: sessions of a style's own daily returns whose sum decides whether it has earned; about a month in the base, Ilmanen's adjacent months, and a year in the variant, Campbell's one-year average, a choice of the lab's
+variants:
+  - {window: 21}
+  - {window: 252}
+neighbours:
+  window: {25: [16, 26], 50: [10, 32]}
+choose: false
+memory: 1600
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged before costs, on the market's closes, apart from the battery, over the in-sample months,
+  each style from its own first formation with a 21-session record to December 2022, the last month
+  ending at the close of 2022-12-30: each style's long/short return over the month, the sum of its
+  daily returns from the session after a formation to the next formation's session, for the legs
+  set at the formation, regressed by ordinary least squares on a constant for each style and on an
+  indicator that the style had earned at the formation (window 21), with standard errors clustered
+  by month. The theory is refuted in this form if the indicator's coefficient is zero or below: a
+  style no better in the month after it earned than after it did not, as the bank's first
+  refutation reads. Any other result short of passing gates 1 to 7 is not proven, not refuted; a
+  base that passes gates 1 to 7 while the clause refutes leaves the theory refuted in this form.
+  The second refutation is not graded: its stock half because the lab holds no single stocks, its
+  industry half reported by the clause over the equity markets alone, where no industry enters.
+  TM-024-01's panic group-months, whose outcome for CA-001-01's momentum tilt it published: if 90%
+  or more of the momentum style's months in which either group was in a panic state fall in one of
+  the earned and not-earned sets, they leave the graded sample and the clause with them is
+  reported; otherwise they stay, disclosed, and the clause without them is reported. The published
+  results of CA-001-01, CA-024-01, TM-003-01, TM-006-01, TM-017-02, TM-023-01, TM-038-01,
+  TM-039-01, TM-040-01, TM-041-01, LL-023-01 and MR-032-01, their years, blocks and states, and the
+  registry's monthly hedged returns of CA-001-01, CA-024-01, TM-024-01 and TM-040-01, from which
+  nothing was computed, stay, disclosed. Reported, not graded: the clause for each style apart; the
+  clause over each group apart, the sector funds and the equity markets; the clause with, for each
+  style, the month's return of its groups' ranked members held in equal parts as a further
+  regressor, with a slope for each style; the clause for the variant, window 252, over its own
+  months; the clause without value, over 2006 to 2013, over 2014 to 2022, and over the holdout;
+  each month, the next month's long/short return of the style with the highest last-21-session
+  return less that of the lowest; each style's autocorrelations of its monthly long/short returns
+  at lags 1 to 3 and the correlations between the styles; the share of months each style has
+  earned; the correlations of the base's monthly returns hedged of its benchmark with the
+  registry's hedged monthly series of CA-001-01 and TM-003-01, over their common months; the alpha
+  by year, and in 2009 and 2020.
