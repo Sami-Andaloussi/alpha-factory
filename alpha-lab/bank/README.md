@@ -169,7 +169,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [CA-015](CA-015-tactical-forecasting-conditional-factor-premia.md) | Tactical return forecasting and conditional factor premia | risk premium, macroeconomic | stocks, sectors, equity indices | months | tested-inconclusive |
 | [CA-016](CA-016-equity-country-allocation-home-bias.md) | Equity country allocation and home bias | behavioural, flows, limits to arbitrage | equity indices | months, years | not-testable |
 | [CA-017](CA-017-international-momentum.md) | International momentum | behavioural, information, flows | equity indices | months | not-testable |
-| [CA-018](CA-018-country-value-stock-country-parallels.md) | Country value and stock-country return parallels | behavioural, limits to arbitrage | equity indices | months, years | untouched |
+| [CA-018](CA-018-country-value-stock-country-parallels.md) | Country value and stock-country return parallels | behavioural, limits to arbitrage | equity indices | months, years | not-testable |
 | [CA-019](CA-019-mean-reversion-national-stock-markets.md) | Mean reversion across national stock markets | behavioural, risk premium, limits to arbitrage | equity indices | years | untouched |
 | [CA-021](CA-021-value-sectors-countries-asset-classes.md) | Value across sectors, countries and asset classes | behavioural, limits to arbitrage | stocks, sectors, equity indices | weeks, months, years | untouched |
 | [CA-022](CA-022-value-spread-deep-value.md) | Value spread and deep value | risk premium, limits to arbitrage, behavioural | stocks, sectors, equity indices, crypto | months, years | untouched |
