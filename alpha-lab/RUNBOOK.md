@@ -136,6 +136,40 @@ its own, beside the snapshot, whose files never change.
      30 April 2010 on three days from 2010-05-03. The paper job's first run may read the day's
      currency bar before it is final, where the backtest reads its final close; its retry reads the
      closed bar;
+   - a fund's distributions are read through `market.signal_distributions`, recovered from the steps
+     by which the adjusted bars scale the past down (`data.distributions_of`, passed to strategies
+     since 2026-09-27, CA-021): each one's cash as a fraction of the fund's close before its
+     ex-date, given on the session the bars as they stood confirm it — the fourth bar read from the
+     ex-date, three sessions after it as a rule for SPY and the sector funds (four to six for XLC and
+     XLRE in a few; thirteen for SPY's of 2025-06-20, given on 07-09, whose bars miss the later steps
+     by more than half the tolerance), up to fifteen for the bond funds — so that the backtest reads
+     what the paper job, drawing the bars each day, can read then; 0 on the other sessions, the last
+     ones included until a distribution there is confirmed. Read with `.shift(1)`, as the closes;
+     gate 1 replaces the last session's, and those older than the memory, from a stream of their
+     own. Bitcoin's are NaN; GLD and SLV pay none; SHY's are NaN throughout (`data.UNREAD`): its day
+     spans a few half-cent steps, most of its steps fit both factors, and read on the bars as they
+     stood it gave some distributions up to eleven sessions after the full bars and amounts up to
+     ten half-cent steps off. A rule that needs the close before an ex-date reads it four sessions
+     before the session a distribution is given on, as a rule, and says so. The reading is never
+     placed before an ex-date. What it does not see: a distribution under three half-cent steps of
+     the price as read (1.5 cents; 3 cents for XLB, XLE, XLK, XLU and XLY, read at half their traded
+     price, their two-for-one splits of late 2025 leaving the steps whole, so that XLK reads one to
+     three a year in 2005 to 2008); a step whose later bars mostly fit the earlier factor too, NaN on
+     its session; two distributions four bars apart or fewer, read as one on the later (XLF's regular
+     one of 2016-09-16 and its spin-off of XLRE's shares on 2016-09-19, 19.15%); a special near a
+     split's ratio or above 30%, NaN or misread. It reads what the adjustment encodes, second steps
+     included: XLE's and XLV's on 2019-12-30 (2.9% and 0.65%), QQQ's pairs of 2010-06, 2011-12 and
+     2023-12, XLB's 1.99% of 2010-09-17, none checked against another source. Read on the bars as
+     they stood each session, the latest factor's bars on their half-cent steps as Yahoo serves
+     them (checked 2026-09-27 on each distribution from 2006), the paper job gives each distribution
+     on the session the backtest does, but for: 9 of the sector funds' 859 a session later (XLB
+     2014-06-25, XLK 2015-06-24 and 2017-09-20, XLP and XLRE 2019-12-26, XLU 2007-09-26 and
+     2016-06-22, XLV 2011-03-23, XLY 2006-12-20, none across a month's turn), which the backtest
+     reads a session early; QQQ, IWM and EFA one each; IEF 11 of 238, two of them two sessions, and
+     five amounts two or three half-cent steps off; TLT one of 237; SPY and EEM none. The paper job
+     gives some a session before the backtest (XLRE 14 of 37, the bond funds some fifty each), and
+     read XLRE's of 2016-12-21 as 26% on one session where the full bars read 1.8%. The paper job
+     reads them from the bars it draws each day;
    - a periodic rebalance sets its targets on the first session of each period, not the last:
      knowing that a session is the last of its month means knowing the next session's date, and
      gate 1 counts that as reading the future;

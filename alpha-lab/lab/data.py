@@ -89,6 +89,13 @@ class Market:
                    currency's daily close comes after the US close; NaN where the last close is more
                    than seven calendar days old; None where the market holds no rate (passed to
                    strategies since 2026-09-27, CA-014-02)
+    signal_distributions  each fund's distributions as a signal may read them: on the session the
+                   bars as they stood confirm one, three sessions after its ex-date as a rule, its
+                   cash as a fraction of the fund's close before the ex-date (the step by which the
+                   adjusted bars scale the past down), 0 on the fund's other sessions, NaN where it
+                   has no bar or none was read (`distributions_of`), and throughout for SHY
+                   (`UNREAD`); read, as the closes, with `.shift(1)`; None where the bars carry no
+                   open, high and low (passed to strategies since 2026-09-27, CA-021)
 
     A strategy reads bitcoin through `signal_prices`, never through `prices`. A fund's volume is
     its own shares' trading, not the trading of what it holds.
@@ -99,13 +106,15 @@ class Market:
     signal_prices: pd.DataFrame
     signal_volumes: pd.DataFrame | None = None
     signal_rates: pd.DataFrame | None = None
+    signal_distributions: pd.DataFrame | None = None
 
     def window(self, start=None, end=None) -> "Market":
         cut = slice(pd.Timestamp(start) if start else None, pd.Timestamp(end) if end else None)
         volumes = None if self.signal_volumes is None else self.signal_volumes.loc[cut]
         rates = None if self.signal_rates is None else self.signal_rates.loc[cut]
+        paid = None if self.signal_distributions is None else self.signal_distributions.loc[cut]
         return Market(self.prices.loc[cut], self.tradable.loc[cut], self.rf.loc[cut], self.signal_prices.loc[cut],
-                      volumes, rates)
+                      volumes, rates, paid)
 
     def asof(self, when) -> "Market":
         """No session after `when`. Bitcoin's close of `when`, in `prices`, is still to come at
@@ -165,6 +174,7 @@ def traded_from(market: Market, first: dict) -> Market:
     trade it."""
     prices, signal = market.prices.copy(), market.signal_prices.copy()
     volumes = None if market.signal_volumes is None else market.signal_volumes.copy()
+    paid = None if market.signal_distributions is None else market.signal_distributions.copy()
     for ticker, when in first.items():
         if ticker in prices.columns:
             before = prices.index < pd.Timestamp(when)
@@ -172,7 +182,9 @@ def traded_from(market: Market, first: dict) -> Market:
             signal.loc[before, ticker] = np.nan
             if volumes is not None:
                 volumes.loc[before, ticker] = np.nan
-    return Market(prices, prices.notna(), market.rf, signal, volumes, market.signal_rates)
+            if paid is not None:
+                paid.loc[before, ticker] = np.nan
+    return Market(prices, prices.notna(), market.rf, signal, volumes, market.signal_rates, paid)
 
 
 def read(path: Path) -> pd.DataFrame:
@@ -200,7 +212,11 @@ def assemble(raw: dict[str, pd.DataFrame], irx: pd.DataFrame, lagged, rates=None
                           .to_numpy(dtype=float))
     rate = irx["Close"].reindex(calendar).ffill(limit=5).shift(1)  # cash held overnight earns the rate set before
     rf = (rate / 100.0 / TRADING_DAYS).rename("rf")
-    return Market(prices, prices.notna(), rf, signal, volumes, rates_before(rates, calendar))
+    paid = None
+    if all({"Open", "High", "Low", "Close"} <= set(raw[t].columns) for t in raw):
+        paid = pd.DataFrame({t: (pd.Series(np.nan, index=calendar) if t in lagged or t in UNREAD
+                                 else distributions_of(raw[t]).reindex(calendar)) for t in raw}, dtype=float)
+    return Market(prices, prices.notna(), rf, signal, volumes, rates_before(rates, calendar), paid)
 
 
 def rates_before(rates, calendar: pd.DatetimeIndex, stale_days: int = 7) -> pd.DataFrame | None:
@@ -218,6 +234,162 @@ def rates_before(rates, calendar: pd.DatetimeIndex, stale_days: int = 7) -> pd.D
         old = (calendar.to_numpy() - when) > np.timedelta64(stale_days, "D")
         out[name.replace("=X", "")] = np.where(old, np.nan, value)
     return pd.DataFrame(out, index=calendar, dtype=float)
+
+
+HALF = 0.005               # the traded prices' step: half a cent, a trade at the midpoint of a one-cent spread
+TOLERANCE = 0.005          # a price is on a step within 0.005 cent of one, or within its rounding below
+ROUNDING = 8e-7            # the adjusted bars' rounding, a share of the price: Yahoo keeps about seven digits
+OFF_BARS = 3               # a factor ends where three bars in a row, read backward, are off its steps
+WINDOW = 10                # the bars before an end that choose the factor before it
+LEAST_ON = 4               # a factor is read when at least four of them are on its steps
+CLEAR = 0.5                # the first bar only the later factor fits lies within half the tolerance of it
+AMBIGUOUS = 0.5            # a step whose later bars mostly fit the earlier factor too is not read
+MOST_PAID = 0.3            # the largest distribution read, as a fraction of the close before it
+SPLITS = (2, 3, 4, 5, 10, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 10)
+SPLIT_STEP = 1 / (1 - MOST_PAID)  # a factor step beyond this ratio, either way, is a split, not a distribution
+LEAST_STEPS = 3            # a distribution under three half-cent steps of the price read is not told from a misreading
+UNREAD = ("SHY",)          # a fund whose day spans a few half-cent steps: its steps fit both factors
+MOST_CANDIDATES = 200_000  # the factors tried on one bar: a traded price up to about $2,300 is read
+CHUNK = 20_000             # the candidates judged on a window at once, which bounds the memory
+
+
+def distributions_of(bars: pd.DataFrame) -> pd.Series:
+    """A fund's distributions, each as a fraction of the traded close before its ex-date, on the
+    session the bars as they stood confirm it: the fourth bar read from the ex-date, three sessions
+    after it as a rule (AS-008's reader, the lab's decisions of 2026-09-26 and 2026-09-27). Read on
+    that session, a distribution is what the paper job, drawing the bars each day, can read then:
+    before it the bars after the ex-date are too few to fix their factor.
+
+    The adjusted bars are the traded prices, on half-cent steps, times one factor that holds from
+    one ex-date to the next and steps down, going back, by the distribution over the close before
+    it; Yahoo rounds them to about seven digits, which the tolerance allows. The first factor is the
+    latest bar's that at least three more of its ten bars confirm; the bars after it are 0, nothing
+    confirmed on them yet, as a distribution with fewer than four bars read from its ex-date gives
+    nothing yet. Walking back, a factor ends where three bars in a row are off its steps; the factor
+    before it is the one, within what a distribution of up to 30% allows, that puts the most of the
+    ten bars before that end on the steps, at least four, ties broken by the bars exactly on them;
+    failing that, the same within a split's ratio. The ex-date is placed on the first bar the later
+    factor fits within half its tolerance and the earlier one does not: never before the ex-date, a
+    session or two after it where a bar lies a hair off its steps. A step whose later bars mostly
+    fit the earlier factor too, as a fund whose day ranges over a few cents may show, is not read,
+    and its session is NaN; so is a step neither a distribution nor a split, every day before a
+    factor that is not read, and every day of a fund whose traded price is above about $2,300. Two
+    distributions four bars apart or fewer are read as one, on the later. A distribution under three
+    half-cent steps of the price as read, and a negative step, are not read. A bar whose four prices
+    are one price says nothing of the factor and is not searched. 0 on the fund's other sessions;
+    NaN where it has no bar."""
+    o = bars[["Open", "High", "Low", "Close"]].to_numpy(dtype=float)
+    ok = np.isfinite(o).all(axis=1) & (o > 0).all(axis=1)
+    rows = np.nonzero(ok & (np.ptp(np.where(ok[:, None], o, 0.0), axis=1) > 0))[0]  # one price is no evidence
+    p = o[rows]                                                # the bars read, oldest first
+    paid = pd.Series(np.where(ok, 0.0, np.nan), index=bars.index)
+
+    def miss(prices, fs, rounding=ROUNDING):
+        """For each factor, how far the prices divided by it lie from the half-cent steps, as a
+        share of the tolerance: under 1 is on the steps."""
+        traded = prices[None] / np.asarray(fs, dtype=float).reshape(-1, *([1] * prices.ndim))
+        scaled = traded / HALF
+        cents = np.abs(scaled - np.round(scaled)) * HALF * 100
+        return cents / np.maximum(TOLERANCE, rounding * traded * 100)
+
+    def on(bar, f):
+        return bool(miss(bar, [f]).max() < 1)
+
+    def chosen(window, low, high, anchors=None):
+        """The factor between low and high that puts the most bars of the window on the steps, and
+        how many it puts there; candidates are the factors that put one of the anchors there, by
+        default any bar of the window."""
+        anchors = window if anchors is None else anchors
+        kept = []
+        for a in anchors:                                      # one bar at a time, the memory bounded
+            first, last = int(a[3] / high / HALF), int(a[3] / low / HALF) + 2
+            if last - first > MOST_CANDIDATES:                 # a price too high to read: not read
+                continue
+            f = a[3] / (np.arange(first, last) * HALF)
+            kept.append(f[miss(a, f).max(axis=1) < 1])
+        fs = np.concatenate(kept) if kept else np.array([])
+        fs = fs[(fs >= low) & (fs <= high)]
+        if not len(fs):
+            return np.nan, 0
+        worst = np.concatenate([miss(window, fs[k:k + CHUNK]).max(axis=2)      # per candidate and bar,
+                                for k in range(0, len(fs), CHUNK)])             # a chunk at a time
+        cents = np.concatenate([miss(window, fs[k:k + CHUNK], rounding=0).max(axis=2)
+                                for k in range(0, len(fs), CHUNK)])
+        count = (worst < 1).sum(axis=1)
+        exact = (cents < 1).sum(axis=1)                        # a neighbouring lattice, a step off, fits
+        best = np.lexsort((worst.sum(axis=1), -exact, -count))[0]  # within the rounding: fewer bars exactly
+        return fs[best], int(count[best])
+
+    if not len(p):
+        paid[:] = np.nan
+        return paid
+    factor = np.full(len(p), np.nan)
+    start, count = len(p) - 1, 0
+    while start >= max(0, len(p) - WINDOW) and count < LEAST_ON:   # the latest bar a factor is read on
+        window = p[max(0, start - WINDOW + 1):start + 1][::-1]
+        f, count = chosen(window, 1 - MOST_PAID, 1.0001, window[:1])
+        start -= count < LEAST_ON
+    if count < LEAST_ON:
+        paid[:] = np.nan
+        return paid
+    fits = window[[on(bar, f) for bar in window]]              # read on all its bars, not one bar's rounding
+    g, more = chosen(fits, f * (1 - 2 * ROUNDING), f * (1 + 2 * ROUNDING))
+    if more >= count and on(p[start], g):
+        f = g
+    paid.iloc[rows[start] + 1:] = np.where(ok[rows[start] + 1:], 0.0, np.nan)  # nothing confirmed on them yet
+    ends = []                                                  # (bar the step is on, factor after, before)
+    while True:
+        i, run, regime = start, 0, []
+        while i >= 0 and run < OFF_BARS:
+            if on(p[i], f):
+                factor[i], run = f, 0
+                regime.append(i)
+            else:
+                run += 1
+            i -= 1
+        earliest = min(regime)
+        if run < OFF_BARS or earliest == 0:
+            break
+        window = p[max(0, earliest - WINDOW):earliest][::-1]
+        g, count = chosen(window, f * (1 - MOST_PAID), f * 1.0001)
+        if count < LEAST_ON:
+            g, count = max((chosen(window, f * s * (1 - MOST_PAID), f * s * 1.0001) for s in SPLITS),
+                           key=lambda x: x[1])
+        if count < LEAST_ON:                                   # the factor before this end is not read
+            paid.iloc[:rows[earliest] + 1] = np.nan
+            break
+        regime = sorted(regime)
+        at = next((j for j in regime if miss(p[j], [f]).max() < CLEAR and not on(p[j], g)), None)
+        both = np.mean([on(p[j], g) for j in regime])          # the later bars the earlier factor fits too
+        ends.append((at, earliest, f, g, both, regime))
+        start = earliest - 1 - int(np.argmax(miss(window, [g])[0].max(axis=1) < 1))
+        f = g
+    def confirmed(regime, first):
+        """The bar on which the bars as they stood confirm the factor from `first` on: its fourth bar
+        read; None while fewer are read, nothing given yet."""
+        later = [j for j in regime if j >= first]
+        return later[LEAST_ON - 1] if len(later) >= LEAST_ON else None
+
+    for at, earliest, after, before, both, regime in ends:
+        ratio = before / after
+        if abs(ratio - 1) < 1e-9:
+            continue
+        if abs(np.log(ratio)) < np.log(SPLIT_STEP):
+            close = p[earliest - 1, 3] / before                # the traded close before, as read
+            if 1 - ratio <= 0 or (1 - ratio) * close < LEAST_STEPS * HALF:
+                continue                                       # negative, or under what a misreading makes
+            if at is None or both >= AMBIGUOUS:                # no bar tells the ex-date: not read
+                when = confirmed(regime, earliest)
+                if when is not None:
+                    paid.iloc[rows[when]] = np.nan
+                continue
+            when = confirmed(regime, at)
+            if when is not None:
+                paid.iloc[rows[when]] = 1 - ratio
+        elif not any(abs(ratio * s - 1) < 0.01 for s in SPLITS):
+            paid.iloc[rows[earliest]] = np.nan                 # neither a distribution nor a split
+    paid.iloc[:rows[0]] = np.nan
+    return paid
 
 
 # --------------------------------------------------------------------------- integrity

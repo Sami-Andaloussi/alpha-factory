@@ -1,0 +1,66 @@
+id: CA-021-01-sector-value-by-yield
+theory: CA-021
+parent: null
+mechanism: >
+  Investors extrapolate recent trends and overpay for growth, and a professional who looks
+  contrarian too early pays for it, so that assets that are cheap against their fundamentals stay
+  cheap for a while and then earn more: among the sector funds, those that pay the most cash for
+  their price, the highest yields, outperform the sector funds held in equal parts.
+prediction:
+  sign: positive
+  size: an alpha of about 0.8 to 1.6% a year over the eleven sector funds held in equal parts, an appraisal ratio of about 0.12 to 0.24; built from the long-short value premium of stock selection, about 3.5% a year, of which a long-only tilt keeps 40 to 50%, at the tracking error of CA-024-01's sector tilt, about 6.8% a year; from half to all of the long record, which the 2010s point below
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY]
+horizon: months
+signal: >
+  On the first session of each month t, each fund's trailing yield: over the distributions the lab's
+  reading gives on sessions after the same calendar date `months` months before t−1 (the month's
+  last day where that date does not exist) and up to t−1, each on the session the bars as they stood
+  confirm it, the sum of each one's cash over the fund's close of t−1, annualised by 12/`months`. On
+  the adjusted closes, a distribution's cash over that close is taken as its fraction of the close
+  before its ex-date, times the ratio of the close of the session before the one it is given on to
+  the close of t−1, divided by the product, over that distribution and every later one given up to
+  t−1, of one minus its fraction, the factors by which they scaled the past down: f_j × A(c_j − 1) /
+  A(t−1) / Π_{k: c_j ≤ c_k ≤ t−1}(1 − f_k), each session the reading's own, before `.shift(1)`; the
+  price's change between the close before the ex-date and the close of the session before the one it
+  is given on is left in. With `measure` "level" the yield is ranked; with "own" the yield over its
+  mean on the first sessions of the sixty months up to t. The funds trading whose reading starts on
+  or before the same calendar date `months` months before t−1 (and, for "own", with sixty readings)
+  are ranked; a run of NaN that ends on t−1, a distribution not yet confirmed as the bars stood,
+  counts as no distribution, and any other NaN in the window leaves the fund unranked. The top third
+  of the ranked funds, rounded, one at least, is held: the highest yields. Of the N funds trading,
+  the n ranked hold n/N of the portfolio, split equally among the highest yields; a fund trading but
+  not yet ranked is held at 1/N, its benchmark weight. The targets start on the first month in which
+  a fund is ranked; from then the portfolio is always fully invested.
+parameters:
+  months: the calendar months over which a fund's distributions are summed into its yield
+  measure: '"level" ranks the yield itself; "own" ranks the yield over its own mean of the last sixty months'
+variants:
+  - {months: 12, measure: level}
+  - {months: 12, measure: own}
+neighbours:
+  months: {25: [9, 15], 50: [6, 18]}
+choose: false
+memory: 1530
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the base by its alpha over the eleven sector funds held in equal parts, as gate 2
+  measures it. The theory is refuted in this form if that alpha is zero or less: the highest yields
+  among the sector funds would then have earned no more than the sector funds from 2006 to 2022, as
+  the bank's first refutation reads for sectors. Any other result short of passing gates 1 to 7 is
+  not proven, not refuted. The alpha alone carries the claim: the rule holds XLU in every month and
+  XLP in most, and its placebos, its weights moved in time, keep that mix, so that their rank judges
+  the timing of some thirty changes, not whether the high yields beat the group; it is reported, not
+  graded. Part of the outcome is published: TM-002-01's verdict gave six sector funds' own alphas
+  over their equal weight for these years, from which the base's average mix earns about +0.5% a
+  year, an estimate that leans high, since the base holds technology and consumer discretionary,
+  which led and are not published, far under their share, and that excludes neither sign; the
+  verdict reads the alpha with it. Reported, not graded: the variant, the yield against its own
+  five-year mean; the base's average weights held fixed and reset on the same months, and the
+  timing, the rest of its alpha, XLRE's and XLC's weights shared among the others before they trade;
+  the correlation of the base's monthly returns, hedged of the eleven funds, with CA-024-01's sector
+  tilt rebuilt from its card; the alpha by year, and in 2008 and 2020; each fund's months held and
+  share of the profit. The three regions, SPY, EFA and EEM, are judged in the reasoning and not
+  held: their yield ranking holds EFA in 189 of 203 months, a tilt whose outcome CA-024-01's verdict
+  published.

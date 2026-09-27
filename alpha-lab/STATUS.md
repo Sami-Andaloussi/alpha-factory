@@ -3,9 +3,9 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 158 untouched · 1 in-progress · 0 tested-conclusive · 40 tested-inconclusive · 64 not-testable.
+**263 theories**: 157 untouched · 1 in-progress · 0 tested-conclusive · 41 tested-inconclusive · 64 not-testable.
 
-**45 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 27 stopped at gate 2, 12 stopped at gate 3, 3 stopped at gate 4, 1 not run yet; 1 under paper trading.
+**46 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 28 stopped at gate 2, 12 stopped at gate 3, 3 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
 | Theory | Family | Status | Strategies |
 |---|---|---|---|
@@ -53,7 +53,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [CA-017](bank/CA-017-international-momentum.md) International momentum | cross-asset relative value | not-testable | [CA-017-01-international-momentum](strategies/CA-017-01-international-momentum/) · not testable: [reasoning](strategies/CA-017-01-international-momentum/reasoning.md) |
 | [CA-018](bank/CA-018-country-value-stock-country-parallels.md) Country value and stock-country return parallels | cross-asset relative value | not-testable | [CA-018-01-country-value](strategies/CA-018-01-country-value/) · not testable: [reasoning](strategies/CA-018-01-country-value/reasoning.md) |
 | [CA-019](bank/CA-019-mean-reversion-national-stock-markets.md) Mean reversion across national stock markets | cross-asset relative value | not-testable | [CA-019-01-reversion-across-national-markets](strategies/CA-019-01-reversion-across-national-markets/) · not testable: [reasoning](strategies/CA-019-01-reversion-across-national-markets/reasoning.md) |
-| [CA-021](bank/CA-021-value-sectors-countries-asset-classes.md) Value across sectors, countries and asset classes | cross-asset relative value | untouched |  |
+| [CA-021](bank/CA-021-value-sectors-countries-asset-classes.md) Value across sectors, countries and asset classes | cross-asset relative value | tested-inconclusive | [CA-021-01-sector-value-by-yield](strategies/CA-021-01-sector-value-by-yield/) · stops at gate 2 · [report](strategies/CA-021-01-sector-value-by-yield/report.ipynb) · [verdict](strategies/CA-021-01-sector-value-by-yield/verdict.md) |
 | [CA-022](bank/CA-022-value-spread-deep-value.md) Value spread and deep value | cross-asset relative value | untouched |  |
 | [CA-023](bank/CA-023-fundamental-indexation.md) Fundamental indexation | cross-asset relative value | untouched |  |
 | [CA-024](bank/CA-024-value-momentum-everywhere.md) Value and momentum everywhere | cross-asset relative value | tested-inconclusive | [CA-024-01-value-within-groups](strategies/CA-024-01-value-within-groups/) · stops at gate 2 · [report](strategies/CA-024-01-value-within-groups/report.ipynb) · [verdict](strategies/CA-024-01-value-within-groups/verdict.md) |
