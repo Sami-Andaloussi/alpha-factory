@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 160 untouched · 1 in-progress · 0 tested-conclusive · 40 tested-inconclusive · 62 not-testable.
+**263 theories**: 159 untouched · 1 in-progress · 0 tested-conclusive · 40 tested-inconclusive · 63 not-testable.
 
 **45 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 27 stopped at gate 2, 12 stopped at gate 3, 3 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -51,7 +51,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [CA-015](bank/CA-015-tactical-forecasting-conditional-factor-premia.md) Tactical return forecasting and conditional factor premia | cross-asset relative value | tested-inconclusive | [CA-015-01-average-correlation-timing](strategies/CA-015-01-average-correlation-timing/) · stops at gate 2 · [report](strategies/CA-015-01-average-correlation-timing/report.ipynb) · [verdict](strategies/CA-015-01-average-correlation-timing/verdict.md) |
 | [CA-016](bank/CA-016-equity-country-allocation-home-bias.md) Equity country allocation and home bias | cross-asset relative value | not-testable | [CA-016-01-equity-country-allocation](strategies/CA-016-01-equity-country-allocation/) · not testable: [reasoning](strategies/CA-016-01-equity-country-allocation/reasoning.md) |
 | [CA-017](bank/CA-017-international-momentum.md) International momentum | cross-asset relative value | not-testable | [CA-017-01-international-momentum](strategies/CA-017-01-international-momentum/) · not testable: [reasoning](strategies/CA-017-01-international-momentum/reasoning.md) |
-| [CA-018](bank/CA-018-country-value-stock-country-parallels.md) Country value and stock-country return parallels | cross-asset relative value | untouched |  |
+| [CA-018](bank/CA-018-country-value-stock-country-parallels.md) Country value and stock-country return parallels | cross-asset relative value | not-testable | [CA-018-01-country-value](strategies/CA-018-01-country-value/) · not testable: [reasoning](strategies/CA-018-01-country-value/reasoning.md) |
 | [CA-019](bank/CA-019-mean-reversion-national-stock-markets.md) Mean reversion across national stock markets | cross-asset relative value | untouched |  |
 | [CA-021](bank/CA-021-value-sectors-countries-asset-classes.md) Value across sectors, countries and asset classes | cross-asset relative value | untouched |  |
 | [CA-022](bank/CA-022-value-spread-deep-value.md) Value spread and deep value | cross-asset relative value | untouched |  |
