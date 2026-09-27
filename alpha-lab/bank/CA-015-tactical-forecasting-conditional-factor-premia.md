@@ -6,7 +6,7 @@ mechanism: [risk premium, macroeconomic]
 asset_classes: [stocks, sectors, equity indices]
 horizon: [months]
 data: [factor returns, valuation ratios, macroeconomic releases, inflation data, interest rates]
-status: untouched
+status: tested-inconclusive
 ---
 
 ## Mechanism
