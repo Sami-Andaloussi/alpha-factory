@@ -6,7 +6,7 @@ mechanism: [microstructure, structural]
 asset_classes: [crypto]
 horizon: [days, months]
 data: [DEX trading volumes, liquidity pool data, protocol fee revenue, MEV data, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
