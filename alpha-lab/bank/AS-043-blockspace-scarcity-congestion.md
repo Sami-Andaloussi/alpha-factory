@@ -6,7 +6,7 @@ mechanism: [structural]
 asset_classes: [crypto]
 horizon: [days, months]
 data: [transaction fees, block fullness, daily prices]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
