@@ -6,7 +6,7 @@ mechanism: [behavioural, risk premium, limits to arbitrage]
 asset_classes: [equity indices]
 horizon: [years]
 data: [country index levels, country valuation ratios, exchange rates]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
