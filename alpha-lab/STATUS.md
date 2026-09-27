@@ -3,7 +3,7 @@
 Every theory of the [bank](bank/), its status, and each strategy drawn from it with the gate it
 reached. Regenerated at every run; rejected strategies stay.
 
-**263 theories**: 168 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 57 not-testable.
+**263 theories**: 167 untouched · 1 in-progress · 0 tested-conclusive · 37 tested-inconclusive · 58 not-testable.
 
 **41 strategies**: 0 passing gates 1 to 7, 2 stopped at gate 1, 26 stopped at gate 2, 10 stopped at gate 3, 2 stopped at gate 4, 1 not run yet; 1 under paper trading.
 
@@ -39,7 +39,7 @@ reached. Regenerated at every run; rejected strategies stay.
 | [AS-039](bank/AS-039-algorithmic-stablecoins-reflexivity.md) Algorithmic stablecoins and mint-burn reflexivity | asset-specific mechanisms | not-testable | [AS-039-01-algorithmic-stablecoins-reflexivity](strategies/AS-039-01-algorithmic-stablecoins-reflexivity/) · not testable: [reasoning](strategies/AS-039-01-algorithmic-stablecoins-reflexivity/reasoning.md) |
 | [AS-040](bank/AS-040-bonding-curves.md) Bonding curves | asset-specific mechanisms | not-testable | [AS-040-01-bonding-curves](strategies/AS-040-01-bonding-curves/) · not testable: [reasoning](strategies/AS-040-01-bonding-curves/reasoning.md) |
 | [AS-042](bank/AS-042-on-chain-transparency.md) Open data and on-chain transparency | asset-specific mechanisms | not-testable | [AS-042-01-on-chain-transparency](strategies/AS-042-01-on-chain-transparency/) · not testable: [reasoning](strategies/AS-042-01-on-chain-transparency/reasoning.md) |
-| [AS-043](bank/AS-043-blockspace-scarcity-congestion.md) Blockspace scarcity and blockchain congestion | asset-specific mechanisms | untouched |  |
+| [AS-043](bank/AS-043-blockspace-scarcity-congestion.md) Blockspace scarcity and blockchain congestion | asset-specific mechanisms | not-testable | [AS-043-01-blockspace-scarcity-congestion](strategies/AS-043-01-blockspace-scarcity-congestion/) · not testable: [reasoning](strategies/AS-043-01-blockspace-scarcity-congestion/reasoning.md) |
 | [AS-044](bank/AS-044-dex-amm-design-mev.md) DEX and AMM design, MEV extraction and DeFi token economics | asset-specific mechanisms | untouched |  |
 | [CA-001](bank/CA-001-momentum-sectors-countries-asset-classes.md) Momentum across sectors, countries and asset classes | cross-asset relative value | tested-inconclusive | [CA-001-01-momentum-within-groups](strategies/CA-001-01-momentum-within-groups/) · stops at gate 2 · [report](strategies/CA-001-01-momentum-within-groups/report.ipynb) · [verdict](strategies/CA-001-01-momentum-within-groups/verdict.md) |
 | [CA-003](bank/CA-003-factor-momentum.md) Factor momentum | cross-asset relative value | untouched |  |
