@@ -6,7 +6,7 @@ mechanism: [behavioural, information, flows]
 asset_classes: [equity indices]
 horizon: [months]
 data: [country index levels, exchange rates, earnings revisions]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
