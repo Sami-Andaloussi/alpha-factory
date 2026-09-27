@@ -1,5 +1,6 @@
 """The snapshot, the calendar, the universe."""
 import json
+import time
 from pathlib import Path
 
 import numpy as np
@@ -343,3 +344,261 @@ def test_extend_fetches_only_what_no_folder_holds(snapshot, monkeypatch):
     with pytest.raises(RuntimeError, match="already frozen"):
         data.extend(root=snapshot, snapshot="2021-01-06")
     assert fetched == [("DDD", "FXX")]
+
+
+def traded(seed=3, start="2020-01-02", sessions=320, halves=0.2, level=40.0, spread=0.3, moves=0.01):
+    """Bars as a fund trades: open, high, low and close in whole cents, a share `halves` of the
+    highs at the midpoint of a one-cent spread; `spread` bounds the day's range beyond the open and
+    the close."""
+    rng = np.random.default_rng(seed)
+    days = pd.bdate_range(start, periods=sessions)
+    close = np.round(level * np.exp(np.cumsum(rng.normal(0, moves, sessions))), 2)
+    open_ = np.round(close * (1 + rng.normal(0, moves * 0.3, sessions)), 2)
+    high = np.maximum(open_, close) + np.round(rng.uniform(0, spread, sessions), 2)
+    low = np.minimum(open_, close) - np.round(rng.uniform(0, spread, sessions), 2)
+    half = rng.random(sessions) < halves
+    high = np.where(half, high + 0.005, high)
+    return pd.DataFrame({"Open": open_, "High": high, "Low": low, "Close": close, "Volume": 1e6}, index=days)
+
+
+def adjusted(raw, paid, splits=(), later=1.0, rounded=True):
+    """The bars as Yahoo adjusts them: before each ex-date, scaled down by the cash over the close
+    before it; before each split, divided by its ratio; all of them by `later`, what was paid after
+    the last bar; kept to about seven digits, off by up to 3e-7 of the price, as Yahoo's are (the
+    snapshot's bars lie a median 1.3e-7 of the price off their steps, 5e-7 at the 99th percentile)."""
+    rng = np.random.default_rng(0)
+    factor = pd.Series(later, index=raw.index)
+    for day, cash in paid.items():
+        before = raw.index < pd.Timestamp(day)
+        factor[before] *= 1 - cash / raw["Close"][before].iloc[-1]
+    for day, ratio in dict(splits).items():
+        factor[raw.index < pd.Timestamp(day)] /= ratio
+    out = raw.copy()
+    for field in ("Open", "High", "Low", "Close"):
+        values = raw[field] * factor
+        noise = 1 + rng.uniform(-3e-7, 3e-7, len(values))
+        out[field] = (values * noise).astype(np.float32).astype(float) if rounded else values
+    return out
+
+
+def fraction(raw, day, cash, late=3):
+    """Where and what the reading gives of the cash paid on `day`: the session the bars as they
+    stood confirm it on, its fourth bar, `late` sessions after it when every bar is on its steps;
+    and the cash over the traded close before the ex-date."""
+    ex = raw.index.get_loc(pd.Timestamp(day))
+    return raw.index[ex + late], cash / raw["Close"].iloc[ex - 1]
+
+
+def read_at(read, when, late=2):
+    """The one distribution read from `when` to `late` sessions after it, nothing in the eight
+    sessions before: a bar a hair off its steps may confirm it a session or two later, never
+    earlier."""
+    at = read.index.get_loc(when)
+    assert read.iloc[max(0, at - 8):at].eq(0.0).all()
+    shown = read.iloc[at:at + late + 1]
+    shown = shown[shown != 0]
+    assert len(shown) == 1
+    return shown.iloc[0]
+
+
+QUARTERLY = {"2020-02-20": 0.18, "2020-05-21": 0.21, "2020-08-20": 0.25, "2020-11-19": 0.01, "2021-02-18": 0.3}
+
+
+def test_a_distribution_is_read_when_the_bars_confirm_it_and_never_before():
+    raw = traded()
+    read = data.distributions_of(adjusted(raw, QUARTERLY, later=0.99))
+    for day, cash in QUARTERLY.items():
+        when, value = fraction(raw, day, cash)
+        expected = value if cash >= data.LEAST_STEPS * data.HALF else 0.0
+        assert read[when] == pytest.approx(expected, rel=1e-4)
+        assert read[raw.index[raw.index < when]].iloc[-8:].eq(0.0).all()   # nothing before it
+    assert (read > 0).sum() == 4                                     # a cent is not told from a misreading
+    assert read.index.equals(raw.index) and read.notna().all()
+
+
+def test_a_high_priced_fund_is_read_through_the_rounding():
+    """At $500, Yahoo's seven digits leave the bars a few hundredths of a cent off their steps."""
+    raw = traded(seed=5, level=500.0, spread=2.0)
+    paid = {"2020-03-19": 1.4, "2020-06-18": 1.6, "2020-09-17": 1.5, "2020-12-17": 1.8}
+    read = data.distributions_of(adjusted(raw, paid, later=0.995))
+    for day, cash in paid.items():
+        when, value = fraction(raw, day, cash)
+        assert read_at(read, when) == pytest.approx(value, abs=2 * data.HALF / 500)   # two half-cent steps
+    assert (read > 0).sum() == 4
+
+
+def test_a_fund_that_often_trades_at_the_half_cent_is_read():
+    raw = traded(halves=0.8)
+    paid = {d: c for d, c in QUARTERLY.items() if c > 0.1}
+    read = data.distributions_of(adjusted(raw, paid))
+    for day, cash in paid.items():
+        when, value = fraction(raw, day, cash)
+        assert read[when] == pytest.approx(value, rel=1e-4)
+    assert (read > 0).sum() == 4 and read.notna().all()
+
+
+def test_a_fund_that_barely_moves_is_never_read_before_its_ex_date():
+    """A short bond fund's day ranges over a few cents, so that the bars around an ex-date may fit
+    both factors: the reading is placed on the first bar only the later one fits, confirmed three
+    bars later, or left unread."""
+    raw = traded(seed=11, level=85.0, spread=0.02, moves=0.0005, sessions=400)
+    months = pd.bdate_range("2020-02-01", periods=400, freq="BMS")[:18]
+    paid = {day: 0.2 + 0.01 * k for k, day in enumerate(months)}
+    read = data.distributions_of(adjusted(raw, paid))
+    for day, cash in paid.items():
+        start = raw.index.get_loc(day)
+        assert read.iloc[start - 10:start + 3].fillna(0.0).eq(0.0).all()   # nothing before its confirmation
+        shown = read.iloc[start + 3:start + 15]
+        shown = shown[shown > 0]
+        if len(shown):
+            assert len(shown) == 1
+            assert shown.iloc[0] == pytest.approx(cash / raw["Close"].iloc[start - 1], abs=0.03 / 85)
+    assert (read > 0).sum() >= 12
+
+
+def test_a_distribution_on_a_sub_cent_day_is_read_a_day_later():
+    raw = traded()
+    day = pd.Timestamp("2020-05-21")
+    raw.loc[day, "Close"] += 0.0013                                  # off the steps
+    read = data.distributions_of(adjusted(raw, {day: 0.21}))
+    when, value = fraction(raw, day, 0.21, late=4)
+    assert read[when] == pytest.approx(value, rel=1e-4)
+    assert (read > 0).sum() == 1
+
+
+def test_a_split_is_no_distribution():
+    """A split the steps show: the shares before it traded at three times the price, a cent over."""
+    raw = traded(sessions=260)
+    split = pd.Timestamp("2020-07-01")
+    before = raw.index < split
+    raw.loc[before, ["Open", "High", "Low", "Close"]] = raw.loc[before, ["Open", "High", "Low", "Close"]] * 3 + 0.01
+    paid = {"2020-03-19": 0.6, "2020-09-17": 0.2}
+    read = data.distributions_of(adjusted(raw, paid, splits={split: 3}))
+    assert read.loc[split:split + pd.Timedelta(days=10)].eq(0.0).all()
+    for day, cash in paid.items():
+        when, value = fraction(raw, day, cash)
+        assert read_at(read, when) == pytest.approx(value, rel=1e-3)
+    assert (read > 0).sum() == 2 and read.notna().all()
+
+
+def test_what_the_bars_cannot_tell_is_nan():
+    raw = traded()
+    big = data.distributions_of(adjusted(raw, {"2020-05-21": 0.37 * raw["Close"].loc[:"2020-05-20"].iloc[-1]}))
+    assert np.isnan(big["2020-05-21"]) and (big > 0).sum() == 0       # a 37% step: neither a distribution nor a split
+    unread = raw.copy()
+    off = np.random.default_rng(2).uniform(0.001, 0.004, (60, 4))   # the older bars off every step
+    unread.iloc[:60, :4] = unread.iloc[:60, :4] + off
+    read = data.distributions_of(adjusted(unread, {raw.index[60]: 0.2}))
+    assert read.iloc[:61].isna().all() and read.iloc[70:].notna().all()
+
+
+def test_a_fund_of_one_price_bars_is_not_read_and_costs_nothing():
+    days = pd.bdate_range("2005-01-03", periods=5000)
+    close = 3000 * np.exp(np.cumsum(np.random.default_rng(1).normal(0, 0.01, len(days))))
+    started = time.perf_counter()
+    read = data.distributions_of(bars(close, days))
+    assert read.isna().all() and time.perf_counter() - started < 5
+
+
+def test_the_bars_as_they_stood_read_nothing_the_full_bars_do_not():
+    """Paper trading reads the bars Yahoo serves each day, the last factor one: on any session,
+    what they read is what the full bars read, 0 where nothing is confirmed yet as there."""
+    raw = traded(seed=9, sessions=320)
+    full = data.distributions_of(adjusted(raw, QUARTERLY, later=0.99))
+    ex = [raw.index.get_loc(pd.Timestamp(d)) for d in QUARTERLY]
+    for c in sorted({e + k for e in ex for k in range(6)} | {60, 150, 250, 319}):
+        cut = raw.iloc[:c + 1]
+        stood = data.distributions_of(adjusted(cut, {d: v for d, v in QUARTERLY.items() if pd.Timestamp(d) <= cut.index[-1]}))
+        assert stood.notna().all()
+        assert stood.to_numpy() == pytest.approx(full.iloc[:c + 1].to_numpy(), abs=1e-5)
+
+
+def test_an_ex_date_on_the_last_bar_waits_for_bars_after_it():
+    raw = traded()
+    day = raw.index.get_loc(pd.Timestamp("2020-05-21"))
+    cut = raw.iloc[:day + 1]
+    read = data.distributions_of(adjusted(cut, {"2020-02-20": 0.18, "2020-05-21": 0.21}))
+    assert read.iloc[-1] == 0.0 and read.notna().all()                # nothing given yet, as the full bars
+    assert read[read > 0].index.tolist() == [fraction(raw, "2020-02-20", 0.18)[0]]
+
+
+def on_both(adjusted_bars, days, later, earlier, rng):
+    """Set the bars of `days` on prices both factors put on the half-cent steps: at a ratio of
+    0.995 between them, a whole dollar of traded price before the ex-date is 99.5 cents after it."""
+    assert later * 0.995 == pytest.approx(earlier)
+    for day in days:
+        k = 40 + rng.integers(-1, 2, 4)
+        adjusted_bars.loc[day, ["Open", "High", "Low", "Close"]] = earlier * np.array([k[0], k[1] + 1, k[2] - 1, k[3]], float)
+
+
+def test_a_bar_a_hair_off_the_later_steps_is_no_ex_date():
+    """A bar before the ex-date the later factor fits within its tolerance by chance, but not
+    within half of it, followed by bars both factors fit, as SHY's of 2010-03: the ex-date is not
+    placed on it, and nothing is given before the fourth bar from the true one."""
+    raw = traded(sessions=200)
+    day = raw.index.get_loc(pd.Timestamp("2020-05-21"))
+    cash = 0.005 * raw["Close"].iloc[day - 1]                        # the factor before it, 0.995
+    bars_ = adjusted(raw, {raw.index[day]: cash}, rounded=False)
+    rng = np.random.default_rng(4)
+    on_both(bars_, raw.index[day - 5:day], 1.0, 0.995, rng)
+    hair = raw.index[day - 6]
+    prices = bars_.loc[hair, ["Open", "High", "Low", "Close"]].to_numpy(dtype=float)
+    bars_.loc[hair, ["Open", "High", "Low", "Close"]] = np.round(prices / data.HALF) * data.HALF + 0.7 * data.TOLERANCE / 100
+    read = data.distributions_of(bars_)
+    assert read.iloc[:day + 3].fillna(0.0).eq(0.0).all()            # nothing before the fourth bar
+    assert read.iloc[day + 3] == pytest.approx(0.005, rel=1e-6)
+
+
+def test_a_distribution_with_fewer_than_four_bars_from_its_ex_date_gives_nothing_yet():
+    """The ex-date's bar a hair off the later steps, the ex-date placed a bar later: on the bars as
+    they stood three bars after the ex-date, nothing is given; the fourth bar from the placement
+    gives it, as the full bars do."""
+    raw = traded(sessions=200)
+    day = raw.index.get_loc(pd.Timestamp("2020-05-21"))
+    bars_ = adjusted(raw, {raw.index[day]: 0.21}, rounded=False)
+    prices = bars_.iloc[day, :4].to_numpy(dtype=float)
+    bars_.iloc[day, :4] = np.round(prices / data.HALF) * data.HALF + 0.7 * data.TOLERANCE / 100
+    stood = data.distributions_of(bars_.iloc[:day + 4])
+    assert stood.notna().all() and (stood.iloc[day - 1:] > 0).sum() == 0
+    full = data.distributions_of(bars_)
+    assert full.iloc[day - 1:day + 4].eq(0.0).all() and full.iloc[day + 4] > 0
+
+
+def test_a_step_whose_later_bars_fit_the_earlier_factor_too_is_nan():
+    raw = traded(sessions=200)
+    day = raw.index.get_loc(pd.Timestamp("2020-05-21"))
+    cash = 0.005 * raw["Close"].iloc[day - 1]
+    bars_ = adjusted(raw, {raw.index[day]: cash}, rounded=False).iloc[:day + 11].copy()
+    rng = np.random.default_rng(6)
+    on_both(bars_, [d for k, d in enumerate(bars_.index[day:]) if k != 1], 1.0 / 0.995 * 0.995, 0.995, rng)
+    read = data.distributions_of(bars_)
+    assert np.isnan(read.iloc[day + 3]) and (read.iloc[day - 1:] > 0).sum() == 0
+
+
+def test_a_fund_whose_steps_fit_both_factors_is_not_read():
+    days = pd.bdate_range("2020-01-02", periods=120)
+    irx = pd.DataFrame({"Close": np.full(len(days), 2.0)}, index=days)
+    etf = adjusted(traded(sessions=120), {"2020-03-19": 0.3})
+    market = data.assemble({"ETF": etf, "SHY": etf.copy()}, irx, ())
+    assert market.signal_distributions["SHY"].isna().all()
+    assert market.signal_distributions["ETF"].gt(0).sum() == 1
+
+
+def test_distributions_are_read_as_signals_are():
+    days = pd.bdate_range("2020-01-02", periods=120)
+    raw = traded(sessions=120)
+    etf = adjusted(raw, {"2020-03-19": 0.3})
+    irx = pd.DataFrame({"Close": np.full(len(days), 2.0)}, index=days)
+    coin = bars(np.linspace(5000, 6000, 170), pd.date_range("2020-01-01", periods=170))
+    market = data.assemble({"ETF": etf, "COIN": coin}, irx, ("COIN",))
+    paid = market.signal_distributions
+    assert paid.index.equals(market.prices.index) and list(paid.columns) == ["ETF", "COIN"]
+    when = paid.index[paid.index.get_loc(pd.Timestamp("2020-03-19")) + 3]
+    assert paid.loc[when, "ETF"] > 0 and paid["ETF"].gt(0).sum() == 1
+    assert paid["COIN"].isna().all()                                 # a lagged asset's are not read
+    late = data.traded_from(market, {"ETF": "2020-02-03"})
+    assert late.signal_distributions.loc[:"2020-01-31", "ETF"].isna().all()
+    assert late.signal_distributions.loc[when, "ETF"] == paid.loc[when, "ETF"]
+    cut = market.window("2020-03-02", "2020-03-31")
+    assert cut.signal_distributions.index.equals(cut.prices.index)
+    assert data.assemble({"ETF": etf[["Close"]]}, irx, ()).signal_distributions is None   # bars with no open

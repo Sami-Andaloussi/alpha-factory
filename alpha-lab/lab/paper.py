@@ -32,7 +32,7 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -224,7 +224,7 @@ def live(raw: dict, irx: pd.DataFrame, session: pd.Timestamp | None = None) -> M
         return market
     tradable = market.tradable.copy()
     tradable.iloc[-1] = tradable.iloc[-2]
-    return Market(market.prices, tradable, market.rf, market.signal_prices, market.signal_volumes, market.signal_rates)
+    return replace(market, tradable=tradable)
 
 
 def targets(paper: Paper, market: Market) -> pd.DataFrame:

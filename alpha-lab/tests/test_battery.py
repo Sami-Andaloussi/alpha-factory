@@ -654,6 +654,63 @@ def test_every_battery_market_keeps_the_exchange_rates(planted):
         assert other.signal_rates.equals(market.signal_rates.loc[other.prices.index])
 
 
+def with_distributions(market, seed=12):
+    """The market with each fund paying about once a quarter, on sessions drawn at random."""
+    rng = np.random.default_rng(seed)
+    shape = market.prices.shape
+    paid = np.where(rng.random(shape) < 1 / 63, rng.uniform(0.002, 0.02, shape), 0.0)
+    return replace(market, signal_distributions=pd.DataFrame(paid, index=market.prices.index,
+                                                              columns=market.prices.columns).where(market.tradable))
+
+
+def on_the_yield(read, back=63):
+    """Each asset weighted by one plus a hundred times what it paid over `back` sessions, read
+    `read` sessions late: 1 is clean, 0 reads the session's own distribution."""
+    def positions(market, span=10, every=5):
+        paid = market.signal_distributions.fillna(0.0).rolling(back, min_periods=1).sum().shift(read)
+        weights = (1 + 100 * paid).where(market.tradable, 0.0).fillna(0.0)
+        weights = weights.div(weights.sum(axis=1).where(lambda s: s > 0), axis=0).fillna(0.0)
+        out = weights * np.nan
+        out.iloc[::every] = weights.iloc[::every]
+        return out
+    return positions
+
+
+def test_a_rule_that_reads_distributions_is_checked_as_one_that_reads_prices(planted):
+    market = with_distributions(planted[0])
+    clean = judge(on_the_yield(1), market).gates[0]
+    assert clean.figures["look-ahead breaks"] == 0 and clean.figures["same-day breaks"] == 0
+    assert clean.figures["memory breaks"] == 0
+    same_day = judge(on_the_yield(0), market).gates[0]
+    assert same_day.figures["same-day breaks"] > 0 and not same_day.passed
+    reaching = judge(on_the_yield(1, back=300), market).gates[0]
+    assert reaching.figures["memory breaks"] > 0 and not reaching.passed
+
+
+def test_a_rule_that_reads_no_distribution_keeps_every_figure(planted):
+    """The distributions are moved from a stream of their own: a card that reads none is judged as
+    on a market without them."""
+    without = judge(planted[1], replace(planted[0], signal_distributions=None))
+    moving = judge(planted[1], with_distributions(planted[0]))
+    for a, b in zip(without.gates, moving.gates):
+        assert a.passed == b.passed and a.reason == b.reason
+        assert repr(a.figures) == repr(b.figures)
+
+
+def test_every_battery_market_keeps_the_distributions(planted):
+    market = with_distributions(planted[0])
+    kept = [battery.handed(market), battery.unheld(market, list(market.prices.columns)[:1]),
+            market.window(None, market.prices.index[100]),
+            calibration.planted_market(market, 0.1, np.random.default_rng(1))[0]]
+    for other in kept:
+        assert other.signal_distributions.equals(market.signal_distributions.loc[other.prices.index])
+    three = list(market.prices.columns)[:3]
+    assert battery.restrict(market, three).signal_distributions.equals(market.signal_distributions[three])
+    last = battery.scrambled(market, [], np.random.default_rng(1)).signal_distributions
+    assert last.iloc[:-1].equals(market.signal_distributions.iloc[:-1])
+    assert not last.iloc[-1].equals(market.signal_distributions.iloc[-1])
+
+
 def test_every_variant_is_checked_for_look_ahead(planted):
     def two(market, span=10, timing="clean"):
         return momentum(1 if timing == "clean" else -1)(market, span)
