@@ -83,6 +83,12 @@ class Market:
                    is: a fund's own shares traded across the US venues (consolidated), in shares,
                    split-adjusted, and bitcoin's in dollars, as Yahoo reports them; None where the
                    bars carry no volume
+    signal_rates   the franc's exchange rates, USDCHF and EURCHF (the dollar and the euro in
+                   francs; the dollar in euros is USDCHF / EURCHF), as a signal may read them at
+                   each close: the rate's daily close of the last day before the session, since a
+                   currency's daily close comes after the US close; NaN where the last close is more
+                   than seven calendar days old; None where the market holds no rate (passed to
+                   strategies since 2026-09-27, CA-014-02)
 
     A strategy reads bitcoin through `signal_prices`, never through `prices`. A fund's volume is
     its own shares' trading, not the trading of what it holds.
@@ -92,12 +98,14 @@ class Market:
     rf: pd.Series
     signal_prices: pd.DataFrame
     signal_volumes: pd.DataFrame | None = None
+    signal_rates: pd.DataFrame | None = None
 
     def window(self, start=None, end=None) -> "Market":
         cut = slice(pd.Timestamp(start) if start else None, pd.Timestamp(end) if end else None)
         volumes = None if self.signal_volumes is None else self.signal_volumes.loc[cut]
+        rates = None if self.signal_rates is None else self.signal_rates.loc[cut]
         return Market(self.prices.loc[cut], self.tradable.loc[cut], self.rf.loc[cut], self.signal_prices.loc[cut],
-                      volumes)
+                      volumes, rates)
 
     def asof(self, when) -> "Market":
         """No session after `when`. Bitcoin's close of `when`, in `prices`, is still to come at
@@ -116,7 +124,9 @@ def load(start=None, end=None, root: Path = DATA) -> Market:
     manifest = json.loads((root / "manifest.json").read_text())
     held = verified(manifest, root)
     raw = {ticker: read(root / held[ticker] / file_name(ticker)) for ticker in listed(manifest, "tickers")}
-    market = assemble(raw, read(root / held[RISK_FREE] / file_name(RISK_FREE)), listed(manifest, "lagged"))
+    named = [*manifest.get("rates", []), *(r for addition in manifest.get("additions", []) for r in addition.get("rates", []))]
+    rates = {rate: read(root / held[rate] / file_name(rate)) for rate in named if rate in held}
+    market = assemble(raw, read(root / held[RISK_FREE] / file_name(RISK_FREE)), listed(manifest, "lagged"), rates)
     return traded_from(market, {a.ticker: a.first_session for a in UNIVERSE}).window(start, end)
 
 
@@ -162,14 +172,14 @@ def traded_from(market: Market, first: dict) -> Market:
             signal.loc[before, ticker] = np.nan
             if volumes is not None:
                 volumes.loc[before, ticker] = np.nan
-    return Market(prices, prices.notna(), market.rf, signal, volumes)
+    return Market(prices, prices.notna(), market.rf, signal, volumes, market.signal_rates)
 
 
 def read(path: Path) -> pd.DataFrame:
     return pd.read_csv(path, index_col="Date", parse_dates=["Date"])
 
 
-def assemble(raw: dict[str, pd.DataFrame], irx: pd.DataFrame, lagged) -> Market:
+def assemble(raw: dict[str, pd.DataFrame], irx: pd.DataFrame, lagged, rates=None) -> Market:
     """Align every close, and every volume, on the ETF calendar; bitcoin's weekend moves land on
     Monday, and its volume, as its close, is the calendar day before's: Monday reads Sunday's, and
     Friday's and Saturday's, and the volume of the day before a holiday, are read by no session."""
@@ -190,7 +200,24 @@ def assemble(raw: dict[str, pd.DataFrame], irx: pd.DataFrame, lagged) -> Market:
                           .to_numpy(dtype=float))
     rate = irx["Close"].reindex(calendar).ffill(limit=5).shift(1)  # cash held overnight earns the rate set before
     rf = (rate / 100.0 / TRADING_DAYS).rename("rf")
-    return Market(prices, prices.notna(), rf, signal, volumes)
+    return Market(prices, prices.notna(), rf, signal, volumes, rates_before(rates, calendar))
+
+
+def rates_before(rates, calendar: pd.DatetimeIndex, stale_days: int = 7) -> pd.DataFrame | None:
+    """Each exchange rate as a signal may read it at each session's close: the daily close of the
+    last day strictly before the session, none if that close is more than `stale_days` calendar days
+    old. A currency's daily close comes after the US close, so the session's own is still to come."""
+    if not rates:
+        return None
+    out = {}
+    for name, frame in rates.items():
+        close = frame["Close"].dropna().sort_index()
+        where = close.index.searchsorted(calendar, side="left") - 1   # the last close before the session
+        value = np.where(where >= 0, close.to_numpy()[np.clip(where, 0, None)], np.nan)
+        when = np.where(where >= 0, close.index.to_numpy()[np.clip(where, 0, None)], np.datetime64("NaT"))
+        old = (calendar.to_numpy() - when) > np.timedelta64(stale_days, "D")
+        out[name.replace("=X", "")] = np.where(old, np.nan, value)
+    return pd.DataFrame(out, index=calendar, dtype=float)
 
 
 # --------------------------------------------------------------------------- integrity

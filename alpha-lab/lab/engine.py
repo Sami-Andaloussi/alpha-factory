@@ -8,7 +8,10 @@ afternoon.
 
 Conventions, the same for every strategy and for the benchmark:
 - the target weights of session t are set from the market up to t-1 (bitcoin through its signal
-  prices, a day late), traded at the close of t, and earn the returns from t to t+1;
+  prices, a day late), traded at the close of t, and earn the returns from t to t+1; the franc's
+  exchange rates of row t are the currencies' close of the day before, which comes after the US
+  close of t-1 and before the close of t at which the targets trade: a signal reads them on row t,
+  unshifted, and gate 1 leaves them unmoved on the session it scrambles;
 - a row of NaN means "hold": no order that day, and the weights drift with prices;
 - a row with any target sells every asset it does not name;
 - long only, no leverage: weights are at least 0 and sum to at most 1;

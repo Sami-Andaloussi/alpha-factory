@@ -124,7 +124,18 @@ its own, beside the snapshot, whose files never change.
      both, the volumes moved wherever it moves the prices. `python -m lab.data check` lists the
      volume bars to examine (missing, zero, or far from their median), which no gate refuses: a card
      that reads volumes says what it does with them. Bitcoin's lagged volume is Sunday's on Monday,
-     and Friday's and Saturday's are read by no session;
+     and Friday's and Saturday's are read by no session; the franc's exchange rates, USDCHF and
+     EURCHF, are read through `market.signal_rates`, each the close of the last day before the
+     session, a currency's daily close coming after the US close, and read on the session's own row
+     without `.shift(1)`, since that close comes before the close at which the targets trade (passed
+     to strategies since 2026-09-27, CA-014-02); gate 1 moves those older than the memory from a stream of their own, and
+     a card that reads them names the gaps the bars carry: EURCHF has no close from 2008-08-01 to
+     2008-08-25, so its close of 07-31 is read, up to seven days old, through 08-07, and none from
+     08-08 to 08-26; USDCHF and EURCHF are read from different days on 08-04 to 08-07 of 2008 and
+     on 2007-11-27, 2007-12-19, 2012-12-05, 2013-10-09 and 2019-05-23; EURCHF repeats the close of
+     30 April 2010 on three days from 2010-05-03. The paper job's first run may read the day's
+     currency bar before it is final, where the backtest reads its final close; its retry reads the
+     closed bar;
    - a periodic rebalance sets its targets on the first session of each period, not the last:
      knowing that a session is the last of its month means knowing the next session's date, and
      gate 1 counts that as reading the future;

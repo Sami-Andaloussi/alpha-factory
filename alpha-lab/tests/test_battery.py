@@ -596,6 +596,64 @@ def test_a_rule_that_reads_no_volume_keeps_every_figure(planted):
         assert repr(a.figures) == repr(b.figures)
 
 
+def with_rates(market, seed=11):
+    """The market with two exchange rates that wander from session to session."""
+    rng = np.random.default_rng(seed)
+    walk = np.exp(np.cumsum(rng.normal(0, 0.005, (len(market.prices.index), 2)), axis=0))
+    return replace(market, signal_rates=pd.DataFrame(walk, index=market.prices.index, columns=["USDCHF", "EURCHF"]))
+
+
+def on_the_dollar(read, back=1):
+    """The first half of the assets while the dollar in euros rose over `back` sessions, the second
+    half otherwise, the rates read `read` sessions late: 0 is clean, since each rate is already the
+    close of the day before; -1 reads tomorrow's."""
+    def positions(market, span=10, every=5):
+        dollar = market.signal_rates["USDCHF"] / market.signal_rates["EURCHF"]
+        rising = (dollar > dollar.shift(back)).shift(read).fillna(False).astype(bool)
+        columns = list(market.prices.columns)
+        half = len(columns) // 2
+        weights = pd.DataFrame(0.0, index=market.prices.index, columns=columns)
+        weights.loc[rising, columns[:half]] = 1.0 / half
+        weights.loc[~rising, columns[half:]] = 1.0 / (len(columns) - half)
+        weights = weights.where(market.tradable, 0.0)
+        out = weights * np.nan
+        out.iloc[::every] = weights.iloc[::every]
+        return out
+    return positions
+
+
+def test_a_rule_that_reads_exchange_rates_is_checked_as_one_that_reads_prices(planted):
+    market = with_rates(planted[0])
+    clean = judge(on_the_dollar(0), market).gates[0]
+    assert clean.figures["look-ahead breaks"] == 0 and clean.figures["same-day breaks"] == 0
+    assert clean.figures["memory breaks"] == 0
+    tomorrow = judge(on_the_dollar(-1), market).gates[0]
+    assert tomorrow.figures["look-ahead breaks"] > 0 and not tomorrow.passed
+    reaching = judge(on_the_dollar(0, back=300), market).gates[0]
+    assert reaching.figures["memory breaks"] > 0 and not reaching.passed
+
+
+def test_a_rule_that_reads_no_exchange_rate_keeps_every_figure(planted):
+    """The rates are moved from a stream of their own: a card that reads none is judged as on a
+    market without them."""
+    without = judge(planted[1], replace(planted[0], signal_rates=None))
+    moving = judge(planted[1], with_rates(planted[0]))
+    for a, b in zip(without.gates, moving.gates):
+        assert a.passed == b.passed and a.reason == b.reason
+        assert repr(a.figures) == repr(b.figures)
+
+
+def test_every_battery_market_keeps_the_exchange_rates(planted):
+    market = with_rates(planted[0])
+    kept = [battery.restrict(market, list(market.prices.columns)[:3]), battery.handed(market),
+            battery.unheld(market, list(market.prices.columns)[:1]), market.window(None, market.prices.index[100]),
+            battery.scrambled(market, [], np.random.default_rng(1)),
+            calibration.planted_market(market, 0.1, np.random.default_rng(1))[0]]
+    for other in kept:
+        assert other.signal_rates is not None
+        assert other.signal_rates.equals(market.signal_rates.loc[other.prices.index])
+
+
 def test_every_variant_is_checked_for_look_ahead(planted):
     def two(market, span=10, timing="clean"):
         return momentum(1 if timing == "clean" else -1)(market, span)

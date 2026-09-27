@@ -42,7 +42,7 @@ import yaml
 from lab import battery, costs, data, engine, registry, status
 from lab.data import Market
 from lab.report import strategy_of
-from lab.universe import LAGGED, RISK_FREE, UNIVERSE
+from lab.universe import CHF_RATES, LAGGED, RISK_FREE, UNIVERSE
 
 PAPER = "https://paper-api.alpaca.markets"     # the paper account: never a variable, a setting or the environment
 KEYS = ("APCA_API_KEY_ID", "APCA_API_SECRET_KEY")
@@ -193,26 +193,38 @@ def papered(lab: Path = LAB, registry_path: Path = registry.REGISTRY) -> list[Pa
 
 
 def yahoo(tickers, through: date) -> tuple[dict, pd.DataFrame]:
-    """The daily bars of `tickers` and the bill's rate from the lab's start to `through`, drawn from
-    Yahoo as the snapshot was."""
+    """The daily bars of `tickers`, of the franc's exchange rates under their own names, and the
+    bill's rate, from the lab's start to `through`, drawn from Yahoo as the snapshot was. The job's
+    first run, after the US close of `through`, may read that day's currency bar before it is final,
+    where the backtest reads its final close; its retry, hours later, reads the closed bar
+    (CA-014-02's audit). The rates are drawn apart: when they cannot be drawn, the job goes on
+    without them while no papered strategy reads them; one that does stops the job, on the market
+    that does not carry them."""
     import yfinance as yf
 
     raw = data.fetch(yf, (*tickers, RISK_FREE), last=through.isoformat())
+    try:
+        raw.update(data.fetch(yf, CHF_RATES, last=through.isoformat()))
+    except Exception as error:                       # a strategy that reads no rate still trades
+        print(f"the exchange rates could not be drawn: {error}", file=sys.stderr)
     return raw, raw.pop(RISK_FREE)
 
 
 def live(raw: dict, irx: pd.DataFrame, session: pd.Timestamp | None = None) -> Market:
-    """The market from the bars, by the snapshot's rules. With `session`, that session added after
-    the last close, as it stands before it opens: no price yet, each asset tradable as at the last
-    close, and the bill's rate set at that close."""
+    """The market from the bars, by the snapshot's rules, the exchange rates among them passed as
+    the market's rates. With `session`, that session added after the last close, as it stands
+    before it opens: no price yet, each asset tradable as at the last close, and the bill's rate set
+    at that close."""
     if session is not None:
         raw = {t: frame.reindex(frame.index.append(pd.DatetimeIndex([session]))) for t, frame in raw.items()}
-    market = data.traded_from(data.assemble(raw, irx, [t for t in raw if t in LAGGED]), FIRST)
+    rates = {t: frame for t, frame in raw.items() if t in CHF_RATES}
+    raw = {t: frame for t, frame in raw.items() if t not in CHF_RATES}
+    market = data.traded_from(data.assemble(raw, irx, [t for t in raw if t in LAGGED], rates or None), FIRST)
     if session is None:
         return market
     tradable = market.tradable.copy()
     tradable.iloc[-1] = tradable.iloc[-2]
-    return Market(market.prices, tradable, market.rf, market.signal_prices, market.signal_volumes)
+    return Market(market.prices, tradable, market.rf, market.signal_prices, market.signal_volumes, market.signal_rates)
 
 
 def targets(paper: Paper, market: Market) -> pd.DataFrame:
