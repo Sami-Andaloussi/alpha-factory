@@ -304,7 +304,7 @@ Mechanism types: **risk premium**, compensation for bearing a risk that others a
 | [AS-037](AS-037-asset-collateralised-stablecoins.md) | Asset-collateralised stablecoins | structural, limits to arbitrage | crypto | days, weeks | not-testable |
 | [AS-038](AS-038-crypto-collateralised-stablecoins.md) | Crypto-collateralised stablecoins | structural, limits to arbitrage | crypto | days | not-testable |
 | [AS-039](AS-039-algorithmic-stablecoins-reflexivity.md) | Algorithmic stablecoins and mint-burn reflexivity | structural, limits to arbitrage | crypto | days, months | not-testable |
-| [AS-040](AS-040-bonding-curves.md) | Bonding curves | structural | crypto | days, months | untouched |
+| [AS-040](AS-040-bonding-curves.md) | Bonding curves | structural | crypto | days, months | not-testable |
 | [AS-042](AS-042-on-chain-transparency.md) | Open data and on-chain transparency | information | crypto | intraday, days | untouched |
 | [AS-043](AS-043-blockspace-scarcity-congestion.md) | Blockspace scarcity and blockchain congestion | structural | crypto | days, months | untouched |
 | [AS-044](AS-044-dex-amm-design-mev.md) | DEX and AMM design, MEV extraction and DeFi token economics | microstructure, structural | crypto | days, months | untouched |
