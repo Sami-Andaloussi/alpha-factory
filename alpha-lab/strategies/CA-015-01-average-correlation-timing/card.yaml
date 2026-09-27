@@ -1,0 +1,79 @@
+id: CA-015-01-average-correlation-timing
+theory: CA-015
+parent: null
+mechanism: >
+  The market's capacity to bear risk varies, and the premium it asks varies with it. When the
+  components of a market move together -- high average correlation among them, typical of crises
+  -- the common risk is what investors fear, they demand a higher premium for holding it, and the
+  market's expected return over the next months is high; the market's variance mixes that part with
+  the components' own variance, which predicts nothing or the reverse, so that volatility alone
+  predicts little. Investors adjust their exposures to this slowly, so the reading, observed at a
+  date, forecasts the market's return over the following quarter.
+prediction:
+  sign: positive (the sector funds earn more over the month after their average correlation stood high against its past three years than after it stood low)
+  size: a judgment -- Ilmanen reports Pollet and Wilson's finding of a correlation of 0.20 with future market returns (§8.6, horizon and sample not given there; the average correlation is not among Table 8.6's predictors), and chapter 19 gives the horizon, the next quarter, without a figure; read here as quarterly, about 0.1 over a month; at a monthly correlation of 0 to 0.1, a slope of about 0 to 2 percentage points of monthly excess return per unit of percentile, an appraisal ratio of about 0 to 0.35 against the sector funds held always and an alpha of about 0 to 2% a year before costs on a residual volatility of about 6% -- but a beta above the average share of 0.47, perhaps 0.5 to 0.7, since the share is highest when the sectors are most volatile, so that the hedged alpha may be below zero with a positive slope; costs about 0.1% a year; the base expected to fail gate 3 or gate 4
+universe: [XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY]
+horizon: months
+signal: >
+  On every session, the reading is the average, over every pair of the sector funds that trade on
+  that session and have window daily returns in the signal prices up to and including the session
+  before, of the correlation of those window returns; there is no reading while fewer than two such
+  funds exist. The reading's percentile is the share of the readings of the lookback sessions before
+  it, up to and including the session before, that are at or below it; there is no percentile while
+  any of those lookback readings is missing. On the first session of each month on which the
+  percentile exists, under rule "scaled" each sector fund that trades holds the percentile divided
+  by the number of sector funds trading, the rest in cash; under rule "median" each holds one over
+  that number when the reading is above the median of the same lookback readings, and nothing
+  otherwise, all in cash. No target on any other session, so that positions drift.
+parameters:
+  window: daily returns over which each pair's correlation is measured, a quarter, the horizon of the forecast Ilmanen reports; the library gives no measurement window
+  lookback: readings against which the reading is ranked, three years
+  rule: '"scaled" holds the sector funds in the proportion of the percentile, Cochrane''s managed portfolio; "median" holds them all or none, Ilmanen''s 1/0 model'
+variants:
+  - {window: 63, lookback: 756, rule: scaled}
+  - {window: 63, lookback: 756, rule: median}
+neighbours:
+  window: {25: [47, 79], 50: [32, 94]}
+  lookback: {25: [567, 945], 50: [378, 1134]}
+choose: false
+memory: 1240
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the base, computed apart from the battery after the run: over the in-sample months from
+  the base's first target to December 2022, each month running from the close of its first session
+  to the close of the next month's first session, the last month, December 2022, ending at the close
+  of 2022-12-30, the sector funds that trade on the month's first session bought in equal parts at
+  the close of that session and held without rebalancing, their return over the month less the
+  Treasury bill's daily returns compounded over the same sessions, before costs, regressed by ordinary least squares on the base's percentile set on the
+  month's first session, with a constant, the standard error robust to heteroskedasticity. The two
+  months whose sector funds' return TM-024-01 published -- those whose first sessions fall in
+  September 2010 and October 2022 -- are left out of the graded sample, and the slope with them is
+  reported. The theory is refuted in this form if the slope is zero or less: the sector funds'
+  average correlation, observed at a date, did not predict their market's return over the next month
+  out of the sources' sample, as the bank's second refutation reads. Any other result short of the
+  base passing gates 1 to 7 is not proven, not refuted; a base that passes gates 1 to 7 while the
+  clause refutes leaves the theory refuted in this form. The first refutation, premia constant
+  across regimes, is read by the same slope and not graded apart; the third, the predictability
+  disappearing with crowding, is not graded: the lab holds no positions or flows. TM-024-01's 18
+  sector panic months (October 2008 to November 2009, July to September 2010, April 2020), whose
+  market return it published pooled with the other groups' (its nineteen funds in equal parts
+  earned 27.4% a year in the months its rule differed from CA-001-01's against 5.8% elsewhere),
+  15 of them (83%) with a percentile above 0.5, counted from the signal alone, under CA-003-01's
+  90%, stay in the graded sample, disclosed, and the slope without them is reported. The grade
+  rests on the slope, not on the base's appraisal ratio, because the share is highest when the
+  sectors are most volatile: the hedged alpha can fall below zero while the reading predicts. The
+  published results of TM-047-02, TM-024-01, TM-039-01, TM-017-01, TM-018-01, CA-006-01, TM-037-01,
+  TM-041-01, SC-026-01, CA-011-01, CA-014-01, TM-002-01 and LL-042-01, their years, states and
+  holdings, and the registry's monthly hedged returns of TM-047-02 and CA-006-01, from which nothing
+  was computed, stay, disclosed.
+  Reported, not graded: the base's figures as the battery gives them; the variant's difference of
+  the mean monthly excess return after readings above the median and after the others, with its
+  standard error; the slope on the next 63 sessions' excess return, Pollet and Wilson's quarter,
+  from every month's first session, the standard error corrected for the overlap (Newey and West,
+  two lags); the slope on the percentile of the sector funds' average variance of daily returns over
+  the same window and lookback, alone and with the correlation's percentile, Pollet and Wilson's
+  other half, predicted negative or nil; the slope over 2008 to 2014 and 2015 to 2022; the slope in
+  the holdout; the correlation of the base's monthly returns hedged of its benchmark with
+  TM-047-02's base as the registry gives it, over their common months.
