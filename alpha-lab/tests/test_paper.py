@@ -310,8 +310,38 @@ def test_the_bars_are_drawn_through_the_day_asked(monkeypatch):
             return pd.DataFrame({field: 1.0 for field in ("Open", "High", "Low", "Close", "Volume")}, index=index)
     monkeypatch.setitem(sys.modules, "yfinance", Yahoo)
     raw, irx = paper.yahoo(["SPY", "IEF"], date(2026, 9, 24))
-    assert asked == [("SPY", "2026-09-25"), ("IEF", "2026-09-25"), ("^IRX", "2026-09-25")]   # Yahoo's end is exclusive
-    assert sorted(raw) == ["IEF", "SPY"] and irx.index[-1] == pd.Timestamp("2026-09-24")
+    assert asked == [("SPY", "2026-09-25"), ("IEF", "2026-09-25"), ("^IRX", "2026-09-25"), ("USDCHF=X", "2026-09-25"),
+                     ("EURCHF=X", "2026-09-25")]                                      # Yahoo's end is exclusive
+    assert sorted(raw) == ["EURCHF=X", "IEF", "SPY", "USDCHF=X"] and irx.index[-1] == pd.Timestamp("2026-09-24")
+
+
+def test_rates_that_cannot_be_drawn_leave_the_assets_drawn(monkeypatch):
+    class Yahoo:
+        __version__ = "0"
+
+        @staticmethod
+        def download(ticker, start, end, **options):
+            if ticker.endswith("=X"):
+                return pd.DataFrame()
+            index = pd.bdate_range("2026-09-21", end, inclusive="left")
+            return pd.DataFrame({field: 1.0 for field in ("Open", "High", "Low", "Close", "Volume")}, index=index)
+    monkeypatch.setitem(sys.modules, "yfinance", Yahoo)
+    raw, irx = paper.yahoo(["SPY"], date(2026, 9, 24))
+    assert sorted(raw) == ["SPY"] and paper.live(raw, irx).signal_rates is None
+
+
+def test_the_live_market_carries_the_exchange_rates_as_the_backtest_reads_them(bars):
+    raw, irx = bars(TICKERS, date(2020, 3, 2))
+    days = raw[TICKERS[0]].index
+    raw = {**raw, "USDCHF=X": pd.DataFrame({"Close": np.linspace(0.95, 0.97, len(days))}, index=days),
+           "EURCHF=X": pd.DataFrame({"Close": np.linspace(1.05, 1.07, len(days))}, index=days)}
+    now, before = paper.live(raw, irx), paper.live(raw, irx, pd.Timestamp("2020-03-03"))
+    assert list(now.prices.columns) == list(paper.live(bars(TICKERS, date(2020, 3, 2))[0], irx).prices.columns)
+    for market in (now, before):
+        assert list(market.signal_rates.columns) == ["USDCHF", "EURCHF"]
+        assert market.signal_rates.index.equals(market.prices.index)
+    assert before.signal_rates.iloc[-1]["USDCHF"] == raw["USDCHF=X"]["Close"].iloc[-1]   # the last day's close, read next session
+    assert np.isnan(before.signal_rates.iloc[0]["USDCHF"])
 
 
 def test_no_session_no_line_and_a_close_not_yet_known_is_refused(tmp_path, bars):

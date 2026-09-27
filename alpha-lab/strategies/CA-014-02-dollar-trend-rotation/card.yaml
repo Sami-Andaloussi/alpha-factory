@@ -1,0 +1,62 @@
+id: CA-014-02-dollar-trend-rotation
+theory: CA-014
+parent: null
+mechanism: >
+  Commodities are quoted in dollars, so the dollar and commodities trend in opposite directions: a
+  falling dollar lifts commodities and gold, which lift inflation expectations and rates, and the
+  inflation-type sectors gain while bonds and the rate-sensitive sectors lag; a rising dollar does
+  the reverse and favours US bonds. The dollar's trend therefore tells which side of the markets
+  leads, through commodities, and the lead persists for months.
+prediction:
+  sign: positive
+  size: an appraisal ratio of about 0.1 to 0.25 over the nine funds held in equal parts, on the new sessions and the whole sample alike, an alpha of about 0.7 to 1.75% a year on a tracking error of about 7% (CA-014-01's published alpha over its appraisal ratio, the same two sides), costs about 0.4 to 0.5% a year; an assumption, since the source reports charts, not statistics, and calls the dollar the hardest market to fit, its effect delayed by months to two years; set after CA-014-01's published results, which it cannot be separated from
+universe: [XLE, XLB, GLD, DBC, XLP, XLV, XLF, XLU, IEF]
+horizon: months
+signal: >
+  On every session, the dollar's reading is USDCHF over EURCHF in the market's signal rates, each
+  the close of the last day before the session: the dollar's price in euros, a proxy for the dollar
+  index. Its mean is the mean of the readings that exist among the last average sessions up to and
+  including the session, when at least nine tenths of them exist. The dollar is falling when the
+  reading is below its mean, rising otherwise. On the first session of each week on which the
+  reading and its mean exist, a falling dollar holds the inflation side and a rising one the
+  rate-sensitive side. Under legs "all", the inflation side is XLE, XLB, GLD and DBC, and the
+  rate-sensitive side XLP, XLV, XLF, XLU and IEF; under legs "classes", the inflation side is GLD
+  and DBC, and the rate-sensitive side IEF. The funds of the side held that trade on the session
+  share the portfolio equally; if none trades, the targets are zero on every fund. A week whose
+  first session has no reading or no mean sets no target, and the portfolio holds (EURCHF has no
+  close from 2008-08-01 to 2008-08-25, its close of 31 July read through 7 August, none from 8 to 26
+  August, so the weeks of 11, 18 and 25 August 2008 set none). The targets start on the first such
+  session, 2005-09-26.
+parameters:
+  average: readings of the dollar averaged to give its trend, Murphy's 200-day (40-week) average
+  legs: '"all" holds the commodity, gold and note funds with the sectors of each side; "classes" holds gold and commodities against the notes alone'
+variants:
+  - {average: 200, legs: all}
+  - {average: 200, legs: classes}
+neighbours:
+  average: {25: [150, 250], 50: [100, 300]}
+choose: false
+splits:
+  in_sample: [2005-01-01, 2022-12-31]
+  holdout: [2023-01-01, 2025-12-31]
+refuted_if: >
+  Judged on the new sessions: those from the first target to 2022-12-31 into which the side the base holds, set by its last target before the session, differs from the side CA-014-01's rule (its base, average 200, legs "all"), rebuilt over the same market, holds into it, or into which that rule holds nothing (up to and including its first holding's session, 2006-11-20), a session's return being earned by the side held into it; the sessions of 2022, whose outcome CA-014-01's published edge for
+  that year mirrors, are left out: 1,563 sessions, about 6.2 years, counted from the signals. On
+  them the base holds what CA-014-01 did not. The figure is the annualised Sharpe ratio of gate 4's
+  daily series (the base's excess returns hedged of the benchmark's with the whole-sample beta)
+  restricted to those sessions, measured to about ±0.40, and the same restricted further to the
+  ordinary monetary regimes, the sessions whose bill rate, as the market's rf gives it (the rate
+  set the session before), is 0.25% a year or more, 829 of them, measured to about ±0.55; both
+  computed by the verdict apart from the battery. The theory is refuted in this form if the first
+  is -0.1 or less and the second zero or less: where the dollar's trend and the commodity/bond
+  ratio's disagree, the side the dollar chose did not lead, outside the zero-rate years too. Any
+  other result short of passing gates 1 to 7 is not proven, not refuted. No placebo rank enters the
+  clause: the placebos shift the whole sample, three fifths of it CA-014-01's published positions.
+  The variant, gold and commodities against the notes, tests the dollar relations alone: the
+  verdict computes, apart from the battery, its excess returns hedged with the whole-sample beta of
+  those of GLD, DBC and IEF held in equal parts, those of the three that trade, reset when it sets
+  targets, at the same costs, and the annualised Sharpe ratio of that series on the same new
+  sessions and on their ordinary regimes. That claim is refuted in this form if the first is -0.1
+  or less and the second zero or less; any other result leaves it not shown. Reported apart, not
+  graded, with the same figures: the base and the variant over the whole sample from the first
+  target and over its ordinary regimes; over the new sessions of 2022; over the new sessions with 2022 kept; and over the graded sessions without 2008, 2009, 2012, 2014, 2015 and 2016, whose edge CA-014-01's verdict published pooled over each year.

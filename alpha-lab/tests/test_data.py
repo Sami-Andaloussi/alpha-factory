@@ -73,6 +73,27 @@ def test_volumes_are_read_as_the_closes_are():
     assert data.assemble({"ETF": etf[["Close"]]}, irx, ()).signal_volumes is None   # bars with no volume
 
 
+def test_exchange_rates_are_read_as_the_close_of_the_day_before():
+    days = pd.bdate_range("2020-03-02", "2020-03-31")
+    etf = pd.DataFrame({"Close": np.arange(len(days)) + 100.0}, index=days)
+    irx = pd.DataFrame({"Close": np.full(len(days), 2.0)}, index=days)
+    fx_days = days.delete([5, 12, 13, 14, 15, 16, 17, 18, 19])     # a holiday, then eight days without a close
+    usd = pd.DataFrame({"Close": np.arange(len(fx_days)) * 0.001 + 0.95}, index=fx_days)
+    market = data.assemble({"ETF": etf}, irx, (), {"USDCHF=X": usd})
+    rates = market.signal_rates
+    assert list(rates.columns) == ["USDCHF"] and rates.index.equals(market.prices.index)
+    assert np.isnan(rates.loc["2020-03-02", "USDCHF"])                      # no close before the first session
+    assert rates.loc["2020-03-03", "USDCHF"] == usd.loc["2020-03-02", "Close"]
+    assert rates.loc["2020-03-09", "USDCHF"] == usd.loc["2020-03-06", "Close"]   # Monday reads Friday's
+    assert rates.loc["2020-03-10", "USDCHF"] == usd.loc["2020-03-06", "Close"]   # no close on the 9th: the one before
+    assert np.isnan(rates.loc["2020-03-27", "USDCHF"])                      # the last close over seven days old
+    assert data.assemble({"ETF": etf}, irx, ()).signal_rates is None
+    cut = market.window("2020-03-09", "2020-03-10")
+    assert cut.signal_rates.index.equals(cut.prices.index)
+    late = data.traded_from(market, {"ETF": "2020-03-06"})
+    assert late.signal_rates.equals(market.signal_rates)                    # a rate is no asset: nothing is cut
+
+
 def test_integer_volumes_come_out_as_floats_and_outliers_are_listed():
     days = pd.bdate_range("2020-03-02", "2020-04-30")
     every_day = pd.date_range("2020-02-01", "2020-04-30")                  # the coin starts first
