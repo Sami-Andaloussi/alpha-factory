@@ -6,7 +6,7 @@ mechanism: [behavioural, flows, limits to arbitrage]
 asset_classes: [equity indices]
 horizon: [months, years]
 data: [country index levels, country valuation ratios, fund flows, exchange rates, sector weights]
-status: untouched
+status: not-testable
 ---
 
 ## Mechanism
