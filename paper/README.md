@@ -8,7 +8,7 @@ survivor.
 
 | Strategy | Role | Since | Sessions | Signals identical | Return |
 |---|---|---|---|---|---|
-| TM-017-01-time-series-momentum | test of the chain | 2026-09-25 | 9 | 7 of 8 | +0.11% |
+| TM-017-01-time-series-momentum | test of the chain | 2026-09-25 | 10 | 8 of 9 | +0.13% |
 
 ## TM-017-01-time-series-momentum
 
@@ -23,3 +23,4 @@ survivor.
 | 2026-10-05 | holds | 5 of 6 (gaps: 2026-10-01) | 100,000.00 |
 | 2026-10-06 | holds | 6 of 7 (gaps: 2026-10-01) | 100,000.00 |
 | 2026-10-07 | holds | 7 of 8 (gaps: 2026-10-01) | 100,000.00 |
+| 2026-10-08 | holds | 8 of 9 (gaps: 2026-10-01) | 100,000.00 |
