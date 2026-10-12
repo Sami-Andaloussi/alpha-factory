@@ -2,6 +2,8 @@
 
 A systematic trading research lab that runs, and the blueprint of the factory it feeds.
 
+> **Research code, not investment advice.** Nothing here is a recommendation to buy or sell any security. Results are historical research outputs, not a promise of future returns.
+
 | Wing | What it is |
 |---|---|
 | [`alpha-lab/`](alpha-lab/) | The research lab: a bank of more than 260 market theories, and a chain that turns one into a strategy, tests it through eight gates and writes its verdict, failures included. Built, and it runs. |
@@ -52,3 +54,7 @@ The [lab's README](alpha-lab/README.md) gives its gates, its data and its costs,
 ## Author
 
 [Sami-Andaloussi](https://github.com/Sami-Andaloussi)
+
+## License
+
+[MIT](LICENSE), Copyright (c) 2026 Sami Andaloussi.
