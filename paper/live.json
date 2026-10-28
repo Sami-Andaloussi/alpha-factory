@@ -2,14 +2,14 @@
  "TM-017-01-time-series-momentum": {
   "role": "test of the chain",
   "since": "2026-09-25",
-  "last": "2026-10-27",
+  "last": "2026-10-28",
   "trading": true,
-  "sessions": 23,
-  "compared": 22,
-  "identical": 21,
+  "sessions": 24,
+  "compared": 23,
+  "identical": 22,
   "gaps": [
    "2026-10-01"
   ],
-  "return": 0.003379
+  "return": 0.003539
  }
 }
