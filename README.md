@@ -51,9 +51,11 @@ admit it, improve it and judge it.
 The [lab's README](alpha-lab/README.md) gives its gates, its data and its costs, and the
 [runbook](alpha-lab/RUNBOOK.md) each step with its command.
 
-## Author
+## Authors
 
 [Sami-Andaloussi](https://github.com/Sami-Andaloussi)
+
+Co-founded by Sami Andaloussi and Anas Chantah ; early development on a shared machine and account.
 
 ## License
 
